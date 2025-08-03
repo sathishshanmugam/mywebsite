@@ -1,13 +1,166 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Crunchery's The destination of your cravings</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cruncherys Fusion Cafe</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background-color: black;
+    }
+
+    header {
+        
+      .logo{
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 250px;
+      height: auto;
+         }
+     .title {
+      text-align: center;
+      padding: 2rem 1rem;
+      background-color:black;
+      color: #ff9900;
+               }     
+      .title h1{
+        margin: 3rem 0 0 0;
+        font-size: 3.5rem;
+                }      
+      .title p{
+       margin: 0 0 0 0;
+       font-size: 1.2rem;
+       color: white;
+       }
+
+     .backgroundimage{
+      background: url('background.jpeg') no-repeat center center/cover;
+      width: 100%;
+      height: 300px;
+      margin: 0;
+      padding: 0;
+		}
+    }
+    nav {
+      background-color: black;
+      text-align: center;
+      padding: 0.7rem 0;
+    }
+
+    nav a {
+      color: #ff9900;
+      margin: 0 20px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    section {
+      color: white;
+      padding: 2rem;
+    }
+
+    .menu-image {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    footer {
+    .logo {
+      position: static;
+      top: 0;
+      right: 0;
+      width: 300px;
+      height: auto;
+    }
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      .logo {
+        width: 600px;
+      }
+
+      nav a {
+        display: inline-block;
+        margin: 10px;
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to Cruncherys Website</h1>
-  <p>The Page is Still Under Development.</p>
+
+  <header>
+    
+    <div class="title">
+    <h1>CRUNCHERY'S</h1>
+    <p>The destination for your cravings</p>
+    </div>
+    <img src="logo.png" alt="Restaurant Logo" class="logo">
+    <div class="backgroundimage"></div>
+  </header>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#menu">Menu</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>At Crunchery's we pride ourselves on crafting handmade pizzas, juicy wings, and fresh baked breads using
+    only the highest quality ingredients.Our creamy sauces and gaming fights add a unique touch to your dining experience.</p>
+    <p>We've fused South Indian Starters with your favourite breads to create legendary food at an affordable price. With a menu boasting
+     a vast selection, we can satisfy any appetite. we never use artificial flavors, ensuring an authetic taste in every bite.</p>
+    <p>Our secret recipe for success includes legendary food with a South Indian twist, top-notch quality, and a mind-blowing ambiance.</p>
+    <p>At Crunchery's, our team takes immense pride in what we do and what we offer. we aim to provide every guest with such a fantastic 
+    experience that they can't wait to return for more. Come savor our delectable creations and immerse yourself in a dining adventure like no other</p>
+    
+  </section>
+
+  <section id="menu">
+    <h2>Our Full Menu</h2>
+    <p>Browse our entire menu below. Click or zoom to view in full size:</p>
+    <a href="menucard.jpg" target="_blank">
+      <img src="menucard.jpg" alt="Full Restaurant Menu" class="menu-image">
+    </a>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <h3><strong>Branch-1</strong></h3>
+    <p><strong>Address:</strong> 24-C, Selvakumar Complex, Vaiyapuri Nagar 4th cross,Karur,Tamilnadu.</p>
+    <p><strong>Phone:</strong> +91-9500538222</p>
+    <p><strong>Email:</strong> cruncherys@gmail.com</p>
+    <h3><strong>Branch-2</strong></h3>
+    <p><strong>Address:</strong> Forty Eleven Sports, No.7 goldfields, Salem-madurai bypass road, Karur, Tamilnadu.</p>
+    <p><strong>Phone:</strong> +91-9500538219</p>
+    <p><strong>Email:</strong> cruncherys2@gmail.com</p>
+  </section>
+
+  <footer>
+    <img src="logo.png" alt="Restaurant Logo" class="logo">
+    <p>&copy; 2025 Cruncherys. All rights reserved.</p>
+  </footer>
+
 </body>
 </html>
-
