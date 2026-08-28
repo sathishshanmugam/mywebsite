@@ -1,166 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cruncherys Fusion Cafe</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-      background-color: black;
-    }
-
-    header {
-        
-      .logo{
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      width: 250px;
-      height: auto;
-         }
-     .title {
-      text-align: center;
-      padding: 2rem 1rem;
-      background-color:black;
-      color: #ff9900;
-               }     
-      .title h1{
-        margin: 3rem 0 0 0;
-        font-size: 3.5rem;
-                }      
-      .title p{
-       margin: 0 0 0 0;
-       font-size: 1.2rem;
-       color: white;
-       }
-
-     .backgroundimage{
-      background: url('background.jpeg') no-repeat center center/cover;
-      width: 100%;
-      height: 300px;
-      margin: 0;
-      padding: 0;
-		}
-    }
-    nav {
-      background-color: black;
-      text-align: center;
-      padding: 0.7rem 0;
-    }
-
-    nav a {
-      color: #ff9900;
-      margin: 0 20px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1.1rem;
-    }
-
-    section {
-      color: white;
-      padding: 2rem;
-    }
-
-    .menu-image {
-      display: block;
-      max-width: 100%;
-      height: auto;
-      margin: 0 auto;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    footer {
-    .logo {
-      position: static;
-      top: 0;
-      right: 0;
-      width: 300px;
-      height: auto;
-    }
-      background-color: black;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2rem;
-      }
-
-      .logo {
-        width: 600px;
-      }
-
-      nav a {
-        display: inline-block;
-        margin: 10px;
-        font-size: 1rem;
-      }
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f97316">
+  <meta name="description" content="Crunchery's Fusion Cafe — the destination for your cravings. Explore our menu, order online and become a Crunchery's partner.">
+  <title>Crunchery's Fusion Cafe | The destination for your cravings</title>
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
-
-  <header>
-    
-    <div class="title">
-    <h1>CRUNCHERY'S</h1>
-    <p>The destination for your cravings</p>
+  <header class="site-header" id="top">
+    <div class="container header-topline">
+      <div></div>
+      <div class="service-strip">
+        <span>🍃 <b>No Preservatives</b></span>
+        <i></i><span>🧼 <b>Hygienically Prepared</b></span>
+        <i></i><span>❤ <b>Made With Love</b></span>
+      </div>
     </div>
-    <img src="logo.png" alt="Restaurant Logo" class="logo">
-    <div class="backgroundimage"></div>
+    <div class="container nav-wrap">
+      <a class="brand" href="#home" aria-label="Crunchery's home">
+        <img class="brand-logo-static" src="assets/logo.png" alt="Crunchery's Fusion Cafe logo">
+        <span class="brand-wordmark">
+          <strong>CRUNCHERY'S<sup class="registered-mark">®</sup></strong>
+          <small>★ &nbsp; THE DESTINATION FOR YOUR CRAVINGS &nbsp; ★</small>
+        </span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+
+      <nav class="main-nav" id="mainNav">
+        <a class="active" href="#home">Home</a>
+        <a href="#menu">Menu</a>
+        <a href="#order">Order Online</a>
+        <a href="#franchise" class="franchise-open">Franchise</a>
+        <a href="#locations">Locations</a>
+        <a href="#about">About Us</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <a class="btn btn-primary nav-order" href="#order">🛒 Order Now</a>
+    </div>
   </header>
 
-  <nav>
-    <a href="#about">About</a>
-    <a href="#menu">Menu</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-pattern"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="hero-welcome">WELCOME TO<br><span>CRUNCHERY'S</span></div>
+          <h1>Not Just a Cafe, <span class="personal">its your personal space</span></h1>
+          <p class="hero-text">South Indian flavours. Global favourites. One seriously delicious experience.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" href="#order">Order Now <span>→</span></a>
+            <button class="btn btn-outline btn-lg franchise-open" type="button" data-form-url="https://forms.gle/KRje4ZQaJgVVrcX19">Become a Partner <span>↗</span></button>
+          </div>
 
-  <section id="about">
-    <h2>About Us</h2>
-    <p>At Crunchery's we pride ourselves on crafting handmade pizzas, juicy wings, and fresh baked breads using
-    only the highest quality ingredients.Our creamy sauces and gaming fights add a unique touch to your dining experience.</p>
-    <p>We've fused South Indian Starters with your favourite breads to create legendary food at an affordable price. With a menu boasting
-     a vast selection, we can satisfy any appetite. we never use artificial flavors, ensuring an authetic taste in every bite.</p>
-    <p>Our secret recipe for success includes legendary food with a South Indian twist, top-notch quality, and a mind-blowing ambiance.</p>
-    <p>At Crunchery's, our team takes immense pride in what we do and what we offer. we aim to provide every guest with such a fantastic 
-    experience that they can't wait to return for more. Come savor our delectable creations and immerse yourself in a dining adventure like no other</p>
-    
-  </section>
+          <div class="trust-row">
+            <div class="trust-item"><span class="trust-icon">🌿</span><div><b>Freshly Made</b><small>Every single day</small></div></div>
+            <div class="trust-item"><span class="trust-icon">✓</span><div><b>No Artificial</b><small>Flavours & colours</small></div></div>
+            <div class="trust-item"><span class="trust-icon">♥</span><div><b>South Indian</b><small>Fusion & more</small></div></div>
+            <div class="trust-item"><span class="trust-icon">♣</span><div><b>Great Experience</b><small>Every single time</small></div></div>
+          </div>
+        </div>
 
-  <section id="menu">
-    <h2>Our Full Menu</h2>
-    <p>Browse our entire menu below. Click or zoom to view in full size:</p>
-    <a href="menucard.jpg" target="_blank">
-      <img src="menucard.jpg" alt="Full Restaurant Menu" class="menu-image">
-    </a>
-  </section>
+        <div class="hero-visual">
+          <img class="hero-food-image" src="assets/hero-food-exact-logo.jpg" alt="Crunchery's burger, loaded fries and refreshing drink">
+        </div>
+      </div>
+    </section>
 
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <h3><strong>Branch-1</strong></h3>
-    <p><strong>Address:</strong> 24-C, Selvakumar Complex, Vaiyapuri Nagar 4th cross,Karur,Tamilnadu.</p>
-    <p><strong>Phone:</strong> +91-9500538222</p>
-    <p><strong>Email:</strong> cruncherys@gmail.com</p>
-    <h3><strong>Branch-2</strong></h3>
-    <p><strong>Address:</strong> 35/9-D, Ramakrishnapuram Main Road, Near SubhaSri Scan Center, Karur, Tamilnadu.</p>
-    <p><strong>Phone:</strong> +91-9500538219</p>
-    <p><strong>Email:</strong> cruncherys2@gmail.com</p>
-  </section>
+    <section class="section menu-preview" id="menu">
+      <div class="container">
+        <div class="section-heading center">
+          <div class="eyebrow">EXPLORE OUR MENU</div>
+          <h2>What are you <span>craving</span> today?</h2>
+          <p>Pick your mood, discover your favourites and add them straight to your cart.</p>
+        </div>
 
-  <footer>
-    <img src="logo.png" alt="Restaurant Logo" class="logo">
-    <p>&copy; 2025 Cruncherys. All rights reserved.</p>
+        <div class="category-strip" id="categoryStrip"></div>
+
+        <div class="menu-toolbar">
+          <div>
+            <span class="eyebrow">POPULAR PICKS</span>
+            <h3>Our Menu</h3>
+          </div>
+          <div class="menu-tools">
+            <input id="menuSearch" type="search" placeholder="Search dishes..." aria-label="Search menu">
+            <select id="categoryFilter" aria-label="Filter menu category"></select>
+          </div>
+        </div>
+
+        <div class="menu-layout">
+          <div class="menu-grid" id="menuGrid"></div>
+
+          <aside class="cart-card" id="cartCard">
+            <div class="cart-head"><div><span class="cart-bag">🛍️</span><div><b>Your Cart</b><small id="cartCount">0 items</small></div></div><button id="closeCart" class="icon-btn" aria-label="Close cart">×</button></div>
+            <div class="cart-items" id="cartItems"><div class="empty-cart">Your cart is waiting for something delicious. 🍔</div></div>
+            <div class="cart-total"><span>Total</span><strong id="cartTotal">₹0</strong></div>
+            <a href="#order" class="btn btn-primary full" id="checkoutBtn">Proceed to Order →</a>
+            <a class="whatsapp-mini" id="whatsappCart" href="#" target="_blank" rel="noopener">🟢 Order on WhatsApp</a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section story-section" id="about">
+      <div class="container story-grid">
+        <div class="story-card story-copy">
+          <div class="eyebrow">OUR STORY</div>
+          <h2>More Than Food.<br><span>It's a Crunchery's Experience.</span></h2>
+          <p class="about-intro">At <strong>Crunchery's</strong>, we believe great food is meant to be enjoyed, shared, and remembered. What started with a passion for creating delicious food has grown into a place where bold flavours, quality ingredients, and a lively atmosphere come together.</p>
+          <p>Our menu brings together the comfort of your favourite pizzas, burgers, sandwiches, pastas, fries, wings, breads, and refreshing drinks with our own unique <strong>South Indian twist</strong>. From our signature starters to our creamy sauces and loaded creations, every dish is crafted to deliver something exciting in every bite.</p>
+          <p>We believe that good food begins with good ingredients. That's why we focus on quality, freshness, and authentic flavours while avoiding artificial flavours. Our goal is simple — to serve food that tastes great, feels satisfying, and keeps you coming back for more.</p>
+          <p>But Crunchery's is not just about what's on the plate. It's about the experience around it. Whether you're catching up with friends, enjoying a meal with family, watching the game, or simply satisfying a craving, we want every visit to feel special.</p>
+          <p class="about-closing"><strong>Bold food. South Indian soul. Great vibes.</strong><br>That's the Crunchery's way.</p>
+          <a class="btn btn-outline" href="#contact">Know More About Us →</a>
+        </div>
+        <div class="story-visual">
+          <div class="story-animation-wrap">
+            <video class="story-animation" autoplay muted loop playsinline preload="auto" poster="assets/logo.png" aria-label="Animated Crunchery's logo">
+              <source src="assets/logo-animation.mp4" type="video/mp4">
+              <img src="assets/logo.png" alt="Crunchery's logo">
+            </video>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section franchise-section" id="franchise">
+      <div class="container franchise-grid">
+        <div class="franchise-art">
+          <div class="shop-placeholder">
+            <div class="awning">CRUNCHERY'S</div>
+            <div class="shop-window">🍔 &nbsp; 🍟 &nbsp; 🥤</div>
+            <div class="shop-door">🚪</div>
+          </div>
+          <div class="leaf leaf-a">🌿</div><div class="leaf leaf-b">🍃</div>
+        </div>
+        <div class="franchise-copy">
+          <div class="eyebrow">JOIN THE CRUNCHERY'S FAMILY</div>
+          <h2>Own a <span>Crunchery's.</span></h2>
+          <p>Bring the Crunchery's experience to your city with a partner model designed around food, operations and customer experience.</p>
+          <div class="benefit-grid">
+            <div><span>✓</span><b>Business Model</b><small>Structured support</small></div>
+            <div><span>◎</span><b>Training</b><small>Complete guidance</small></div>
+            <div><span>★</span><b>Marketing</b><small>Brand support</small></div>
+            <div><span>⚙</span><b>Operations</b><small>Ongoing assistance</small></div>
+          </div>
+          <!-- Replace the URL in script.js with your existing Google Form -->
+          <button class="btn btn-primary btn-lg franchise-open" id="franchiseBtn" type="button" data-form-url="https://forms.gle/KRje4ZQaJgVVrcX19">Start Franchise Enquiry →</button>
+          <small class="form-note">Your existing Google Form can be connected here.</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="section order-section" id="order">
+      <div class="container order-panel">
+        <div>
+          <div class="eyebrow">ORDER ONLINE</div>
+          <h2>Ready to satisfy<br><span>that craving?</span></h2>
+          <p>Your cart is ready. Choose your favourites, then send your order through your existing Google Form or WhatsApp workflow.</p>
+          <div class="order-points"><span>✓ Freshly prepared</span><span>✓ Easy ordering</span><span>✓ Multiple branches</span></div>
+        </div>
+        <div class="order-actions">
+          <button class="btn btn-primary btn-lg" id="googleOrderBtn">Continue to Order Form →</button>
+          <a class="btn btn-outline btn-lg" id="whatsappOrderBtn" href="#" target="_blank" rel="noopener">Order via WhatsApp</a>
+          <small class="form-note">Google Form connection is configured in <code>script.js</code>.</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="section locations-section" id="locations">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">OUR LOCATIONS</div>
+          <h2>Find Crunchery's <span>near you.</span></h2>
+        </div>
+        <div class="location-grid">
+          <article class="location-card location-photo-card">
+            <img class="location-photo" src="assets/vaiyapuri-nagar.jpg" alt="Crunchery's Vaiyapuri Nagar branch interior">
+            <div class="location-icon">📍</div>
+            <div><span class="location-label">BRANCH 1</span><h3>Vaiyapuri Nagar</h3>
+              <p>24-C, Selvakumar Complex,<br>Vaiyapuri Nagar 4th Cross,<br>Karur, Tamil Nadu.</p>
+              <div class="location-actions"><a href="tel:+919500538222">☎ Call</a><a href="https://maps.google.com/?q=24-C+Selvakumar+Complex+Vaiyapuri+Nagar+Karur" target="_blank" rel="noopener">↗ Directions</a></div>
+            </div>
+          </article>
+          <article class="location-card">
+            <div class="location-icon">📍</div>
+            <div><span class="location-label">BRANCH 2</span><h3>Ramakrishnapuram</h3>
+              <p>35/9-D, Ramakrishnapuram Main Road,<br>Near SubhaSri Scan Center,<br>Karur, Tamil Nadu.</p>
+              <div class="location-actions"><a href="tel:+919500538219">☎ Call</a><a href="https://maps.google.com/?q=35%2F9-D+Ramakrishnapuram+Main+Road+Karur" target="_blank" rel="noopener">↗ Directions</a></div>
+            </div>
+          </article>
+          <article class="open-card">
+            <div class="clock">◷</div>
+            <h3>We're Open</h3><h4>Every Day!</h4>
+            <strong>11:00 AM – 11:00 PM</strong>
+            <p>Come and enjoy your favourite food with us.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="container contact-grid">
+        <div>
+          <div class="eyebrow">GET IN TOUCH</div>
+          <h2>Let's talk <span>Crunchery's.</span></h2>
+          <p>For orders, feedback, events, collaborations or partnership enquiries, reach out to us.</p>
+        </div>
+        <div class="contact-links">
+          <a href="tel:+919500538222"><span>☎</span><div><small>Call us</small><b>+91 95005 38222</b></div></a>
+          <a href="mailto:cruncherys@gmail.com"><span>✉</span><div><small>Email</small><b>cruncherys@gmail.com</b></div></a>
+          <a href="https://wa.me/919500538222" target="_blank" rel="noopener"><span>◉</span><div><small>WhatsApp</small><b>Chat with Crunchery's</b></div></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="form-modal" id="franchiseModal" aria-hidden="true">
+    <div class="form-modal-backdrop" data-close-franchise></div>
+    <div class="form-modal-panel" role="dialog" aria-modal="true" aria-labelledby="franchiseModalTitle">
+      <div class="franchise-modal-brand">
+        <div class="modal-brand-left">
+          <video class="modal-logo-animation" autoplay muted loop playsinline preload="auto" poster="assets/logo.png">
+            <source src="assets/logo-animation.mp4" type="video/mp4">
+            <img src="assets/logo.png" alt="Crunchery's logo">
+          </video>
+          <div>
+            <strong>CRUNCHERY'S<sup class="registered-mark">®</sup></strong>
+            <small>THE DESTINATION FOR YOUR CRAVINGS</small>
+          </div>
+        </div>
+        <button class="modal-close" type="button" data-close-franchise aria-label="Close form">×</button>
+      </div>
+      <div class="form-modal-title">
+        <span class="eyebrow">PARTNER WITH US</span>
+        <h2 id="franchiseModalTitle">Become a <span>Crunchery's Partner.</span></h2>
+        <p>Tell us a little about yourself and your plans. Our Partner Development Team will review your enquiry and get in touch.</p>
+      </div>
+      <div class="form-frame-wrap">
+        <div class="form-loading" id="franchiseLoading">
+          <div class="loading-ring"></div>
+          <b>Loading Partner Enquiry...</b>
+          <small>Preparing the Crunchery's form for you.</small>
+        </div>
+        <iframe id="franchiseFrame" title="Crunchery's Franchise Enquiry Form" loading="eager"></iframe>
+      </div>
+      <div class="modal-footer-note">
+        <span>Already have the form open?</span>
+        <a id="franchiseExternal" href="https://forms.gle/KRje4ZQaJgVVrcX19" target="_blank" rel="noopener">Open in a new tab ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand"><img src="assets/logo.png" alt="Crunchery's logo"><p>Thank you for being part of our journey. We can't wait to serve your next craving.</p></div>
+      <div><h4>QUICK LINKS</h4><a href="#home">Home</a><a href="#menu">Menu</a><a href="#order">Order Online</a><a href="#franchise" class="franchise-open">Franchise</a><a href="#about">About Us</a></div>
+      <div><h4>HELP</h4><a href="#contact">Contact</a><a href="#locations">Locations</a><a href="#">Privacy Policy</a><a href="#">Terms & Conditions</a></div>
+      <div><h4>FOLLOW US</h4><div class="socials"><a href="#" aria-label="Instagram">◎</a><a href="#" aria-label="Facebook">f</a><a href="https://wa.me/919500538222" target="_blank" rel="noopener" aria-label="WhatsApp">◉</a></div><a class="email-chip" href="mailto:cruncherys@gmail.com">✉ cruncherys@gmail.com</a></div>
+    </div>
+    <div class="copyright">© 2026 Crunchery's Fusion Cafe. All Rights Reserved. <span>Made with love for your cravings.</span></div>
   </footer>
 
+  <a class="floating-wa" href="https://wa.me/919500538222" target="_blank" rel="noopener" aria-label="WhatsApp">◉</a>
+
+  <script src="script.js?v=8"></script>
 </body>
 </html>

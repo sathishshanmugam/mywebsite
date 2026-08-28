@@ -1,0 +1,1157 @@
+
+/*
+  CRUNCHERY'S WEBSITE CONFIGURATION
+  ---------------------------------
+  Replace these two placeholders with your real Google Form links.
+
+  GOOGLE_ORDER_FORM_URL:
+    The Google Form used for customer orders.
+
+  FRANCHISE_FORM_URL:
+    Your existing Crunchery's partner/franchise enquiry Google Form.
+*/
+const CONFIG = {
+  GOOGLE_ORDER_FORM_URL: "",
+  FRANCHISE_FORM_URL: "https://forms.gle/KRje4ZQaJgVVrcX19",
+  WHATSAPP_NUMBER: "919500538222"
+};
+
+const MENU = [
+  {
+    "name": "Brownie",
+    "description": "",
+    "category": "Desserts",
+    "price": 80,
+    "type": "veg"
+  },
+  {
+    "name": "Orange",
+    "description": "",
+    "category": "Cold Pressed Juices",
+    "price": 180,
+    "type": "veg"
+  },
+  {
+    "name": "Pineapple",
+    "description": "",
+    "category": "Cold Pressed Juices",
+    "price": 140,
+    "type": "veg"
+  },
+  {
+    "name": "Choco Lava Cake",
+    "description": "",
+    "category": "Desserts",
+    "price": 90,
+    "type": "veg"
+  },
+  {
+    "name": "Watermelon",
+    "description": "",
+    "category": "Cold Pressed Juices",
+    "price": 90,
+    "type": "veg"
+  },
+  {
+    "name": "Black Grapes",
+    "description": "",
+    "category": "Cold Pressed Juices",
+    "price": 120,
+    "type": "veg"
+  },
+  {
+    "name": "Hot Garlic Mushroom Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 130,
+    "type": "veg"
+  },
+  {
+    "name": "Butter Garlic Mushroom Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 130,
+    "type": "veg"
+  },
+  {
+    "name": "Pepperfry Mushroom Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 130,
+    "type": "veg"
+  },
+  {
+    "name": "Paneer Podimas Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 160,
+    "type": "veg"
+  },
+  {
+    "name": "Ghee Podi Potato Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 130,
+    "type": "veg"
+  },
+  {
+    "name": "Butter Garlic Mushroom",
+    "description": "",
+    "category": "Starters",
+    "price": 110,
+    "type": "veg"
+  },
+  {
+    "name": "Hot Garlic Mushroom",
+    "description": "",
+    "category": "Starters",
+    "price": 110,
+    "type": "veg"
+  },
+  {
+    "name": "Pepperfry Mushroom",
+    "description": "",
+    "category": "Starters",
+    "price": 110,
+    "type": "veg"
+  },
+  {
+    "name": "Paneer Podimas",
+    "description": "",
+    "category": "Starters",
+    "price": 140,
+    "type": "veg"
+  },
+  {
+    "name": "Ghee Podi Potato",
+    "description": "",
+    "category": "Starters",
+    "price": 90,
+    "type": "veg"
+  },
+  {
+    "name": "Hyderabadi Chicken Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 180,
+    "type": "non-veg"
+  },
+  {
+    "name": "Ghee Podi Chicken Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 180,
+    "type": "non-veg"
+  },
+  {
+    "name": "Hot Spicy Chicken Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 180,
+    "type": "non-veg"
+  },
+  {
+    "name": "Hot Spicy Chicken",
+    "description": "",
+    "category": "Starters",
+    "price": 140,
+    "type": "non-veg"
+  },
+  {
+    "name": "Ghee Podi Chicken",
+    "description": "",
+    "category": "Starters",
+    "price": 140,
+    "type": "non-veg"
+  },
+  {
+    "name": "Hyderabadi Chicken",
+    "description": "",
+    "category": "Starters",
+    "price": 140,
+    "type": "non-veg"
+  },
+  {
+    "name": "Hot Garlic Chicken Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 180,
+    "type": "non-veg"
+  },
+  {
+    "name": "Butter Garlic Chicken Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 180,
+    "type": "non-veg"
+  },
+  {
+    "name": "Hot Garlic Chicken",
+    "description": "",
+    "category": "Starters",
+    "price": 140,
+    "type": "non-veg"
+  },
+  {
+    "name": "Butter Garlic Chicken",
+    "description": "",
+    "category": "Starters",
+    "price": 140,
+    "type": "non-veg"
+  },
+  {
+    "name": "Hyderabadi Chicken Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 200,
+    "type": "non-veg"
+  },
+  {
+    "name": "Hot Spicy Chicken Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 200,
+    "type": "non-veg"
+  },
+  {
+    "name": "Hot Garlic Chicken Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 200,
+    "type": "non-veg"
+  },
+  {
+    "name": "Butter Garlic Chicken Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 200,
+    "type": "non-veg"
+  },
+  {
+    "name": "Ghee Podi Chicken Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 200,
+    "type": "non-veg"
+  },
+  {
+    "name": "Peri Peri Fries",
+    "description": "",
+    "category": "French Fries",
+    "price": 100,
+    "type": "veg"
+  },
+  {
+    "name": "French Fries",
+    "description": "",
+    "category": "French Fries",
+    "price": 90,
+    "type": "veg"
+  },
+  {
+    "name": "Hot Garlic Mushroom Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 150,
+    "type": "veg"
+  },
+  {
+    "name": "Butter Garlic Mushroom Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 150,
+    "type": "veg"
+  },
+  {
+    "name": "Mushroom Pepperfry Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 150,
+    "type": "veg"
+  },
+  {
+    "name": "Paneer Podimas Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 180,
+    "type": "veg"
+  },
+  {
+    "name": "Ghee Podi Potato Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 150,
+    "type": "veg"
+  },
+  {
+    "name": "Black Coffee",
+    "description": "",
+    "category": "Coffee",
+    "price": 40,
+    "type": "veg"
+  },
+  {
+    "name": "Hibiscus Rose",
+    "description": "",
+    "category": "Tea",
+    "price": 40,
+    "type": "veg"
+  },
+  {
+    "name": "Lemon Ginger",
+    "description": "",
+    "category": "Tea",
+    "price": 40,
+    "type": "veg"
+  },
+  {
+    "name": "Darjeeling Summer",
+    "description": "",
+    "category": "Tea",
+    "price": 40,
+    "type": "veg"
+  },
+  {
+    "name": "Garlic Bread",
+    "description": "",
+    "category": "Garlic Breads",
+    "price": 70,
+    "type": "veg"
+  },
+  {
+    "name": "Chilli Cheese Toast",
+    "description": "",
+    "category": "Sandwich",
+    "price": 120,
+    "type": "veg"
+  },
+  {
+    "name": "Cheesy Fries",
+    "description": "",
+    "category": "French Fries",
+    "price": 140,
+    "type": "veg"
+  },
+  {
+    "name": "Egg Burji Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 110,
+    "type": "egg"
+  },
+  {
+    "name": "Nutella Toast",
+    "description": "",
+    "category": "Sandwich",
+    "price": 90,
+    "type": "veg"
+  },
+  {
+    "name": "Cheese 'n Corn Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 120,
+    "type": "veg"
+  },
+  {
+    "name": "Lime Mint",
+    "description": "",
+    "category": "Mojitos",
+    "price": 100,
+    "type": "veg"
+  },
+  {
+    "name": "Blue Curacao",
+    "description": "",
+    "category": "Mojitos",
+    "price": 100,
+    "type": "veg"
+  },
+  {
+    "name": "Blue Berry",
+    "description": "",
+    "category": "Mojitos",
+    "price": 100,
+    "type": "veg"
+  },
+  {
+    "name": "Green Apple",
+    "description": "",
+    "category": "Mojitos",
+    "price": 100,
+    "type": "veg"
+  },
+  {
+    "name": "French Chili Toast",
+    "description": "",
+    "category": "Garlic Breads",
+    "price": 100,
+    "type": "veg"
+  },
+  {
+    "name": "Scrambled Egg",
+    "description": "",
+    "category": "Starters",
+    "price": 60,
+    "type": "egg"
+  },
+  {
+    "name": "Eggpepperfry Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 110,
+    "type": "egg"
+  },
+  {
+    "name": "Scrambled Egg Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 110,
+    "type": "egg"
+  },
+  {
+    "name": "Scrambled Egg  Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 130,
+    "type": "egg"
+  },
+  {
+    "name": "Mac 'n Cheese Pasta",
+    "description": "",
+    "category": "Pastas",
+    "price": 0,
+    "type": "veg"
+  },
+  {
+    "name": "Plates",
+    "description": "",
+    "category": "Cutleries",
+    "price": 10,
+    "type": "veg"
+  },
+  {
+    "name": "Egg Burji",
+    "description": "",
+    "category": "Starters",
+    "price": 60,
+    "type": "egg"
+  },
+  {
+    "name": "Creamy White Pasta",
+    "description": "",
+    "category": "Pastas",
+    "price": 0,
+    "type": "veg"
+  },
+  {
+    "name": "Tangy Red Pasta",
+    "description": "",
+    "category": "Pastas",
+    "price": 0,
+    "type": "veg"
+  },
+  {
+    "name": "Black Ginger Coffee",
+    "description": "",
+    "category": "Coffee",
+    "price": 40,
+    "type": "veg"
+  },
+  {
+    "name": "Black Sukku Malli Coffee",
+    "description": "",
+    "category": "Coffee",
+    "price": 40,
+    "type": "veg"
+  },
+  {
+    "name": "Egg Burji Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 130,
+    "type": "egg"
+  },
+  {
+    "name": "Cheese Garlic Bread",
+    "description": "",
+    "category": "Garlic Breads",
+    "price": 90,
+    "type": "veg"
+  },
+  {
+    "name": "Egg Pepperfry",
+    "description": "",
+    "category": "Starters",
+    "price": 60,
+    "type": "egg"
+  },
+  {
+    "name": "Cheese Scrambled Egg",
+    "description": "",
+    "category": "Starters",
+    "price": 80,
+    "type": "egg"
+  },
+  {
+    "name": "Cheese Scrambled Egg Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 130,
+    "type": "egg"
+  },
+  {
+    "name": "Egg Pepperfry Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 130,
+    "type": "egg"
+  },
+  {
+    "name": "Cheese Scrambled Egg Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 150,
+    "type": "egg"
+  },
+  {
+    "name": "Bbq Chicken Wings -2pcs",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 110,
+    "type": "non-veg"
+  },
+  {
+    "name": "Bbq Chicken Wings -4pcs",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 190,
+    "type": "non-veg"
+  },
+  {
+    "name": "Fried Chicken Lollypop- 1 Pc",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 100,
+    "type": "non-veg"
+  },
+  {
+    "name": "Fried Chicken Lollypop-2 Pcs",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 180,
+    "type": "non-veg"
+  },
+  {
+    "name": "Paneer  Cheese Balls",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 140,
+    "type": "veg"
+  },
+  {
+    "name": "Onion Rings",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 90,
+    "type": "veg"
+  },
+  {
+    "name": "500ml Water Bottle",
+    "description": "",
+    "category": "WaterBottles",
+    "price": 15,
+    "type": "veg"
+  },
+  {
+    "name": "1l Water Bottle",
+    "description": "",
+    "category": "WaterBottles",
+    "price": 25,
+    "type": "veg"
+  },
+  {
+    "name": "Popcorn Chicken",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 160,
+    "type": "non-veg"
+  },
+  {
+    "name": "Chicken Skewers",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 150,
+    "type": "non-veg"
+  },
+  {
+    "name": "Chipotle Wings-2 Pcs",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 110,
+    "type": "non-veg"
+  },
+  {
+    "name": "Chipotle Wings- 4pc",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 190,
+    "type": "non-veg"
+  },
+  {
+    "name": "Paneer Pepperfry",
+    "description": "",
+    "category": "Starters",
+    "price": 140,
+    "type": "veg"
+  },
+  {
+    "name": "Paneer Pepperfry Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 160,
+    "type": "veg"
+  },
+  {
+    "name": "Paneer Pepperfry Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 180,
+    "type": "veg"
+  },
+  {
+    "name": "Brownie With Icecream",
+    "description": "",
+    "category": "Desserts",
+    "price": 120,
+    "type": "veg"
+  },
+  {
+    "name": "Perfect Vanilla Shake",
+    "description": "",
+    "category": "Milkshakes",
+    "price": 150,
+    "type": "veg"
+  },
+  {
+    "name": "Creamy Blueberry Shake",
+    "description": "",
+    "category": "Milkshakes",
+    "price": 150,
+    "type": "veg"
+  },
+  {
+    "name": "Strawberry Cream Dream",
+    "description": "",
+    "category": "Milkshakes",
+    "price": 150,
+    "type": "veg"
+  },
+  {
+    "name": "Hazelnut Brownie Shake",
+    "description": "",
+    "category": "Milkshakes",
+    "price": 190,
+    "type": "veg"
+  },
+  {
+    "name": "Latte Cold Coffee",
+    "description": "",
+    "category": "Milkshakes",
+    "price": 190,
+    "type": "veg"
+  },
+  {
+    "name": "Nuts And Caramel Shake",
+    "description": "",
+    "category": "Milkshakes",
+    "price": 190,
+    "type": "veg"
+  },
+  {
+    "name": "Rose Gulkand Shake",
+    "description": "",
+    "category": "Milkshakes",
+    "price": 190,
+    "type": "veg"
+  },
+  {
+    "name": "Pizza",
+    "description": "",
+    "category": "Pizzas",
+    "price": 0,
+    "type": "non-veg"
+  },
+  {
+    "name": "Basic Birthday Decoration",
+    "description": "",
+    "category": "Decoration",
+    "price": 1000,
+    "type": "veg"
+  },
+  {
+    "name": "Birthday Decoration",
+    "description": "",
+    "category": "Decoration",
+    "price": 1500,
+    "type": "veg"
+  },
+  {
+    "name": "Chipotle Saucy Mushroom",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 150,
+    "type": "veg"
+  },
+  {
+    "name": "Choco Lava Cake With Icecream",
+    "description": "",
+    "category": "Desserts",
+    "price": 130,
+    "type": "veg"
+  },
+  {
+    "name": "Icecream 1 Scoop",
+    "description": "",
+    "category": "Desserts",
+    "price": 40,
+    "type": "veg"
+  },
+  {
+    "name": "Bbq Saucy Mushroom",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 150,
+    "type": "veg"
+  },
+  {
+    "name": "Chipotle Saucy Paneer",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 150,
+    "type": "veg"
+  },
+  {
+    "name": "Bbq Saucy Paneer",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 150,
+    "type": "veg"
+  },
+  {
+    "name": "Paneer Popcorn",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 140,
+    "type": "veg"
+  },
+  {
+    "name": "Mushroom Popcorn",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 140,
+    "type": "veg"
+  },
+  {
+    "name": "Fried Wings-2 Pcs",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 100,
+    "type": "non-veg"
+  },
+  {
+    "name": "Fried Wings-4 Pcs",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 180,
+    "type": "non-veg"
+  },
+  {
+    "name": "Chocolate Caramel Shake",
+    "description": "",
+    "category": "Milkshakes",
+    "price": 150,
+    "type": "veg"
+  },
+  {
+    "name": "Peri Peri Pasta",
+    "description": "",
+    "category": "Pastas",
+    "price": 0,
+    "type": "veg"
+  },
+  {
+    "name": "Chettinad Chicken Briyani 1kg",
+    "description": "",
+    "category": "Special Orders",
+    "price": 1800,
+    "type": "non-veg"
+  },
+  {
+    "name": "Peach Ice Tea",
+    "description": "",
+    "category": "Mocktails",
+    "price": 120,
+    "type": "veg"
+  },
+  {
+    "name": "Red Sea Mocktail",
+    "description": "",
+    "category": "Mocktails",
+    "price": 120,
+    "type": "veg"
+  },
+  {
+    "name": "Glass Of Galaxy",
+    "description": "",
+    "category": "Mocktails",
+    "price": 120,
+    "type": "veg"
+  },
+  {
+    "name": "Cappucino",
+    "description": "",
+    "category": "Coffee",
+    "price": 90,
+    "type": "veg"
+  },
+  {
+    "name": "Latte",
+    "description": "",
+    "category": "Coffee",
+    "price": 90,
+    "type": "veg"
+  },
+  {
+    "name": "Mocha",
+    "description": "",
+    "category": "Coffee",
+    "price": 90,
+    "type": "veg"
+  },
+  {
+    "name": "Seeraga Samba Chicken Biriyani",
+    "description": "",
+    "category": "The Biriyani Counter",
+    "price": 0,
+    "type": "non-veg"
+  },
+  {
+    "name": "Chicken-ka-baap Biriyani",
+    "description": "",
+    "category": "The Biriyani Counter",
+    "price": 0,
+    "type": "non-veg"
+  },
+  {
+    "name": "Chicken Drum-stick Biriyani",
+    "description": "",
+    "category": "The Biriyani Counter",
+    "price": 0,
+    "type": "non-veg"
+  },
+  {
+    "name": "Pop-chick Biriyani",
+    "description": "",
+    "category": "The Biriyani Counter",
+    "price": 0,
+    "type": "non-veg"
+  },
+  {
+    "name": "Chicken-ka-baap",
+    "description": "",
+    "category": "TBC Starters",
+    "price": 0,
+    "type": "non-veg"
+  },
+  {
+    "name": "Pop-chick",
+    "description": "",
+    "category": "TBC Starters",
+    "price": 0,
+    "type": "non-veg"
+  },
+  {
+    "name": "Singlecontroller",
+    "description": "Single controller for 1 hour",
+    "category": "PS5 FOOD-GAME COMBO",
+    "price": 200,
+    "type": "veg"
+  },
+  {
+    "name": "Double Controller",
+    "description": "double controller for 1 hour",
+    "category": "PS5 FOOD-GAME COMBO",
+    "price": 300,
+    "type": "veg"
+  },
+  {
+    "name": "Fried Drum-stick Chicken",
+    "description": "",
+    "category": "TBC Starters",
+    "price": 0,
+    "type": "non-veg"
+  },
+  {
+    "name": "Strawberry Fondue",
+    "description": "",
+    "category": "Desserts",
+    "price": 110,
+    "type": "veg"
+  },
+  {
+    "name": "Chicken Loaded Fries",
+    "description": "",
+    "category": "French Fries",
+    "price": 220,
+    "type": "non-veg"
+  },
+  {
+    "name": "Fried Chicken Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 220,
+    "type": "non-veg"
+  },
+  {
+    "name": "Crispy Crumb Burger Veg",
+    "description": "",
+    "category": "Burger",
+    "price": 200,
+    "type": "veg"
+  },
+  {
+    "name": "Crispy Crumb Burger Chicken",
+    "description": "",
+    "category": "Burger",
+    "price": 220,
+    "type": "non-veg"
+  },
+  {
+    "name": "Whole Wheat Pizza",
+    "description": "",
+    "category": "Pizzas",
+    "price": 0,
+    "type": "veg"
+  },
+  {
+    "name": "Pineapple Custard",
+    "description": "",
+    "category": "Desserts",
+    "price": 100,
+    "type": "veg"
+  },
+  {
+    "name": "Chocolate Coffee Mousse",
+    "description": "",
+    "category": "Desserts",
+    "price": 80,
+    "type": "veg"
+  },
+  {
+    "name": "Oats & Nuts Kheer",
+    "description": "",
+    "category": "Desserts",
+    "price": 100,
+    "type": "veg"
+  },
+  {
+    "name": "Korean Cream Cheese Garlic Bun",
+    "description": "",
+    "category": "Desserts",
+    "price": 200,
+    "type": "veg"
+  }
+];
+
+const categoryIcons = {
+  "Burger":"🍔","Pizzas":"🍕","French Fries":"🍟","Starters":"🍗","Sandwich":"🥪",
+  "Garlic Breads":"🧄","Pastas":"🍝","Crunchery's Specials":"🔥","Desserts":"🍰",
+  "Milkshakes":"🥤","Mojitos":"🍹","Mocktails":"🍸","Cold Pressed Juices":"🍊",
+  "Coffee":"☕","Tea":"🍵","Special Orders":"🎉","The Biriyani Counter":"🍚",
+  "TBC Starters":"🍗","PS5 FOOD-GAME COMBO":"🎮","Decoration":"🎂","WaterBottles":"💧",
+  "Cutleries":"🍴"
+};
+
+const $ = (id) => document.getElementById(id);
+const money = (n) => "₹" + Number(n || 0).toLocaleString("en-IN");
+let cart = JSON.parse(localStorage.getItem("cruncherys_cart") || "[]");
+let selectedCategory = "All";
+
+function uniqueCategories(){
+  return [...new Set(MENU.map(x => x.category).filter(Boolean))];
+}
+
+function emojiFor(item){
+  const c = item.category;
+  if (categoryIcons[c]) return categoryIcons[c];
+  const n = item.name.toLowerCase();
+  if(n.includes("chicken")) return "🍗";
+  if(n.includes("mushroom")) return "🍄";
+  if(n.includes("paneer")) return "🧀";
+  if(n.includes("egg")) return "🥚";
+  if(n.includes("coffee")) return "☕";
+  if(n.includes("shake")) return "🥤";
+  return "🍽️";
+}
+
+function setupCategories(){
+  const cats = uniqueCategories();
+  const strip = $("categoryStrip");
+  const filter = $("categoryFilter");
+  strip.innerHTML = `<button class="cat-pill active" data-cat="All"><span class="cat-icon">✨</span><span>All Menu</span></button>` +
+    cats.map(c => `<button class="cat-pill" data-cat="${escapeHtml(c)}"><span class="cat-icon">${categoryIcons[c] || "🍽️"}</span><span>${escapeHtml(c)}</span></button>`).join("");
+  filter.innerHTML = `<option value="All">All categories</option>` + cats.map(c => `<option>${escapeHtml(c)}</option>`).join("");
+
+  strip.querySelectorAll(".cat-pill").forEach(btn => btn.addEventListener("click", () => {
+    selectedCategory = btn.dataset.cat;
+    filter.value = selectedCategory;
+    strip.querySelectorAll(".cat-pill").forEach(b => b.classList.toggle("active", b === btn));
+    renderMenu();
+  }));
+  filter.addEventListener("change", () => {
+    selectedCategory = filter.value;
+    strip.querySelectorAll(".cat-pill").forEach(b => b.classList.toggle("active", b.dataset.cat === selectedCategory));
+    renderMenu();
+  });
+  $("menuSearch").addEventListener("input", renderMenu);
+}
+
+function renderMenu(){
+  const q = $("menuSearch").value.trim().toLowerCase();
+  let list = MENU.filter(item => {
+    const categoryMatch = selectedCategory === "All" || item.category === selectedCategory;
+    const searchMatch = !q || item.name.toLowerCase().includes(q) || item.category.toLowerCase().includes(q);
+    return categoryMatch && searchMatch;
+  });
+  $("menuGrid").innerHTML = list.length ? list.map(cardHtml).join("") :
+    `<div class="empty-cart" style="grid-column:1/-1">No dishes found. Try another search. 🍽️</div>`;
+  $("menuGrid").querySelectorAll(".add-btn").forEach(btn => btn.addEventListener("click", () => addToCart(Number(btn.dataset.index))));
+}
+
+function cardHtml(item){
+  const index = MENU.indexOf(item);
+  const type = item.type || "veg";
+  const badge = type === "non-veg" ? "NON-VEG" : type === "egg" ? "EGG" : "VEG";
+  const price = Number(item.price) > 0 ? money(item.price) : "On selection";
+  return `<article class="menu-card">
+    <span class="badge ${type}">${badge}</span>
+    <div class="food-image">${emojiFor(item)}</div>
+    <div class="menu-card-body">
+      <h4>${escapeHtml(item.name)}</h4>
+      <div class="menu-desc">${escapeHtml(item.description || "Freshly prepared at Crunchery's.")}</div>
+      <div class="menu-bottom"><span class="price">${price}</span><button class="add-btn" data-index="${index}">ADD +</button></div>
+    </div>
+  </article>`;
+}
+
+function addToCart(index){
+  const item = MENU[index];
+  const existing = cart.find(x => x.name === item.name && x.price === Number(item.price));
+  if(existing) existing.qty++;
+  else cart.push({name:item.name, price:Number(item.price)||0, qty:1, category:item.category});
+  saveCart();
+  openCart();
+}
+
+function changeQty(i, delta){
+  cart[i].qty += delta;
+  if(cart[i].qty <= 0) cart.splice(i,1);
+  saveCart();
+}
+
+function saveCart(){
+  localStorage.setItem("cruncherys_cart", JSON.stringify(cart));
+  renderCart();
+}
+
+function renderCart(){
+  const total = cart.reduce((s,x)=>s + x.price*x.qty, 0);
+  const count = cart.reduce((s,x)=>s + x.qty, 0);
+  $("cartCount").textContent = `${count} item${count===1?"":"s"}`;
+  $("cartTotal").textContent = money(total);
+  $("cartItems").innerHTML = cart.length ? cart.map((x,i)=>`
+    <div class="cart-line">
+      <div><b>${escapeHtml(x.name)}</b><small>${money(x.price)} × ${x.qty}</small></div>
+      <div class="qty"><button data-i="${i}" data-d="-1">−</button><span>${x.qty}</span><button data-i="${i}" data-d="1">+</button></div>
+    </div>`).join("") : `<div class="empty-cart">Your cart is waiting for something delicious. 🍔</div>`;
+  $("cartItems").querySelectorAll(".qty button").forEach(b => b.addEventListener("click",()=>changeQty(Number(b.dataset.i),Number(b.dataset.d))));
+  updateOrderLinks();
+}
+
+function openCart(){ $("cartCard").classList.add("open"); }
+$("closeCart").addEventListener("click",()=> $("cartCard").classList.remove("open"));
+
+function cartMessage(){
+  if(!cart.length) return "Hi Crunchery's! I'd like to know today's menu.";
+  const lines = cart.map(x => `• ${x.name} × ${x.qty} — ${money(x.price*x.qty)}`).join("\n");
+  const total = cart.reduce((s,x)=>s+x.price*x.qty,0);
+  return `Hi Crunchery's! I'd like to place an order:\n${lines}\n\nTotal: ${money(total)}\nPlease confirm availability and ordering details.`;
+}
+
+function updateOrderLinks(){
+  const wa = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(cartMessage())}`;
+  $("whatsappCart").href = wa;
+  $("whatsappOrderBtn").href = wa;
+}
+
+function setupForms(){
+  const orderValid = CONFIG.GOOGLE_ORDER_FORM_URL.startsWith("http");
+  const franchiseValid = CONFIG.FRANCHISE_FORM_URL.startsWith("http");
+
+  $("googleOrderBtn").addEventListener("click",()=>{
+    if(orderValid) window.open(CONFIG.GOOGLE_ORDER_FORM_URL,"_blank","noopener");
+    else alert("Online ordering is being prepared. You can order quickly through WhatsApp for now.");
+  });
+
+  const modal = $("franchiseModal");
+  const frame = $("franchiseFrame");
+  const external = $("franchiseExternal");
+
+  document.querySelectorAll(".franchise-open").forEach(btn => {
+    btn.addEventListener("click",()=>{
+      if(!franchiseValid){
+        alert("The franchise enquiry form is not configured yet.");
+        return;
+      }
+      external.href = CONFIG.FRANCHISE_FORM_URL;
+      if(!frame.src) frame.src = CONFIG.FRANCHISE_FORM_URL;
+      const loading = $("franchiseLoading");
+      if (loading) loading.style.display = "flex";
+      frame.onload = () => { if (loading) loading.style.display = "none"; };
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden","false");
+      document.body.style.overflow = "hidden";
+    });
+  });
+
+  document.querySelectorAll("[data-close-franchise]").forEach(el => {
+    el.addEventListener("click", closeFranchiseModal);
+  });
+
+  document.addEventListener("keydown",(e)=>{
+    if(e.key === "Escape" && modal.classList.contains("open")) closeFranchiseModal();
+  });
+}
+
+function closeFranchiseModal(){
+  const modal = $("franchiseModal");
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden","true");
+  document.body.style.overflow = "";
+}
+
+function escapeHtml(s){
+  return String(s ?? "").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+}
+
+$("menuToggle").addEventListener("click",()=> $("mainNav").classList.toggle("open"));
+$("mainNav").querySelectorAll("a").forEach(a=>a.addEventListener("click",()=> $("mainNav").classList.remove("open")));
+$("checkoutBtn").addEventListener("click",(e)=>{
+  if(!cart.length){e.preventDefault();openCart();alert("Please add at least one item to your cart.");}
+});
+
+setupCategories();
+setupForms();
+renderMenu();
+renderCart();
