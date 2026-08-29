@@ -690,3 +690,71 @@ body{background:#fffaf3}
     overflow-x: hidden;
   }
 }
+
+/* =========================================================
+   FINAL LOCATION CARD PHOTO ALIGNMENT FIX
+   Both branch photos are full-width and exactly aligned
+   ========================================================= */
+
+.location-card.location-photo-card {
+  padding: 0 !important;
+  overflow: hidden !important;
+  display: grid !important;
+  grid-template-columns: 46px minmax(0, 1fr) !important;
+  gap: 12px !important;
+  align-items: start !important;
+}
+
+.location-card.location-photo-card > .location-photo {
+  grid-column: 1 / -1 !important;
+  width: 100% !important;
+  height: 260px !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* Keep the location details aligned underneath the photo */
+.location-card.location-photo-card > .location-icon {
+  margin: 22px 0 0 22px !important;
+}
+
+.location-card.location-photo-card > div:last-child {
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 22px 22px 22px 0 !important;
+}
+
+/* Make sure the card itself does not introduce an inset */
+.location-card.location-photo-card::before,
+.location-card.location-photo-card::after {
+  box-sizing: border-box;
+}
+
+@media (max-width: 760px) {
+  .location-card.location-photo-card {
+    grid-template-columns: 46px minmax(0, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  .location-card.location-photo-card > .location-photo {
+    width: 100% !important;
+    height: 180px !important;
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+
+  .location-card.location-photo-card > .location-icon {
+    margin: 18px 0 0 18px !important;
+  }
+
+  .location-card.location-photo-card > div:last-child {
+    padding: 18px 18px 18px 0 !important;
+  }
+}
