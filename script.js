@@ -1120,30 +1120,30 @@ function openPizzaCustomizer(item){
 
   baseBox.innerHTML = `
 
-    <button
-      type="button"
-      class="pizza-option"
-      data-base="Maida">
+  <button
+    type="button"
+    class="pizza-option"
+    data-base="Maida"
+    data-base-price="0">
 
-      <strong>Maida</strong>
+    <strong>Maida</strong>
+    <small>₹0</small>
 
-      <small>₹0</small>
-
-    </button>
+  </button>
 
 
-    <button
-      type="button"
-      class="pizza-option"
-      data-base="Whole Wheat">
+  <button
+    type="button"
+    class="pizza-option"
+    data-base="Whole Wheat"
+    data-base-price="30">
 
-      <strong>Whole Wheat</strong>
+    <strong>Whole Wheat</strong>
+    <small>+₹30</small>
 
-      <small>₹30</small>
+  </button>
 
-    </button>
-
-  `;
+`;
 
 
   /* =====================================================
