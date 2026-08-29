@@ -399,7 +399,14 @@ body{background:#fffaf3}
 .service-strip i{height:18px;background:#dccfbe}
 .nav-wrap{height:181px;gap:30px}
 .brand{width:600px;gap:18px}
-.brand-logo-static{width:132px;height:132px;object-fit:contain;filter:none}
+.brand-logo-static{
+  width:145px;
+  height:145px;
+  object-fit:contain;
+  filter:none;
+  transform:scale(1.35);
+  transform-origin:center;
+}
 .brand-wordmark strong{
   font-family:'Anton',Impact,sans-serif;
   font-size:55px;line-height:.92;letter-spacing:1px;font-weight:400;
