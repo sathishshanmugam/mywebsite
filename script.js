@@ -95,41 +95,6 @@ const MENU = [
     "type": "veg"
   },
   {
-    "name": "Butter Garlic Mushroom",
-    "description": "",
-    "category": "Starters",
-    "price": 110,
-    "type": "veg"
-  },
-  {
-    "name": "Hot Garlic Mushroom",
-    "description": "",
-    "category": "Starters",
-    "price": 110,
-    "type": "veg"
-  },
-  {
-    "name": "Pepperfry Mushroom",
-    "description": "",
-    "category": "Starters",
-    "price": 110,
-    "type": "veg"
-  },
-  {
-    "name": "Paneer Podimas",
-    "description": "",
-    "category": "Starters",
-    "price": 140,
-    "type": "veg"
-  },
-  {
-    "name": "Ghee Podi Potato",
-    "description": "",
-    "category": "Starters",
-    "price": 90,
-    "type": "veg"
-  },
-  {
     "name": "Hyderabadi Chicken Sandwich",
     "description": "",
     "category": "Sandwich",
@@ -151,27 +116,6 @@ const MENU = [
     "type": "non-veg"
   },
   {
-    "name": "Hot Spicy Chicken",
-    "description": "",
-    "category": "Starters",
-    "price": 140,
-    "type": "non-veg"
-  },
-  {
-    "name": "Ghee Podi Chicken",
-    "description": "",
-    "category": "Starters",
-    "price": 140,
-    "type": "non-veg"
-  },
-  {
-    "name": "Hyderabadi Chicken",
-    "description": "",
-    "category": "Starters",
-    "price": 140,
-    "type": "non-veg"
-  },
-  {
     "name": "Hot Garlic Chicken Sandwich",
     "description": "",
     "category": "Sandwich",
@@ -183,20 +127,6 @@ const MENU = [
     "description": "",
     "category": "Sandwich",
     "price": 180,
-    "type": "non-veg"
-  },
-  {
-    "name": "Hot Garlic Chicken",
-    "description": "",
-    "category": "Starters",
-    "price": 140,
-    "type": "non-veg"
-  },
-  {
-    "name": "Butter Garlic Chicken",
-    "description": "",
-    "category": "Starters",
-    "price": 140,
     "type": "non-veg"
   },
   {
@@ -284,34 +214,6 @@ const MENU = [
     "type": "veg"
   },
   {
-    "name": "Black Coffee",
-    "description": "",
-    "category": "Coffee",
-    "price": 40,
-    "type": "veg"
-  },
-  {
-    "name": "Hibiscus Rose",
-    "description": "",
-    "category": "Tea",
-    "price": 40,
-    "type": "veg"
-  },
-  {
-    "name": "Lemon Ginger",
-    "description": "",
-    "category": "Tea",
-    "price": 40,
-    "type": "veg"
-  },
-  {
-    "name": "Darjeeling Summer",
-    "description": "",
-    "category": "Tea",
-    "price": 40,
-    "type": "veg"
-  },
-  {
     "name": "Garlic Bread",
     "description": "",
     "category": "Garlic Breads",
@@ -389,13 +291,6 @@ const MENU = [
     "type": "veg"
   },
   {
-    "name": "Scrambled Egg",
-    "description": "",
-    "category": "Starters",
-    "price": 60,
-    "type": "egg"
-  },
-  {
     "name": "Eggpepperfry Sandwich",
     "description": "",
     "category": "Sandwich",
@@ -424,20 +319,6 @@ const MENU = [
     "type": "veg"
   },
   {
-    "name": "Plates",
-    "description": "",
-    "category": "Cutleries",
-    "price": 10,
-    "type": "veg"
-  },
-  {
-    "name": "Egg Burji",
-    "description": "",
-    "category": "Starters",
-    "price": 60,
-    "type": "egg"
-  },
-  {
     "name": "Creamy White Pasta",
     "description": "",
     "category": "Pastas",
@@ -449,20 +330,6 @@ const MENU = [
     "description": "",
     "category": "Pastas",
     "price": 0,
-    "type": "veg"
-  },
-  {
-    "name": "Black Ginger Coffee",
-    "description": "",
-    "category": "Coffee",
-    "price": 40,
-    "type": "veg"
-  },
-  {
-    "name": "Black Sukku Malli Coffee",
-    "description": "",
-    "category": "Coffee",
-    "price": 40,
     "type": "veg"
   },
   {
@@ -478,20 +345,6 @@ const MENU = [
     "category": "Garlic Breads",
     "price": 90,
     "type": "veg"
-  },
-  {
-    "name": "Egg Pepperfry",
-    "description": "",
-    "category": "Starters",
-    "price": 60,
-    "type": "egg"
-  },
-  {
-    "name": "Cheese Scrambled Egg",
-    "description": "",
-    "category": "Starters",
-    "price": 80,
-    "type": "egg"
   },
   {
     "name": "Cheese Scrambled Egg Sandwich",
@@ -557,20 +410,6 @@ const MENU = [
     "type": "veg"
   },
   {
-    "name": "500ml Water Bottle",
-    "description": "",
-    "category": "WaterBottles",
-    "price": 15,
-    "type": "veg"
-  },
-  {
-    "name": "1l Water Bottle",
-    "description": "",
-    "category": "WaterBottles",
-    "price": 25,
-    "type": "veg"
-  },
-  {
     "name": "Popcorn Chicken",
     "description": "",
     "category": "Crunchery's Specials",
@@ -597,13 +436,6 @@ const MENU = [
     "category": "Crunchery's Specials",
     "price": 190,
     "type": "non-veg"
-  },
-  {
-    "name": "Paneer Pepperfry",
-    "description": "",
-    "category": "Starters",
-    "price": 140,
-    "type": "veg"
   },
   {
     "name": "Paneer Pepperfry Sandwich",
@@ -681,20 +513,6 @@ const MENU = [
     "category": "Pizzas",
     "price": 0,
     "type": "non-veg"
-  },
-  {
-    "name": "Basic Birthday Decoration",
-    "description": "",
-    "category": "Decoration",
-    "price": 1000,
-    "type": "veg"
-  },
-  {
-    "name": "Birthday Decoration",
-    "description": "",
-    "category": "Decoration",
-    "price": 1500,
-    "type": "veg"
   },
   {
     "name": "Chipotle Saucy Mushroom",
@@ -781,13 +599,6 @@ const MENU = [
     "type": "veg"
   },
   {
-    "name": "Chettinad Chicken Briyani 1kg",
-    "description": "",
-    "category": "Special Orders",
-    "price": 1800,
-    "type": "non-veg"
-  },
-  {
     "name": "Peach Ice Tea",
     "description": "",
     "category": "Mocktails",
@@ -807,90 +618,6 @@ const MENU = [
     "category": "Mocktails",
     "price": 120,
     "type": "veg"
-  },
-  {
-    "name": "Cappucino",
-    "description": "",
-    "category": "Coffee",
-    "price": 90,
-    "type": "veg"
-  },
-  {
-    "name": "Latte",
-    "description": "",
-    "category": "Coffee",
-    "price": 90,
-    "type": "veg"
-  },
-  {
-    "name": "Mocha",
-    "description": "",
-    "category": "Coffee",
-    "price": 90,
-    "type": "veg"
-  },
-  {
-    "name": "Seeraga Samba Chicken Biriyani",
-    "description": "",
-    "category": "The Biriyani Counter",
-    "price": 0,
-    "type": "non-veg"
-  },
-  {
-    "name": "Chicken-ka-baap Biriyani",
-    "description": "",
-    "category": "The Biriyani Counter",
-    "price": 0,
-    "type": "non-veg"
-  },
-  {
-    "name": "Chicken Drum-stick Biriyani",
-    "description": "",
-    "category": "The Biriyani Counter",
-    "price": 0,
-    "type": "non-veg"
-  },
-  {
-    "name": "Pop-chick Biriyani",
-    "description": "",
-    "category": "The Biriyani Counter",
-    "price": 0,
-    "type": "non-veg"
-  },
-  {
-    "name": "Chicken-ka-baap",
-    "description": "",
-    "category": "TBC Starters",
-    "price": 0,
-    "type": "non-veg"
-  },
-  {
-    "name": "Pop-chick",
-    "description": "",
-    "category": "TBC Starters",
-    "price": 0,
-    "type": "non-veg"
-  },
-  {
-    "name": "Singlecontroller",
-    "description": "Single controller for 1 hour",
-    "category": "PS5 FOOD-GAME COMBO",
-    "price": 200,
-    "type": "veg"
-  },
-  {
-    "name": "Double Controller",
-    "description": "double controller for 1 hour",
-    "category": "PS5 FOOD-GAME COMBO",
-    "price": 300,
-    "type": "veg"
-  },
-  {
-    "name": "Fried Drum-stick Chicken",
-    "description": "",
-    "category": "TBC Starters",
-    "price": 0,
-    "type": "non-veg"
   },
   {
     "name": "Strawberry Fondue",
@@ -949,13 +676,6 @@ const MENU = [
     "type": "veg"
   },
   {
-    "name": "Oats & Nuts Kheer",
-    "description": "",
-    "category": "Desserts",
-    "price": 100,
-    "type": "veg"
-  },
-  {
     "name": "Korean Cream Cheese Garlic Bun",
     "description": "",
     "category": "Desserts",
@@ -965,12 +685,9 @@ const MENU = [
 ];
 
 const categoryIcons = {
-  "Burger":"🍔","Pizzas":"🍕","French Fries":"🍟","Starters":"🍗","Sandwich":"🥪",
+  "Burger":"🍔","Pizzas":"🍕","French Fries":"🍟","Sandwich":"🥪",
   "Garlic Breads":"🧄","Pastas":"🍝","Crunchery's Specials":"🔥","Desserts":"🍰",
-  "Milkshakes":"🥤","Mojitos":"🍹","Mocktails":"🍸","Cold Pressed Juices":"🍊",
-  "Coffee":"☕","Tea":"🍵","Special Orders":"🎉","The Biriyani Counter":"🍚",
-  "TBC Starters":"🍗","PS5 FOOD-GAME COMBO":"🎮","Decoration":"🎂","WaterBottles":"💧",
-  "Cutleries":"🍴"
+  "Milkshakes":"🥤","Mojitos":"🍹","Mocktails":"🍸","Cold Pressed Juices":"🍊"
 };
 
 const $ = (id) => document.getElementById(id);
