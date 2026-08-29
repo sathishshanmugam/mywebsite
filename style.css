@@ -589,3 +589,12 @@ body{background:#fffaf3}
     min-height: 320px;
   }
 }
+/* HERO WELCOME — SINGLE LINE */
+.hero-welcome {
+  white-space: nowrap;
+}
+
+/* HERO MAIN MESSAGE — TWO LINES */
+.hero h1 .personal {
+  display: inline-block;
+}
