@@ -776,6 +776,13 @@ const PIZZA_VARIATIONS = [
 ];
 
 const PIZZA_CHOICES = {
+
+  plain: {
+    label: "Plain",
+    extra: 0,
+    toppings: []
+  },
+
   veg: {
     label: "Veg",
     extra: 60,
@@ -801,11 +808,13 @@ const PIZZA_CHOICES = {
       "Ghee Podi Chicken"
     ]
   }
+
 };
 
 let pizzaSelection = {
   item: null,
   variation: null,
+  base: null,
   choice: null,
   topping: null
 };
@@ -981,14 +990,21 @@ function ensurePizzaModal(){
 
 
       <div class="pizza-section-title">
-        2. Choose Type
+        2. Choose Base
+      </div>
+
+      <div id="pizzaBaseOptions" class="pizza-options"></div>
+
+
+      <div class="pizza-section-title">
+        3. Choose Type
       </div>
 
       <div id="pizzaChoiceOptions" class="pizza-options"></div>
 
 
       <div class="pizza-section-title">
-        3. Choose Topping
+        4. Choose Topping
       </div>
 
       <div class="pizza-topping-note">
@@ -1058,25 +1074,25 @@ function openPizzaCustomizer(item){
 
   ensurePizzaModal();
 
-
   pizzaSelection = {
-    item:item,
-    variation:null,
-    choice:null,
-    topping:null
+    item: item,
+    variation: null,
+    base: null,
+    choice: null,
+    topping: null
   };
-
 
   const modal = $("pizzaCustomizeModal");
 
   const variationBox = $("pizzaVariationOptions");
-
+  const baseBox = $("pizzaBaseOptions");
   const choiceBox = $("pizzaChoiceOptions");
-
   const toppingBox = $("pizzaToppingOptions");
 
 
-  /* Pizza variations */
+  /* =====================================================
+     PIZZA VARIATIONS
+     ===================================================== */
 
   variationBox.innerHTML = PIZZA_VARIATIONS.map(v => `
 
@@ -1098,9 +1114,55 @@ function openPizzaCustomizer(item){
   `).join("");
 
 
-  /* Veg / Non Veg */
+  /* =====================================================
+     BASE
+     ===================================================== */
+
+  baseBox.innerHTML = `
+
+    <button
+      type="button"
+      class="pizza-option"
+      data-base="Maida">
+
+      <strong>Maida</strong>
+
+      <small>₹0</small>
+
+    </button>
+
+
+    <button
+      type="button"
+      class="pizza-option"
+      data-base="Whole Wheat">
+
+      <strong>Whole Wheat</strong>
+
+      <small>₹30</small>
+
+    </button>
+
+  `;
+
+
+  /* =====================================================
+     TYPE
+     ===================================================== */
 
   choiceBox.innerHTML = `
+
+    <button
+      type="button"
+      class="pizza-option"
+      data-choice="plain">
+
+      <strong>Plain</strong>
+
+      <small>No addon · +₹0</small>
+
+    </button>
+
 
     <button
       type="button"
@@ -1128,13 +1190,16 @@ function openPizzaCustomizer(item){
   `;
 
 
-  toppingBox.innerHTML =
-    `<div style="color:#777">
-      Choose Veg or Non-Veg first.
-    </div>`;
+  toppingBox.innerHTML = `
+    <div style="color:#777">
+      Choose Plain, Veg or Non-Veg.
+    </div>
+  `;
 
 
-  /* Variation selection */
+  /* =====================================================
+     PIZZA VARIATION SELECTION
+     ===================================================== */
 
   variationBox
     .querySelectorAll(".pizza-option")
@@ -1150,12 +1215,10 @@ function openPizzaCustomizer(item){
 
         btn.classList.add("selected");
 
-
         pizzaSelection.variation =
           PIZZA_VARIATIONS.find(
             v => v.name === btn.dataset.variation
           );
-
 
         updatePizzaSummary();
 
@@ -1164,7 +1227,39 @@ function openPizzaCustomizer(item){
     });
 
 
-  /* Veg / Non Veg selection */
+  /* =====================================================
+     BASE SELECTION
+     ===================================================== */
+
+  baseBox
+    .querySelectorAll(".pizza-option")
+    .forEach(btn => {
+
+      btn.addEventListener("click", () => {
+
+        baseBox
+          .querySelectorAll(".pizza-option")
+          .forEach(b =>
+            b.classList.remove("selected")
+          );
+
+        btn.classList.add("selected");
+
+        pizzaSelection.base ={
+          name: btn.dataset.base,
+          extra: Number(btn.dataset.basePrice || 0)
+          };
+
+        updatePizzaSummary();
+
+      });
+
+    });
+
+
+  /* =====================================================
+     TYPE SELECTION
+     ===================================================== */
 
   choiceBox
     .querySelectorAll(".pizza-option")
@@ -1180,7 +1275,6 @@ function openPizzaCustomizer(item){
 
         btn.classList.add("selected");
 
-
         pizzaSelection.choice =
           btn.dataset.choice;
 
@@ -1191,7 +1285,30 @@ function openPizzaCustomizer(item){
           PIZZA_CHOICES[pizzaSelection.choice];
 
 
-        /* Show ONLY relevant toppings */
+        /* =================================================
+           PLAIN
+           No toppings
+           ================================================= */
+
+        if(pizzaSelection.choice === "plain"){
+
+          toppingBox.innerHTML = `
+            <div style="color:#777">
+              Plain Pizza selected — no addons.
+            </div>
+          `;
+
+          pizzaSelection.topping = "No Topping";
+
+          updatePizzaSummary();
+
+          return;
+        }
+
+
+        /* =================================================
+           VEG / NON VEG TOPPINGS
+           ================================================= */
 
         toppingBox.innerHTML =
           choice.toppings.map(topping => `
@@ -1226,10 +1343,8 @@ function openPizzaCustomizer(item){
 
               tBtn.classList.add("selected");
 
-
               pizzaSelection.topping =
                 tBtn.dataset.topping;
-
 
               updatePizzaSummary();
 
@@ -1245,14 +1360,16 @@ function openPizzaCustomizer(item){
     });
 
 
-  /* Add Pizza */
+  /* =====================================================
+     ADD PIZZA TO CART
+     ===================================================== */
 
   $("pizzaConfirmBtn").onclick = () => {
 
     if(
       !pizzaSelection.variation ||
-      !pizzaSelection.choice ||
-      !pizzaSelection.topping
+      !pizzaSelection.base ||
+      !pizzaSelection.choice
     ){
       return;
     }
@@ -1262,8 +1379,19 @@ function openPizzaCustomizer(item){
       PIZZA_CHOICES[pizzaSelection.choice];
 
 
+    /* Plain = no topping required */
+
+    if(
+      pizzaSelection.choice !== "plain" &&
+      !pizzaSelection.topping
+    ){
+      return;
+    }
+
+
     const finalPrice =
       pizzaSelection.variation.price +
+      pizzaSelection.base.extra +
       choice.extra;
 
 
@@ -1272,11 +1400,14 @@ function openPizzaCustomizer(item){
       variation:
         pizzaSelection.variation.name,
 
+      base:
+        pizzaSelection.base,
+
       choice:
         choice.label,
 
       topping:
-        pizzaSelection.topping
+        pizzaSelection.topping || "No Topping"
 
     };
 
@@ -1287,9 +1418,11 @@ function openPizzaCustomizer(item){
 
       pizzaSelection.variation.name,
 
+      pizzaSelection.base,
+
       choice.label,
 
-      pizzaSelection.topping,
+      pizzaSelection.topping || "No Topping",
 
       finalPrice
 
@@ -1297,7 +1430,9 @@ function openPizzaCustomizer(item){
 
 
     const existing =
-      cart.find(x => x.signature === signature);
+      cart.find(
+        x => x.signature === signature
+      );
 
 
     if(existing){
@@ -1308,17 +1443,22 @@ function openPizzaCustomizer(item){
 
       cart.push({
 
-        name:pizzaSelection.item.name,
+        name:
+          pizzaSelection.item.name,
 
-        price:finalPrice,
+        price:
+          finalPrice,
 
         qty:1,
 
-        category:pizzaSelection.item.category,
+        category:
+          pizzaSelection.item.category,
 
-        customization:customization,
+        customization:
+          customization,
 
-        signature:signature
+        signature:
+          signature
 
       });
 
@@ -1356,11 +1496,12 @@ function updatePizzaSummary(){
 
   if(
     !pizzaSelection.variation ||
+    !pizzaSelection.base ||
     !pizzaSelection.choice
   ){
 
     summary.innerHTML =
-      "Please select your pizza and type.";
+      "Please select pizza, base and type.";
 
     confirm.disabled = true;
 
@@ -1375,7 +1516,18 @@ function updatePizzaSummary(){
 
   const total =
     pizzaSelection.variation.price +
+    pizzaSelection.base.extra +
     choice.extra;
+
+
+  const toppingText =
+    pizzaSelection.choice === "plain"
+      ? "No Topping"
+      : (
+          pizzaSelection.topping
+            ? pizzaSelection.topping
+            : "Choose a topping"
+        );
 
 
   summary.innerHTML = `
@@ -1388,19 +1540,39 @@ function updatePizzaSummary(){
       </b>
     </div>
 
+
     <div>
-      ${escapeHtml(choice.label)}
-      : +${money(choice.extra)}
+      Base:
+      ${escapeHtml(
+      pizzaSelection.base.name
+      )}
+      ${
+      pizzaSelection.base.extra > 0
+      ? ` +${money(pizzaSelection.base.extra)}`
+      : ""
+      }
     </div>
+
+
+    <div>
+      Type:
+      ${escapeHtml(
+        choice.label
+      )}
+
+      ${
+        choice.extra > 0
+          ? `: +${money(choice.extra)}`
+          : ""
+      }
+    </div>
+
 
     <div>
       Topping:
-      ${
-        pizzaSelection.topping
-          ? escapeHtml(pizzaSelection.topping)
-          : "Choose a topping"
-      }
+      ${escapeHtml(toppingText)}
     </div>
+
 
     <div class="pizza-summary-total">
       Total: ${money(total)}
@@ -1409,8 +1581,23 @@ function updatePizzaSummary(){
   `;
 
 
-  confirm.disabled =
-    !pizzaSelection.topping;
+  /*
+    Plain does not require a topping.
+    Veg / Non-Veg requires one topping.
+  */
+
+  if(
+    pizzaSelection.choice === "plain"
+  ){
+
+    confirm.disabled = false;
+
+  }else{
+
+    confirm.disabled =
+      !pizzaSelection.topping;
+
+  }
 
 }
 
