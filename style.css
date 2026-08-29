@@ -598,3 +598,12 @@ body{background:#fffaf3}
 .hero h1 .personal {
   display: inline-block;
 }
+/* Hero welcome - keep entire phrase on one line */
+.hero-welcome {
+  display: block !important;
+  white-space: nowrap !important;
+}
+
+.hero-welcome span {
+  display: inline !important;
+}
