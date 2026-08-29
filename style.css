@@ -404,7 +404,7 @@ body{background:#fffaf3}
   height:145px;
   object-fit:contain;
   filter:none;
-  transform:scale(1.35);
+  transform:scale(1.5);
   transform-origin:center;
 }
 .brand-wordmark strong{
