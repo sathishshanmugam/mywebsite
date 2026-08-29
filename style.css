@@ -459,13 +459,54 @@ body{background:#fffaf3}
 .site-header{background:#fffaf3;border-bottom:1px solid #eee1d2}
 .header-topline{height:42px}
 .service-strip{font-size:12px;gap:17px}
-.nav-wrap{height:132px;gap:28px}
-.brand{width:500px;gap:20px}
-.brand img{width:128px;height:128px;object-fit:contain;flex:0 0 128px}
-.brand-wordmark strong{font-family:Anton,Impact,sans-serif;font-size:52px;line-height:.98;letter-spacing:.2px;color:#241912;font-weight:400;text-shadow:none}
-.brand-wordmark strong::first-letter{color:#241912}
-.brand-wordmark strong{background:linear-gradient(90deg,#241912 0 74%,#f36a0b 74%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.brand-wordmark small{margin-top:9px;padding:7px 0 8px;border-top:2px solid #f36a0b;border-bottom:2px solid #f36a0b;font-size:13px;letter-spacing:.2px;color:#172238}
+.nav-wrap{height:150px;gap:28px}
+
+.brand{
+  width:560px;
+  gap:20px;
+}
+
+.brand img{
+  width:145px;
+  height:145px;
+  object-fit:contain;
+  flex:0 0 145px;
+}
+
+.brand-wordmark strong{
+  font-family:Anton,Impact,sans-serif;
+  font-size:62px;
+  line-height:.98;
+  letter-spacing:.2px;
+  color:#241912;
+  font-weight:400;
+  text-shadow:none;
+}
+
+.brand-wordmark strong::first-letter{
+  color:#241912;
+}
+
+.brand-wordmark strong{
+  background:linear-gradient(
+    90deg,
+    #241912 0 74%,
+    #f36a0b 74%
+  );
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.brand-wordmark small{
+  margin-top:11px;
+  padding:8px 0 9px;
+  border-top:3px solid #f36a0b;
+  border-bottom:3px solid #f36a0b;
+  font-size:15px;
+  letter-spacing:.3px;
+  color:#172238;
+}
 .registered-mark{font-family:Arial,sans-serif;font-size:.32em;vertical-align:top;position:relative;top:-.1em;color:#241912;-webkit-text-fill-color:#241912}
 .main-nav{gap:25px}
 .main-nav a{font-size:14px;padding:18px 0;font-weight:800}
