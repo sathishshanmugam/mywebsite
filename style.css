@@ -607,3 +607,63 @@ body{background:#fffaf3}
 .hero-welcome span {
   display: inline !important;
 }
+/* =========================================
+   MOBILE HERO FIX
+   ========================================= */
+
+@media (max-width: 768px) {
+
+  /* Allow welcome heading to fit the phone */
+  .hero-welcome {
+    white-space: normal !important;
+    font-size: clamp(38px, 10vw, 58px) !important;
+    line-height: 0.95 !important;
+    max-width: 100% !important;
+  }
+
+  .hero-welcome span {
+    display: inline !important;
+  }
+
+  /* Main hero heading */
+  .hero h1 {
+    font-size: clamp(42px, 11vw, 64px) !important;
+    line-height: 0.95 !important;
+    max-width: 100% !important;
+    overflow-wrap: normal;
+  }
+
+  /* Keep "Not Just a Cafe," and personal line as intended */
+  .hero h1 .personal {
+    display: inline !important;
+  }
+
+  /* Hero description */
+  .hero-text {
+    font-size: 20px !important;
+    line-height: 1.4 !important;
+    max-width: 100% !important;
+  }
+
+  /* Buttons must fit phone width */
+  .hero-actions {
+    width: 100%;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .hero-actions .btn {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  /* Prevent anything inside hero from creating horizontal scroll */
+  .hero,
+  .hero-grid,
+  .hero-copy {
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+  }
+}
