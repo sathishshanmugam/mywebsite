@@ -762,13 +762,717 @@ function cardHtml(item){
   </article>`;
 }
 
+/* =========================================================
+   PIZZA CUSTOMIZATION
+   ========================================================= */
+
+const PIZZA_VARIATIONS = [
+  { name: "Margherita Small", price: 190 },
+  { name: "Double Cheese Small", price: 210 },
+  { name: "Bbq Small", price: 190 },
+  { name: "Margherita Medium", price: 270 },
+  { name: "Double Cheese Medium", price: 290 },
+  { name: "Bbq Medium", price: 270 }
+];
+
+const PIZZA_CHOICES = {
+  veg: {
+    label: "Veg",
+    extra: 60,
+    toppings: [
+      "Hot Garlic Mushroom",
+      "Butter Garlic Mushroom",
+      "Pepperfry Mushroom",
+      "Paneer Podimas",
+      "Paneer Pepperfry",
+      "Ghee Podi Potato",
+      "Corn"
+    ]
+  },
+
+  "non-veg": {
+    label: "Non-Veg",
+    extra: 80,
+    toppings: [
+      "Hot Garlic Chicken",
+      "Butter Garlic Chicken",
+      "Hot Spicy Chicken",
+      "Hyderabadi Chicken",
+      "Ghee Podi Chicken"
+    ]
+  }
+};
+
+let pizzaSelection = {
+  item: null,
+  variation: null,
+  choice: null,
+  topping: null
+};
+
+
+/* =========================================================
+   CREATE PIZZA POPUP
+   ========================================================= */
+
+function ensurePizzaModal(){
+
+  if($("pizzaCustomizeModal")) return;
+
+  const style = document.createElement("style");
+
+  style.textContent = `
+    #pizzaCustomizeModal{
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:rgba(0,0,0,.60);
+      padding:18px;
+    }
+
+    #pizzaCustomizeModal.open{
+      display:flex;
+    }
+
+    .pizza-customize-card{
+      width:min(620px,100%);
+      max-height:90vh;
+      overflow:auto;
+      background:#fff;
+      border-radius:22px;
+      padding:24px;
+      box-shadow:0 20px 60px rgba(0,0,0,.30);
+    }
+
+    .pizza-customize-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+      margin-bottom:20px;
+    }
+
+    .pizza-customize-head h3{
+      margin:0;
+      font-size:25px;
+    }
+
+    .pizza-close{
+      border:0;
+      background:#f3f3f3;
+      border-radius:50%;
+      width:38px;
+      height:38px;
+      font-size:22px;
+      cursor:pointer;
+    }
+
+    .pizza-section-title{
+      font-weight:800;
+      font-size:17px;
+      margin:20px 0 10px;
+    }
+
+    .pizza-options{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+    }
+
+    .pizza-option{
+      border:2px solid #e5e5e5;
+      background:#fff;
+      border-radius:13px;
+      padding:13px;
+      text-align:left;
+      cursor:pointer;
+      font-size:15px;
+    }
+
+    .pizza-option.selected{
+      border-color:#ff6500;
+      background:#fff3e8;
+    }
+
+    .pizza-option strong{
+      display:block;
+    }
+
+    .pizza-option small{
+      color:#777;
+      display:block;
+      margin-top:4px;
+    }
+
+    .pizza-topping-note{
+      font-size:13px;
+      color:#777;
+      margin-bottom:10px;
+    }
+
+    .pizza-summary{
+      margin-top:20px;
+      padding:15px;
+      border-radius:14px;
+      background:#fafafa;
+      border:1px solid #e5e5e5;
+      line-height:1.6;
+    }
+
+    .pizza-summary-total{
+      font-size:21px;
+      font-weight:800;
+      color:#f45d00;
+      margin-top:5px;
+    }
+
+    .pizza-confirm{
+      width:100%;
+      margin-top:15px;
+      border:0;
+      border-radius:13px;
+      padding:14px;
+      background:#ff6500;
+      color:#fff;
+      font-size:17px;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .pizza-confirm:disabled{
+      opacity:.45;
+      cursor:not-allowed;
+    }
+
+    @media(max-width:520px){
+      .pizza-customize-card{
+        padding:18px;
+      }
+
+      .pizza-options{
+        grid-template-columns:1fr;
+      }
+    }
+  `;
+
+  document.head.appendChild(style);
+
+
+  const modal = document.createElement("div");
+
+  modal.id = "pizzaCustomizeModal";
+
+  modal.innerHTML = `
+    <div class="pizza-customize-card">
+
+      <div class="pizza-customize-head">
+        <h3>Customize Your Pizza</h3>
+        <button class="pizza-close" type="button">×</button>
+      </div>
+
+      <div class="pizza-section-title">
+        1. Choose Pizza
+      </div>
+
+      <div id="pizzaVariationOptions" class="pizza-options"></div>
+
+
+      <div class="pizza-section-title">
+        2. Choose Type
+      </div>
+
+      <div id="pizzaChoiceOptions" class="pizza-options"></div>
+
+
+      <div class="pizza-section-title">
+        3. Choose Topping
+      </div>
+
+      <div class="pizza-topping-note">
+        Toppings are included at ₹0.
+      </div>
+
+      <div id="pizzaToppingOptions" class="pizza-options"></div>
+
+
+      <div id="pizzaSummary" class="pizza-summary">
+        Please select your pizza and type.
+      </div>
+
+
+      <button
+        id="pizzaConfirmBtn"
+        class="pizza-confirm"
+        type="button"
+        disabled>
+        Add Pizza to Cart
+      </button>
+
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+
+  const closeModal = () => {
+    modal.classList.remove("open");
+  };
+
+
+  modal
+    .querySelector(".pizza-close")
+    .addEventListener("click", closeModal);
+
+
+  modal.addEventListener("click", e => {
+
+    if(e.target === modal){
+      closeModal();
+    }
+
+  });
+
+
+  document.addEventListener("keydown", e => {
+
+    if(
+      e.key === "Escape" &&
+      modal.classList.contains("open")
+    ){
+      closeModal();
+    }
+
+  });
+
+}
+
+
+/* =========================================================
+   OPEN PIZZA CUSTOMIZER
+   ========================================================= */
+
+function openPizzaCustomizer(item){
+
+  ensurePizzaModal();
+
+
+  pizzaSelection = {
+    item:item,
+    variation:null,
+    choice:null,
+    topping:null
+  };
+
+
+  const modal = $("pizzaCustomizeModal");
+
+  const variationBox = $("pizzaVariationOptions");
+
+  const choiceBox = $("pizzaChoiceOptions");
+
+  const toppingBox = $("pizzaToppingOptions");
+
+
+  /* Pizza variations */
+
+  variationBox.innerHTML = PIZZA_VARIATIONS.map(v => `
+
+    <button
+      type="button"
+      class="pizza-option"
+      data-variation="${escapeHtml(v.name)}">
+
+      <strong>
+        ${escapeHtml(v.name)}
+      </strong>
+
+      <small>
+        ${money(v.price)}
+      </small>
+
+    </button>
+
+  `).join("");
+
+
+  /* Veg / Non Veg */
+
+  choiceBox.innerHTML = `
+
+    <button
+      type="button"
+      class="pizza-option"
+      data-choice="veg">
+
+      <strong>Veg</strong>
+
+      <small>+${money(60)}</small>
+
+    </button>
+
+
+    <button
+      type="button"
+      class="pizza-option"
+      data-choice="non-veg">
+
+      <strong>Non-Veg</strong>
+
+      <small>+${money(80)}</small>
+
+    </button>
+
+  `;
+
+
+  toppingBox.innerHTML =
+    `<div style="color:#777">
+      Choose Veg or Non-Veg first.
+    </div>`;
+
+
+  /* Variation selection */
+
+  variationBox
+    .querySelectorAll(".pizza-option")
+    .forEach(btn => {
+
+      btn.addEventListener("click", () => {
+
+        variationBox
+          .querySelectorAll(".pizza-option")
+          .forEach(b =>
+            b.classList.remove("selected")
+          );
+
+        btn.classList.add("selected");
+
+
+        pizzaSelection.variation =
+          PIZZA_VARIATIONS.find(
+            v => v.name === btn.dataset.variation
+          );
+
+
+        updatePizzaSummary();
+
+      });
+
+    });
+
+
+  /* Veg / Non Veg selection */
+
+  choiceBox
+    .querySelectorAll(".pizza-option")
+    .forEach(btn => {
+
+      btn.addEventListener("click", () => {
+
+        choiceBox
+          .querySelectorAll(".pizza-option")
+          .forEach(b =>
+            b.classList.remove("selected")
+          );
+
+        btn.classList.add("selected");
+
+
+        pizzaSelection.choice =
+          btn.dataset.choice;
+
+        pizzaSelection.topping = null;
+
+
+        const choice =
+          PIZZA_CHOICES[pizzaSelection.choice];
+
+
+        /* Show ONLY relevant toppings */
+
+        toppingBox.innerHTML =
+          choice.toppings.map(topping => `
+
+            <button
+              type="button"
+              class="pizza-option"
+              data-topping="${escapeHtml(topping)}">
+
+              <strong>
+                ${escapeHtml(topping)}
+              </strong>
+
+              <small>₹0</small>
+
+            </button>
+
+          `).join("");
+
+
+        toppingBox
+          .querySelectorAll(".pizza-option")
+          .forEach(tBtn => {
+
+            tBtn.addEventListener("click", () => {
+
+              toppingBox
+                .querySelectorAll(".pizza-option")
+                .forEach(b =>
+                  b.classList.remove("selected")
+                );
+
+              tBtn.classList.add("selected");
+
+
+              pizzaSelection.topping =
+                tBtn.dataset.topping;
+
+
+              updatePizzaSummary();
+
+            });
+
+          });
+
+
+        updatePizzaSummary();
+
+      });
+
+    });
+
+
+  /* Add Pizza */
+
+  $("pizzaConfirmBtn").onclick = () => {
+
+    if(
+      !pizzaSelection.variation ||
+      !pizzaSelection.choice ||
+      !pizzaSelection.topping
+    ){
+      return;
+    }
+
+
+    const choice =
+      PIZZA_CHOICES[pizzaSelection.choice];
+
+
+    const finalPrice =
+      pizzaSelection.variation.price +
+      choice.extra;
+
+
+    const customization = {
+
+      variation:
+        pizzaSelection.variation.name,
+
+      choice:
+        choice.label,
+
+      topping:
+        pizzaSelection.topping
+
+    };
+
+
+    const signature = [
+
+      pizzaSelection.item.name,
+
+      pizzaSelection.variation.name,
+
+      choice.label,
+
+      pizzaSelection.topping,
+
+      finalPrice
+
+    ].join("|");
+
+
+    const existing =
+      cart.find(x => x.signature === signature);
+
+
+    if(existing){
+
+      existing.qty++;
+
+    }else{
+
+      cart.push({
+
+        name:pizzaSelection.item.name,
+
+        price:finalPrice,
+
+        qty:1,
+
+        category:pizzaSelection.item.category,
+
+        customization:customization,
+
+        signature:signature
+
+      });
+
+    }
+
+
+    saveCart();
+
+    modal.classList.remove("open");
+
+    openCart();
+
+  };
+
+
+  updatePizzaSummary();
+
+  modal.classList.add("open");
+
+}
+
+
+/* =========================================================
+   UPDATE PIZZA PRICE / SUMMARY
+   ========================================================= */
+
+function updatePizzaSummary(){
+
+  const summary =
+    $("pizzaSummary");
+
+  const confirm =
+    $("pizzaConfirmBtn");
+
+
+  if(
+    !pizzaSelection.variation ||
+    !pizzaSelection.choice
+  ){
+
+    summary.innerHTML =
+      "Please select your pizza and type.";
+
+    confirm.disabled = true;
+
+    return;
+
+  }
+
+
+  const choice =
+    PIZZA_CHOICES[pizzaSelection.choice];
+
+
+  const total =
+    pizzaSelection.variation.price +
+    choice.extra;
+
+
+  summary.innerHTML = `
+
+    <div>
+      <b>
+        ${escapeHtml(
+          pizzaSelection.variation.name
+        )}
+      </b>
+    </div>
+
+    <div>
+      ${escapeHtml(choice.label)}
+      : +${money(choice.extra)}
+    </div>
+
+    <div>
+      Topping:
+      ${
+        pizzaSelection.topping
+          ? escapeHtml(pizzaSelection.topping)
+          : "Choose a topping"
+      }
+    </div>
+
+    <div class="pizza-summary-total">
+      Total: ${money(total)}
+    </div>
+
+  `;
+
+
+  confirm.disabled =
+    !pizzaSelection.topping;
+
+}
+
+
+/* =========================================================
+   NORMAL ADD TO CART
+   ========================================================= */
+
 function addToCart(index){
+
   const item = MENU[index];
-  const existing = cart.find(x => x.name === item.name && x.price === Number(item.price));
-  if(existing) existing.qty++;
-  else cart.push({name:item.name, price:Number(item.price)||0, qty:1, category:item.category});
+
+
+  /* Pizza opens customization instead */
+
+  if(
+    item.name === "Pizza" &&
+    item.category === "Pizzas"
+  ){
+
+    openPizzaCustomizer(item);
+
+    return;
+
+  }
+
+
+  /* All other menu items work normally */
+
+  const existing =
+    cart.find(
+      x =>
+        x.name === item.name &&
+        x.price === Number(item.price)
+    );
+
+
+  if(existing){
+
+    existing.qty++;
+
+  }else{
+
+    cart.push({
+
+      name:item.name,
+
+      price:Number(item.price) || 0,
+
+      qty:1,
+
+      category:item.category
+
+    });
+
+  }
+
+
   saveCart();
+
   openCart();
+
 }
 
 function changeQty(i, delta){
@@ -788,10 +1492,49 @@ function renderCart(){
   $("cartCount").textContent = `${count} item${count===1?"":"s"}`;
   $("cartTotal").textContent = money(total);
   $("cartItems").innerHTML = cart.length ? cart.map((x,i)=>`
-    <div class="cart-line">
-      <div><b>${escapeHtml(x.name)}</b><small>${money(x.price)} × ${x.qty}</small></div>
-      <div class="qty"><button data-i="${i}" data-d="-1">−</button><span>${x.qty}</span><button data-i="${i}" data-d="1">+</button></div>
-    </div>`).join("") : `<div class="empty-cart">Your cart is waiting for something delicious. 🍔</div>`;
+  <div class="cart-line">
+
+    <div>
+      <b>${escapeHtml(x.name)}</b>
+
+      ${
+        x.customization
+          ? `<small>
+              ${escapeHtml(x.customization.variation)}
+              · ${escapeHtml(x.customization.choice)}
+              · ${escapeHtml(x.customization.topping)}
+            </small>`
+          : ""
+      }
+
+      <small>
+        ${money(x.price)} × ${x.qty}
+      </small>
+    </div>
+
+    <div class="qty">
+
+      <button
+        data-i="${i}"
+        data-d="-1">
+        −
+      </button>
+
+      <span>${x.qty}</span>
+
+      <button
+        data-i="${i}"
+        data-d="1">
+        +
+      </button>
+
+    </div>
+
+  </div>
+`).join("") :
+`<div class="empty-cart">
+  Your cart is waiting for something delicious. 🍔
+</div>`;
   $("cartItems").querySelectorAll(".qty button").forEach(b => b.addEventListener("click",()=>changeQty(Number(b.dataset.i),Number(b.dataset.d))));
   updateOrderLinks();
 }
@@ -801,7 +1544,15 @@ $("closeCart").addEventListener("click",()=> $("cartCard").classList.remove("ope
 
 function cartMessage(){
   if(!cart.length) return "Hi Crunchery's! I'd like to know today's menu.";
-  const lines = cart.map(x => `• ${x.name} × ${x.qty} — ${money(x.price*x.qty)}`).join("\n");
+  const lines = cart.map(x => {
+
+  const details = x.customization
+    ? ` (${x.customization.variation}, ${x.customization.choice}, ${x.customization.topping})`
+    : "";
+
+  return `• ${x.name}${details} × ${x.qty} — ${money(x.price*x.qty)}`;
+
+}).join("\n");
   const total = cart.reduce((s,x)=>s+x.price*x.qty,0);
   return `Hi Crunchery's! I'd like to place an order:\n${lines}\n\nTotal: ${money(total)}\nPlease confirm availability and ordering details.`;
 }
