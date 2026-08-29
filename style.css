@@ -355,7 +355,7 @@ section[id]{scroll-margin-top:190px}
 .hero{min-height:600px;background:linear-gradient(110deg,#fffaf2 0%,#fff5e5 58%,#fff0d8 100%)}
 .hero-grid{min-height:600px;grid-template-columns:39% 61%;gap:0}
 .hero-copy{padding:42px 0 32px}
-.hero-welcome{font-family:'Anton',Impact,sans-serif;font-size:54px;line-height:.92;letter-spacing:.5px;font-weight:400;color:#2d211b;margin:0 0 48px;text-transform:uppercase}
+.hero-welcome{font-family:'Anton',Impact,sans-serif;font-size:54px;line-height:.92;letter-spacing:.5px;font-weight:400;color:#2d211b;margin:0 0 48px;text-transform:none}
 .hero-welcome span{color:#f16a0b}
 .hero h1{font-family:'Nunito',sans-serif;font-size:48px;line-height:1.04;letter-spacing:-2px;font-weight:900;max-width:560px;margin:0 0 22px}
 .hero h1 span{display:inline;color:inherit;font-style:normal;font-family:inherit;font-weight:inherit}
