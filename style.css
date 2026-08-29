@@ -423,7 +423,7 @@ body{background:#fffaf3}
 .hero-pattern{opacity:.48;background-size:26px 26px;mask-image:linear-gradient(90deg,#000 0%,#000 48%,transparent 82%)}
 .hero-grid{min-height:606px;grid-template-columns:40% 60%;gap:0;align-items:stretch}
 .hero-copy{padding:45px 0 22px;display:flex;flex-direction:column;justify-content:flex-start}
-.hero-welcome{font-family:'Anton',Impact,sans-serif;font-size:56px;line-height:.92;letter-spacing:.5px;font-weight:400;color:#30221c;margin:0 0 46px;text-transform:uppercase}
+.hero-welcome{font-family:'Anton',Impact,sans-serif;font-size:56px;line-height:.92;letter-spacing:.5px;font-weight:400;color:#30221c;margin:0 0 46px;text-transform:none}
 .hero-welcome span{color:#f46b0b}
 .hero h1{font-family:'Nunito',sans-serif;font-size:57px;line-height:1.02;letter-spacing:-2.7px;font-weight:900;max-width:590px;margin:0 0 22px;color:#34241d}
 .hero h1 span{display:inline;font-family:inherit;font-weight:inherit;font-style:normal;color:inherit}
