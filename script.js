@@ -2256,14 +2256,27 @@ function renderCart(){
     <div>
       <b>${escapeHtml(x.name)}</b>
 
-      ${
-        x.customization
-          ? `<small>
-              ${escapeHtml(x.customization.variation)}
-              · ${escapeHtml(x.customization.choice)}
-              · ${escapeHtml(x.customization.topping)}
-            </small>`
-          : ""
+     ${
+          x.customization
+    ? `<small>
+        ${escapeHtml(x.customization.variation)}
+        ${
+          x.customization.choice
+            ? ` · ${escapeHtml(x.customization.choice)}`
+            : ""
+        }
+        ${
+          x.customization.topping
+            ? ` · ${escapeHtml(x.customization.topping)}`
+            : ""
+        }
+        ${
+          x.customization.addon
+            ? ` · ${escapeHtml(x.customization.addon)}`
+            : ""
+        }
+      </small>`
+    : ""
       }
 
       <small>
