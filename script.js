@@ -2342,24 +2342,178 @@ function openCart(){ $("cartCard").classList.add("open"); }
 $("closeCart").addEventListener("click",()=> $("cartCard").classList.remove("open"));
 
 function cartMessage(){
-  if(!cart.length) return "Hi Crunchery's! I'd like to know today's menu.";
+
+  if(!cart.length){
+    return "Hi Crunchery's! I'd like to know today's menu.";
+  }
+
   const lines = cart.map(x => {
 
-  const details = x.customization
-    ? ` (${x.customization.variation}, ${x.customization.choice}, ${x.customization.topping})`
-    : "";
+    let details = "";
 
-  return `• ${x.name}${details} × ${x.qty} — ${money(x.price*x.qty)}`;
+    if(x.customization){
 
-}).join("\n");
-  const total = cart.reduce((s,x)=>s+x.price*x.qty,0);
+      const parts = [];
+
+      if(x.customization.variation){
+        parts.push(x.customization.variation);
+      }
+
+      if(x.customization.base){
+        if(typeof x.customization.base === "object"){
+          parts.push(`Base: ${x.customization.base.name}`);
+        }else{
+          parts.push(`Base: ${x.customization.base}`);
+        }
+      }
+
+      if(x.customization.choice){
+        parts.push(x.customization.choice);
+      }
+
+      if(x.customization.topping){
+        parts.push(`Topping: ${x.customization.topping}`);
+      }
+
+      if(x.customization.addon){
+        parts.push(`Add-on: ${x.customization.addon}`);
+      }
+
+      if(parts.length){
+        details = ` (${parts.join(", ")})`;
+      }
+
+    }
+
+    return `• ${x.name}${details} × ${x.qty} — ${money(x.price*x.qty)}`;
+
+  }).join("\n");
+
+
+  const total =
+    cart.reduce(
+      (s,x) => s + x.price * x.qty,
+      0
+    );
+
+
   return `Hi Crunchery's! I'd like to place an order:\n${lines}\n\nTotal: ${money(total)}\nPlease confirm availability and ordering details.`;
+
 }
 
 function updateOrderLinks(){
-  const wa = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(cartMessage())}`;
-  $("whatsappCart").href = wa;
-  $("whatsappOrderBtn").href = wa;
+
+  const whatsappCart = $("whatsappCart");
+  const whatsappOrderBtn = $("whatsappOrderBtn");
+
+  if(whatsappCart){
+    whatsappCart.href = "#";
+    whatsappCart.onclick = (e) => {
+      e.preventDefault();
+      openOutletSelector();
+    };
+  }
+
+  if(whatsappOrderBtn){
+    whatsappOrderBtn.href = "#";
+    whatsappOrderBtn.onclick = (e) => {
+      e.preventDefault();
+      openOutletSelector();
+    };
+  }
+
+}
+function openOutletSelector(){
+
+  const old = $("outletSelectorModal");
+
+  if(old){
+    old.remove();
+  }
+
+  const modal = document.createElement("div");
+
+  modal.id = "outletSelectorModal";
+
+  modal.innerHTML = `
+    <div class="outlet-selector-card">
+
+      <button
+        type="button"
+        class="outlet-selector-close"
+        onclick="this.closest('#outletSelectorModal').remove()">
+        ×
+      </button>
+
+      <h3>Choose Your Outlet</h3>
+
+      <p>Select the outlet you would like to order from.</p>
+
+      <button
+        type="button"
+        class="outlet-choice"
+        onclick="sendOutletWhatsApp('919500538222')">
+
+        <span class="outlet-choice-icon">📍</span>
+
+        <span class="outlet-choice-text">
+          <strong>Vaiyapuri Nagar</strong>
+          <small>Order from Vaiyapuri Nagar</small>
+        </span>
+
+      </button>
+
+
+      <button
+        type="button"
+        class="outlet-choice"
+        onclick="sendOutletWhatsApp('919500538219')">
+
+        <span class="outlet-choice-icon">📍</span>
+
+        <span class="outlet-choice-text">
+          <strong>Ramakrishnapuram</strong>
+          <small>Order from Ramakrishnapuram</small>
+        </span>
+
+      </button>
+
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+
+  modal.addEventListener("click", (e) => {
+
+    if(e.target === modal){
+      modal.remove();
+    }
+
+  });
+
+}
+
+
+function sendOutletWhatsApp(number){
+
+  const message = encodeURIComponent(cartMessage());
+
+  const whatsappURL =
+    `https://wa.me/${number}?text=${message}`;
+
+  window.open(
+    whatsappURL,
+    "_blank",
+    "noopener"
+  );
+
+  const modal = $("outletSelectorModal");
+
+  if(modal){
+    modal.remove();
+  }
+
 }
 
 function setupForms(){
