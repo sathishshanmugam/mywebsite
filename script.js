@@ -655,13 +655,6 @@ const MENU = [
     "type": "non-veg"
   },
   {
-    "name": "Whole Wheat Pizza",
-    "description": "",
-    "category": "Pizzas",
-    "price": 0,
-    "type": "veg"
-  },
-  {
     "name": "Pineapple Custard",
     "description": "",
     "category": "Desserts",
