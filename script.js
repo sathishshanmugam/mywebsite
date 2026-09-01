@@ -406,7 +406,7 @@ const MENU = [
     "category": "Garlic Breads",
     "price": 90,
     "type": "veg",
-    "image": "assets/garlic-bread.jpg"
+    "image": "assets/garlic-bread.png"
   },
   {
     "name": "French Chili Toast",
@@ -414,7 +414,7 @@ const MENU = [
     "category": "Garlic Breads",
     "price": 100,
     "type": "veg",
-    "image": "assets/garlic-bread.jpg"
+    "image": "assets/garlic-bread.png"
   },
   {
     "name": "Garlic Bread",
