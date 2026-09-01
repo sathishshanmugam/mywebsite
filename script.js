@@ -315,21 +315,21 @@ const MENU = [
     "name": "Mac 'n Cheese Pasta",
     "description": "",
     "category": "Pastas",
-    "price": 0,
+    "price": 170,
     "type": "veg"
   },
   {
     "name": "Creamy White Pasta",
     "description": "",
     "category": "Pastas",
-    "price": 0,
+    "price": 150,
     "type": "veg"
   },
   {
     "name": "Tangy Red Pasta",
     "description": "",
     "category": "Pastas",
-    "price": 0,
+    "price": 170,
     "type": "veg"
   },
   {
@@ -595,7 +595,7 @@ const MENU = [
     "name": "Peri Peri Pasta",
     "description": "",
     "category": "Pastas",
-    "price": 0,
+    "price": 170,
     "type": "veg"
   },
   {
