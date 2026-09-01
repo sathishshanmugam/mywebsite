@@ -789,3 +789,153 @@ body{background:#fffaf3}
   background: #ffedd5 !important;
   background-image: none !important;
 }
+/* =========================================================
+   WHATSAPP OUTLET SELECTOR
+   ========================================================= */
+
+#outletSelectorModal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(0,0,0,.55);
+}
+
+
+.outlet-selector-card {
+  position: relative;
+
+  width: min(430px, 100%);
+
+  background: #ffffff;
+
+  border-radius: 24px;
+
+  padding: 30px;
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.25);
+}
+
+
+.outlet-selector-card h3 {
+  margin: 0 0 8px;
+
+  font-size: 25px;
+
+  color: #33251f;
+}
+
+
+.outlet-selector-card > p {
+  margin: 0 0 22px;
+
+  color: #777;
+
+  font-size: 15px;
+}
+
+
+.outlet-selector-close {
+  position: absolute;
+
+  top: 12px;
+  right: 15px;
+
+  width: 36px;
+  height: 36px;
+
+  border: 0;
+
+  border-radius: 50%;
+
+  background: #f5f5f5;
+
+  color: #555;
+
+  font-size: 25px;
+
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+
+.outlet-choice {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+
+  margin-top: 12px;
+
+  padding: 17px;
+
+  border: 1.5px solid #eadcca;
+
+  border-radius: 16px;
+
+  background: #fffaf4;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition: .2s ease;
+}
+
+
+.outlet-choice:hover {
+  border-color: #ff6500;
+
+  transform: translateY(-2px);
+}
+
+
+.outlet-choice-icon {
+  font-size: 25px;
+
+  flex-shrink: 0;
+}
+
+
+.outlet-choice-text {
+  display: block;
+}
+
+
+.outlet-choice-text strong {
+  display: block;
+
+  font-size: 17px;
+
+  color: #33251f;
+}
+
+
+.outlet-choice-text small {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #888;
+
+  font-size: 13px;
+}
+
+
+@media(max-width:520px){
+
+  .outlet-selector-card {
+    padding: 24px 18px;
+  }
+
+}
