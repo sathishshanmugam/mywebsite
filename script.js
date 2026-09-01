@@ -1593,7 +1593,572 @@ function updatePizzaSummary(){
   }
 
 }
+/* =========================================================
+   PASTA CUSTOMIZATION
+   ========================================================= */
 
+const PASTA_VARIATIONS = [
+  { name: "Penne", extra: 0 },
+  { name: "Fusilli", extra: 0 },
+  { name: "Macaroni", extra: 0 }
+];
+
+const PASTA_ADDONS = [
+  { name: "No Add-on", price: 0 },
+  { name: "Mushroom", price: 30 },
+  { name: "Corn", price: 30 },
+  { name: "Chicken", price: 50 }
+];
+
+let pastaSelection = {
+  item: null,
+  variation: null,
+  addon: null
+};
+
+
+/* =========================================================
+   CREATE PASTA POPUP
+   ========================================================= */
+
+function ensurePastaModal(){
+
+  if($("pastaCustomizeModal")) return;
+
+  const style = document.createElement("style");
+
+  style.textContent = `
+    #pastaCustomizeModal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.55);
+      z-index:9999;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+
+    #pastaCustomizeModal.open{
+      display:flex;
+    }
+
+    .pasta-customize-card{
+      width:min(520px,100%);
+      max-height:90vh;
+      overflow-y:auto;
+      background:#fff;
+      border-radius:20px;
+      padding:25px;
+      box-shadow:0 20px 60px rgba(0,0,0,.25);
+    }
+
+    .pasta-customize-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:20px;
+    }
+
+    .pasta-customize-head h3{
+      margin:0;
+      font-size:24px;
+    }
+
+    .pasta-close{
+      border:0;
+      background:#f5f5f5;
+      width:38px;
+      height:38px;
+      border-radius:50%;
+      font-size:24px;
+      cursor:pointer;
+    }
+
+    .pasta-section-title{
+      font-size:17px;
+      font-weight:800;
+      margin:20px 0 10px;
+    }
+
+    .pasta-options{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
+    .pasta-option{
+      border:1.5px solid #ddd;
+      background:#fff;
+      border-radius:13px;
+      padding:14px;
+      text-align:left;
+      cursor:pointer;
+      transition:.2s;
+    }
+
+    .pasta-option strong{
+      display:block;
+      font-size:15px;
+    }
+
+    .pasta-option small{
+      display:block;
+      margin-top:5px;
+      color:#777;
+    }
+
+    .pasta-option.selected{
+      border-color:#ff6500;
+      background:#fff5ed;
+    }
+
+    .pasta-summary{
+      margin-top:20px;
+      padding:15px;
+      border-radius:14px;
+      background:#fafafa;
+      border:1px solid #e5e5e5;
+      line-height:1.6;
+    }
+
+    .pasta-summary-total{
+      font-size:21px;
+      font-weight:800;
+      color:#f45d00;
+      margin-top:5px;
+    }
+
+    .pasta-confirm{
+      width:100%;
+      margin-top:15px;
+      border:0;
+      border-radius:13px;
+      padding:14px;
+      background:#ff6500;
+      color:#fff;
+      font-size:17px;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .pasta-confirm:disabled{
+      opacity:.45;
+      cursor:not-allowed;
+    }
+
+    @media(max-width:520px){
+      .pasta-customize-card{
+        padding:18px;
+      }
+
+      .pasta-options{
+        grid-template-columns:1fr;
+      }
+    }
+  `;
+
+  document.head.appendChild(style);
+
+
+  const modal = document.createElement("div");
+
+  modal.id = "pastaCustomizeModal";
+
+  modal.innerHTML = `
+    <div class="pasta-customize-card">
+
+      <div class="pasta-customize-head">
+        <h3>Customize Your Pasta</h3>
+
+        <button
+          class="pasta-close"
+          type="button">
+          ×
+        </button>
+      </div>
+
+
+      <div class="pasta-section-title">
+        1. Choose Pasta
+      </div>
+
+      <div
+        id="pastaVariationOptions"
+        class="pasta-options">
+      </div>
+
+
+      <div class="pasta-section-title">
+        2. Choose Add-on
+      </div>
+
+      <div
+        id="pastaAddonOptions"
+        class="pasta-options">
+      </div>
+
+
+      <div
+        id="pastaSummary"
+        class="pasta-summary">
+        Please select your pasta.
+      </div>
+
+
+      <button
+        id="pastaConfirmBtn"
+        class="pasta-confirm"
+        type="button"
+        disabled>
+        Add Pasta to Cart
+      </button>
+
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+
+  const closeModal = () => {
+    modal.classList.remove("open");
+  };
+
+
+  modal
+    .querySelector(".pasta-close")
+    .addEventListener("click", closeModal);
+
+
+  modal.addEventListener("click", e => {
+
+    if(e.target === modal){
+      closeModal();
+    }
+
+  });
+
+
+  document.addEventListener("keydown", e => {
+
+    if(
+      e.key === "Escape" &&
+      modal.classList.contains("open")
+    ){
+      closeModal();
+    }
+
+  });
+
+}
+
+
+/* =========================================================
+   OPEN PASTA CUSTOMIZER
+   ========================================================= */
+
+function openPastaCustomizer(item){
+
+  ensurePastaModal();
+
+
+  pastaSelection = {
+    item:item,
+    variation:null,
+    addon:null
+  };
+
+
+  const modal = $("pastaCustomizeModal");
+
+  const variationBox =
+    $("pastaVariationOptions");
+
+  const addonBox =
+    $("pastaAddonOptions");
+
+
+  /* =====================================================
+     PASTA VARIATIONS
+     ===================================================== */
+
+  variationBox.innerHTML =
+    PASTA_VARIATIONS.map(v => `
+
+      <button
+        type="button"
+        class="pasta-option"
+        data-variation="${escapeHtml(v.name)}">
+
+        <strong>
+          ${escapeHtml(v.name)}
+        </strong>
+
+        <small>
+          +₹0
+        </small>
+
+      </button>
+
+    `).join("");
+
+
+  /* =====================================================
+     ADD-ONS
+     ===================================================== */
+
+  addonBox.innerHTML =
+    PASTA_ADDONS.map(a => `
+
+      <button
+        type="button"
+        class="pasta-option"
+        data-addon="${escapeHtml(a.name)}"
+        data-addon-price="${a.price}">
+
+        <strong>
+          ${escapeHtml(a.name)}
+        </strong>
+
+        <small>
+          ${a.price === 0 ? "₹0" : "+" + money(a.price)}
+        </small>
+
+      </button>
+
+    `).join("");
+
+
+  /* =====================================================
+     VARIATION SELECTION
+     ===================================================== */
+
+  variationBox
+    .querySelectorAll(".pasta-option")
+    .forEach(btn => {
+
+      btn.addEventListener("click", () => {
+
+        variationBox
+          .querySelectorAll(".pasta-option")
+          .forEach(b =>
+            b.classList.remove("selected")
+          );
+
+        btn.classList.add("selected");
+
+
+        pastaSelection.variation =
+          PASTA_VARIATIONS.find(
+            v =>
+              v.name === btn.dataset.variation
+          );
+
+
+        updatePastaSummary();
+
+      });
+
+    });
+
+
+  /* =====================================================
+     ADD-ON SELECTION
+     ===================================================== */
+
+  addonBox
+    .querySelectorAll(".pasta-option")
+    .forEach(btn => {
+
+      btn.addEventListener("click", () => {
+
+        addonBox
+          .querySelectorAll(".pasta-option")
+          .forEach(b =>
+            b.classList.remove("selected")
+          );
+
+        btn.classList.add("selected");
+
+
+        pastaSelection.addon = {
+          name:btn.dataset.addon,
+          price:Number(
+            btn.dataset.addonPrice || 0
+          )
+        };
+
+
+        updatePastaSummary();
+
+      });
+
+    });
+
+
+  updatePastaSummary();
+
+  modal.classList.add("open");
+}
+
+
+/* =========================================================
+   UPDATE PASTA SUMMARY
+   ========================================================= */
+
+function updatePastaSummary(){
+
+  const summary =
+    $("pastaSummary");
+
+  const confirm =
+    $("pastaConfirmBtn");
+
+
+  if(
+    !pastaSelection.variation ||
+    !pastaSelection.addon
+  ){
+
+    summary.innerHTML =
+      "Please select your pasta and add-on.";
+
+    confirm.disabled = true;
+
+    return;
+  }
+
+
+  const basePrice =
+    Number(pastaSelection.item.price) || 0;
+
+  const total =
+    basePrice +
+    pastaSelection.variation.extra +
+    pastaSelection.addon.price;
+
+
+  summary.innerHTML = `
+
+    <div>
+      <b>Pasta:</b>
+      ${escapeHtml(
+        pastaSelection.variation.name
+      )}
+    </div>
+
+    <div>
+      <b>Add-on:</b>
+      ${escapeHtml(
+        pastaSelection.addon.name
+      )}
+    </div>
+
+    <div class="pasta-summary-total">
+      Total: ${money(total)}
+    </div>
+
+  `;
+
+
+  confirm.disabled = false;
+}
+
+
+/* =========================================================
+   ADD PASTA TO CART
+   ========================================================= */
+
+$("pastaConfirmBtn").onclick = () => {
+
+  if(
+    !pastaSelection.item ||
+    !pastaSelection.variation ||
+    !pastaSelection.addon
+  ){
+    return;
+  }
+
+
+  const basePrice =
+    Number(pastaSelection.item.price) || 0;
+
+
+  const finalPrice =
+    basePrice +
+    pastaSelection.variation.extra +
+    pastaSelection.addon.price;
+
+
+  const customization = {
+
+    variation:
+      pastaSelection.variation.name,
+
+    addon:
+      pastaSelection.addon.name
+
+  };
+
+
+  const signature = [
+
+    pastaSelection.item.name,
+
+    pastaSelection.variation.name,
+
+    pastaSelection.addon.name,
+
+    finalPrice
+
+  ].join("|");
+
+
+  const existing =
+    cart.find(
+      x =>
+        x.signature === signature
+    );
+
+
+  if(existing){
+
+    existing.qty++;
+
+  }else{
+
+    cart.push({
+
+      name:
+        pastaSelection.item.name,
+
+      price:
+        finalPrice,
+
+      qty:1,
+
+      category:
+        pastaSelection.item.category,
+
+      customization:
+        customization,
+
+      signature:
+        signature
+
+    });
+
+  }
+
+
+  saveCart();
+
+  $("pastaCustomizeModal")
+    .classList.remove("open");
+
+  openCart();
+
+};
 
 /* =========================================================
    NORMAL ADD TO CART
@@ -1616,6 +2181,15 @@ function addToCart(index){
     return;
 
   }
+  
+  /* Pasta opens customization instead */
+
+if(
+  item.category === "Pastas"
+){
+  openPastaCustomizer(item);
+  return;
+}
 
 
   /* All other menu items work normally */
