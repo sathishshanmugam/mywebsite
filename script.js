@@ -419,7 +419,8 @@ const MENU = [
     "description": "",
     "category": "Garlic Breads",
     "price": 70,
-    "type": "veg"
+    "type": "veg",
+    "image": "assets/garlic-bread.jpg"
   },
 
   {
@@ -764,7 +765,13 @@ function cardHtml(item){
   const price = Number(item.price) > 0 ? money(item.price) : "On selection";
   return `<article class="menu-card">
     <span class="badge ${type}">${badge}</span>
-    <div class="food-image">${emojiFor(item)}</div>
+    <div class="food-image">
+  ${
+    item.image
+      ? `<img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}">`
+      : emojiFor(item)
+  }
+</div>
     <div class="menu-card-body">
       <h4>${escapeHtml(item.name)}</h4>
       <div class="menu-desc">${escapeHtml(item.description || "Freshly prepared at Crunchery's.")}</div>
