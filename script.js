@@ -18,10 +18,137 @@ const CONFIG = {
 
 const MENU = [
   {
-    "name": "Brownie",
+    "name": "Butter Garlic Chicken Burger",
     "description": "",
-    "category": "Desserts",
-    "price": 80,
+    "category": "Burger",
+    "price": 200,
+    "type": "non-veg"
+  },
+  {
+    "name": "Butter Garlic Mushroom Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 150,
+    "type": "veg"
+  },
+  {
+    "name": "Cheese Scrambled Egg Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 150,
+    "type": "egg"
+  },
+  {
+    "name": "Crispy Crumb Burger Chicken",
+    "description": "",
+    "category": "Burger",
+    "price": 220,
+    "type": "non-veg"
+  },
+  {
+    "name": "Crispy Crumb Burger Veg",
+    "description": "",
+    "category": "Burger",
+    "price": 200,
+    "type": "veg"
+  },
+  {
+    "name": "Egg Burji Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 130,
+    "type": "egg"
+  },
+  {
+    "name": "Egg Pepperfry Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 130,
+    "type": "egg"
+  },
+  {
+    "name": "Fried Chicken Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 220,
+    "type": "non-veg"
+  },
+  {
+    "name": "Ghee Podi Chicken Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 200,
+    "type": "non-veg"
+  },
+  {
+    "name": "Ghee Podi Potato Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 150,
+    "type": "veg"
+  },
+  {
+    "name": "Hot Garlic Chicken Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 200,
+    "type": "non-veg"
+  },
+  {
+    "name": "Hot Garlic Mushroom Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 150,
+    "type": "veg"
+  },
+  {
+    "name": "Hot Spicy Chicken Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 200,
+    "type": "non-veg"
+  },
+  {
+    "name": "Hyderabadi Chicken Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 200,
+    "type": "non-veg"
+  },
+  {
+    "name": "Mushroom Pepperfry Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 150,
+    "type": "veg"
+  },
+  {
+    "name": "Paneer Pepperfry Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 180,
+    "type": "veg"
+  },
+  {
+    "name": "Paneer Podimas Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 180,
+    "type": "veg"
+  },
+  {
+    "name": "Scrambled Egg  Burger",
+    "description": "",
+    "category": "Burger",
+    "price": 130,
+    "type": "egg"
+  },
+
+  {
+    "name": "Black Grapes",
+    "description": "",
+    "category": "Cold Pressed Juices",
+    "price": 120,
     "type": "veg"
   },
   {
@@ -39,334 +166,13 @@ const MENU = [
     "type": "veg"
   },
   {
-    "name": "Choco Lava Cake",
-    "description": "",
-    "category": "Desserts",
-    "price": 90,
-    "type": "veg"
-  },
-  {
     "name": "Watermelon",
     "description": "",
     "category": "Cold Pressed Juices",
     "price": 90,
     "type": "veg"
   },
-  {
-    "name": "Black Grapes",
-    "description": "",
-    "category": "Cold Pressed Juices",
-    "price": 120,
-    "type": "veg"
-  },
-  {
-    "name": "Hot Garlic Mushroom Sandwich",
-    "description": "",
-    "category": "Sandwich",
-    "price": 130,
-    "type": "veg"
-  },
-  {
-    "name": "Butter Garlic Mushroom Sandwich",
-    "description": "",
-    "category": "Sandwich",
-    "price": 130,
-    "type": "veg"
-  },
-  {
-    "name": "Pepperfry Mushroom Sandwich",
-    "description": "",
-    "category": "Sandwich",
-    "price": 130,
-    "type": "veg"
-  },
-  {
-    "name": "Paneer Podimas Sandwich",
-    "description": "",
-    "category": "Sandwich",
-    "price": 160,
-    "type": "veg"
-  },
-  {
-    "name": "Ghee Podi Potato Sandwich",
-    "description": "",
-    "category": "Sandwich",
-    "price": 130,
-    "type": "veg"
-  },
-  {
-    "name": "Hyderabadi Chicken Sandwich",
-    "description": "",
-    "category": "Sandwich",
-    "price": 180,
-    "type": "non-veg"
-  },
-  {
-    "name": "Ghee Podi Chicken Sandwich",
-    "description": "",
-    "category": "Sandwich",
-    "price": 180,
-    "type": "non-veg"
-  },
-  {
-    "name": "Hot Spicy Chicken Sandwich",
-    "description": "",
-    "category": "Sandwich",
-    "price": 180,
-    "type": "non-veg"
-  },
-  {
-    "name": "Hot Garlic Chicken Sandwich",
-    "description": "",
-    "category": "Sandwich",
-    "price": 180,
-    "type": "non-veg"
-  },
-  {
-    "name": "Butter Garlic Chicken Sandwich",
-    "description": "",
-    "category": "Sandwich",
-    "price": 180,
-    "type": "non-veg"
-  },
-  {
-    "name": "Hyderabadi Chicken Burger",
-    "description": "",
-    "category": "Burger",
-    "price": 200,
-    "type": "non-veg"
-  },
-  {
-    "name": "Hot Spicy Chicken Burger",
-    "description": "",
-    "category": "Burger",
-    "price": 200,
-    "type": "non-veg"
-  },
-  {
-    "name": "Hot Garlic Chicken Burger",
-    "description": "",
-    "category": "Burger",
-    "price": 200,
-    "type": "non-veg"
-  },
-  {
-    "name": "Butter Garlic Chicken Burger",
-    "description": "",
-    "category": "Burger",
-    "price": 200,
-    "type": "non-veg"
-  },
-  {
-    "name": "Ghee Podi Chicken Burger",
-    "description": "",
-    "category": "Burger",
-    "price": 200,
-    "type": "non-veg"
-  },
-  {
-    "name": "Peri Peri Fries",
-    "description": "",
-    "category": "French Fries",
-    "price": 100,
-    "type": "veg"
-  },
-  {
-    "name": "French Fries",
-    "description": "",
-    "category": "French Fries",
-    "price": 90,
-    "type": "veg"
-  },
-  {
-    "name": "Hot Garlic Mushroom Burger",
-    "description": "",
-    "category": "Burger",
-    "price": 150,
-    "type": "veg"
-  },
-  {
-    "name": "Butter Garlic Mushroom Burger",
-    "description": "",
-    "category": "Burger",
-    "price": 150,
-    "type": "veg"
-  },
-  {
-    "name": "Mushroom Pepperfry Burger",
-    "description": "",
-    "category": "Burger",
-    "price": 150,
-    "type": "veg"
-  },
-  {
-    "name": "Paneer Podimas Burger",
-    "description": "",
-    "category": "Burger",
-    "price": 180,
-    "type": "veg"
-  },
-  {
-    "name": "Ghee Podi Potato Burger",
-    "description": "",
-    "category": "Burger",
-    "price": 150,
-    "type": "veg"
-  },
-  {
-    "name": "Garlic Bread",
-    "description": "",
-    "category": "Garlic Breads",
-    "price": 70,
-    "type": "veg"
-  },
-  {
-    "name": "Chilli Cheese Toast",
-    "description": "",
-    "category": "Sandwich",
-    "price": 120,
-    "type": "veg"
-  },
-  {
-    "name": "Cheesy Fries",
-    "description": "",
-    "category": "French Fries",
-    "price": 140,
-    "type": "veg"
-  },
-  {
-    "name": "Egg Burji Sandwich",
-    "description": "",
-    "category": "Sandwich",
-    "price": 110,
-    "type": "egg"
-  },
-  {
-    "name": "Nutella Toast",
-    "description": "",
-    "category": "Sandwich",
-    "price": 90,
-    "type": "veg"
-  },
-  {
-    "name": "Cheese 'n Corn Sandwich",
-    "description": "",
-    "category": "Sandwich",
-    "price": 120,
-    "type": "veg"
-  },
-  {
-    "name": "Lime Mint",
-    "description": "",
-    "category": "Mojitos",
-    "price": 100,
-    "type": "veg"
-  },
-  {
-    "name": "Blue Curacao",
-    "description": "",
-    "category": "Mojitos",
-    "price": 100,
-    "type": "veg"
-  },
-  {
-    "name": "Blue Berry",
-    "description": "",
-    "category": "Mojitos",
-    "price": 100,
-    "type": "veg"
-  },
-  {
-    "name": "Green Apple",
-    "description": "",
-    "category": "Mojitos",
-    "price": 100,
-    "type": "veg"
-  },
-  {
-    "name": "French Chili Toast",
-    "description": "",
-    "category": "Garlic Breads",
-    "price": 100,
-    "type": "veg"
-  },
-  {
-    "name": "Eggpepperfry Sandwich",
-    "description": "",
-    "category": "Sandwich",
-    "price": 110,
-    "type": "egg"
-  },
-  {
-    "name": "Scrambled Egg Sandwich",
-    "description": "",
-    "category": "Sandwich",
-    "price": 110,
-    "type": "egg"
-  },
-  {
-    "name": "Scrambled Egg  Burger",
-    "description": "",
-    "category": "Burger",
-    "price": 130,
-    "type": "egg"
-  },
-  {
-    "name": "Mac 'n Cheese Pasta",
-    "description": "",
-    "category": "Pastas",
-    "price": 170,
-    "type": "veg"
-  },
-  {
-    "name": "Creamy White Pasta",
-    "description": "",
-    "category": "Pastas",
-    "price": 150,
-    "type": "veg"
-  },
-  {
-    "name": "Tangy Red Pasta",
-    "description": "",
-    "category": "Pastas",
-    "price": 170,
-    "type": "veg"
-  },
-  {
-    "name": "Egg Burji Burger",
-    "description": "",
-    "category": "Burger",
-    "price": 130,
-    "type": "egg"
-  },
-  {
-    "name": "Cheese Garlic Bread",
-    "description": "",
-    "category": "Garlic Breads",
-    "price": 90,
-    "type": "veg"
-  },
-  {
-    "name": "Cheese Scrambled Egg Sandwich",
-    "description": "",
-    "category": "Sandwich",
-    "price": 130,
-    "type": "egg"
-  },
-  {
-    "name": "Egg Pepperfry Burger",
-    "description": "",
-    "category": "Burger",
-    "price": 130,
-    "type": "egg"
-  },
-  {
-    "name": "Cheese Scrambled Egg Burger",
-    "description": "",
-    "category": "Burger",
-    "price": 150,
-    "type": "egg"
-  },
+
   {
     "name": "Bbq Chicken Wings -2pcs",
     "description": "",
@@ -379,6 +185,55 @@ const MENU = [
     "description": "",
     "category": "Crunchery's Specials",
     "price": 190,
+    "type": "non-veg"
+  },
+  {
+    "name": "Bbq Saucy Mushroom",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 150,
+    "type": "veg"
+  },
+  {
+    "name": "Bbq Saucy Paneer",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 150,
+    "type": "veg"
+  },
+  {
+    "name": "Chicken Skewers",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 150,
+    "type": "non-veg"
+  },
+  {
+    "name": "Chipotle Saucy Mushroom",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 150,
+    "type": "veg"
+  },
+  {
+    "name": "Chipotle Saucy Paneer",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 150,
+    "type": "veg"
+  },
+  {
+    "name": "Chipotle Wings- 4pc",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 190,
+    "type": "non-veg"
+  },
+  {
+    "name": "Chipotle Wings-2 Pcs",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 110,
     "type": "non-veg"
   },
   {
@@ -396,7 +251,21 @@ const MENU = [
     "type": "non-veg"
   },
   {
-    "name": "Paneer  Cheese Balls",
+    "name": "Fried Wings-2 Pcs",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 100,
+    "type": "non-veg"
+  },
+  {
+    "name": "Fried Wings-4 Pcs",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 180,
+    "type": "non-veg"
+  },
+  {
+    "name": "Mushroom Popcorn",
     "description": "",
     "category": "Crunchery's Specials",
     "price": 140,
@@ -410,45 +279,32 @@ const MENU = [
     "type": "veg"
   },
   {
+    "name": "Paneer  Cheese Balls",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 140,
+    "type": "veg"
+  },
+  {
+    "name": "Paneer Popcorn",
+    "description": "",
+    "category": "Crunchery's Specials",
+    "price": 140,
+    "type": "veg"
+  },
+  {
     "name": "Popcorn Chicken",
     "description": "",
     "category": "Crunchery's Specials",
     "price": 160,
     "type": "non-veg"
   },
+
   {
-    "name": "Chicken Skewers",
+    "name": "Brownie",
     "description": "",
-    "category": "Crunchery's Specials",
-    "price": 150,
-    "type": "non-veg"
-  },
-  {
-    "name": "Chipotle Wings-2 Pcs",
-    "description": "",
-    "category": "Crunchery's Specials",
-    "price": 110,
-    "type": "non-veg"
-  },
-  {
-    "name": "Chipotle Wings- 4pc",
-    "description": "",
-    "category": "Crunchery's Specials",
-    "price": 190,
-    "type": "non-veg"
-  },
-  {
-    "name": "Paneer Pepperfry Sandwich",
-    "description": "",
-    "category": "Sandwich",
-    "price": 160,
-    "type": "veg"
-  },
-  {
-    "name": "Paneer Pepperfry Burger",
-    "description": "",
-    "category": "Burger",
-    "price": 180,
+    "category": "Desserts",
+    "price": 80,
     "type": "veg"
   },
   {
@@ -459,7 +315,115 @@ const MENU = [
     "type": "veg"
   },
   {
-    "name": "Perfect Vanilla Shake",
+    "name": "Choco Lava Cake",
+    "description": "",
+    "category": "Desserts",
+    "price": 90,
+    "type": "veg"
+  },
+  {
+    "name": "Choco Lava Cake With Icecream",
+    "description": "",
+    "category": "Desserts",
+    "price": 130,
+    "type": "veg"
+  },
+  {
+    "name": "Chocolate Coffee Mousse",
+    "description": "",
+    "category": "Desserts",
+    "price": 80,
+    "type": "veg"
+  },
+  {
+    "name": "Icecream 1 Scoop",
+    "description": "",
+    "category": "Desserts",
+    "price": 40,
+    "type": "veg"
+  },
+  {
+    "name": "Korean Cream Cheese Garlic Bun",
+    "description": "",
+    "category": "Desserts",
+    "price": 200,
+    "type": "veg"
+  },
+  {
+    "name": "Pineapple Custard",
+    "description": "",
+    "category": "Desserts",
+    "price": 100,
+    "type": "veg"
+  },
+  {
+    "name": "Strawberry Fondue",
+    "description": "",
+    "category": "Desserts",
+    "price": 110,
+    "type": "veg"
+  },
+
+  {
+    "name": "Cheesy Fries",
+    "description": "",
+    "category": "French Fries",
+    "price": 140,
+    "type": "veg"
+  },
+  {
+    "name": "Chicken Loaded Fries",
+    "description": "",
+    "category": "French Fries",
+    "price": 220,
+    "type": "non-veg"
+  },
+  {
+    "name": "French Fries",
+    "description": "",
+    "category": "French Fries",
+    "price": 90,
+    "type": "veg"
+  },
+  {
+    "name": "Paneer Loaded Fries",
+    "description": "",
+    "category": "French Fries",
+    "price": 220,
+    "type": "veg"
+  },
+  {
+    "name": "Peri Peri Fries",
+    "description": "",
+    "category": "French Fries",
+    "price": 100,
+    "type": "veg"
+  },
+
+  {
+    "name": "Cheese Garlic Bread",
+    "description": "",
+    "category": "Garlic Breads",
+    "price": 90,
+    "type": "veg"
+  },
+  {
+    "name": "French Chili Toast",
+    "description": "",
+    "category": "Garlic Breads",
+    "price": 100,
+    "type": "veg"
+  },
+  {
+    "name": "Garlic Bread",
+    "description": "",
+    "category": "Garlic Breads",
+    "price": 70,
+    "type": "veg"
+  },
+
+  {
+    "name": "Chocolate Caramel Shake",
     "description": "",
     "category": "Milkshakes",
     "price": 150,
@@ -467,13 +431,6 @@ const MENU = [
   },
   {
     "name": "Creamy Blueberry Shake",
-    "description": "",
-    "category": "Milkshakes",
-    "price": 150,
-    "type": "veg"
-  },
-  {
-    "name": "Strawberry Cream Dream",
     "description": "",
     "category": "Milkshakes",
     "price": 150,
@@ -501,6 +458,13 @@ const MENU = [
     "type": "veg"
   },
   {
+    "name": "Perfect Vanilla Shake",
+    "description": "",
+    "category": "Milkshakes",
+    "price": 150,
+    "type": "veg"
+  },
+  {
     "name": "Rose Gulkand Shake",
     "description": "",
     "category": "Milkshakes",
@@ -508,94 +472,18 @@ const MENU = [
     "type": "veg"
   },
   {
-    "name": "Pizza",
-    "description": "",
-    "category": "Pizzas",
-    "price": 0,
-    "type": "non-veg"
-  },
-  {
-    "name": "Chipotle Saucy Mushroom",
-    "description": "",
-    "category": "Crunchery's Specials",
-    "price": 150,
-    "type": "veg"
-  },
-  {
-    "name": "Choco Lava Cake With Icecream",
-    "description": "",
-    "category": "Desserts",
-    "price": 130,
-    "type": "veg"
-  },
-  {
-    "name": "Icecream 1 Scoop",
-    "description": "",
-    "category": "Desserts",
-    "price": 40,
-    "type": "veg"
-  },
-  {
-    "name": "Bbq Saucy Mushroom",
-    "description": "",
-    "category": "Crunchery's Specials",
-    "price": 150,
-    "type": "veg"
-  },
-  {
-    "name": "Chipotle Saucy Paneer",
-    "description": "",
-    "category": "Crunchery's Specials",
-    "price": 150,
-    "type": "veg"
-  },
-  {
-    "name": "Bbq Saucy Paneer",
-    "description": "",
-    "category": "Crunchery's Specials",
-    "price": 150,
-    "type": "veg"
-  },
-  {
-    "name": "Paneer Popcorn",
-    "description": "",
-    "category": "Crunchery's Specials",
-    "price": 140,
-    "type": "veg"
-  },
-  {
-    "name": "Mushroom Popcorn",
-    "description": "",
-    "category": "Crunchery's Specials",
-    "price": 140,
-    "type": "veg"
-  },
-  {
-    "name": "Fried Wings-2 Pcs",
-    "description": "",
-    "category": "Crunchery's Specials",
-    "price": 100,
-    "type": "non-veg"
-  },
-  {
-    "name": "Fried Wings-4 Pcs",
-    "description": "",
-    "category": "Crunchery's Specials",
-    "price": 180,
-    "type": "non-veg"
-  },
-  {
-    "name": "Chocolate Caramel Shake",
+    "name": "Strawberry Cream Dream",
     "description": "",
     "category": "Milkshakes",
     "price": 150,
     "type": "veg"
   },
+
   {
-    "name": "Peri Peri Pasta",
+    "name": "Glass Of Galaxy",
     "description": "",
-    "category": "Pastas",
-    "price": 170,
+    "category": "Mocktails",
+    "price": 120,
     "type": "veg"
   },
   {
@@ -612,68 +500,198 @@ const MENU = [
     "price": 120,
     "type": "veg"
   },
+
   {
-    "name": "Glass Of Galaxy",
+    "name": "Blue Berry",
     "description": "",
-    "category": "Mocktails",
-    "price": 120,
-    "type": "veg"
-  },
-  {
-    "name": "Strawberry Fondue",
-    "description": "",
-    "category": "Desserts",
-    "price": 110,
-    "type": "veg"
-  },
-  {
-    "name": "Chicken Loaded Fries",
-    "description": "",
-    "category": "French Fries",
-    "price": 220,
-    "type": "non-veg"
-  },
-  {
-    "name": "Fried Chicken Burger",
-    "description": "",
-    "category": "Burger",
-    "price": 220,
-    "type": "non-veg"
-  },
-  {
-    "name": "Crispy Crumb Burger Veg",
-    "description": "",
-    "category": "Burger",
-    "price": 200,
-    "type": "veg"
-  },
-  {
-    "name": "Crispy Crumb Burger Chicken",
-    "description": "",
-    "category": "Burger",
-    "price": 220,
-    "type": "non-veg"
-  },
-  {
-    "name": "Pineapple Custard",
-    "description": "",
-    "category": "Desserts",
+    "category": "Mojitos",
     "price": 100,
     "type": "veg"
   },
   {
-    "name": "Chocolate Coffee Mousse",
+    "name": "Blue Curacao",
     "description": "",
-    "category": "Desserts",
-    "price": 80,
+    "category": "Mojitos",
+    "price": 100,
     "type": "veg"
   },
   {
-    "name": "Korean Cream Cheese Garlic Bun",
+    "name": "Green Apple",
     "description": "",
-    "category": "Desserts",
-    "price": 200,
+    "category": "Mojitos",
+    "price": 100,
     "type": "veg"
+  },
+  {
+    "name": "Lime Mint",
+    "description": "",
+    "category": "Mojitos",
+    "price": 100,
+    "type": "veg"
+  },
+
+  {
+    "name": "Creamy White Pasta",
+    "description": "",
+    "category": "Pastas",
+    "price": 150,
+    "type": "veg"
+  },
+  {
+    "name": "Mac 'n Cheese Pasta",
+    "description": "",
+    "category": "Pastas",
+    "price": 170,
+    "type": "veg"
+  },
+  {
+    "name": "Peri Peri Pasta",
+    "description": "",
+    "category": "Pastas",
+    "price": 170,
+    "type": "veg"
+  },
+  {
+    "name": "Tangy Red Pasta",
+    "description": "",
+    "category": "Pastas",
+    "price": 170,
+    "type": "veg"
+  },
+
+  {
+    "name": "Pizza",
+    "description": "",
+    "category": "Pizzas",
+    "price": 0,
+    "type": "non-veg"
+  },
+
+  {
+    "name": "Butter Garlic Chicken Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 180,
+    "type": "non-veg"
+  },
+  {
+    "name": "Butter Garlic Mushroom Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 130,
+    "type": "veg"
+  },
+  {
+    "name": "Cheese 'n Corn Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 120,
+    "type": "veg"
+  },
+  {
+    "name": "Cheese Scrambled Egg Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 130,
+    "type": "egg"
+  },
+  {
+    "name": "Chilli Cheese Toast",
+    "description": "",
+    "category": "Sandwich",
+    "price": 120,
+    "type": "veg"
+  },
+  {
+    "name": "Egg Burji Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 110,
+    "type": "egg"
+  },
+  {
+    "name": "Eggpepperfry Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 110,
+    "type": "egg"
+  },
+  {
+    "name": "Ghee Podi Chicken Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 180,
+    "type": "non-veg"
+  },
+  {
+    "name": "Ghee Podi Potato Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 130,
+    "type": "veg"
+  },
+  {
+    "name": "Hot Garlic Chicken Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 180,
+    "type": "non-veg"
+  },
+  {
+    "name": "Hot Garlic Mushroom Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 130,
+    "type": "veg"
+  },
+  {
+    "name": "Hot Spicy Chicken Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 180,
+    "type": "non-veg"
+  },
+  {
+    "name": "Hyderabadi Chicken Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 180,
+    "type": "non-veg"
+  },
+  {
+    "name": "Nutella Toast",
+    "description": "",
+    "category": "Sandwich",
+    "price": 90,
+    "type": "veg"
+  },
+  {
+    "name": "Paneer Pepperfry Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 160,
+    "type": "veg"
+  },
+  {
+    "name": "Paneer Podimas Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 160,
+    "type": "veg"
+  },
+  {
+    "name": "Pepperfry Mushroom Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 130,
+    "type": "veg"
+  },
+  {
+    "name": "Scrambled Egg Sandwich",
+    "description": "",
+    "category": "Sandwich",
+    "price": 110,
+    "type": "egg"
   }
 ];
 
