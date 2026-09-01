@@ -1998,76 +1998,10 @@ function openPastaCustomizer(item){
 
   updatePastaSummary();
 
-  modal.classList.add("open");
-}
 
-
-/* =========================================================
-   UPDATE PASTA SUMMARY
-   ========================================================= */
-
-function updatePastaSummary(){
-
-  const summary =
-    $("pastaSummary");
-
-  const confirm =
-    $("pastaConfirmBtn");
-
-
-  if(
-    !pastaSelection.variation ||
-    !pastaSelection.addon
-  ){
-
-    summary.innerHTML =
-      "Please select your pasta and add-on.";
-
-    confirm.disabled = true;
-
-    return;
-  }
-
-
-  const basePrice =
-    Number(pastaSelection.item.price) || 0;
-
-  const total =
-    basePrice +
-    pastaSelection.variation.extra +
-    pastaSelection.addon.price;
-
-
-  summary.innerHTML = `
-
-    <div>
-      <b>Pasta:</b>
-      ${escapeHtml(
-        pastaSelection.variation.name
-      )}
-    </div>
-
-    <div>
-      <b>Add-on:</b>
-      ${escapeHtml(
-        pastaSelection.addon.name
-      )}
-    </div>
-
-    <div class="pasta-summary-total">
-      Total: ${money(total)}
-    </div>
-
-  `;
-
-
-  confirm.disabled = false;
-}
-
-
-/* =========================================================
+/* =====================================================
    ADD PASTA TO CART
-   ========================================================= */
+   ===================================================== */
 
 $("pastaConfirmBtn").onclick = () => {
 
@@ -2153,12 +2087,83 @@ $("pastaConfirmBtn").onclick = () => {
 
   saveCart();
 
+
   $("pastaCustomizeModal")
     .classList.remove("open");
+
 
   openCart();
 
 };
+
+
+modal.classList.add("open");
+}
+
+
+/* =========================================================
+   UPDATE PASTA SUMMARY
+   ========================================================= */
+
+function updatePastaSummary(){
+
+  const summary =
+    $("pastaSummary");
+
+  const confirm =
+    $("pastaConfirmBtn");
+
+
+  if(
+    !pastaSelection.variation ||
+    !pastaSelection.addon
+  ){
+
+    summary.innerHTML =
+      "Please select your pasta and add-on.";
+
+    confirm.disabled = true;
+
+    return;
+  }
+
+
+  const basePrice =
+    Number(pastaSelection.item.price) || 0;
+
+  const total =
+    basePrice +
+    pastaSelection.variation.extra +
+    pastaSelection.addon.price;
+
+
+  summary.innerHTML = `
+
+    <div>
+      <b>Pasta:</b>
+      ${escapeHtml(
+        pastaSelection.variation.name
+      )}
+    </div>
+
+    <div>
+      <b>Add-on:</b>
+      ${escapeHtml(
+        pastaSelection.addon.name
+      )}
+    </div>
+
+    <div class="pasta-summary-total">
+      Total: ${money(total)}
+    </div>
+
+  `;
+
+
+  confirm.disabled = false;
+}
+
+
 
 /* =========================================================
    NORMAL ADD TO CART
