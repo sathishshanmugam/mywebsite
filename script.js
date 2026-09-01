@@ -422,7 +422,7 @@ const MENU = [
     "category": "Garlic Breads",
     "price": 70,
     "type": "veg",
-    "image": "assets/garlic-bread.jpg"
+    "image": "assets/garlic-bread.png"
   },
 
   {
