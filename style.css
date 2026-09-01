@@ -758,12 +758,13 @@ body{background:#fffaf3}
     padding: 18px 18px 18px 0 !important;
   }
 }
+
 /* ===== MENU FOOD PHOTO ===== */
 
 .food-image {
   width: 100%;
   height: 190px;
-  background: #f7f4f1;
+  background: #ffe2bc;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -775,9 +776,10 @@ body{background:#fffaf3}
   height: 100%;
   display: block;
   object-fit: contain;
+  object-position: center;
 }
 
-/* Keep the food nicely framed on smaller screens */
+/* Mobile */
 @media (max-width: 600px) {
   .food-image {
     height: 150px;
