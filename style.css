@@ -948,17 +948,22 @@ body{background:#fffaf3}
 }
 @media(max-width:760px){
   .cart-card{
-    position:static !important;
+    position:fixed !important;
+    left:12px !important;
+    right:12px !important;
+    bottom:12px !important;
     top:auto !important;
-    right:auto !important;
-    bottom:auto !important;
-    width:100% !important;
+    width:auto !important;
     max-width:none !important;
-    transform:none !important;
-    box-shadow:none !important;
+    max-height:75vh !important;
+    overflow:auto !important;
+    z-index:120 !important;
+    transform:translateY(120%) !important;
+    transition:transform .25s ease !important;
+    box-shadow:0 25px 60px rgba(0,0,0,.25) !important;
   }
 
   .cart-card.open{
-    transform:none !important;
+    transform:translateY(0) !important;
   }
 }
