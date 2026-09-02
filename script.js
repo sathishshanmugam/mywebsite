@@ -708,7 +708,56 @@ const $ = (id) => document.getElementById(id);
 const money = (n) => "₹" + Number(n || 0).toLocaleString("en-IN");
 let cart = JSON.parse(localStorage.getItem("cruncherys_cart") || "[]");
 let selectedCategory = "All";
+let selectedOutletId = null;
+let selectedOutletName = "";
+let availableProductIds = new Set();
+async function loadOutletAvailability(outletId){
 
+  availableProductIds = new Set();
+
+  if(!outletId){
+    renderMenu();
+    return;
+  }
+
+  try{
+
+    const snapshot = await db
+      .collection("outlet_products")
+      .where("outletId", "==", outletId)
+      .where("available", "==", true)
+      .get();
+
+    snapshot.forEach(doc => {
+
+      const data = doc.data();
+
+      if(data.productId){
+        availableProductIds.add(data.productId);
+      }
+
+    });
+
+    console.log(
+      `🔥 ${outletId}: ${availableProductIds.size} products ON`
+    );
+
+    renderMenu();
+
+  }catch(error){
+
+    console.error(
+      "❌ Failed to load outlet availability:",
+      error
+    );
+
+    alert(
+      "Unable to load the selected outlet menu. Please try again."
+    );
+
+  }
+
+}
 function uniqueCategories(){
   return [...new Set(MENU.map(x => x.category).filter(Boolean))];
 }
@@ -749,15 +798,56 @@ function setupCategories(){
 }
 
 function renderMenu(){
+
   const q = $("menuSearch").value.trim().toLowerCase();
+
   let list = MENU.filter(item => {
-    const categoryMatch = selectedCategory === "All" || item.category === selectedCategory;
-    const searchMatch = !q || item.name.toLowerCase().includes(q) || item.category.toLowerCase().includes(q);
+
+    const categoryMatch =
+      selectedCategory === "All" ||
+      item.category === selectedCategory;
+
+    const searchMatch =
+      !q ||
+      item.name.toLowerCase().includes(q) ||
+      item.category.toLowerCase().includes(q);
+
     return categoryMatch && searchMatch;
   });
-  $("menuGrid").innerHTML = list.length ? list.map(cardHtml).join("") :
-    `<div class="empty-cart" style="grid-column:1/-1">No dishes found. Try another search. 🍽️</div>`;
-  $("menuGrid").querySelectorAll(".add-btn").forEach(btn => btn.addEventListener("click", () => addToCart(Number(btn.dataset.index))));
+
+
+  $("menuGrid").innerHTML = list.length
+    ? list.map(item => {
+
+        const productId =
+          slugifyProductName(item.name);
+
+        const available =
+          selectedOutletId &&
+          availableProductIds.has(productId);
+
+        return cardHtml(item, available);
+
+      }).join("")
+
+    : `
+      <div class="empty-cart" style="grid-column:1/-1">
+        No dishes found. Try another search. 🍽️
+      </div>
+    `;
+
+
+  $("menuGrid")
+    .querySelectorAll(".add-btn")
+    .forEach(btn => {
+
+      btn.addEventListener(
+        "click",
+        () => addToCart(Number(btn.dataset.index))
+      );
+
+    });
+
 }
 
 function cardHtml(item){
