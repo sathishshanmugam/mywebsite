@@ -711,6 +711,16 @@ let selectedCategory = "All";
 let selectedOutletId = null;
 let selectedOutletName = "";
 let availableProductIds = new Set();
+function slugifyProductName(name){
+
+  return name
+    .toLowerCase()
+    .trim()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+}
 async function loadOutletAvailability(outletId){
 
   availableProductIds = new Set();
@@ -758,6 +768,55 @@ async function loadOutletAvailability(outletId){
   }
 
 }
+async function selectOutlet(outletId){
+
+  try{
+
+    const outletDoc = await db
+      .collection("outlets")
+      .doc(outletId)
+      .get();
+
+    if(!outletDoc.exists){
+
+      alert("Outlet information could not be found.");
+      return;
+
+    }
+
+    const outlet = outletDoc.data();
+
+    if(outlet.active !== true){
+
+      alert("This outlet is currently unavailable.");
+      return;
+
+    }
+
+    selectedOutletId = outletId;
+    selectedOutletName = outlet.name || outletId;
+
+    await loadOutletAvailability(outletId);
+
+    console.log(
+      `📍 Selected outlet: ${selectedOutletName}`
+    );
+
+  }catch(error){
+
+    console.error(
+      "❌ Outlet selection error:",
+      error
+    );
+
+    alert(
+      "Unable to select this outlet. Please try again."
+    );
+
+  }
+
+}
+
 function uniqueCategories(){
   return [...new Set(MENU.map(x => x.category).filter(Boolean))];
 }
@@ -850,28 +909,92 @@ function renderMenu(){
 
 }
 
-function cardHtml(item){
-  const index = MENU.indexOf(item);
-  const type = item.type || "veg";
-  const badge = type === "non-veg" ? "NON-VEG" : type === "egg" ? "EGG" : "VEG";
-  const price = Number(item.price) > 0 ? money(item.price) : "On selection";
-  return `<article class="menu-card">
-    <span class="badge ${type}">${badge}</span>
-    <div class="food-image">
-  ${
-    item.image
-      ? `<img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}">`
-      : emojiFor(item)
-  }
-</div>
-    <div class="menu-card-body">
-      <h4>${escapeHtml(item.name)}</h4>
-      <div class="menu-desc">${escapeHtml(item.description || "Freshly prepared at Crunchery's.")}</div>
-      <div class="menu-bottom"><span class="price">${price}</span><button class="add-btn" data-index="${index}">ADD +</button></div>
-    </div>
-  </article>`;
-}
+function cardHtml(item, available){
 
+  const index = MENU.indexOf(item);
+
+  let buttonHtml = "";
+
+  if(!selectedOutletId){
+
+    buttonHtml = `
+      <button
+        class="add-btn"
+        type="button"
+        disabled
+      >
+        SELECT OUTLET
+      </button>
+    `;
+
+  }else if(!available){
+
+    buttonHtml = `
+      <button
+        class="add-btn"
+        type="button"
+        disabled
+      >
+        UNAVAILABLE
+      </button>
+    `;
+
+  }else{
+
+    buttonHtml = `
+      <button
+        class="add-btn"
+        type="button"
+        data-index="${index}"
+      >
+        ADD +
+      </button>
+    `;
+
+  }
+
+
+  return `
+    <article class="food-card">
+
+      <div class="food-image">
+        ${
+          item.image
+            ? `<img src="${item.image}" alt="${item.name}" loading="lazy">`
+            : `<span class="food-emoji">${CATEGORY_ICONS[item.category] || "🍽️"}</span>`
+        }
+      </div>
+
+      <div class="food-info">
+
+        <div class="food-category">
+          ${item.category}
+        </div>
+
+        <h3>${item.name}</h3>
+
+        ${
+          item.description
+            ? `<p>${item.description}</p>`
+            : ""
+        }
+
+        <div class="food-bottom">
+
+          <span class="food-price">
+            ₹${item.price}
+          </span>
+
+          ${buttonHtml}
+
+        </div>
+
+      </div>
+
+    </article>
+  `;
+
+}
 /* =========================================================
    PIZZA CUSTOMIZATION
    ========================================================= */
@@ -2542,7 +2665,7 @@ function openOutletSelector(){
       <button
         type="button"
         class="outlet-choice"
-        onclick="sendOutletWhatsApp('919500538222')">
+        onclick="selectOutlet('vaiyapuri_nagar')">
 
         <span class="outlet-choice-icon">📍</span>
 
@@ -2557,7 +2680,7 @@ function openOutletSelector(){
       <button
         type="button"
         class="outlet-choice"
-        onclick="sendOutletWhatsApp('919500538219')">
+        onclick="selectOutlet('ramakrishnapuram')">
 
         <span class="outlet-choice-icon">📍</span>
 
