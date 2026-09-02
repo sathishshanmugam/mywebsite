@@ -3473,10 +3473,14 @@ function openCustomerDetails(){
 
       </div>
 
-      <button
-        type="button"
-        class="btn btn-primary customer-details-continue"
-        onclick="continueToOrderSummary()">
+     <button
+  type="button"
+  id="customerDetailsContinue"
+  class="btn btn-primary customer-details-continue">
+
+  Continue →
+
+</button>
 
         Continue →
 
@@ -3508,6 +3512,21 @@ function openCustomerDetails(){
     });
 
   }
+  const continueBtn = $("customerDetailsContinue");
+
+if(continueBtn){
+
+  continueBtn.addEventListener("click", (e)=>{
+
+    e.preventDefault();
+
+    console.log("Continue button clicked");
+
+    continueToOrderSummary();
+
+  });
+
+}
 
 }
 
