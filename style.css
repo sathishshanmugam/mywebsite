@@ -946,3 +946,6 @@ body{background:#fffaf3}
   }
 
 }
+@media(max-width:760px){
+  .cart-card{position:static;}
+}
