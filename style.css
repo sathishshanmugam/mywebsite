@@ -960,3 +960,13 @@ body{background:#fffaf3}
     transform:translateY(0) !important;
   }
 }
+@media(max-width:760px){
+  .menu-toolbar{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:#fffaf3;
+    padding-top:10px;
+    padding-bottom:10px;
+  }
+}
