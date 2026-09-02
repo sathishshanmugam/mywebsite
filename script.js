@@ -881,9 +881,18 @@ async function selectOutlet(outletId){
     showOrderTypeStep();
 
 
-    console.log(
-      `📍 Selected outlet: ${selectedOutletName}`
-    );
+    const orderBar = $("orderSelectionBar");
+
+if(orderBar){
+  orderBar.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+console.log(
+  `📍 Selected outlet: ${selectedOutletName}`
+);
 
 
   }catch(error){
@@ -922,12 +931,21 @@ function selectOrderType(orderType){
   const modal = $("outletSelectorModal");
 
   if(modal){
-    modal.remove();
-  }
+  modal.remove();
+}
 
-  console.log(
-    `🧾 Order type: ${ORDER_TYPE_LABELS[orderType]}`
-  );
+const orderBar = $("orderSelectionBar");
+
+if(orderBar){
+  orderBar.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+console.log(
+  `🧾 Order type: ${ORDER_TYPE_LABELS[orderType]}`
+);
 
 }
 
