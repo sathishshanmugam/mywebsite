@@ -3561,12 +3561,6 @@ function continueToOrderSummary(){
     window.customerOrderDetails
   );
 
-  const modal = $("customerDetailsModal");
-
-  if(modal){
-    modal.remove();
-  }
-
   openOrderSummary();
 
 }
