@@ -1167,11 +1167,19 @@ function renderOrderSelectionBar(){
   /*
     Insert the bar immediately before the menu.
   */
+ const categoryStrip = $("categoryStrip");
+
+if(categoryStrip){
+  categoryStrip.parentNode.insertBefore(
+    bar,
+    categoryStrip
+  );
+}else{
   menuGrid.parentNode.insertBefore(
     bar,
     menuGrid
   );
-
+}
 }
 
 /* =========================================================
