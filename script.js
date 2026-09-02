@@ -1174,6 +1174,7 @@ function injectOrderSelectionStyles(){
 
     #orderSelectionBar{
       width:100%;
+      grid-column:1 / -1;
       margin:0 auto 24px;
       padding:16px 18px;
       background:#fff;
