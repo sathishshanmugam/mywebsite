@@ -947,5 +947,18 @@ body{background:#fffaf3}
 
 }
 @media(max-width:760px){
-  .cart-card{position:static;}
+  .cart-card{
+    position:static !important;
+    top:auto !important;
+    right:auto !important;
+    bottom:auto !important;
+    width:100% !important;
+    max-width:none !important;
+    transform:none !important;
+    box-shadow:none !important;
+  }
+
+  .cart-card.open{
+    transform:none !important;
+  }
 }
