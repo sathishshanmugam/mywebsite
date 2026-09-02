@@ -970,3 +970,106 @@ body{background:#fffaf3}
     padding-bottom:10px;
   }
 }
+#customerDetailsModal{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,.60);
+  padding:18px;
+  box-sizing:border-box;
+}
+
+.customer-details-card{
+  width:min(500px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:22px;
+  padding:24px;
+  box-shadow:0 20px 60px rgba(0,0,0,.30);
+  box-sizing:border-box;
+  position:relative;
+}
+
+.customer-details-card h3{
+  margin:0 0 8px;
+  font-size:25px;
+}
+
+.customer-details-card > p{
+  margin:0 0 20px;
+  color:#777;
+}
+
+.customer-details-close{
+  position:absolute;
+  top:15px;
+  right:15px;
+  width:38px;
+  height:38px;
+  border:0;
+  border-radius:50%;
+  background:#f3f3f3;
+  font-size:22px;
+  cursor:pointer;
+}
+
+.customer-form-group{
+  margin-bottom:16px;
+}
+
+.customer-form-group label{
+  display:block;
+  margin-bottom:7px;
+  font-weight:700;
+}
+
+.customer-form-group label span{
+  color:#ff6500;
+}
+
+.customer-form-group label small{
+  color:#888;
+  font-weight:400;
+}
+
+.customer-form-group input,
+.customer-form-group textarea{
+  width:100%;
+  box-sizing:border-box;
+  border:1px solid #ddd;
+  border-radius:12px;
+  padding:12px 14px;
+  font:inherit;
+  outline:none;
+}
+
+.customer-form-group input:focus,
+.customer-form-group textarea:focus{
+  border-color:#ff6500;
+}
+
+.customer-details-continue{
+  width:100%;
+  margin-top:5px;
+}
+
+@media(max-width:520px){
+
+  #customerDetailsModal{
+    padding:12px;
+  }
+
+  .customer-details-card{
+    padding:20px;
+    border-radius:18px;
+  }
+
+  .customer-details-card h3{
+    font-size:21px;
+  }
+
+}
