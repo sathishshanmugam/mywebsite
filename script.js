@@ -3412,13 +3412,13 @@ function openCustomerDetails(){
   modal.id = "customerDetailsModal";
 
   modal.innerHTML = `
-
     <div class="customer-details-card">
 
       <button
         type="button"
         class="customer-details-close"
-        onclick="this.closest('#customerDetailsModal').remove()">
+        aria-label="Close"
+      >
         ×
       </button>
 
@@ -3441,6 +3441,7 @@ function openCustomerDetails(){
 
       </div>
 
+
       <div class="customer-form-group">
 
         <label for="customerMobile">
@@ -3458,6 +3459,7 @@ function openCustomerDetails(){
 
       </div>
 
+
       <div class="customer-form-group">
 
         <label for="customerInstructions">
@@ -3473,79 +3475,130 @@ function openCustomerDetails(){
 
       </div>
 
-     <button
-  type="button"
-  id="customerDetailsContinue"
-  class="btn btn-primary customer-details-continue">
 
-  Continue →
-
-</button>
-
+      <button
+        type="button"
+        id="customerDetailsContinue"
+        class="btn btn-primary customer-details-continue"
+      >
         Continue →
-
       </button>
 
     </div>
-
   `;
 
   document.body.appendChild(modal);
 
+
+  /* CLOSE BUTTON */
+
+  const closeBtn =
+    modal.querySelector(".customer-details-close");
+
+  if(closeBtn){
+
+    closeBtn.addEventListener("click",()=>{
+
+      modal.remove();
+
+    });
+
+  }
+
+
+  /* CLOSE WHEN CLICKING OUTSIDE */
+
   modal.addEventListener("click",(e)=>{
 
     if(e.target === modal){
+
       modal.remove();
+
     }
 
   });
 
-  const mobile = $("customerMobile");
+
+  /* MOBILE NUMBER */
+
+  const mobile =
+    modal.querySelector("#customerMobile");
 
   if(mobile){
 
     mobile.addEventListener("input",()=>{
 
       mobile.value =
-        mobile.value.replace(/\D/g,"").slice(0,10);
+        mobile.value
+          .replace(/\D/g,"")
+          .slice(0,10);
 
     });
 
   }
-  const continueBtn = $("customerDetailsContinue");
 
-if(continueBtn){
 
-  continueBtn.addEventListener("click", (e)=>{
+  /* CONTINUE BUTTON */
 
-    e.preventDefault();
+  const continueBtn =
+    modal.querySelector("#customerDetailsContinue");
 
-    console.log("Continue button clicked");
+  if(continueBtn){
 
-    continueToOrderSummary();
+    continueBtn.addEventListener("click",(e)=>{
 
-  });
+      e.preventDefault();
+      e.stopPropagation();
 
-}
+      console.log("CUSTOMER CONTINUE CLICKED");
+
+      continueToOrderSummary();
+
+    });
+
+  }
 
 }
 
 function continueToOrderSummary(){
 
-  const nameInput = $("customerName");
-  const mobileInput = $("customerMobile");
-  const instructionsInput = $("customerInstructions");
+  console.log("continueToOrderSummary() started");
 
-  const name = nameInput ? nameInput.value.trim() : "";
-  const mobile = mobileInput ? mobileInput.value.trim() : "";
+
+  const nameInput =
+    $("customerName");
+
+  const mobileInput =
+    $("customerMobile");
+
+  const instructionsInput =
+    $("customerInstructions");
+
+
+  const name =
+    nameInput
+      ? nameInput.value.trim()
+      : "";
+
+
+  const mobile =
+    mobileInput
+      ? mobileInput.value.trim()
+      : "";
+
+
   const instructions =
-    instructionsInput ? instructionsInput.value.trim() : "";
+    instructionsInput
+      ? instructionsInput.value.trim()
+      : "";
 
-  console.log("Customer details:", {
+
+  console.log("Customer:", {
     name,
     mobile,
     instructions
   });
+
 
   if(!name){
 
@@ -3556,31 +3609,66 @@ function continueToOrderSummary(){
     }
 
     return;
+
   }
+
 
   if(!/^\d{10}$/.test(mobile)){
 
-    alert("Please enter a valid 10-digit mobile number.");
+    alert(
+      "Please enter a valid 10-digit mobile number."
+    );
 
     if(mobileInput){
       mobileInput.focus();
     }
 
     return;
+
   }
 
+
   window.customerOrderDetails = {
+
     name: name,
+
     mobile: mobile,
+
     instructions: instructions
+
   };
 
+
   console.log(
-    "Customer details saved:",
-    window.customerOrderDetails
+    "Customer details saved successfully."
   );
 
-  openOrderSummary();
+
+  try{
+
+    openOrderSummary();
+
+    const modal =
+      $("customerDetailsModal");
+
+    if(modal){
+
+      modal.remove();
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "ORDER SUMMARY ERROR:",
+      error
+    );
+
+    alert(
+      "Unable to open Order Summary. Please try again."
+    );
+
+  }
 
 }
 
