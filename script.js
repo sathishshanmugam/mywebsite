@@ -724,7 +724,7 @@ function slugifyProductName(name){
     .toLowerCase()
     .trim()
     .replace(/&/g, "and")
-    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/[^a-z0-9]+/g, "_")
     .replace(/^-+|-+$/g, "");
 
 }
