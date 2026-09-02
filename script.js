@@ -1361,8 +1361,8 @@ function renderMenu(){
           slugifyProductName(item.name);
 
         const available =
-          selectedOutletId &&
-          availableProductIds.has(productId);
+        !!selectedOutletId &&
+        availableProductIds.has(productId);
 
         return cardHtml(item, available);
 
@@ -2931,11 +2931,51 @@ function addToCart(index){
 
   const item = MENU[index];
 
+  if(!item){
+    return;
+  }
 
-  /* Pizza opens customization instead */
 
+  /*
+    Safety check:
+    Customer must select both outlet and order type
+    before anything can be added to the cart.
+  */
+  if(!selectedOutletId || !selectedOrderType){
+
+    alert(
+      "Please select your outlet and order type first."
+    );
+
+    openOutletSelector();
+
+    return;
+  }
+
+
+  /*
+    Verify that this product is currently available
+    at the selected outlet.
+  */
+  const productId =
+    slugifyProductName(item.name);
+
+  if(!availableProductIds.has(productId)){
+
+    alert(
+      `${item.name} is currently sold out at ${selectedOutletName}.`
+    );
+
+    renderMenu();
+
+    return;
+  }
+
+
+  /*
+    Pizza products open the Pizza Customizer.
+  */
   if(
-    item.name === "Pizza" &&
     item.category === "Pizzas"
   ){
 
@@ -2944,19 +2984,25 @@ function addToCart(index){
     return;
 
   }
-  
-  /* Pasta opens customization instead */
-
-if(
-  item.category === "Pastas"
-){
-  openPastaCustomizer(item);
-  return;
-}
 
 
-  /* All other menu items work normally */
+  /*
+    Pasta products open the Pasta Customizer.
+  */
+  if(
+    item.category === "Pastas"
+  ){
 
+    openPastaCustomizer(item);
+
+    return;
+
+  }
+
+
+  /*
+    All other menu items are added normally.
+  */
   const existing =
     cart.find(
       x =>
@@ -2973,13 +3019,17 @@ if(
 
     cart.push({
 
-      name:item.name,
+      name:
+        item.name,
 
-      price:Number(item.price) || 0,
+      price:
+        Number(item.price) || 0,
 
-      qty:1,
+      qty:
+        1,
 
-      category:item.category
+      category:
+        item.category
 
     });
 
@@ -3078,57 +3128,126 @@ function cartMessage(){
     return "Hi Crunchery's! I'd like to know today's menu.";
   }
 
+
+  const outletText =
+    selectedOutletName
+      ? selectedOutletName
+      : "Not selected";
+
+
+  const orderTypeText =
+    selectedOrderType
+      ? (
+          ORDER_TYPE_LABELS[selectedOrderType]
+          || selectedOrderType
+        )
+      : "Not selected";
+
+
   const lines = cart.map(x => {
 
     let details = "";
+
 
     if(x.customization){
 
       const parts = [];
 
+
       if(x.customization.variation){
-        parts.push(x.customization.variation);
+
+        parts.push(
+          x.customization.variation
+        );
+
       }
+
 
       if(x.customization.base){
-        if(typeof x.customization.base === "object"){
-          parts.push(`Base: ${x.customization.base.name}`);
+
+        if(
+          typeof x.customization.base === "object"
+        ){
+
+          parts.push(
+            `Base: ${x.customization.base.name}`
+          );
+
         }else{
-          parts.push(`Base: ${x.customization.base}`);
+
+          parts.push(
+            `Base: ${x.customization.base}`
+          );
+
         }
+
       }
+
 
       if(x.customization.choice){
-        parts.push(x.customization.choice);
+
+        parts.push(
+          x.customization.choice
+        );
+
       }
+
 
       if(x.customization.topping){
-        parts.push(`Topping: ${x.customization.topping}`);
+
+        parts.push(
+          `Topping: ${x.customization.topping}`
+        );
+
       }
+
 
       if(x.customization.addon){
-        parts.push(`Add-on: ${x.customization.addon}`);
+
+        parts.push(
+          `Add-on: ${x.customization.addon}`
+        );
+
       }
 
+
       if(parts.length){
-        details = ` (${parts.join(", ")})`;
+
+        details =
+          ` (${parts.join(", ")})`;
+
       }
 
     }
 
-    return `• ${x.name}${details} × ${x.qty} — ${money(x.price*x.qty)}`;
+
+    return (
+      `• ${x.name}${details} × ${x.qty} — ${money(x.price * x.qty)}`
+    );
 
   }).join("\n");
 
 
   const total =
     cart.reduce(
-      (s,x) => s + x.price * x.qty,
+      (s,x) =>
+        s + x.price * x.qty,
       0
     );
 
 
-  return `Hi Crunchery's! I'd like to place an order:\n${lines}\n\nTotal: ${money(total)}\nPlease confirm availability and ordering details.`;
+  return `Hi Crunchery's!
+
+I'd like to place an order.
+
+📍 Outlet: ${outletText}
+🧾 Order Type: ${orderTypeText}
+
+${lines}
+
+💰 Total: ${money(total)}
+
+Please confirm my order.`;
 
 }
 
@@ -3138,18 +3257,38 @@ function updateOrderLinks(){
   const whatsappOrderBtn = $("whatsappOrderBtn");
 
   if(whatsappCart){
+
     whatsappCart.href = "#";
+
     whatsappCart.onclick = (e) => {
+
       e.preventDefault();
-      openOutletSelector();
+
+      if(!selectedOutletId || !selectedOrderType){
+        openOutletSelector();
+        return;
+      }
+
+      sendOutletWhatsApp();
+
     };
   }
 
   if(whatsappOrderBtn){
+
     whatsappOrderBtn.href = "#";
+
     whatsappOrderBtn.onclick = (e) => {
+
       e.preventDefault();
-      openOutletSelector();
+
+      if(!selectedOutletId || !selectedOrderType){
+        openOutletSelector();
+        return;
+      }
+
+      sendOutletWhatsApp();
+
     };
   }
 
@@ -3226,12 +3365,30 @@ function openOutletSelector(){
 }
 
 
-function sendOutletWhatsApp(number){
+function sendOutletWhatsApp(){
 
-  const message = encodeURIComponent(cartMessage());
+  if(!selectedOutletId || !selectedOrderType){
+    alert("Please select your outlet and order type first.");
+    openOutletSelector();
+    return;
+  }
+
+  if(!cart.length){
+    alert("Please add at least one item to your cart.");
+    openCart();
+    return;
+  }
+
+  if(!selectedOutletWhatsapp){
+    alert("WhatsApp number for this outlet is not available.");
+    return;
+  }
+
+  const message =
+    encodeURIComponent(cartMessage());
 
   const whatsappURL =
-    `https://wa.me/${number}?text=${message}`;
+    `https://wa.me/${selectedOutletWhatsapp}?text=${message}`;
 
   window.open(
     whatsappURL,
@@ -3239,7 +3396,8 @@ function sendOutletWhatsApp(number){
     "noopener"
   );
 
-  const modal = $("outletSelectorModal");
+  const modal =
+    $("outletSelectorModal");
 
   if(modal){
     modal.remove();
@@ -3252,9 +3410,16 @@ function setupForms(){
   const franchiseValid = CONFIG.FRANCHISE_FORM_URL.startsWith("http");
 
   $("googleOrderBtn").addEventListener("click",()=>{
-    if(orderValid) window.open(CONFIG.GOOGLE_ORDER_FORM_URL,"_blank","noopener");
-    else alert("Online ordering is being prepared. You can order quickly through WhatsApp for now.");
-  });
+
+  /*
+    Order Online now starts the new ordering flow.
+    The menu remains visible.
+    Customer first chooses outlet,
+    then Dine-In / Pick-Up.
+  */
+  openOutletSelector();
+
+});
 
   const modal = $("franchiseModal");
   const frame = $("franchiseFrame");
@@ -3300,10 +3465,44 @@ function escapeHtml(s){
 $("menuToggle").addEventListener("click",()=> $("mainNav").classList.toggle("open"));
 $("mainNav").querySelectorAll("a").forEach(a=>a.addEventListener("click",()=> $("mainNav").classList.remove("open")));
 $("checkoutBtn").addEventListener("click",(e)=>{
-  if(!cart.length){e.preventDefault();openCart();alert("Please add at least one item to your cart.");}
+
+  e.preventDefault();
+
+  if(!selectedOutletId){
+
+    alert("Please select your outlet first.");
+    openOutletSelector();
+    return;
+
+  }
+
+  if(!selectedOrderType){
+
+    alert("Please select Dine-In or Pick-Up.");
+    showOrderTypeStep();
+    return;
+
+  }
+
+  if(!cart.length){
+
+    openCart();
+
+    alert(
+      "Please add at least one item to your cart."
+    );
+
+    return;
+
+  }
+
+  sendOutletWhatsApp();
+
 });
 
+injectOrderSelectionStyles();
 setupCategories();
 setupForms();
 renderMenu();
 renderCart();
+renderOrderSelectionBar();
