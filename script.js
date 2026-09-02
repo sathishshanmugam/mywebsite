@@ -3410,16 +3410,9 @@ function setupForms(){
   const orderValid = CONFIG.GOOGLE_ORDER_FORM_URL.startsWith("http");
   const franchiseValid = CONFIG.FRANCHISE_FORM_URL.startsWith("http");
 
-  $("googleOrderBtn").addEventListener("click",()=>{
-
-  /*
-    Order Online now starts the new ordering flow.
-    The menu remains visible.
-    Customer first chooses outlet,
-    then Dine-In / Pick-Up.
-  */
+  $("googleOrderBtn").addEventListener("click",(e)=>{
+  e.preventDefault();
   openOutletSelector();
-
 });
 
   const modal = $("franchiseModal");
