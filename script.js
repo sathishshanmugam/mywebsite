@@ -779,35 +779,112 @@ async function selectOutlet(outletId){
 
   try{
 
+    /*
+      If customer already has items in the cart
+      and tries to change outlet, warn them first.
+    */
+    if(
+      selectedOutletId &&
+      selectedOutletId !== outletId &&
+      cart.length > 0
+    ){
+
+      const changeOutlet =
+        confirm(
+          "Changing the outlet will clear your current cart. Do you want to continue?"
+        );
+
+      if(!changeOutlet){
+        return;
+      }
+
+      cart = [];
+
+      saveCart();
+
+      renderCart();
+
+    }
+
+
     const outletDoc = await db
       .collection("outlets")
       .doc(outletId)
       .get();
 
+
     if(!outletDoc.exists){
 
       alert("Outlet information could not be found.");
+
       return;
 
     }
 
+
     const outlet = outletDoc.data();
+
 
     if(outlet.active !== true){
 
       alert("This outlet is currently unavailable.");
+
       return;
 
     }
 
-    selectedOutletId = outletId;
-    selectedOutletName = outlet.name || outletId;
 
-    await loadOutletAvailability(outletId);
+    /*
+      Store selected outlet information.
+    */
+    selectedOutletId =
+      outletId;
+
+    selectedOutletName =
+      outlet.name || outletId;
+
+    selectedOutletWhatsapp =
+      outlet.whatsapp || "";
+
+
+    /*
+      New outlet means customer must choose
+      Dine-In or Pick-Up again.
+    */
+    selectedOrderType = "";
+
+
+    /*
+      Load product availability for this outlet.
+    */
+    await loadOutletAvailability(
+      outletId
+    );
+
+
+    /*
+      Update the selection bar above the menu.
+    */
+    renderOrderSelectionBar();
+
+
+    /*
+      Re-render menu so the buttons update.
+    */
+    renderMenu();
+
+
+    /*
+      Now ask customer for:
+      Dine-In / Pick-Up
+    */
+    showOrderTypeStep();
+
 
     console.log(
       `📍 Selected outlet: ${selectedOutletName}`
     );
+
 
   }catch(error){
 
@@ -821,6 +898,401 @@ async function selectOutlet(outletId){
     );
 
   }
+
+}
+/* =========================================================
+   ORDER TYPE SELECTION
+   ========================================================= */
+
+function selectOrderType(orderType){
+
+  if(
+    orderType !== "dine-in" &&
+    orderType !== "pick-up"
+  ){
+    return;
+  }
+
+  selectedOrderType = orderType;
+
+  renderOrderSelectionBar();
+
+  renderMenu();
+
+  const modal = $("outletSelectorModal");
+
+  if(modal){
+    modal.remove();
+  }
+
+  console.log(
+    `🧾 Order type: ${ORDER_TYPE_LABELS[orderType]}`
+  );
+
+}
+
+
+/* =========================================================
+   SHOW DINE-IN / PICK-UP SELECTION
+   ========================================================= */
+
+function showOrderTypeStep(){
+
+  const modal = $("outletSelectorModal");
+
+  if(!modal){
+    return;
+  }
+
+  const card =
+    modal.querySelector(".outlet-selector-card");
+
+  if(!card){
+    return;
+  }
+
+
+  card.innerHTML = `
+
+    <button
+      type="button"
+      class="outlet-selector-close"
+      onclick="this.closest('#outletSelectorModal').remove()">
+      ×
+    </button>
+
+    <h3>Choose Order Type</h3>
+
+    <p>
+      How would you like to receive your order?
+    </p>
+
+
+    <button
+      type="button"
+      class="outlet-choice"
+      onclick="selectOrderType('dine-in')">
+
+      <span class="outlet-choice-icon">🍽️</span>
+
+      <span class="outlet-choice-text">
+
+        <strong>Dine-In</strong>
+
+        <small>
+          Enjoy your meal at ${escapeHtml(selectedOutletName)}
+        </small>
+
+      </span>
+
+    </button>
+
+
+    <button
+      type="button"
+      class="outlet-choice"
+      onclick="selectOrderType('pick-up')">
+
+      <span class="outlet-choice-icon">🥡</span>
+
+      <span class="outlet-choice-text">
+
+        <strong>Pick-Up</strong>
+
+        <small>
+          Pick up your order from ${escapeHtml(selectedOutletName)}
+        </small>
+
+      </span>
+
+    </button>
+
+  `;
+
+}
+
+/* =========================================================
+   ORDER SELECTION BAR
+   ========================================================= */
+
+function renderOrderSelectionBar(){
+
+  const menuGrid = $("menuGrid");
+
+  if(!menuGrid){
+    return;
+  }
+
+  /*
+    Remove previous bar so we don't create duplicates.
+  */
+  const oldBar = $("orderSelectionBar");
+
+  if(oldBar){
+    oldBar.remove();
+  }
+
+
+  const bar = document.createElement("div");
+
+  bar.id = "orderSelectionBar";
+
+
+  /*
+    No outlet selected yet.
+  */
+  if(!selectedOutletId){
+
+    bar.innerHTML = `
+
+      <div class="order-selection-info">
+
+        <div class="order-selection-title">
+          🛍️ Start Your Order
+        </div>
+
+        <div class="order-selection-subtitle">
+          Choose your outlet and order type to start ordering.
+        </div>
+
+      </div>
+
+      <button
+        type="button"
+        class="order-selection-btn"
+        onclick="openOutletSelector()">
+
+        Choose Outlet
+
+      </button>
+
+    `;
+
+  }
+
+
+  /*
+    Outlet selected but order type not selected.
+  */
+  else if(!selectedOrderType){
+
+    bar.innerHTML = `
+
+      <div class="order-selection-info">
+
+        <div class="order-selection-title">
+          📍 ${escapeHtml(selectedOutletName)}
+        </div>
+
+        <div class="order-selection-subtitle">
+          Please choose Dine-In or Pick-Up.
+        </div>
+
+      </div>
+
+      <button
+        type="button"
+        class="order-selection-btn"
+        onclick="showOrderTypeStep()">
+
+        Choose Order Type
+
+      </button>
+
+    `;
+
+  }
+
+
+  /*
+    Both outlet and order type selected.
+  */
+  else{
+
+    bar.innerHTML = `
+
+      <div class="order-selection-info">
+
+        <div class="order-selection-title">
+
+          📍 ${escapeHtml(selectedOutletName)}
+
+          <span class="order-selection-divider">|</span>
+
+          🧾 ${escapeHtml(
+            ORDER_TYPE_LABELS[selectedOrderType]
+          )}
+
+        </div>
+
+        <div class="order-selection-subtitle">
+          You can now add items to your order.
+        </div>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="order-selection-btn"
+        onclick="openOutletSelector()">
+
+        Change
+
+      </button>
+
+    `;
+
+  }
+
+
+  /*
+    Insert the bar immediately before the menu.
+  */
+  menuGrid.parentNode.insertBefore(
+    bar,
+    menuGrid
+  );
+
+}
+
+/* =========================================================
+   ORDER SELECTION STYLES
+   ========================================================= */
+
+function injectOrderSelectionStyles(){
+
+  if($("orderSelectionStyles")){
+    return;
+  }
+
+  const style = document.createElement("style");
+
+  style.id = "orderSelectionStyles";
+
+  style.textContent = `
+
+    #orderSelectionBar{
+      width:100%;
+      margin:0 auto 24px;
+      padding:16px 18px;
+      background:#fff;
+      border:1px solid #e8e1dc;
+      border-radius:16px;
+      box-shadow:0 6px 20px rgba(0,0,0,.06);
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+
+      box-sizing:border-box;
+    }
+
+
+    .order-selection-info{
+      min-width:0;
+      flex:1;
+    }
+
+
+    .order-selection-title{
+      font-size:16px;
+      font-weight:800;
+      color:#222;
+      line-height:1.4;
+    }
+
+
+    .order-selection-subtitle{
+      margin-top:4px;
+      font-size:13px;
+      color:#777;
+      line-height:1.4;
+    }
+
+
+    .order-selection-divider{
+      color:#bbb;
+      margin:0 5px;
+    }
+
+
+    .order-selection-btn{
+      flex-shrink:0;
+
+      border:0;
+      border-radius:10px;
+
+      padding:11px 17px;
+
+      background:#ff6500;
+      color:#fff;
+
+      font-size:14px;
+      font-weight:800;
+
+      cursor:pointer;
+
+      transition:.2s;
+    }
+
+
+    .order-selection-btn:hover{
+      transform:translateY(-1px);
+      opacity:.92;
+    }
+
+
+    .order-selection-btn:active{
+      transform:translateY(0);
+    }
+
+
+    @media(max-width:600px){
+
+      #orderSelectionBar{
+        padding:14px;
+        gap:10px;
+        align-items:center;
+      }
+
+
+      .order-selection-title{
+        font-size:14px;
+      }
+
+
+      .order-selection-subtitle{
+        font-size:12px;
+      }
+
+
+      .order-selection-btn{
+        padding:9px 12px;
+        font-size:12px;
+      }
+
+    }
+
+
+    @media(max-width:420px){
+
+      #orderSelectionBar{
+        flex-direction:column;
+        align-items:stretch;
+      }
+
+
+      .order-selection-btn{
+        width:100%;
+      }
+
+    }
+
+  `;
+
+  document.head.appendChild(style);
 
 }
 
