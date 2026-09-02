@@ -258,14 +258,7 @@ button,input,select{font:inherit}
 .sticker-hot{left:10px;top:75px}.sticker-quality{right:0;bottom:70px}
 
 .menu-preview{padding-top:65px}
-.category-strip{
-  padding-top:25px;
-  position:sticky;
-  top:82px;
-  z-index:50;
-  background:#fffaf3;
-  padding-bottom:10px;
-}
+.category-strip{padding-top:25px;background:#fffaf3;padding-bottom:10px;}
 .menu-card .food-image{background-image:linear-gradient(135deg,#fff0dc,#ffe2bc)}
 .menu-toolbar h3{font-size:29px}
 
