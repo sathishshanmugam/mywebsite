@@ -3410,9 +3410,16 @@ function setupForms(){
   const orderValid = CONFIG.GOOGLE_ORDER_FORM_URL.startsWith("http");
   const franchiseValid = CONFIG.FRANCHISE_FORM_URL.startsWith("http");
 
-  $("googleOrderBtn").addEventListener("click",(e)=>{
-  e.preventDefault();
-  openOutletSelector();
+ document.querySelectorAll(".order-online-trigger").forEach(btn => {
+
+  btn.addEventListener("click",(e)=>{
+
+    e.preventDefault();
+
+    openOutletSelector();
+
+  });
+
 });
 
   const modal = $("franchiseModal");
