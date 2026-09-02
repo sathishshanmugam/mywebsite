@@ -3562,43 +3562,24 @@ function openCustomerDetails(){
 
 function continueToOrderSummary(){
 
-  console.log("continueToOrderSummary() started");
+  const nameInput = $("customerName");
+  const mobileInput = $("customerMobile");
+  const instructionsInput = $("customerInstructions");
+
+  const name = nameInput
+    ? nameInput.value.trim()
+    : "";
+
+  const mobile = mobileInput
+    ? mobileInput.value.trim()
+    : "";
+
+  const instructions = instructionsInput
+    ? instructionsInput.value.trim()
+    : "";
 
 
-  const nameInput =
-    $("customerName");
-
-  const mobileInput =
-    $("customerMobile");
-
-  const instructionsInput =
-    $("customerInstructions");
-
-
-  const name =
-    nameInput
-      ? nameInput.value.trim()
-      : "";
-
-
-  const mobile =
-    mobileInput
-      ? mobileInput.value.trim()
-      : "";
-
-
-  const instructions =
-    instructionsInput
-      ? instructionsInput.value.trim()
-      : "";
-
-
-  console.log("Customer:", {
-    name,
-    mobile,
-    instructions
-  });
-
+  /* VALIDATE NAME */
 
   if(!name){
 
@@ -3609,63 +3590,86 @@ function continueToOrderSummary(){
     }
 
     return;
-
   }
 
 
+  /* VALIDATE MOBILE */
+
   if(!/^\d{10}$/.test(mobile)){
 
-    alert(
-      "Please enter a valid 10-digit mobile number."
-    );
+    alert("Please enter a valid 10-digit mobile number.");
 
     if(mobileInput){
       mobileInput.focus();
     }
 
     return;
-
   }
 
 
+  /* SAVE CUSTOMER DETAILS */
+
   window.customerOrderDetails = {
-
     name: name,
-
     mobile: mobile,
-
     instructions: instructions
-
   };
 
 
   console.log(
-    "Customer details saved successfully."
+    "Customer details saved:",
+    window.customerOrderDetails
   );
 
+
+  /*
+    IMPORTANT:
+    Open the Order Summary FIRST.
+    Only remove Customer Details AFTER
+    the Order Summary has actually been created.
+  */
 
   try{
 
     openOrderSummary();
 
-    const modal =
-      $("customerDetailsModal");
+    const summaryModal =
+      $("orderSummaryModal");
 
-    if(modal){
+    if(summaryModal){
 
-      modal.remove();
+      const customerModal =
+        $("customerDetailsModal");
+
+      if(customerModal){
+        customerModal.remove();
+      }
+
+      console.log(
+        "Order Summary opened successfully."
+      );
+
+    }else{
+
+      console.error(
+        "Order Summary modal was not created."
+      );
+
+      alert(
+        "Unable to open Order Summary. Please try again."
+      );
 
     }
 
   }catch(error){
 
     console.error(
-      "ORDER SUMMARY ERROR:",
+      "Order Summary error:",
       error
     );
 
     alert(
-      "Unable to open Order Summary. Please try again."
+      "Something went wrong while opening the Order Summary."
     );
 
   }
