@@ -3478,11 +3478,17 @@ $("checkoutBtn").addEventListener("click",(e)=>{
 
   if(!selectedOrderType){
 
-    alert("Please select Dine-In or Pick-Up.");
-    showOrderTypeStep();
-    return;
+  alert("Please select Dine-In or Pick-Up.");
 
-  }
+  openOutletSelector();
+
+  setTimeout(() => {
+    showOrderTypeStep();
+  }, 0);
+
+  return;
+
+}
 
   if(!cart.length){
 
