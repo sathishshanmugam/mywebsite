@@ -710,7 +710,14 @@ let cart = JSON.parse(localStorage.getItem("cruncherys_cart") || "[]");
 let selectedCategory = "All";
 let selectedOutletId = null;
 let selectedOutletName = "";
+let selectedOutletWhatsapp = "";
+let selectedOrderType = "";
 let availableProductIds = new Set();
+
+const ORDER_TYPE_LABELS = {
+  "dine-in": "Dine-In",
+  "pick-up": "Pick-Up"
+};
 function slugifyProductName(name){
 
   return name
@@ -930,7 +937,12 @@ function cardHtml(item, available){
 
   let buttonHtml = "";
 
-  if(!selectedOutletId){
+  /*
+    Customer can add items only after BOTH:
+    1. Outlet is selected
+    2. Order type is selected
+  */
+  if(!selectedOutletId || !selectedOrderType){
 
     buttonHtml = `
       <button
@@ -938,10 +950,14 @@ function cardHtml(item, available){
         type="button"
         disabled
       >
-        SELECT OUTLET
+        SELECT OUTLET &amp; ORDER TYPE
       </button>
     `;
 
+  /*
+    Outlet is selected and order type is selected,
+    but this particular product is OFF in Firebase.
+  */
   }else if(!available){
 
     buttonHtml = `
@@ -950,10 +966,13 @@ function cardHtml(item, available){
         type="button"
         disabled
       >
-        UNAVAILABLE
+        SOLD OUT
       </button>
     `;
 
+  /*
+    Outlet + order type selected and product is available.
+  */
   }else{
 
     buttonHtml = `
@@ -1313,6 +1332,15 @@ function ensurePizzaModal(){
    ========================================================= */
 
 function openPizzaCustomizer(item){
+
+  if(!selectedOutletId || !selectedOrderType){
+
+    alert("Please select your outlet and order type first.");
+
+    openOutletSelector();
+
+    return;
+  }
 
   ensurePizzaModal();
 
@@ -2107,6 +2135,15 @@ function ensurePastaModal(){
    ========================================================= */
 
 function openPastaCustomizer(item){
+
+  if(!selectedOutletId || !selectedOrderType){
+
+    alert("Please select your outlet and order type first.");
+
+    openOutletSelector();
+
+    return;
+  }
 
   ensurePastaModal();
 
