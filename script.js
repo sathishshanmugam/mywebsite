@@ -3263,17 +3263,25 @@ function cartMessage(){
     );
 
 
-  return `Hi Crunchery's!
+ const customer =
+  window.customerOrderDetails || {};
 
-I'd like to place an order.
+return `Hi Crunchery's! I'd like to place an order:
 
 📍 Outlet: ${outletText}
 🧾 Order Type: ${orderTypeText}
 
+👤 Name: ${customer.name || "Not provided"}
+📱 Mobile: ${customer.mobile || "Not provided"}
+
 ${lines}
 
-💰 Total: ${money(total)}
+Total: ${money(total)}
 
+${customer.instructions
+  ? `📝 Special Instructions: ${customer.instructions}\n`
+  : ""
+}
 Please confirm my order.`;
 
 }
@@ -3391,6 +3399,435 @@ function openOutletSelector(){
 
 }
 
+function openCustomerDetails(){
+
+  const old = $("customerDetailsModal");
+
+  if(old){
+    old.remove();
+  }
+
+  const modal = document.createElement("div");
+
+  modal.id = "customerDetailsModal";
+
+  modal.innerHTML = `
+
+    <div class="customer-details-card">
+
+      <button
+        type="button"
+        class="customer-details-close"
+        onclick="this.closest('#customerDetailsModal').remove()">
+        ×
+      </button>
+
+      <h3>Complete Your Order</h3>
+
+      <p>Please enter your details to continue.</p>
+
+      <div class="customer-form-group">
+
+        <label for="customerName">
+          Name <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          id="customerName"
+          placeholder="Enter your name"
+          autocomplete="name"
+        >
+
+      </div>
+
+      <div class="customer-form-group">
+
+        <label for="customerMobile">
+          Mobile Number <span>*</span>
+        </label>
+
+        <input
+          type="tel"
+          id="customerMobile"
+          placeholder="Enter your mobile number"
+          inputmode="numeric"
+          maxlength="10"
+          autocomplete="tel"
+        >
+
+      </div>
+
+      <div class="customer-form-group">
+
+        <label for="customerInstructions">
+          Special Instructions
+          <small>(Optional)</small>
+        </label>
+
+        <textarea
+          id="customerInstructions"
+          rows="3"
+          placeholder="Any special request?"
+        ></textarea>
+
+      </div>
+
+      <button
+        type="button"
+        class="btn btn-primary customer-details-continue"
+        onclick="continueToOrderSummary()">
+
+        Continue →
+
+      </button>
+
+    </div>
+
+  `;
+
+  document.body.appendChild(modal);
+
+  modal.addEventListener("click",(e)=>{
+
+    if(e.target === modal){
+      modal.remove();
+    }
+
+  });
+
+  const mobile = $("customerMobile");
+
+  if(mobile){
+
+    mobile.addEventListener("input",()=>{
+
+      mobile.value =
+        mobile.value.replace(/\D/g,"").slice(0,10);
+
+    });
+
+  }
+
+}
+
+function continueToOrderSummary(){
+
+  const name =
+    $("customerName")?.value.trim();
+
+  const mobile =
+    $("customerMobile")?.value.trim();
+
+  const instructions =
+    $("customerInstructions")?.value.trim() || "";
+
+  if(!name){
+
+    alert("Please enter your name.");
+
+    $("customerName")?.focus();
+
+    return;
+  }
+
+  if(!/^[6-9]\d{9}$/.test(mobile)){
+
+    alert("Please enter a valid 10-digit mobile number.");
+
+    $("customerMobile")?.focus();
+
+    return;
+  }
+
+  window.customerOrderDetails = {
+    name,
+    mobile,
+    instructions
+  };
+
+  const modal =
+    $("customerDetailsModal");
+
+  if(modal){
+    modal.remove();
+  }
+
+  // Step 10B will open the Order Summary here.
+  openOrderSummary();
+
+}
+
+function openOrderSummary(){
+
+  const details = window.customerOrderDetails;
+
+  if(!details){
+    openCustomerDetails();
+    return;
+  }
+
+  const old = $("orderSummaryModal");
+
+  if(old){
+    old.remove();
+  }
+
+  const total =
+    cart.reduce((sum,x) => sum + x.price * x.qty, 0);
+
+  const itemsHtml = cart.map(x => {
+
+    let customization = "";
+
+    if(x.customization){
+
+      const parts = [];
+
+      if(x.customization.variation){
+        parts.push(x.customization.variation);
+      }
+
+      if(x.customization.choice){
+        parts.push(x.customization.choice);
+      }
+
+      if(x.customization.topping){
+        parts.push(x.customization.topping);
+      }
+
+      if(x.customization.base){
+
+        if(typeof x.customization.base === "object"){
+          parts.push(`Base: ${x.customization.base.name}`);
+        }else{
+          parts.push(`Base: ${x.customization.base}`);
+        }
+
+      }
+
+      if(x.customization.addon){
+        parts.push(x.customization.addon);
+      }
+
+      if(parts.length){
+        customization = `
+          <small class="summary-item-customization">
+            ${escapeHtml(parts.join(" · "))}
+          </small>
+        `;
+      }
+
+    }
+
+    return `
+      <div class="summary-item">
+
+        <div class="summary-item-info">
+
+          <strong>
+            ${escapeHtml(x.name)}
+          </strong>
+
+          ${customization}
+
+          <small>
+            ${money(x.price)} × ${x.qty}
+          </small>
+
+        </div>
+
+        <strong class="summary-item-price">
+          ${money(x.price * x.qty)}
+        </strong>
+
+      </div>
+    `;
+
+  }).join("");
+
+  const modal = document.createElement("div");
+
+  modal.id = "orderSummaryModal";
+
+  modal.innerHTML = `
+
+    <div class="order-summary-card">
+
+      <button
+        type="button"
+        class="order-summary-close"
+        onclick="this.closest('#orderSummaryModal').remove()">
+        ×
+      </button>
+
+      <h3>Order Summary</h3>
+
+      <p class="order-summary-subtitle">
+        Please check your order details before confirming.
+      </p>
+
+
+      <div class="summary-info">
+
+        <div class="summary-info-row">
+
+          <span>📍 Outlet</span>
+
+          <strong>
+            ${escapeHtml(selectedOutletName)}
+          </strong>
+
+        </div>
+
+
+        <div class="summary-info-row">
+
+          <span>🧾 Order Type</span>
+
+          <strong>
+            ${escapeHtml(
+              ORDER_TYPE_LABELS[selectedOrderType]
+              || selectedOrderType
+            )}
+          </strong>
+
+        </div>
+
+
+        <div class="summary-info-row">
+
+          <span>👤 Name</span>
+
+          <strong>
+            ${escapeHtml(details.name)}
+          </strong>
+
+        </div>
+
+
+        <div class="summary-info-row">
+
+          <span>📱 Mobile</span>
+
+          <strong>
+            ${escapeHtml(details.mobile)}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="summary-items">
+
+        <h4>Your Items</h4>
+
+        ${itemsHtml}
+
+      </div>
+
+
+      ${
+        details.instructions
+        ? `
+          <div class="summary-instructions">
+
+            <span>📝 Special Instructions</span>
+
+            <p>
+              ${escapeHtml(details.instructions)}
+            </p>
+
+          </div>
+        `
+        : ""
+      }
+
+
+      <div class="summary-total">
+
+        <span>Total</span>
+
+        <strong>
+          ${money(total)}
+        </strong>
+
+      </div>
+
+
+      <div class="summary-actions">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onclick="
+            this.closest('#orderSummaryModal').remove();
+            openCustomerDetails();
+          ">
+
+          ← Back
+
+        </button>
+
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          onclick="confirmFinalOrder()">
+
+          CONFIRM ORDER →
+
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+  document.body.appendChild(modal);
+
+
+  modal.addEventListener("click",(e)=>{
+
+    if(e.target === modal){
+      modal.remove();
+    }
+
+  });
+
+}
+
+function confirmFinalOrder(){
+
+  if(!cart.length){
+
+    alert("Your cart is empty.");
+
+    openCart();
+
+    return;
+  }
+
+  if(!selectedOutletId || !selectedOrderType){
+
+    alert("Please select your outlet and order type first.");
+
+    openOutletSelector();
+
+    return;
+  }
+
+  const modal = $("orderSummaryModal");
+
+  if(modal){
+    modal.remove();
+  }
+
+  sendOutletWhatsApp();
+
+}
 
 function sendOutletWhatsApp(){
 
@@ -3529,7 +3966,7 @@ $("checkoutBtn").addEventListener("click",(e)=>{
 
   }
 
-  sendOutletWhatsApp();
+  openCustomerDetails();
 
 });
 
