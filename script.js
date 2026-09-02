@@ -897,7 +897,7 @@ function renderMenu(){
 
 
   $("menuGrid")
-    .querySelectorAll(".add-btn")
+   .querySelectorAll(".add-btn:not(:disabled)")
     .forEach(btn => {
 
       btn.addEventListener(
@@ -912,6 +912,21 @@ function renderMenu(){
 function cardHtml(item, available){
 
   const index = MENU.indexOf(item);
+
+  const type = item.type || "veg";
+
+  const badge =
+    type === "non-veg"
+      ? "NON-VEG"
+      : type === "egg"
+        ? "EGG"
+        : "VEG";
+
+  const price =
+    Number(item.price) > 0
+      ? money(item.price)
+      : "On selection";
+
 
   let buttonHtml = "";
 
@@ -954,45 +969,39 @@ function cardHtml(item, available){
   }
 
 
-  return `
-    <article class="food-card">
+  return `<article class="menu-card">
 
-      <div class="food-image">
-        ${
-          item.image
-            ? `<img src="${item.image}" alt="${item.name}" loading="lazy">`
-            : `<span class="food-emoji">${CATEGORY_ICONS[item.category] || "🍽️"}</span>`
-        }
+    <span class="badge ${type}">${badge}</span>
+
+    <div class="food-image">
+      ${
+        item.image
+          ? `<img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}">`
+          : emojiFor(item)
+      }
+    </div>
+
+    <div class="menu-card-body">
+
+      <h4>${escapeHtml(item.name)}</h4>
+
+      <div class="menu-desc">
+        ${escapeHtml(item.description || "Freshly prepared at Crunchery's.")}
       </div>
 
-      <div class="food-info">
+      <div class="menu-bottom">
 
-        <div class="food-category">
-          ${item.category}
-        </div>
+        <span class="price">
+          ${price}
+        </span>
 
-        <h3>${item.name}</h3>
-
-        ${
-          item.description
-            ? `<p>${item.description}</p>`
-            : ""
-        }
-
-        <div class="food-bottom">
-
-          <span class="food-price">
-            ₹${item.price}
-          </span>
-
-          ${buttonHtml}
-
-        </div>
+        ${buttonHtml}
 
       </div>
 
-    </article>
-  `;
+    </div>
+
+  </article>`;
 
 }
 /* =========================================================
