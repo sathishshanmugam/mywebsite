@@ -3513,47 +3513,60 @@ function openCustomerDetails(){
 
 function continueToOrderSummary(){
 
-  const name =
-    $("customerName")?.value.trim();
+  const nameInput = $("customerName");
+  const mobileInput = $("customerMobile");
+  const instructionsInput = $("customerInstructions");
 
-  const mobile =
-    $("customerMobile")?.value.trim();
-
+  const name = nameInput ? nameInput.value.trim() : "";
+  const mobile = mobileInput ? mobileInput.value.trim() : "";
   const instructions =
-    $("customerInstructions")?.value.trim() || "";
+    instructionsInput ? instructionsInput.value.trim() : "";
+
+  console.log("Customer details:", {
+    name,
+    mobile,
+    instructions
+  });
 
   if(!name){
 
     alert("Please enter your name.");
 
-    $("customerName")?.focus();
+    if(nameInput){
+      nameInput.focus();
+    }
 
     return;
   }
 
-  if(!/^[6-9]\d{9}$/.test(mobile)){
+  if(!/^\d{10}$/.test(mobile)){
 
     alert("Please enter a valid 10-digit mobile number.");
 
-    $("customerMobile")?.focus();
+    if(mobileInput){
+      mobileInput.focus();
+    }
 
     return;
   }
 
   window.customerOrderDetails = {
-    name,
-    mobile,
-    instructions
+    name: name,
+    mobile: mobile,
+    instructions: instructions
   };
 
-  const modal =
-    $("customerDetailsModal");
+  console.log(
+    "Customer details saved:",
+    window.customerOrderDetails
+  );
+
+  const modal = $("customerDetailsModal");
 
   if(modal){
     modal.remove();
   }
 
-  // Step 10B will open the Order Summary here.
   openOrderSummary();
 
 }
