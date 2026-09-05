@@ -643,7 +643,8 @@ auth.onAuthStateChanged(async user=>{
     console.error(err);
     $('loading').classList.add('hidden');
     $('accessError').classList.remove('hidden');
-    $('accessError').innerHTML='<h3>Access unavailable</h3><div class="error">'+escapeHtml(err.message||'Unable to load outlet access.')+'</div><div class="actions"><button class="btn btn-secondary" onclick="location.href='../'">Back to Portal</button></div>';
+    $('accessError').innerHTML='<h3>Access unavailable</h3><div class="error">'+escapeHtml(err.message||'Unable to load outlet access.')+'</div><div class="actions"><button id="backPortalBtn" class="btn btn-secondary" type="button">Back to Portal</button></div>';
+    $('backPortalBtn').onclick=()=>location.href='../';
   }
 });
 </script>
