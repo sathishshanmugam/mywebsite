@@ -47,12 +47,36 @@ th{font-size:12px;color:var(--muted)}
 .setup-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end;margin-bottom:12px}
 .footer{text-align:center;color:var(--muted);font-size:12px;padding:14px}
 .note{background:#fff8ed;border-left:4px solid var(--accent);padding:13px 15px;border-radius:10px;color:#665c50;font-size:13px;margin-top:15px}
+
+/* Outlet header */
+.outlet-header{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:26px}
+.outlet-brand{font-size:14px;font-weight:900;letter-spacing:2px;color:var(--accent);margin-bottom:4px}
+.outlet-name{font-size:42px;font-weight:900;line-height:1.05;margin:0 0 6px}
+.outlet-module{font-size:18px;color:var(--muted)}
+.header-actions{display:flex;gap:10px;flex-wrap:wrap}
+.header-actions button{border:1px solid #ddd5c7;background:#fff;border-radius:14px;padding:12px 20px;font-size:16px;font-weight:800;color:var(--text);cursor:pointer}
+.header-actions button:hover{transform:translateY(-1px)}
 @media(max-width:900px){.grid,.grid2{grid-template-columns:1fr 1fr}.metrics{grid-template-columns:repeat(2,1fr)}.staff-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.container{padding:14px}.card{padding:22px 18px;border-radius:20px}.grid,.grid2,.metrics,.staff-grid{grid-template-columns:1fr}h1{font-size:31px}.topbar button{flex:1;padding:13px 12px}.setup-row{grid-template-columns:1fr}.share{font-size:14px}.share span{font-size:18px}}
+@media(max-width:600px){.container{padding:14px}.card{padding:22px 18px;border-radius:20px}.grid,.grid2,.metrics,.staff-grid{grid-template-columns:1fr}h1{font-size:31px}.topbar button{flex:1;padding:13px 12px}.setup-row{grid-template-columns:1fr}.share{font-size:14px}.share span{font-size:18px}.outlet-header{flex-direction:column}.outlet-name{font-size:32px}.header-actions{width:100%}.header-actions button{flex:1}}
 </style>
 </head>
 <body>
 <div class="container">
+
+  <!-- OUTLET HEADER -->
+  <header class="outlet-header">
+    <div>
+      <div class="outlet-brand">CRUNCHERY'S</div>
+      <h1 id="outletName" class="outlet-name">Loading outlet...</h1>
+      <div class="outlet-module">DPS</div>
+    </div>
+
+    <div class="header-actions">
+      <button id="portalBtn" type="button">Portal</button>
+      <button id="logoutBtn" type="button">Logout</button>
+    </div>
+  </header>
+
   <div class="topbar">
     <button id="tabDaily" class="active">Daily Entry</button>
     <button id="tabSetup">Employee Setup</button>
@@ -142,78 +166,179 @@ th{font-size:12px;color:var(--muted)}
   <div class="footer">Crunchery's DPS • Daily Performance & Incentive System</div>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyDIU4hrqUMLDDwqTFN1xkTXdkVOqDfTC2c",
+  authDomain: "cruncherys-ordering.firebaseapp.com",
+  projectId: "cruncherys-ordering",
+  storageBucket: "cruncherys-ordering.firebasestorage.app",
+  messagingSenderId: "612969187132",
+  appId: "1:612969187132:web:5a8140707d0958fdcec039"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
+</script>
+
 <script>
 (function(){
   const $=id=>document.getElementById(id);
   const money=n=>'₹'+Number(n||0).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});
   const dateDisplay=s=>s ? s.split('-').reverse().join('-') : '';
-  const escapeHtml=s=>String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+  const escapeHtml=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 
-  const KEY='crunchery_dps_v2';
-  let state=JSON.parse(localStorage.getItem(KEY)||'null')||{
-    employees:['Sathish','Vikash','Suren','Vijay','Bharath','Meenakshi'],
+  let currentUser=null;
+  let staffAccess=null;
+  let outletId=null;
+
+  let state={
+    employees:[],
     weekdayTarget:12000,
     weekendTarget:20000,
     incentiveRate:25,
     records:[]
   };
 
-  function saveState(){localStorage.setItem(KEY,JSON.stringify(state));}
   function todayISO(){
-    const d=new Date(); d.setMinutes(d.getMinutes()-d.getTimezoneOffset()); return d.toISOString().slice(0,10);
+    const d=new Date();
+    d.setMinutes(d.getMinutes()-d.getTimezoneOffset());
+    return d.toISOString().slice(0,10);
   }
+
   function dayInfo(){
     if(!$('date').value)return null;
     const d=new Date($('date').value+'T00:00:00');
     const n=d.getDay();
-    return {name:d.toLocaleDateString('en-IN',{weekday:'long'}),weekend:n===0||n===6};
+    return {
+      name:d.toLocaleDateString('en-IN',{weekday:'long'}),
+      weekend:n===0||n===6
+    };
   }
-  function setDefaultDate(){$('date').value=todayISO();updateDay();}
+
+  function setDefaultDate(){
+    $('date').value=todayISO();
+    updateDay();
+  }
+
+  function showMessage(id,text,type=''){
+    const el=$(id);
+    if(!el)return;
+    el.className='message'+(type?' '+type:'');
+    el.textContent=text||'';
+  }
+
+  function clearMessages(){
+    ['message','setupMessage','outletMessage'].forEach(id=>showMessage(id,''));
+  }
+
+  function showError(msg){showMessage('message',msg,'error');}
 
   function renderEmployeeSetup(){
     $('employeeRows').innerHTML='';
+
+    if(!state.employees.length){
+      $('employeeRows').innerHTML='<div class="hint">No employees added yet. Click “+ Add Employee”.</div>';
+      return;
+    }
+
     state.employees.forEach((name,i)=>{
-      const row=document.createElement('div'); row.className='setup-row';
-      row.innerHTML=`<div><label>Employee ${i+1}</label><input class="employeeName" data-index="${i}" value="${escapeHtml(name)}" placeholder="Employee name"></div>
-      <button class="action danger removeEmployee" data-index="${i}" type="button">Remove</button>`;
+      const row=document.createElement('div');
+      row.className='setup-row';
+      row.innerHTML=
+        `<div>
+          <label>Employee ${i+1}</label>
+          <input class="employeeName" data-index="${i}" value="${escapeHtml(name)}" placeholder="Employee name">
+        </div>
+        <button class="action danger removeEmployee" data-index="${i}" type="button">Remove</button>`;
       $('employeeRows').appendChild(row);
     });
-    document.querySelectorAll('.removeEmployee').forEach(btn=>btn.onclick=()=>{
-      if(state.employees.length<=1){alert('At least one employee is required.');return}
-      state.employees.splice(Number(btn.dataset.index),1); renderEmployeeSetup();
+
+    document.querySelectorAll('.removeEmployee').forEach(btn=>{
+      btn.onclick=()=>{
+        const index=Number(btn.dataset.index);
+        state.employees.splice(index,1);
+        renderEmployeeSetup();
+      };
     });
   }
 
   function renderStaff(){
     $('staffGrid').innerHTML='';
+
+    if(!state.employees.length){
+      $('staffGrid').innerHTML='<div class="hint">Add employees in Employee Setup first.</div>';
+      calculate();
+      return;
+    }
+
     state.employees.forEach((name,i)=>{
-      const div=document.createElement('div'); div.className='staff'; div.dataset.i=i;
-      div.innerHTML=`<div class="staff-top"><input class="work" type="checkbox"><span class="staff-name">${escapeHtml(name||'Employee '+(i+1))}</span></div>
-      <div class="staff-hours"><label>Working Hours</label><input class="hours" type="number" min="0" max="24" step="0.25" value="0" disabled></div>
-      <div class="share"><span>Incentive Share</span><span class="shareAmount">₹0.00</span></div>`;
+      const div=document.createElement('div');
+      div.className='staff';
+      div.dataset.i=i;
+
+      div.innerHTML=
+        `<div class="staff-top">
+          <input class="work" type="checkbox">
+          <span class="staff-name">${escapeHtml(name||'Employee '+(i+1))}</span>
+        </div>
+        <div class="staff-hours">
+          <label>Working Hours</label>
+          <input class="hours" type="number" min="0" max="24" step="0.25" value="0" disabled>
+        </div>
+        <div class="share">
+          <span>Incentive Share</span>
+          <span class="shareAmount">₹0.00</span>
+        </div>`;
+
       $('staffGrid').appendChild(div);
-      const cb=div.querySelector('.work'),hr=div.querySelector('.hours');
-      cb.onchange=()=>{hr.disabled=!cb.checked;if(!cb.checked)hr.value=0;calculate()};
+
+      const cb=div.querySelector('.work');
+      const hr=div.querySelector('.hours');
+
+      cb.onchange=()=>{
+        hr.disabled=!cb.checked;
+        if(!cb.checked)hr.value=0;
+        calculate();
+      };
+
       hr.oninput=calculate;
     });
+
     calculate();
   }
 
-  function updateDay(){const info=dayInfo();$('day').value=info?info.name:'';calculate();}
+  function updateDay(){
+    const info=dayInfo();
+    $('day').value=info?info.name:'';
+    calculate();
+  }
 
   function calculate(){
     const info=dayInfo();
-    const target=info?(info.weekend?Number(state.weekendTarget||0):Number(state.weekdayTarget||0)):0;
+    const target=info
+      ? (info.weekend ? Number(state.weekendTarget||0) : Number(state.weekdayTarget||0))
+      : 0;
+
     const sales=Math.max(0,Number($('sales').value||0));
     const excess=Math.max(0,sales-target);
     const pool=excess*(Number(state.incentiveRate||0)/100);
+
     let hours=0;
+
     document.querySelectorAll('.staff').forEach(s=>{
-      const cb=s.querySelector('.work'), hr=s.querySelector('.hours');
-      const h=cb.checked?Math.max(0,Math.min(24,Number(hr.value||0))):0;
+      const cb=s.querySelector('.work');
+      const hr=s.querySelector('.hours');
+      const h=cb.checked ? Math.max(0,Math.min(24,Number(hr.value||0))) : 0;
       hours+=h;
     });
-    const perHour=hours?pool/hours:0;
+
+    const perHour=hours ? pool/hours : 0;
+
     $('mThreshold').textContent=money(target);
     $('mExcess').textContent=money(excess);
     $('mPool').textContent=money(pool);
@@ -221,144 +346,422 @@ th{font-size:12px;color:var(--muted)}
     $('mPerHour').textContent=money(perHour);
 
     document.querySelectorAll('.staff').forEach(s=>{
-      const cb=s.querySelector('.work'),hr=s.querySelector('.hours');
-      const h=cb.checked?Number(hr.value||0):0;
+      const cb=s.querySelector('.work');
+      const hr=s.querySelector('.hours');
+      const h=cb.checked ? Number(hr.value||0) : 0;
       s.querySelector('.shareAmount').textContent=money(h*perHour);
     });
+
     return {info,target,sales,excess,pool,hours,perHour};
   }
 
   function breakdown(c){
     const out=[];
+
     document.querySelectorAll('.staff').forEach(s=>{
-      const cb=s.querySelector('.work'); if(!cb.checked)return;
+      const cb=s.querySelector('.work');
+      if(!cb.checked)return;
+
       const h=Math.max(0,Math.min(24,Number(s.querySelector('.hours').value||0)));
       const index=Number(s.dataset.i);
-      out.push({name:state.employees[index]||('Employee '+(index+1)),hours:h,incentive:h*c.perHour});
+
+      out.push({
+        name:state.employees[index]||('Employee '+(index+1)),
+        hours:h,
+        incentive:h*c.perHour
+      });
     });
+
     return out;
   }
 
   function whatsappText(r){
-    let t=`*CRUNCHERY'S – DAILY INCENTIVE*\\n\\n`;
-    t+=`📅 ${dateDisplay(r.date)} | ${r.day}\\n`;
-    t+=`💰 Sales: ${money(r.sales)}\\n`;
-    t+=`🎯 Target: ${money(r.target)}\\n`;
-    t+=`🎁 Incentive: ${money(r.pool)}\\n`;
-    t+=`⏱️ Total Hours: ${r.hours}\\n`;
-    t+=`💵 Rate/Hr: ${money(r.perHour)}\\n\\n`;
-    t+=`*Employee Share*\\n`;
-    r.breakdown.forEach(x=>{t+=`${x.name} — ${money(x.incentive)}\\n`;});
-    t+=`\\n*Total Incentive: ${money(r.pool)}*`;
+    let t=`*CRUNCHERY'S – DAILY INCENTIVE*\n\n`;
+    t+=`📅 ${dateDisplay(r.date)} | ${r.day}\n`;
+    t+=`💰 Sales: ${money(r.sales)}\n`;
+    t+=`🎯 Target: ${money(r.target)}\n`;
+    t+=`🎁 Incentive: ${money(r.pool)}\n`;
+    t+=`⏱️ Total Hours: ${r.hours}\n`;
+    t+=`💵 Rate/Hr: ${money(r.perHour)}\n\n`;
+    t+=`*Employee Share*\n`;
+    r.breakdown.forEach(x=>{
+      t+=`${x.name} — ${money(x.incentive)}\n`;
+    });
+    t+=`\n*Total Incentive: ${money(r.pool)}*`;
     return t;
   }
 
   function openWhatsApp(r){
-    const text=whatsappText(r);
-    window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank');
+    window.open('https://wa.me/?text='+encodeURIComponent(whatsappText(r)),'_blank');
   }
 
-  function submitDay(){
+  async function submitDay(){
     clearMessages();
+
+    if(!outletId){
+      showError('Outlet is not loaded yet. Please wait a moment and try again.');
+      return;
+    }
+
     const c=calculate();
-    if(!$('date').value){showError('Please select a date.');return}
+
+    if(!$('date').value){
+      showError('Please select a date.');
+      return;
+    }
+
     const b=breakdown(c);
-    if(c.sales<=c.target){showError('Target was not achieved. Only target-achieved days can be submitted.');return}
-    if(!b.length||c.hours<=0){showError('Select at least one employee and enter working hours.');return}
-    if(state.records.some(r=>r.date===$('date').value)){showError('A record already exists for this date. Delete the old record before submitting again.');return}
+
+    if(c.sales<=c.target){
+      showError('Target was not achieved. Only target-achieved days can be submitted.');
+      return;
+    }
+
+    if(!b.length||c.hours<=0){
+      showError('Select at least one employee and enter working hours.');
+      return;
+    }
+
+    if(state.records.some(r=>r.date===$('date').value)){
+      showError('A record already exists for this date. Delete the old record before submitting again.');
+      return;
+    }
 
     const rec={
-      id:Date.now().toString(),
+      outletId,
       date:$('date').value,
       day:c.info.name,
-      sales:c.sales,target:c.target,excess:c.excess,pool:c.pool,
-      hours:c.hours,perHour:c.perHour,
-      breakdown:b
+      sales:c.sales,
+      target:c.target,
+      excess:c.excess,
+      pool:c.pool,
+      hours:c.hours,
+      perHour:c.perHour,
+      breakdown:b,
+      createdAt:firebase.firestore.FieldValue.serverTimestamp()
     };
-    state.records.unshift(rec);saveState();renderRecords();
-    $('message').className='message success';
-    $('message').textContent='Day submitted successfully.';
+
+    try{
+      await db.collection('outlet_dps_records').add(rec);
+      await loadRecords();
+
+      showMessage('message','Day submitted successfully.','success');
+    }catch(error){
+      console.error(error);
+      showError('Unable to submit the day. Check Firestore permissions.');
+    }
   }
 
-  function renderRecords(){
+  async function renderRecords(){
     $('emptyRecords').classList.toggle('hidden',state.records.length>0);
     $('recordsTable').classList.toggle('hidden',state.records.length===0);
     $('recordsBody').innerHTML='';
+
     state.records.forEach(r=>{
       const tr=document.createElement('tr');
-      const shares=r.breakdown.map(x=>`${escapeHtml(x.name)} — ${money(x.incentive)}`).join('<br>');
-      tr.innerHTML=`<td><strong>${dateDisplay(r.date)}</strong><br><small>${escapeHtml(r.day)}</small></td>
-      <td>${money(r.sales)}</td><td>${money(r.target)}</td><td>${money(r.pool)}</td><td>${r.hours}</td><td>${money(r.perHour)}</td>
-      <td class="record-shares">${shares}</td>
-      <td><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="smallbtn waRecord" data-id="${r.id}">WhatsApp</button><button class="smallbtn deleteRecord" data-id="${r.id}" style="color:#c62828;border-color:#e5b9b9">Delete</button></div></td>`;
+
+      const shares=(r.breakdown||[])
+        .map(x=>`${escapeHtml(x.name)} — ${money(x.incentive)}`)
+        .join('<br>');
+
+      tr.innerHTML=
+        `<td><strong>${dateDisplay(r.date)}</strong><br><small>${escapeHtml(r.day)}</small></td>
+         <td>${money(r.sales)}</td>
+         <td>${money(r.target)}</td>
+         <td>${money(r.pool)}</td>
+         <td>${r.hours}</td>
+         <td>${money(r.perHour)}</td>
+         <td class="record-shares">${shares}</td>
+         <td>
+           <div style="display:flex;gap:6px;flex-wrap:wrap">
+             <button class="smallbtn waRecord" data-id="${r.id}">WhatsApp</button>
+             <button class="smallbtn deleteRecord" data-id="${r.id}" style="color:#c62828;border-color:#e5b9b9">Delete</button>
+           </div>
+         </td>`;
+
       $('recordsBody').appendChild(tr);
     });
-    document.querySelectorAll('.waRecord').forEach(b=>b.onclick=()=>{
-      const r=state.records.find(x=>x.id===b.dataset.id);if(r)openWhatsApp(r);
+
+    document.querySelectorAll('.waRecord').forEach(b=>{
+      b.onclick=()=>{
+        const r=state.records.find(x=>x.id===b.dataset.id);
+        if(r)openWhatsApp(r);
+      };
     });
-    document.querySelectorAll('.deleteRecord').forEach(b=>b.onclick=()=>{
-      const r=state.records.find(x=>x.id===b.dataset.id);if(!r)return;
-      if(confirm(`Delete the incentive record for ${dateDisplay(r.date)}?`)){
-        state.records=state.records.filter(x=>x.id!==b.dataset.id);saveState();renderRecords();
-      }
+
+    document.querySelectorAll('.deleteRecord').forEach(b=>{
+      b.onclick=async()=>{
+        const r=state.records.find(x=>x.id===b.dataset.id);
+        if(!r)return;
+
+        if(!confirm(`Delete the incentive record for ${dateDisplay(r.date)}?`))return;
+
+        try{
+          await db.collection('outlet_dps_records').doc(b.dataset.id).delete();
+          await loadRecords();
+        }catch(error){
+          console.error(error);
+          alert('Unable to delete this record. Check Firestore permissions.');
+        }
+      };
     });
   }
 
-  function clearMessages(){
-    ['message','setupMessage','outletMessage'].forEach(id=>{$(id).className='message';$(id).textContent='';});
-  }
-  function showError(msg){$('message').className='message error';$('message').textContent=msg;}
+  async function loadRecords(){
+    if(!outletId)return;
 
-  function saveEmployees(){
-    const names=[...document.querySelectorAll('.employeeName')].map(x=>x.value.trim()).filter(Boolean);
-    if(!names.length){$('setupMessage').className='message error';$('setupMessage').textContent='Add at least one employee.';return}
-    state.employees=names;saveState();renderEmployeeSetup();renderStaff();
-    $('setupMessage').className='message success';$('setupMessage').textContent='Employee setup saved.';
+    try{
+      // Deliberately use only "where" here and sort in JavaScript.
+      // This avoids requiring a composite Firestore index.
+      const snap=await db
+        .collection('outlet_dps_records')
+        .where('outletId','==',outletId)
+        .get();
+
+      state.records=snap.docs.map(doc=>({
+        id:doc.id,
+        ...doc.data()
+      }));
+
+      state.records.sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')));
+      await renderRecords();
+
+    }catch(error){
+      console.error('LOAD RECORDS ERROR:',error);
+      showMessage('message','Unable to load DPS records. Check Firestore permissions.','error');
+    }
   }
-  function saveOutlet(){
+
+  async function saveEmployees(){
+    const names=[...document.querySelectorAll('.employeeName')]
+      .map(x=>x.value.trim())
+      .filter(Boolean);
+
+    if(!names.length){
+      showMessage('setupMessage','Add at least one employee.','error');
+      return;
+    }
+
+    state.employees=names;
+
+    try{
+      await saveOutletSettings();
+      renderEmployeeSetup();
+      renderStaff();
+      showMessage('setupMessage','Employee setup saved.','success');
+    }catch(error){
+      console.error(error);
+      showMessage('setupMessage','Unable to save employee setup. Check Firestore permissions.','error');
+    }
+  }
+
+  async function saveOutlet(){
     const wd=Math.max(0,Number($('weekdayTarget').value||0));
     const we=Math.max(0,Number($('weekendTarget').value||0));
     const rate=Math.max(0,Math.min(100,Number($('incentiveRate').value||0)));
-    state.weekdayTarget=wd;state.weekendTarget=we;state.incentiveRate=rate;saveState();calculate();
-    $('outletMessage').className='message success';$('outletMessage').textContent='Outlet DPS settings saved.';
+
+    state.weekdayTarget=wd;
+    state.weekendTarget=we;
+    state.incentiveRate=rate;
+
+    try{
+      await saveOutletSettings();
+      calculate();
+      showMessage('outletMessage','Outlet DPS settings saved.','success');
+    }catch(error){
+      console.error(error);
+      showMessage('outletMessage','Unable to save outlet settings. Check Firestore permissions.','error');
+    }
   }
-  function loadSetup(){
+
+  async function saveOutletSettings(){
+    if(!outletId)throw new Error('OUTLET_NOT_LOADED');
+
+    await db.collection('outlet_dps_settings').doc(outletId).set({
+      outletId,
+      employees:state.employees,
+      weekdayTarget:Number(state.weekdayTarget||0),
+      weekendTarget:Number(state.weekendTarget||0),
+      incentiveRate:Number(state.incentiveRate||0),
+      updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+    },{merge:true});
+  }
+
+  async function loadOutletSettings(){
+    const snap=await db.collection('outlet_dps_settings').doc(outletId).get();
+
+    if(snap.exists){
+      const data=snap.data();
+
+      state.employees=Array.isArray(data.employees)
+        ? data.employees.map(x=>String(x||'').trim()).filter(Boolean)
+        : [];
+
+      state.weekdayTarget=Number(data.weekdayTarget ?? 12000);
+      state.weekendTarget=Number(data.weekendTarget ?? 20000);
+      state.incentiveRate=Number(data.incentiveRate ?? 25);
+    }
+
     $('weekdayTarget').value=state.weekdayTarget;
     $('weekendTarget').value=state.weekendTarget;
     $('incentiveRate').value=state.incentiveRate;
+
     renderEmployeeSetup();
+    renderStaff();
   }
 
   function show(section){
-    ['daily','setup','records'].forEach(id=>$(id).classList.toggle('hidden',id!==section));
+    ['daily','setup','records'].forEach(id=>{
+      $(id).classList.toggle('hidden',id!==section);
+    });
+
     $('tabDaily').classList.toggle('active',section==='daily');
     $('tabSetup').classList.toggle('active',section==='setup');
     $('tabRecords').classList.toggle('active',section==='records');
-    if(section==='records')renderRecords();
-    if(section==='setup')loadSetup();
+
+    if(section==='records')loadRecords();
+    if(section==='setup')loadOutletSettings().catch(error=>{
+      console.error(error);
+      showMessage('setupMessage','Unable to load outlet settings. Check Firestore permissions.','error');
+    });
   }
 
+  async function loadStaffAccess(user){
+    // IMPORTANT:
+    // The existing Crunchery's Outlet Portal stores staff access in
+    // staff/{Firebase Auth UID}. Reuse that same record so DPS does
+    // not create a second login/access system.
+    if(!user?.uid)throw new Error('UID_NOT_AVAILABLE');
+
+    const snap=await db
+      .collection('staff')
+      .doc(user.uid)
+      .get();
+
+    if(!snap.exists)throw new Error('OUTLET_NOT_CONFIGURED');
+
+    const data=snap.data();
+
+    if(data.active===false)throw new Error('ACCESS_DISABLED');
+    if(!data.outletId)throw new Error('OUTLET_NOT_CONFIGURED');
+
+    return data;
+  }
+
+  async function startApp(user){
+    currentUser=user;
+
+    try{
+      staffAccess=await loadStaffAccess(user);
+      outletId=staffAccess.outletId;
+
+      $('outletName').textContent=
+        staffAccess.outletName || staffAccess.outletId;
+
+      await loadOutletSettings();
+      await loadRecords();
+      setDefaultDate();
+
+    }catch(error){
+      console.error('DPS ACCESS ERROR:',error);
+      $('outletName').textContent='Access unavailable';
+      let msg='Unable to load outlet access.';
+      if(error.message==='OUTLET_NOT_CONFIGURED'){
+        msg='Your existing outlet login is valid, but no active outlet access was found for this Firebase account.';
+      }else if(error.message==='ACCESS_DISABLED'){
+        msg='This outlet staff login has been disabled.';
+      }else{
+        msg='Unable to load outlet access. Check the existing staff/{UID} record and Firestore permissions.';
+      }
+      showMessage('message',msg,'error');
+    }
+  }
+
+  // Common header navigation
+  $('portalBtn').onclick=()=>{
+    window.location.href='../';
+  };
+
+  $('logoutBtn').onclick=async()=>{
+    try{
+      await auth.signOut();
+    }finally{
+      window.location.href='../';
+    }
+  };
+
+  // Tabs
   $('tabDaily').onclick=()=>show('daily');
   $('tabSetup').onclick=()=>show('setup');
   $('tabRecords').onclick=()=>show('records');
+
+  // Daily entry
   $('date').onchange=updateDay;
   $('sales').oninput=calculate;
+
   $('submitBtn').onclick=submitDay;
+
   $('whatsappBtn').onclick=()=>{
-    const c=calculate(),b=breakdown(c);
-    if(!c.info){showError('Please select a date.');return}
-    if(c.sales<=c.target){showError('Target was not achieved. WhatsApp summary is available only for an achieved day.');return}
-    if(!b.length||c.hours<=0){showError('Select at least one employee and enter working hours.');return}
-    openWhatsApp({date:$('date').value,day:c.info.name,sales:c.sales,target:c.target,pool:c.pool,hours:c.hours,perHour:c.perHour,breakdown:b});
+    const c=calculate();
+    const b=breakdown(c);
+
+    if(!c.info){
+      showError('Please select a date.');
+      return;
+    }
+
+    if(c.sales<=c.target){
+      showError('Target was not achieved. WhatsApp summary is available only for an achieved day.');
+      return;
+    }
+
+    if(!b.length||c.hours<=0){
+      showError('Select at least one employee and enter working hours.');
+      return;
+    }
+
+    openWhatsApp({
+      date:$('date').value,
+      day:c.info.name,
+      sales:c.sales,
+      target:c.target,
+      pool:c.pool,
+      hours:c.hours,
+      perHour:c.perHour,
+      breakdown:b
+    });
   };
-  $('resetBtn').onclick=()=>{$('sales').value='';document.querySelectorAll('.staff').forEach(s=>{s.querySelector('.work').checked=false;s.querySelector('.hours').value=0;s.querySelector('.hours').disabled=true});clearMessages();calculate()};
-  $('addEmployeeBtn').onclick=()=>{state.employees.push('');renderEmployeeSetup()};
+
+  $('resetBtn').onclick=()=>{
+    $('sales').value='';
+    document.querySelectorAll('.staff').forEach(s=>{
+      s.querySelector('.work').checked=false;
+      s.querySelector('.hours').value=0;
+      s.querySelector('.hours').disabled=true;
+    });
+    clearMessages();
+    calculate();
+  };
+
+  $('addEmployeeBtn').onclick=()=>{
+    state.employees.push('');
+    renderEmployeeSetup();
+  };
+
   $('saveEmployeesBtn').onclick=saveEmployees;
   $('saveOutletBtn').onclick=saveOutlet;
 
-  setDefaultDate();loadSetup();renderStaff();renderRecords();calculate();
+  // Use the same Firebase phone login session as the Outlet Portal.
+  auth.onAuthStateChanged(async user=>{
+    if(!user){
+      window.location.href='../';
+      return;
+    }
+
+    await startApp(user);
+  });
+
 })();
 </script>
-<!-- DPS v3: live employee incentive display + record delete -->
 </body>
 </html>
