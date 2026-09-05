@@ -136,32 +136,59 @@ function friendlyAuthError(error){
   Therefore the portal uses that same source instead of staff/{UID}.
 */
 async function loadStaffAccess(user){
+
+  console.log("AUTH UID:", user?.uid);
+  console.log("AUTH PHONE:", user?.phoneNumber);
+
   if(!user?.uid || !user.phoneNumber){
     throw new Error("USER_NOT_AVAILABLE");
   }
 
   const phone = user.phoneNumber;
 
-  const doc = await db
-    .collection("staff_access")
-    .doc(phone)
-    .get();
+  console.log("READING STAFF ACCESS:", phone);
 
-  if(!doc.exists){
-    throw new Error("OUTLET_NOT_CONFIGURED");
+  try {
+
+    const doc = await db
+      .collection("staff_access")
+      .doc(phone)
+      .get();
+
+    console.log("STAFF ACCESS EXISTS:", doc.exists);
+
+    if(!doc.exists){
+      throw new Error(
+        "OUTLET_NOT_CONFIGURED: No staff_access document for " + phone
+      );
+    }
+
+    const data = doc.data();
+
+    console.log("STAFF ACCESS DATA:", data);
+
+    if(data.active === false){
+      throw new Error("ACCESS_DISABLED");
+    }
+
+    if(!data.outletId){
+      throw new Error("OUTLET_NOT_CONFIGURED: outletId missing");
+    }
+
+    return data;
+
+  } catch(error) {
+
+    console.error("STAFF ACCESS FIRESTORE ERROR:", error);
+
+    if(error.code === "permission-denied"){
+      throw new Error(
+        "FIRESTORE_PERMISSION_DENIED for staff_access/" + phone
+      );
+    }
+
+    throw error;
   }
-
-  const data = doc.data();
-
-  if(data.active === false){
-    throw new Error("ACCESS_DISABLED");
-  }
-
-  if(!data.outletId){
-    throw new Error("OUTLET_NOT_CONFIGURED");
-  }
-
-  return data;
 }
 
 function setupRecaptcha(containerId="recaptcha-container", sendButtonId="sendOtpBtn", errorId="loginError"){
