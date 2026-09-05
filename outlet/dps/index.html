@@ -376,20 +376,33 @@ const db = firebase.firestore();
   }
 
   function whatsappText(r){
-    let t=`*CRUNCHERY'S – DAILY INCENTIVE*\n\n`;
-    t+=`📅 ${dateDisplay(r.date)} | ${r.day}\n`;
-    t+=`💰 Sales: ${money(r.sales)}\n`;
-    t+=`🎯 Target: ${money(r.target)}\n`;
-    t+=`🎁 Incentive: ${money(r.pool)}\n`;
-    t+=`⏱️ Total Hours: ${r.hours}\n`;
-    t+=`💵 Rate/Hr: ${money(r.perHour)}\n\n`;
-    t+=`*Employee Share*\n`;
-    r.breakdown.forEach(x=>{
-      t+=`${x.name} — ${money(x.incentive)}\n`;
-    });
-    t+=`\n*Total Incentive: ${money(r.pool)}*`;
-    return t;
-  }
+
+  const employeeRows = r.breakdown.map(x => {
+    const name = String(x.name || "").trim();
+    return `${name.padEnd(14, " ")} — ${money(x.incentive)}`;
+  }).join("\n");
+
+  let t = `*CRUNCHERY'S – DAILY INCENTIVE*\n\n`;
+
+  t += "```\n";
+  t += `📅 Date          : ${dateDisplay(r.date)} | ${r.day}\n`;
+  t += `💰 Sales         : ${money(r.sales)}\n`;
+  t += `🎯 Target        : ${money(r.target)}\n`;
+  t += `🎁 Incentive     : ${money(r.pool)}\n`;
+  t += `⏱️ Total Hours   : ${r.hours}\n`;
+  t += `💵 Rate / Hr     : ${money(r.perHour)}\n`;
+  t += "```\n\n";
+
+  t += `*Employee Share*\n\n`;
+
+  t += "```\n";
+  t += employeeRows;
+  t += "\n```\n\n";
+
+  t += `*Total Incentive: ${money(r.pool)}*`;
+
+  return t;
+}
 
   function openWhatsApp(r){
     window.open('https://wa.me/?text='+encodeURIComponent(whatsappText(r)),'_blank');
