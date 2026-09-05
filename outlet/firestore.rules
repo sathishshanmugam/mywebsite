@@ -1,0 +1,69 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function phoneAccess() {
+      return get(
+        /databases/$(database)/documents/staff_access/$(request.auth.token.phone_number)
+      );
+    }
+
+    function activeOutletStaff() {
+      return signedIn()
+        && phoneAccess().data.active != false
+        && phoneAccess().data.outletId is string;
+    }
+
+    function ownsOutlet(outletId) {
+      return activeOutletStaff()
+        && phoneAccess().data.outletId == outletId;
+    }
+
+    match /staff_access/{phoneNumber} {
+      allow read: if signedIn()
+        && request.auth.token.phone_number == phoneNumber
+        && resource.data.active != false;
+      allow write: if false;
+    }
+
+    match /outlets/{outletId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /outlet_products/{docId} {
+      allow read: if true;
+
+      allow create, update: if activeOutletStaff()
+        && ownsOutlet(request.resource.data.outletId)
+        && request.resource.data.productId is string
+        && request.resource.data.available is bool;
+
+      allow delete: if false;
+    }
+
+    match /dps_records/{docId} {
+      allow read: if activeOutletStaff()
+        && ownsOutlet(resource.data.outletId);
+
+      allow create: if activeOutletStaff()
+        && ownsOutlet(request.resource.data.outletId)
+        && request.resource.data.date is string
+        && request.resource.data.sales is number
+        && request.resource.data.target is number
+        && request.resource.data.excessSales is number
+        && request.resource.data.incentivePool is number;
+
+      allow update: if activeOutletStaff()
+        && ownsOutlet(resource.data.outletId)
+        && ownsOutlet(request.resource.data.outletId);
+
+      allow delete: if false;
+    }
+  }
+}
