@@ -1,652 +1,363 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Crunchery's — DPS</title>
-<meta name="description" content="Crunchery's Daily Performance & Incentive System">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crunchery's DPS</title>
 <style>
-:root{
-  --bg:#f7f2e8;--card:#fff;--text:#26352b;--muted:#72786f;--line:#e7e0d4;
-  --accent:#e85d04;--accent-dark:#cf4f00;--soft:#f4eee2;--good:#168a48;--danger:#b42318;
-}
+:root{--bg:#f6f1e7;--card:#fff;--text:#24362c;--muted:#737b74;--line:#ded8cb;--accent:#ef5b00;--dark:#24362c;--good:#16834b;--danger:#c62828}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-button,input{font:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
-.container{max-width:1340px;margin:auto;padding:30px 38px 50px}
-.topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:28px}
-.brand{font-size:17px;font-weight:900;letter-spacing:2px;color:var(--accent)}
-.outlet-name{font-size:42px;line-height:1.05;font-weight:850;margin:8px 0 8px;word-break:break-word}
-.subtitle{font-size:20px;color:var(--muted);margin:0}
-.top-actions{display:flex;gap:10px}
-.top-actions button{background:#fff;border:1px solid #ddd4c5;border-radius:14px;padding:13px 22px;font-weight:800;color:var(--text);box-shadow:0 1px 1px rgba(0,0,0,.02)}
-.top-actions button:hover{background:var(--soft)}
-.tabs{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
-.tab{border:1px solid #ddd4c5;background:#fff;border-radius:12px;padding:12px 20px;font-weight:850;color:var(--text)}
-.tab.active{background:var(--text);color:#fff;border-color:var(--text)}
-.card{background:var(--card);border-radius:22px;padding:28px;margin-bottom:18px;box-shadow:0 12px 32px rgba(69,55,33,.06)}
-.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:22px}
-.eyebrow{font-size:14px;letter-spacing:2px;color:var(--accent);font-weight:900}
-h2{font-size:30px;margin:6px 0}
-h3{font-size:20px;margin:0 0 14px}
-.hint{color:var(--muted);font-size:16px;line-height:1.45}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
-.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
-.field label{display:block;font-size:16px;font-weight:800;margin-bottom:8px}
-input,select{width:100%;height:56px;border:1px solid #ddd7cd;border-radius:13px;padding:0 16px;background:#fff;color:var(--text);font-size:18px;outline:none}
-input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(232,93,4,.10)}
-input[readonly]{background:#faf8f4}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
-.btn{border:0;border-radius:13px;padding:14px 20px;font-weight:850}
-.btn-primary{background:var(--accent);color:#fff}
-.btn-primary:hover{background:var(--accent-dark)}
-.btn-secondary{background:var(--soft);color:var(--text)}
-.btn-green{background:var(--good);color:#fff}
-.btn-danger{background:#fff;color:var(--danger);border:1px solid #efc6c2}
-.message{margin-top:15px;font-weight:750}
-.success{color:var(--good)} .error{color:var(--danger)}
+body{margin:0;background:var(--bg);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text)}
+.container{max-width:1180px;margin:auto;padding:28px}
+.topbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+.topbar button{border:1px solid #ddd5c7;background:#fff;border-radius:16px;padding:15px 28px;font-size:17px;font-weight:800;color:var(--text);cursor:pointer}
+.topbar button.active{background:var(--dark);color:#fff;border-color:var(--dark)}
+.card{background:var(--card);border-radius:28px;padding:30px 40px;margin-bottom:18px;box-shadow:0 8px 28px rgba(70,55,35,.06)}
+.eyebrow{color:var(--accent);font-size:14px;font-weight:900;letter-spacing:2px;margin-bottom:8px}
+h1{font-size:40px;margin:0 0 8px} h2{font-size:26px;margin:0 0 20px}
+.subtitle{color:var(--muted);font-size:15px;margin:0 0 26px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+label{display:block;font-size:14px;font-weight:800;margin-bottom:8px}
+input,select{width:100%;height:52px;border:1px solid var(--line);border-radius:13px;padding:10px 14px;font-size:17px;color:var(--text);background:#fff}
+input:focus,select:focus{outline:2px solid #f6b27f;border-color:var(--accent)}
+.readonly{background:#f7f4ee}
 .staff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.staff-card{border:1px solid var(--line);border-radius:17px;padding:18px;background:#fcfaf6}
-.staff-title{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:900;margin-bottom:14px}
-.staff-title input{width:22px;height:22px}
-.staff-card .hours-label{font-size:13px;font-weight:800;color:var(--muted);display:block;margin-bottom:6px}
-.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:11px}
-.metric{background:var(--soft);border-radius:15px;padding:17px}
-.metric span{display:block;color:var(--muted);font-size:13px;font-weight:750;margin-bottom:7px}
-.metric strong{font-size:22px}
-.target-warning{font-size:18px;font-weight:850;color:var(--danger);margin-top:15px}
-.target-ok{font-size:18px;font-weight:850;color:var(--good);margin-top:15px}
-.employee-list{display:grid;gap:12px}
-.employee-row{display:grid;grid-template-columns:90px 1fr auto;gap:12px;align-items:center;padding:13px 15px;background:#fcfaf6;border:1px solid var(--line);border-radius:14px}
-.employee-row .slot{font-weight:900}
-.employee-row input{height:48px}
-.remove{background:none;border:0;color:var(--danger);font-weight:850;padding:10px}
+.staff{border:1px solid var(--line);border-radius:16px;padding:15px;background:#fff}
+.staff-top{display:flex;align-items:center;gap:10px;font-weight:900}
+.staff-top input{width:20px;height:20px}
+.staff-name{font-size:16px}
+.staff-hours{margin-top:12px}
+.share{margin-top:10px;padding:10px 12px;border-radius:10px;background:#f7f4ee;font-weight:900}
+.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.metric{background:#f8f6f1;border:1px solid var(--line);border-radius:15px;padding:15px}
+.metric span{display:block;font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+.metric strong{font-size:20px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+button.action{border:0;border-radius:13px;padding:14px 20px;font-size:15px;font-weight:900;cursor:pointer}
+.primary{background:var(--dark);color:#fff}.whatsapp{background:#20a950;color:#fff}.secondary{background:#eeeae1;color:var(--text)}.danger{background:#c62828;color:#fff}
+.message{margin-top:12px;font-weight:700;font-size:14px}.error{color:var(--danger)}.success{color:var(--good)}
+.hidden{display:none!important}
 .table-wrap{overflow:auto}
-table{width:100%;border-collapse:collapse;min-width:900px}
-th,td{text-align:left;padding:14px 12px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-size:13px;color:var(--muted);font-weight:850}
-td{font-size:15px}
-.record-date{font-weight:900}
-.record-staff{margin-top:6px;color:var(--muted);line-height:1.5}
-.empty{padding:30px;text-align:center;color:var(--muted)}
-.loading{position:fixed;inset:0;background:rgba(247,242,232,.94);display:flex;align-items:center;justify-content:center;z-index:20;font-size:18px;font-weight:850}
-.footer{text-align:center;color:var(--muted);font-size:13px;margin-top:20px}
-@media(max-width:900px){
- .container{padding:22px 18px 40px}.outlet-name{font-size:34px}.grid3,.grid2{grid-template-columns:1fr 1fr}.staff-grid{grid-template-columns:1fr 1fr}.metrics{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:560px){
- .topbar{flex-direction:column}.top-actions{width:100%}.top-actions button{flex:1}.grid3,.grid2,.staff-grid,.metrics{grid-template-columns:1fr}
- .container{padding:18px 12px 35px}.card{padding:20px;border-radius:18px}.outlet-name{font-size:29px}.subtitle{font-size:17px}
- .employee-row{grid-template-columns:70px 1fr}.employee-row .remove{grid-column:2}
-}
+table{border-collapse:collapse;width:100%;min-width:900px;font-size:14px}
+th,td{text-align:left;padding:13px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;color:var(--muted)}
+.smallbtn{border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px 11px;font-weight:800;cursor:pointer;margin-right:5px}
+.record-shares{font-size:12px;color:var(--muted);line-height:1.7;margin-top:5px}
+.setup-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end;margin-bottom:12px}
+.footer{text-align:center;color:var(--muted);font-size:12px;padding:14px}
+.note{background:#fff8ed;border-left:4px solid var(--accent);padding:13px 15px;border-radius:10px;color:#665c50;font-size:13px;margin-top:15px}
+@media(max-width:900px){.grid,.grid2{grid-template-columns:1fr 1fr}.metrics{grid-template-columns:repeat(2,1fr)}.staff-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.container{padding:14px}.card{padding:22px 18px;border-radius:20px}.grid,.grid2,.metrics,.staff-grid{grid-template-columns:1fr}h1{font-size:31px}.topbar button{flex:1;padding:13px 12px}.setup-row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div id="loading" class="loading">Loading outlet...</div>
-
 <div class="container">
-  <header class="topbar">
-    <div>
-      <div class="brand">CRUNCHERY'S</div>
-      <div id="outletNameHeader" class="outlet-name">Outlet</div>
-      <p class="subtitle">DPS</p>
+  <div class="topbar">
+    <button id="tabDaily" class="active">Daily Entry</button>
+    <button id="tabSetup">Employee Setup</button>
+    <button id="tabRecords">Records</button>
+  </div>
+
+  <section id="daily">
+    <div class="card">
+      <div class="eyebrow">DAILY PERFORMANCE & INCENTIVE</div>
+      <h1>Daily Entry</h1>
+      <p class="subtitle">Targets and incentive rate are outlet-specific. Employee setup only contains staff names.</p>
+      <div class="grid">
+        <div><label>Date</label><input id="date" type="date"></div>
+        <div><label>Day</label><input id="day" class="readonly" readonly></div>
+        <div><label>Daily Sales (₹)</label><input id="sales" type="number" min="0" step="1" placeholder="Enter sales"></div>
+      </div>
+      <div class="note">The target is automatically selected from the outlet settings: Monday–Friday = weekday target, Saturday–Sunday = weekend target.</div>
     </div>
-    <div class="top-actions">
-      <button id="portalBtn">Portal</button>
-      <button id="logoutBtn">Logout</button>
+
+    <div class="card">
+      <h2>Staff Working Today</h2>
+      <div id="staffGrid" class="staff-grid"></div>
+      <div class="hint">Tick the employees working today and enter their working hours.</div>
     </div>
-  </header>
 
-  <div id="accessError" class="card hidden"></div>
-
-  <nav class="tabs">
-    <button class="tab active" data-tab="daily">Daily Entry</button>
-    <button class="tab" data-tab="employees">Employee Setup</button>
-    <button class="tab" data-tab="records">Records</button>
-  </nav>
-
-  <main>
-    <section id="dailyTab">
-      <div class="card">
-        <div class="card-head">
-          <div>
-            <div class="eyebrow">DAILY PERFORMANCE</div>
-            <h2>Target Achieved</h2>
-            <div class="hint">Only submit a day when the outlet has achieved its target.</div>
-          </div>
-        </div>
-
-        <div class="grid3">
-          <div class="field"><label for="date">Date</label><input id="date" type="date"></div>
-          <div class="field"><label for="day">Day</label><input id="day" readonly></div>
-          <div class="field"><label for="sales">Daily Sales (₹)</label><input id="sales" type="number" min="0" step="1" placeholder="Enter sales"></div>
-        </div>
-
-        <div class="grid3" style="margin-top:15px">
-          <div class="field"><label for="weekdayTarget">Weekday Target (₹)</label><input id="weekdayTarget" type="number" min="0" step="1"></div>
-          <div class="field"><label for="weekendTarget">Weekend Target (₹)</label><input id="weekendTarget" type="number" min="0" step="1"></div>
-          <div class="field"><label for="rate">Incentive Rate (%)</label><input id="rate" type="number" min="0" max="100" step="0.01"></div>
-        </div>
-
-        <div id="targetStatus"></div>
+    <div class="card">
+      <h2>Calculation</h2>
+      <div class="metrics">
+        <div class="metric"><span>Target</span><strong id="mThreshold">₹0.00</strong></div>
+        <div class="metric"><span>Excess Sales</span><strong id="mExcess">₹0.00</strong></div>
+        <div class="metric"><span>Incentive</span><strong id="mPool">₹0.00</strong></div>
+        <div class="metric"><span>Total Hours</span><strong id="mHours">0</strong></div>
+        <div class="metric"><span>Rate / Hr</span><strong id="mPerHour">₹0.00</strong></div>
       </div>
-
-      <div class="card">
-        <div class="card-head">
-          <div>
-            <h3>Employees Working Today</h3>
-            <div class="hint">Select the employees who worked today and enter their working hours.</div>
-          </div>
-        </div>
-        <div id="staffGrid" class="staff-grid"></div>
+      <div id="message" class="message"></div>
+      <div class="actions">
+        <button class="action primary" id="submitBtn">Submit Day</button>
+        <button class="action whatsapp" id="whatsappBtn">WhatsApp Summary</button>
+        <button class="action secondary" id="resetBtn">New Entry</button>
       </div>
+    </div>
+  </section>
 
-      <div class="card">
-        <h3>Calculation</h3>
-        <div class="metrics">
-          <div class="metric"><span>Target</span><strong id="mTarget">₹0</strong></div>
-          <div class="metric"><span>Excess Sales</span><strong id="mExcess">₹0</strong></div>
-          <div class="metric"><span>Incentive Pool</span><strong id="mPool">₹0</strong></div>
-          <div class="metric"><span>Total Hours</span><strong id="mHours">0</strong></div>
-          <div class="metric"><span>Incentive / Hour</span><strong id="mPerHour">₹0</strong></div>
-        </div>
-        <div id="dailyMessage" class="message"></div>
-        <div class="actions">
-          <button id="submitBtn" class="btn btn-primary">Submit Achieved Day</button>
-          <button id="whatsappBtn" class="btn btn-green">WhatsApp Summary</button>
-          <button id="resetBtn" class="btn btn-secondary">New Entry</button>
-        </div>
+  <section id="setup" class="hidden">
+    <div class="card">
+      <div class="eyebrow">EMPLOYEE SETUP</div>
+      <h1>Employees</h1>
+      <p class="subtitle">Employee names are outlet-specific. Targets and incentive rate are NOT stored against individual employees.</p>
+      <div id="employeeRows"></div>
+      <div class="actions">
+        <button class="action secondary" id="addEmployeeBtn">+ Add Employee</button>
+        <button class="action primary" id="saveEmployeesBtn">Save Employee Setup</button>
       </div>
-    </section>
+      <div id="setupMessage" class="message"></div>
+    </div>
 
-    <section id="employeesTab" class="hidden">
-      <div class="card">
-        <div class="card-head">
-          <div>
-            <div class="eyebrow">EMPLOYEE SETUP</div>
-            <h2>Employees</h2>
-            <div class="hint">Set the staff names for this outlet. These names will appear in Daily Entry, Records and WhatsApp summaries.</div>
-          </div>
-          <button id="addEmployeeBtn" class="btn btn-secondary">+ Add Employee</button>
-        </div>
-
-        <div id="employeeList" class="employee-list"></div>
-
-        <div class="card" style="margin:20px 0 0;padding:20px;background:#fcfaf6">
-          <h3>DPS Settings</h3>
-          <div class="grid3">
-            <div class="field"><label for="setupWeekday">Weekday Target (₹)</label><input id="setupWeekday" type="number" min="0"></div>
-            <div class="field"><label for="setupWeekend">Weekend Target (₹)</label><input id="setupWeekend" type="number" min="0"></div>
-            <div class="field"><label for="setupRate">Incentive Rate (%)</label><input id="setupRate" type="number" min="0" max="100" step="0.01"></div>
-          </div>
-        </div>
-
-        <div class="actions">
-          <button id="saveEmployeesBtn" class="btn btn-primary">Save Employee Setup</button>
-        </div>
-        <div id="employeeMessage" class="message"></div>
+    <div class="card">
+      <h2>Outlet DPS Settings</h2>
+      <div class="grid">
+        <div><label>Weekday Target (₹)</label><input id="weekdayTarget" type="number" min="0" step="1"></div>
+        <div><label>Weekend Target (₹)</label><input id="weekendTarget" type="number" min="0" step="1"></div>
+        <div><label>Incentive Rate (%)</label><input id="incentiveRate" type="number" min="0" max="100" step="0.01"></div>
       </div>
-    </section>
+      <div class="note">These three values apply to the entire outlet. They are not employee settings.</div>
+      <div class="actions"><button class="action primary" id="saveOutletBtn">Save Outlet Settings</button></div>
+      <div id="outletMessage" class="message"></div>
+    </div>
+  </section>
 
-    <section id="recordsTab" class="hidden">
-      <div class="card">
-        <div class="card-head">
-          <div>
-            <div class="eyebrow">HISTORY</div>
-            <h2>Achieved Days</h2>
-            <div class="hint">Only successfully submitted target-achieved days are shown here.</div>
-          </div>
-        </div>
-        <div id="recordsEmpty" class="empty">No achieved days recorded yet.</div>
-        <div id="recordsWrap" class="table-wrap hidden">
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Sales</th>
-                <th>Target</th>
-                <th>Excess</th>
-                <th>Pool</th>
-                <th>Hours</th>
-                <th>Incentive / Hour</th>
-                <th>Employees</th>
-                <th>WhatsApp</th>
-              </tr>
-            </thead>
-            <tbody id="recordsBody"></tbody>
-          </table>
-        </div>
+  <section id="records" class="hidden">
+    <div class="card">
+      <div class="eyebrow">SUBMITTED DAYS</div>
+      <h1>Records</h1>
+      <p class="subtitle">Only submitted days are stored. Individual records can be deleted.</p>
+      <div id="emptyRecords" class="hint">No records yet.</div>
+      <div class="table-wrap">
+        <table id="recordsTable" class="hidden">
+          <thead>
+            <tr><th>Date</th><th>Sales</th><th>Target</th><th>Incentive</th><th>Total Hours</th><th>Rate/Hr</th><th>Employee Share</th><th>Actions</th></tr>
+          </thead>
+          <tbody id="recordsBody"></tbody>
+        </table>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
   <div class="footer">Crunchery's DPS • Daily Performance & Incentive System</div>
 </div>
 
-<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore-compat.js"></script>
-
 <script>
-const firebaseConfig = {
-  apiKey: "AIzaSyDIU4hrqUMLDDwqTFN1xkTXdkVOqDfTC2c",
-  authDomain: "cruncherys-ordering.firebaseapp.com",
-  projectId: "cruncherys-ordering",
-  storageBucket: "cruncherys-ordering.firebasestorage.app",
-  messagingSenderId: "612969187132",
-  appId: "1:612969187132:web:5a8140707d0958fdcec039"
-};
+(function(){
+  const $=id=>document.getElementById(id);
+  const money=n=>'₹'+Number(n||0).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const dateDisplay=s=>s ? s.split('-').reverse().join('-') : '';
+  const escapeHtml=s=>String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const auth = firebase.auth();
-
-const $ = id => document.getElementById(id);
-const money = n => '₹' + Number(n || 0).toLocaleString('en-IN',{maximumFractionDigits:2});
-let staffAccess = null;
-let employees = [];
-let settings = { weekdayTarget:12000, weekendTarget:20000, rate:25, whatsapp:'' };
-let records = [];
-
-function todayISO(){
-  const d=new Date();
-  d.setMinutes(d.getMinutes()-d.getTimezoneOffset());
-  return d.toISOString().slice(0,10);
-}
-
-function dayInfo(){
-  if(!$('date').value) return null;
-  const d=new Date($('date').value+'T00:00:00');
-  const n=d.getDay();
-  return { name:d.toLocaleDateString('en-IN',{weekday:'long'}), weekend:n===0||n===6 };
-}
-
-function getTarget(info){
-  return info ? Number(info.weekend ? $('weekendTarget').value : $('weekdayTarget').value || 0) : 0;
-}
-
-function selectedStaff(){
-  return [...document.querySelectorAll('.staff-card')].filter(x=>x.querySelector('.work').checked).map(x=>{
-    const employeeId=x.dataset.id;
-    const name=x.dataset.name;
-    const hours=Math.max(0,Math.min(24,Number(x.querySelector('.hours').value||0)));
-    return {employeeId,name,hours};
-  });
-}
-
-function calculate(){
-  const info=dayInfo();
-  $('day').value=info ? info.name : '';
-  const target=getTarget(info);
-  const sales=Math.max(0,Number($('sales').value||0));
-  const excess=Math.max(0,sales-target);
-  const pool=excess*(Number($('rate').value||0)/100);
-  const staff=selectedStaff();
-  const hours=staff.reduce((s,x)=>s+x.hours,0);
-  const perHour=hours ? pool/hours : 0;
-
-  $('mTarget').textContent=money(target);
-  $('mExcess').textContent=money(excess);
-  $('mPool').textContent=money(pool);
-  $('mHours').textContent=hours.toFixed(2).replace(/\.00$/,'');
-  $('mPerHour').textContent=money(perHour);
-
-  const status=$('targetStatus');
-  if(sales<=0){
-    status.innerHTML='';
-  }else if(sales>=target){
-    status.className='target-ok';
-    status.textContent='✓ Target achieved — this day can be submitted.';
-  }else{
-    status.className='target-warning';
-    status.textContent='Target not achieved — this day will not be saved.';
-  }
-
-  return {info,target,sales,excess,pool,hours,perHour,staff};
-}
-
-function renderStaff(){
-  const grid=$('staffGrid');
-  const previous={};
-  grid.querySelectorAll('.staff-card').forEach(x=>{
-    previous[x.dataset.id]={
-      checked:x.querySelector('.work').checked,
-      hours:x.querySelector('.hours').value
-    };
-  });
-
-  grid.innerHTML='';
-  if(!employees.length){
-    grid.innerHTML='<div class="empty" style="grid-column:1/-1">No employees added. Open Employee Setup and add staff.</div>';
-    return;
-  }
-
-  employees.forEach(emp=>{
-    const div=document.createElement('div');
-    div.className='staff-card';
-    div.dataset.id=emp.id;
-    div.dataset.name=emp.name;
-    const old=previous[emp.id] || {};
-    div.innerHTML=`
-      <div class="staff-title">
-        <input class="work" type="checkbox" ${old.checked?'checked':''}>
-        <span>${escapeHtml(emp.name)}</span>
-      </div>
-      <span class="hours-label">Working Hours</span>
-      <input class="hours" type="number" min="0" max="24" step="0.25" value="${old.hours||0}" ${old.checked?'':'disabled'}>
-    `;
-    grid.appendChild(div);
-    const cb=div.querySelector('.work');
-    const hr=div.querySelector('.hours');
-    cb.addEventListener('change',()=>{hr.disabled=!cb.checked;if(!cb.checked)hr.value=0;calculate()});
-    hr.addEventListener('input',calculate);
-  });
-  calculate();
-}
-
-function renderEmployeeSetup(){
-  $('setupWeekday').value=settings.weekdayTarget ?? 12000;
-  $('setupWeekend').value=settings.weekendTarget ?? 20000;
-  $('setupRate').value=settings.rate ?? 25;
-
-  const list=$('employeeList');
-  list.innerHTML='';
-  employees.forEach((emp,i)=>{
-    const row=document.createElement('div');
-    row.className='employee-row';
-    row.dataset.id=emp.id;
-    row.innerHTML=`
-      <div class="slot">Staff ${i+1}</div>
-      <input class="employee-name" type="text" value="${escapeAttr(emp.name)}" placeholder="Employee name">
-      <button class="remove" type="button">Remove</button>
-    `;
-    list.appendChild(row);
-    row.querySelector('.remove').addEventListener('click',()=>{
-      employees=employees.filter(x=>x.id!==emp.id);
-      renderEmployeeSetup();
-    });
-  });
-}
-
-function addEmployee(){
-  const next=employees.length+1;
-  employees.push({id:'staff_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),name:'Staff '+next});
-  renderEmployeeSetup();
-}
-
-async function saveEmployeeSetup(){
-  const rows=[...document.querySelectorAll('.employee-row')];
-  const updated=[];
-  rows.forEach((row,i)=>{
-    const name=row.querySelector('.employee-name').value.trim();
-    if(name) updated.push({id:row.dataset.id,name});
-  });
-
-  if(!updated.length){
-    showMessage('employeeMessage','Add at least one employee name.','error');
-    return;
-  }
-
-  employees=updated;
-  settings.weekdayTarget=Math.max(0,Number($('setupWeekday').value||0));
-  settings.weekendTarget=Math.max(0,Number($('setupWeekend').value||0));
-  settings.rate=Math.max(0,Math.min(100,Number($('setupRate').value||0)));
-
-  try{
-    await db.collection('outlet_dps_settings').doc(staffAccess.outletId).set({
-      outletId:staffAccess.outletId,
-      employees,
-      weekdayTarget:settings.weekdayTarget,
-      weekendTarget:settings.weekendTarget,
-      rate:settings.rate,
-      whatsapp:settings.whatsapp || '',
-      updatedAt:firebase.firestore.FieldValue.serverTimestamp()
-    },{merge:true});
-
-    syncSettingsToDaily();
-    renderEmployeeSetup();
-    renderStaff();
-    showMessage('employeeMessage','Employee setup saved successfully.','success');
-  }catch(err){
-    console.error(err);
-    showMessage('employeeMessage','Unable to save employee setup. Check Firestore permissions.','error');
-  }
-}
-
-function syncSettingsToDaily(){
-  $('weekdayTarget').value=settings.weekdayTarget;
-  $('weekendTarget').value=settings.weekendTarget;
-  $('rate').value=settings.rate;
-  calculate();
-}
-
-async function loadData(){
-  const ref=db.collection('outlet_dps_settings').doc(staffAccess.outletId);
-  const snap=await ref.get();
-  if(snap.exists){
-    const d=snap.data()||{};
-    settings={
-      weekdayTarget:d.weekdayTarget ?? 12000,
-      weekendTarget:d.weekendTarget ?? 20000,
-      rate:d.rate ?? 25,
-      whatsapp:d.whatsapp || ''
-    };
-    employees=Array.isArray(d.employees) ? d.employees : [];
-  }
-  syncSettingsToDaily();
-  renderEmployeeSetup();
-  renderStaff();
-
-  const recSnap=await db.collection('outlet_dps_records')
-    .where('outletId','==',staffAccess.outletId)
-    .orderBy('date','desc')
-    .limit(100).get();
-
-  records=recSnap.docs.map(d=>({id:d.id,...d.data()}));
-  renderRecords();
-}
-
-function renderRecords(){
-  const body=$('recordsBody');
-  body.innerHTML='';
-  $('recordsEmpty').classList.toggle('hidden',records.length>0);
-  $('recordsWrap').classList.toggle('hidden',records.length===0);
-
-  records.forEach(r=>{
-    const tr=document.createElement('tr');
-    const staff=(r.staff||[]).map(x=>`${escapeHtml(x.name)} — ${x.hours} hrs — ${money(x.incentive)}`).join('<br>');
-    tr.innerHTML=`
-      <td><div class="record-date">${formatDate(r.date)}</div><div class="hint">${escapeHtml(r.day||'')}</div></td>
-      <td>${money(r.sales)}</td>
-      <td>${money(r.target)}</td>
-      <td>${money(r.excess)}</td>
-      <td>${money(r.pool)}</td>
-      <td>${Number(r.hours||0).toFixed(2).replace(/\.00$/,'')}</td>
-      <td>${money(r.perHour)}</td>
-      <td><div class="record-staff">${staff||'—'}</div></td>
-      <td><button class="btn btn-secondary" style="padding:9px 12px" data-wa="${r.id}">WhatsApp</button></td>
-    `;
-    body.appendChild(tr);
-  });
-
-  body.querySelectorAll('[data-wa]').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      const rec=records.find(x=>x.id===btn.dataset.wa);
-      if(rec) openWhatsApp(rec);
-    });
-  });
-}
-
-async function submitDay(){
-  clearMessage('dailyMessage');
-  const c=calculate();
-
-  if(!c.info){showMessage('dailyMessage','Please select a date.','error');return}
-  if(c.sales<c.target){showMessage('dailyMessage','Target is not achieved. This day will not be saved.','error');return}
-  if(c.hours<=0){showMessage('dailyMessage','Select at least one employee and enter working hours.','error');return}
-  if(!c.staff.length){showMessage('dailyMessage','Select at least one employee.','error');return}
-
-  const staff=c.staff.map(x=>({...x,incentive:x.hours*c.perHour}));
-  const record={
-    outletId:staffAccess.outletId,
-    outletName:staffAccess.outletName || staffAccess.outletId,
-    date:$('date').value,
-    day:c.info.name,
-    sales:c.sales,
-    target:c.target,
-    excess:c.excess,
-    pool:c.pool,
-    hours:c.hours,
-    perHour:c.perHour,
-    rate:Number($('rate').value||0),
-    staff,
-    createdAt:firebase.firestore.FieldValue.serverTimestamp(),
-    createdBy:auth.currentUser.uid
+  const KEY='crunchery_dps_v2';
+  let state=JSON.parse(localStorage.getItem(KEY)||'null')||{
+    employees:['Sathish','Vikash','Suren','Vijay','Bharath','Meenakshi'],
+    weekdayTarget:12000,
+    weekendTarget:20000,
+    incentiveRate:25,
+    records:[]
   };
 
-  try{
-    const id=staffAccess.outletId+'_'+record.date;
-    await db.collection('outlet_dps_records').doc(id).set(record,{merge:false});
-    const existing=records.findIndex(x=>x.id===id);
-    const local={id,...record,createdAt:null};
-    if(existing>=0) records[existing]=local; else records.unshift(local);
-    records.sort((a,b)=>String(b.date).localeCompare(String(a.date)));
-    renderRecords();
-    showMessage('dailyMessage','Day submitted successfully.','success');
-  }catch(err){
-    console.error(err);
-    if(err.code==='permission-denied'){
-      showMessage('dailyMessage','Permission denied by Firestore rules. The DPS collection rules need to be added.','error');
-    }else{
-      showMessage('dailyMessage','Unable to save this day. Please try again.','error');
-    }
+  function saveState(){localStorage.setItem(KEY,JSON.stringify(state));}
+  function todayISO(){
+    const d=new Date(); d.setMinutes(d.getMinutes()-d.getTimezoneOffset()); return d.toISOString().slice(0,10);
   }
-}
+  function dayInfo(){
+    if(!$('date').value)return null;
+    const d=new Date($('date').value+'T00:00:00');
+    const n=d.getDay();
+    return {name:d.toLocaleDateString('en-IN',{weekday:'long'}),weekend:n===0||n===6};
+  }
+  function setDefaultDate(){$('date').value=todayISO();updateDay();}
 
-function summaryText(c){
-  const outlet=(staffAccess.outletName||staffAccess.outletId||"Crunchery's").toUpperCase();
-  let text=`*${outlet} – DAILY PERFORMANCE SUMMARY*\\n`;
-  text+=`📅 ${formatDate($('date').value)} (${c.info?.name||''})\\n\\n`;
-  text+=`💰 *Daily Sales:* ${money(c.sales)}\\n`;
-  text+=`🎯 *Target:* ${money(c.target)}\\n`;
-  text+=`📈 *Excess Sales:* ${money(c.excess)}\\n`;
-  text+=`🎁 *Incentive Pool:* ${money(c.pool)}\\n`;
-  text+=`⏱️ *Total Staff Hours:* ${c.hours}\\n`;
-  text+=`💵 *Incentive / Hour:* ${money(c.perHour)}\\n\\n`;
-  text+=`*EMPLOYEE DETAILS*\\n`;
-  c.staff.forEach(x=>text+=`${x.name} – ${x.hours} hrs – ${money(x.hours*c.perHour)}\\n`);
-  text+=`\\n_Daily Performance & Incentive System_`;
-  return text;
-}
-
-function openWhatsApp(recordOrCalc){
-  const isRecord=!!recordOrCalc.id;
-  let text;
-  if(isRecord){
-    const r=recordOrCalc;
-    let t=`*${(r.outletName||staffAccess.outletId).toUpperCase()} – DAILY PERFORMANCE SUMMARY*\\n`;
-    t+=`📅 ${formatDate(r.date)} (${r.day||''})\\n\\n`;
-    t+=`💰 *Daily Sales:* ${money(r.sales)}\\n🎯 *Target:* ${money(r.target)}\\n📈 *Excess Sales:* ${money(r.excess)}\\n🎁 *Incentive Pool:* ${money(r.pool)}\\n⏱️ *Total Staff Hours:* ${r.hours}\\n💵 *Incentive / Hour:* ${money(r.perHour)}\\n\\n*EMPLOYEE DETAILS*\\n`;
-    (r.staff||[]).forEach(x=>t+=`${x.name} – ${x.hours} hrs – ${money(x.incentive)}\\n`);
-    text=t;
-  }else{
-    const c=recordOrCalc;
-    if(!c.info){showMessage('dailyMessage','Please select a date.','error');return}
-    if(c.sales<c.target){showMessage('dailyMessage','WhatsApp summary is available only after the target is achieved.','error');return}
-    if(c.hours<=0){showMessage('dailyMessage','Select employees and enter working hours first.','error');return}
-    text=summaryText(c);
+  function renderEmployeeSetup(){
+    $('employeeRows').innerHTML='';
+    state.employees.forEach((name,i)=>{
+      const row=document.createElement('div'); row.className='setup-row';
+      row.innerHTML=`<div><label>Employee ${i+1}</label><input class="employeeName" data-index="${i}" value="${escapeHtml(name)}" placeholder="Employee name"></div>
+      <button class="action danger removeEmployee" data-index="${i}" type="button">Remove</button>`;
+      $('employeeRows').appendChild(row);
+    });
+    document.querySelectorAll('.removeEmployee').forEach(btn=>btn.onclick=()=>{
+      if(state.employees.length<=1){alert('At least one employee is required.');return}
+      state.employees.splice(Number(btn.dataset.index),1); renderEmployeeSetup();
+    });
   }
 
-  const phone=String(settings.whatsapp||'').replace(/\D/g,'');
-  if(!phone){
-    // If outlet WhatsApp is not configured, use the device's WhatsApp share composer.
+  function renderStaff(){
+    $('staffGrid').innerHTML='';
+    state.employees.forEach((name,i)=>{
+      const div=document.createElement('div'); div.className='staff'; div.dataset.i=i;
+      div.innerHTML=`<div class="staff-top"><input class="work" type="checkbox"><span class="staff-name">${escapeHtml(name||'Employee '+(i+1))}</span></div>
+      <div class="staff-hours"><label>Hours</label><input class="hours" type="number" min="0" max="24" step="0.25" value="0" disabled></div>
+      <div class="share">Calculated: <span class="shareAmount">₹0.00</span></div>`;
+      $('staffGrid').appendChild(div);
+      const cb=div.querySelector('.work'),hr=div.querySelector('.hours');
+      cb.onchange=()=>{hr.disabled=!cb.checked;if(!cb.checked)hr.value=0;calculate()};
+      hr.oninput=calculate;
+    });
+    calculate();
+  }
+
+  function updateDay(){const info=dayInfo();$('day').value=info?info.name:'';calculate();}
+
+  function calculate(){
+    const info=dayInfo();
+    const target=info?(info.weekend?Number(state.weekendTarget||0):Number(state.weekdayTarget||0)):0;
+    const sales=Math.max(0,Number($('sales').value||0));
+    const excess=Math.max(0,sales-target);
+    const pool=excess*(Number(state.incentiveRate||0)/100);
+    let hours=0;
+    document.querySelectorAll('.staff').forEach(s=>{
+      const cb=s.querySelector('.work'), hr=s.querySelector('.hours');
+      const h=cb.checked?Math.max(0,Math.min(24,Number(hr.value||0))):0;
+      hours+=h;
+    });
+    const perHour=hours?pool/hours:0;
+    $('mThreshold').textContent=money(target);
+    $('mExcess').textContent=money(excess);
+    $('mPool').textContent=money(pool);
+    $('mHours').textContent=hours.toFixed(2).replace(/\.00$/,'');
+    $('mPerHour').textContent=money(perHour);
+
+    document.querySelectorAll('.staff').forEach(s=>{
+      const cb=s.querySelector('.work'),hr=s.querySelector('.hours');
+      const h=cb.checked?Number(hr.value||0):0;
+      s.querySelector('.shareAmount').textContent=money(h*perHour);
+    });
+    return {info,target,sales,excess,pool,hours,perHour};
+  }
+
+  function breakdown(c){
+    const out=[];
+    document.querySelectorAll('.staff').forEach(s=>{
+      const cb=s.querySelector('.work'); if(!cb.checked)return;
+      const h=Math.max(0,Math.min(24,Number(s.querySelector('.hours').value||0)));
+      const index=Number(s.dataset.i);
+      out.push({name:state.employees[index]||('Employee '+(index+1)),hours:h,incentive:h*c.perHour});
+    });
+    return out;
+  }
+
+  function whatsappText(r){
+    let t=`*CRUNCHERY'S – DAILY INCENTIVE*\\n\\n`;
+    t+=`📅 ${dateDisplay(r.date)} | ${r.day}\\n`;
+    t+=`💰 Sales: ${money(r.sales)}\\n`;
+    t+=`🎯 Target: ${money(r.target)}\\n`;
+    t+=`🎁 Incentive: ${money(r.pool)}\\n`;
+    t+=`⏱️ Total Hours: ${r.hours}\\n`;
+    t+=`💵 Rate/Hr: ${money(r.perHour)}\\n\\n`;
+    t+=`*Employee Share*\\n`;
+    r.breakdown.forEach(x=>{t+=`${x.name} — ${money(x.incentive)}\\n`;});
+    t+=`\\n*Total Incentive: ${money(r.pool)}*`;
+    return t;
+  }
+
+  function openWhatsApp(r){
+    const text=whatsappText(r);
     window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank');
-  }else{
-    window.open('https://wa.me/'+phone+'?text='+encodeURIComponent(text),'_blank');
-  }
-}
-
-function resetEntry(){
-  $('date').value=todayISO();
-  $('sales').value='';
-  document.querySelectorAll('.staff-card').forEach(x=>{
-    x.querySelector('.work').checked=false;
-    x.querySelector('.hours').value=0;
-    x.querySelector('.hours').disabled=true;
-  });
-  clearMessage('dailyMessage');
-  calculate();
-}
-
-function showTab(name){
-  $('dailyTab').classList.toggle('hidden',name!=='daily');
-  $('employeesTab').classList.toggle('hidden',name!=='employees');
-  $('recordsTab').classList.toggle('hidden',name!=='records');
-  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));
-}
-
-function showMessage(id,text,type){
-  const el=$(id);
-  el.className='message '+(type||'');
-  el.textContent=text;
-}
-function clearMessage(id){
-  $(id).className='message';
-  $(id).textContent='';
-}
-function formatDate(s){
-  if(!s)return '';
-  const p=s.split('-');
-  return p.length===3 ? `${p[2]}/${p[1]}/${p[0]}` : s;
-}
-function escapeHtml(s){
-  return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
-}
-function escapeAttr(s){return escapeHtml(s)}
-
-$('date').value=todayISO();
-$('portalBtn').onclick=()=>location.href='../';
-$('logoutBtn').onclick=async()=>{await auth.signOut();location.href='../';};
-$('addEmployeeBtn').onclick=addEmployee;
-$('saveEmployeesBtn').onclick=saveEmployeeSetup;
-$('submitBtn').onclick=submitDay;
-$('whatsappBtn').onclick=()=>openWhatsApp(calculate());
-$('resetBtn').onclick=resetEntry;
-
-['date','sales','weekdayTarget','weekendTarget','rate'].forEach(id=>{
-  $(id).addEventListener(id==='date'?'change':'input',calculate);
-});
-
-document.querySelectorAll('.tab').forEach(btn=>btn.onclick=()=>showTab(btn.dataset.tab));
-
-auth.onAuthStateChanged(async user=>{
-  if(!user){
-    location.href='../';
-    return;
   }
 
-  try{
-    const snap=await db.collection('staff').doc(user.uid).get();
-    if(!snap.exists) throw new Error('Staff access not found.');
-    const data=snap.data()||{};
-    if(data.active===false) throw new Error('This staff account is inactive.');
-    if(!data.outletId) throw new Error('Outlet access is not configured.');
+  function submitDay(){
+    clearMessages();
+    const c=calculate();
+    if(!$('date').value){showError('Please select a date.');return}
+    const b=breakdown(c);
+    if(c.sales<=c.target){showError('Target was not achieved. Only target-achieved days can be submitted.');return}
+    if(!b.length||c.hours<=0){showError('Select at least one employee and enter working hours.');return}
+    if(state.records.some(r=>r.date===$('date').value)){showError('A record already exists for this date. Delete the old record before submitting again.');return}
 
-    staffAccess=data;
-    $('outletNameHeader').textContent=data.outletName||data.outletId;
-
-    await loadData();
-    $('loading').classList.add('hidden');
-  }catch(err){
-    console.error(err);
-    $('loading').classList.add('hidden');
-    $('accessError').classList.remove('hidden');
-    $('accessError').innerHTML='<h3>Access unavailable</h3><div class="error">'+escapeHtml(err.message||'Unable to load outlet access.')+'</div><div class="actions"><button id="backPortalBtn" class="btn btn-secondary" type="button">Back to Portal</button></div>';
-    $('backPortalBtn').onclick=()=>location.href='../';
+    const rec={
+      id:Date.now().toString(),
+      date:$('date').value,
+      day:c.info.name,
+      sales:c.sales,target:c.target,excess:c.excess,pool:c.pool,
+      hours:c.hours,perHour:c.perHour,
+      breakdown:b
+    };
+    state.records.unshift(rec);saveState();renderRecords();
+    $('message').className='message success';
+    $('message').textContent='Day submitted successfully.';
   }
-});
+
+  function renderRecords(){
+    $('emptyRecords').classList.toggle('hidden',state.records.length>0);
+    $('recordsTable').classList.toggle('hidden',state.records.length===0);
+    $('recordsBody').innerHTML='';
+    state.records.forEach(r=>{
+      const tr=document.createElement('tr');
+      const shares=r.breakdown.map(x=>`${escapeHtml(x.name)} — ${money(x.incentive)}`).join('<br>');
+      tr.innerHTML=`<td><strong>${dateDisplay(r.date)}</strong><br><small>${escapeHtml(r.day)}</small></td>
+      <td>${money(r.sales)}</td><td>${money(r.target)}</td><td>${money(r.pool)}</td><td>${r.hours}</td><td>${money(r.perHour)}</td>
+      <td class="record-shares">${shares}</td>
+      <td><button class="smallbtn waRecord" data-id="${r.id}">WhatsApp</button><button class="smallbtn deleteRecord" data-id="${r.id}">Delete</button></td>`;
+      $('recordsBody').appendChild(tr);
+    });
+    document.querySelectorAll('.waRecord').forEach(b=>b.onclick=()=>{
+      const r=state.records.find(x=>x.id===b.dataset.id);if(r)openWhatsApp(r);
+    });
+    document.querySelectorAll('.deleteRecord').forEach(b=>b.onclick=()=>{
+      const r=state.records.find(x=>x.id===b.dataset.id);if(!r)return;
+      if(confirm(`Delete the incentive record for ${dateDisplay(r.date)}?`)){
+        state.records=state.records.filter(x=>x.id!==b.dataset.id);saveState();renderRecords();
+      }
+    });
+  }
+
+  function clearMessages(){
+    ['message','setupMessage','outletMessage'].forEach(id=>{$(id).className='message';$(id).textContent='';});
+  }
+  function showError(msg){$('message').className='message error';$('message').textContent=msg;}
+
+  function saveEmployees(){
+    const names=[...document.querySelectorAll('.employeeName')].map(x=>x.value.trim()).filter(Boolean);
+    if(!names.length){$('setupMessage').className='message error';$('setupMessage').textContent='Add at least one employee.';return}
+    state.employees=names;saveState();renderEmployeeSetup();renderStaff();
+    $('setupMessage').className='message success';$('setupMessage').textContent='Employee setup saved.';
+  }
+  function saveOutlet(){
+    const wd=Math.max(0,Number($('weekdayTarget').value||0));
+    const we=Math.max(0,Number($('weekendTarget').value||0));
+    const rate=Math.max(0,Math.min(100,Number($('incentiveRate').value||0)));
+    state.weekdayTarget=wd;state.weekendTarget=we;state.incentiveRate=rate;saveState();calculate();
+    $('outletMessage').className='message success';$('outletMessage').textContent='Outlet DPS settings saved.';
+  }
+  function loadSetup(){
+    $('weekdayTarget').value=state.weekdayTarget;
+    $('weekendTarget').value=state.weekendTarget;
+    $('incentiveRate').value=state.incentiveRate;
+    renderEmployeeSetup();
+  }
+
+  function show(section){
+    ['daily','setup','records'].forEach(id=>$(id).classList.toggle('hidden',id!==section));
+    $('tabDaily').classList.toggle('active',section==='daily');
+    $('tabSetup').classList.toggle('active',section==='setup');
+    $('tabRecords').classList.toggle('active',section==='records');
+    if(section==='records')renderRecords();
+    if(section==='setup')loadSetup();
+  }
+
+  $('tabDaily').onclick=()=>show('daily');
+  $('tabSetup').onclick=()=>show('setup');
+  $('tabRecords').onclick=()=>show('records');
+  $('date').onchange=updateDay;
+  $('sales').oninput=calculate;
+  $('submitBtn').onclick=submitDay;
+  $('whatsappBtn').onclick=()=>{
+    const c=calculate(),b=breakdown(c);
+    if(!c.info){showError('Please select a date.');return}
+    if(c.sales<=c.target){showError('Target was not achieved. WhatsApp summary is available only for an achieved day.');return}
+    if(!b.length||c.hours<=0){showError('Select at least one employee and enter working hours.');return}
+    openWhatsApp({date:$('date').value,day:c.info.name,sales:c.sales,target:c.target,pool:c.pool,hours:c.hours,perHour:c.perHour,breakdown:b});
+  };
+  $('resetBtn').onclick=()=>{$('sales').value='';document.querySelectorAll('.staff').forEach(s=>{s.querySelector('.work').checked=false;s.querySelector('.hours').value=0;s.querySelector('.hours').disabled=true});clearMessages();calculate()};
+  $('addEmployeeBtn').onclick=()=>{state.employees.push('');renderEmployeeSetup()};
+  $('saveEmployeesBtn').onclick=saveEmployees;
+  $('saveOutletBtn').onclick=saveOutlet;
+
+  setDefaultDate();loadSetup();renderStaff();renderRecords();calculate();
+})();
 </script>
 </body>
 </html>
