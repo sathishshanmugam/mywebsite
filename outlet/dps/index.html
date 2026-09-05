@@ -28,7 +28,7 @@ input:focus,select:focus{outline:2px solid #f6b27f;border-color:var(--accent)}
 .staff-top input{width:20px;height:20px}
 .staff-name{font-size:16px}
 .staff-hours{margin-top:12px}
-.share{margin-top:10px;padding:10px 12px;border-radius:10px;background:#f7f4ee;font-weight:900}
+.share{margin-top:12px;padding:12px 14px;border-radius:12px;background:#eef7ef;border:1px solid #cfe5d3;font-weight:900;color:#16834b;display:flex;justify-content:space-between;align-items:center;gap:10px}.share span{font-size:20px}
 .metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
 .metric{background:#f8f6f1;border:1px solid var(--line);border-radius:15px;padding:15px}
 .metric span{display:block;font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
@@ -48,7 +48,7 @@ th{font-size:12px;color:var(--muted)}
 .footer{text-align:center;color:var(--muted);font-size:12px;padding:14px}
 .note{background:#fff8ed;border-left:4px solid var(--accent);padding:13px 15px;border-radius:10px;color:#665c50;font-size:13px;margin-top:15px}
 @media(max-width:900px){.grid,.grid2{grid-template-columns:1fr 1fr}.metrics{grid-template-columns:repeat(2,1fr)}.staff-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.container{padding:14px}.card{padding:22px 18px;border-radius:20px}.grid,.grid2,.metrics,.staff-grid{grid-template-columns:1fr}h1{font-size:31px}.topbar button{flex:1;padding:13px 12px}.setup-row{grid-template-columns:1fr}}
+@media(max-width:600px){.container{padding:14px}.card{padding:22px 18px;border-radius:20px}.grid,.grid2,.metrics,.staff-grid{grid-template-columns:1fr}h1{font-size:31px}.topbar button{flex:1;padding:13px 12px}.setup-row{grid-template-columns:1fr}.share{font-size:14px}.share span{font-size:18px}}
 </style>
 </head>
 <body>
@@ -75,11 +75,11 @@ th{font-size:12px;color:var(--muted)}
     <div class="card">
       <h2>Staff Working Today</h2>
       <div id="staffGrid" class="staff-grid"></div>
-      <div class="hint">Tick the employees working today and enter their working hours.</div>
+      <div class="hint">Tick the employees working today and enter their working hours. Each employee's incentive share is calculated instantly from their hours.</div>
     </div>
 
     <div class="card">
-      <h2>Calculation</h2>
+      <h2>Live Calculation</h2><p class="subtitle" style="margin-bottom:16px">Employee share = Working Hours × Incentive / Hour. The amount beside each employee updates immediately.</p>
       <div class="metrics">
         <div class="metric"><span>Target</span><strong id="mThreshold">₹0.00</strong></div>
         <div class="metric"><span>Excess Sales</span><strong id="mExcess">₹0.00</strong></div>
@@ -189,8 +189,8 @@ th{font-size:12px;color:var(--muted)}
     state.employees.forEach((name,i)=>{
       const div=document.createElement('div'); div.className='staff'; div.dataset.i=i;
       div.innerHTML=`<div class="staff-top"><input class="work" type="checkbox"><span class="staff-name">${escapeHtml(name||'Employee '+(i+1))}</span></div>
-      <div class="staff-hours"><label>Hours</label><input class="hours" type="number" min="0" max="24" step="0.25" value="0" disabled></div>
-      <div class="share">Calculated: <span class="shareAmount">₹0.00</span></div>`;
+      <div class="staff-hours"><label>Working Hours</label><input class="hours" type="number" min="0" max="24" step="0.25" value="0" disabled></div>
+      <div class="share"><span>Incentive Share</span><span class="shareAmount">₹0.00</span></div>`;
       $('staffGrid').appendChild(div);
       const cb=div.querySelector('.work'),hr=div.querySelector('.hours');
       cb.onchange=()=>{hr.disabled=!cb.checked;if(!cb.checked)hr.value=0;calculate()};
@@ -290,7 +290,7 @@ th{font-size:12px;color:var(--muted)}
       tr.innerHTML=`<td><strong>${dateDisplay(r.date)}</strong><br><small>${escapeHtml(r.day)}</small></td>
       <td>${money(r.sales)}</td><td>${money(r.target)}</td><td>${money(r.pool)}</td><td>${r.hours}</td><td>${money(r.perHour)}</td>
       <td class="record-shares">${shares}</td>
-      <td><button class="smallbtn waRecord" data-id="${r.id}">WhatsApp</button><button class="smallbtn deleteRecord" data-id="${r.id}">Delete</button></td>`;
+      <td><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="smallbtn waRecord" data-id="${r.id}">WhatsApp</button><button class="smallbtn deleteRecord" data-id="${r.id}" style="color:#c62828;border-color:#e5b9b9">Delete</button></div></td>`;
       $('recordsBody').appendChild(tr);
     });
     document.querySelectorAll('.waRecord').forEach(b=>b.onclick=()=>{
@@ -359,5 +359,6 @@ th{font-size:12px;color:var(--muted)}
   setDefaultDate();loadSetup();renderStaff();renderRecords();calculate();
 })();
 </script>
+<!-- DPS v3: live employee incentive display + record delete -->
 </body>
 </html>
