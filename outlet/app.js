@@ -321,32 +321,6 @@ function resetPhoneLogin(){
   }
 }
 
-async function loadStaffAccess(user){
-  const phone = user.phoneNumber;
-
-  if(!phone){
-    throw new Error("PHONE_NOT_AVAILABLE");
-  }
-
-  const doc = await db.collection("staff_access").doc(phone).get();
-
-  if(!doc.exists){
-    throw new Error("OUTLET_NOT_CONFIGURED");
-  }
-
-  const data = doc.data();
-
-  if(data.active === false){
-    throw new Error("ACCESS_DISABLED");
-  }
-
-  if(!data.outletId){
-    throw new Error("OUTLET_NOT_CONFIGURED");
-  }
-
-  return data;
-}
-
 $("sendOtpBtn").addEventListener("click", sendOtp);
 $("verifyOtpBtn").addEventListener("click", verifyOtp);
 $("changeNumberBtn").addEventListener("click", resetPhoneLogin);
