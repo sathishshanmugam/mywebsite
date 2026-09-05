@@ -203,6 +203,37 @@ async function setAll(value){
   }
 }
 
+async function loadAvailability(){
+
+  if(!staffAccess?.outletId){
+    availability.clear();
+    renderMenu();
+    updateSummary();
+    return;
+  }
+
+  availability.clear();
+
+  const snapshot = await db
+    .collection("outlet_products")
+    .where("outletId", "==", staffAccess.outletId)
+    .get();
+
+  snapshot.forEach(doc => {
+    const data = doc.data();
+
+    if(data.productId){
+      availability.set(
+        data.productId,
+        data.available === true
+      );
+    }
+  });
+
+  renderMenu();
+  updateSummary();
+}
+
 function friendlyAuthError(error){
   const code = error?.code || "";
 
