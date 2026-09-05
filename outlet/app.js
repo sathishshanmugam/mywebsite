@@ -105,22 +105,34 @@ function updateSummary(){
   $("offItems").textContent = total - available;
 }
 
-async function loadAvailability(){
-  availability = new Map();
+async function loadStaffAccess(user){
 
-  const snapshot = await db.collection("outlet_products")
-    .where("outletId","==",staffAccess.outletId)
+  if(!user?.uid){
+    throw new Error("USER_NOT_AVAILABLE");
+  }
+
+  // Firebase Authentication UID identifies the outlet company phone.
+  // Firestore staff/{UID} tells us which outlet this phone belongs to.
+  const doc = await db
+    .collection("staff")
+    .doc(user.uid)
     .get();
 
-  snapshot.forEach(doc => {
-    const data = doc.data();
-    if(data.productId){
-      availability.set(data.productId, data.available === true);
-    }
-  });
+  if(!doc.exists){
+    throw new Error("OUTLET_NOT_CONFIGURED");
+  }
 
-  renderMenu();
-  updateSummary();
+  const data = doc.data();
+
+  if(data.active === false){
+    throw new Error("ACCESS_DISABLED");
+  }
+
+  if(!data.outletId){
+    throw new Error("OUTLET_NOT_CONFIGURED");
+  }
+
+  return data;
 }
 
 async function setAvailability(productId, value){
