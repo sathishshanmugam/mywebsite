@@ -113,10 +113,10 @@ async function loadStaffAccess(user){
 
   // Firebase Authentication UID identifies the outlet company phone.
   // Firestore staff/{UID} tells us which outlet this phone belongs to.
-  const doc = await db
-    .collection("staff_access")
-    .doc(user.phoneNumber)
-    .get();
+ const doc = await db
+  .collection("staff")
+  .doc(user.uid)
+  .get();
 
   if(!doc.exists){
     throw new Error("OUTLET_NOT_CONFIGURED");
