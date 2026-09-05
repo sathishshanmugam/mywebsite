@@ -68,7 +68,7 @@ function renderMenu(){
   }
 
   list.innerHTML = items.map(item => {
-    const productId = item.productId || slugifyProductName(item.name);
+    const productId = slugifyProductName(item.name);
     const on = availability.get(productId) === true;
 
     return `
@@ -96,7 +96,7 @@ function updateSummary(){
   let available = 0;
 
   MENU.forEach(item => {
-    const id = item.productId || slugifyProductName(item.name);
+    const id = slugifyProductName(item.name);
     if(availability.get(id) === true) available++;
   });
 
@@ -174,7 +174,7 @@ async function setAll(value){
   const batch = db.batch();
 
   MENU.forEach(item => {
-    const productId = item.productId || slugifyProductName(item.name);
+    const productId = slugifyProductName(item.name);
     availability.set(productId, value);
 
     const ref = db.collection("outlet_products")
