@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Crunchery's DPS</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="shell">
+<section id="loginView" class="card auth">
+  <div class="brand">CRUNCHERY'S</div><h1>Outlet Portal</h1>
+  <p class="muted">Use your outlet company phone number.</p>
+  <div id="phoneStep"><label>Mobile number</label><input id="phone" type="tel" inputmode="tel" placeholder="+91 XXXXX XXXXX">
+  <div id="recaptcha-container" class="recaptcha"></div><button id="sendOtpBtn" class="primary">Send OTP</button></div>
+  <div id="otpStep" class="hidden"><label>Enter OTP</label><input id="otp" inputmode="numeric" maxlength="6" placeholder="6-digit OTP">
+  <button id="verifyOtpBtn" class="primary">Verify & Login</button><button id="changeNumberBtn" class="text-btn">Change number</button></div>
+  <p id="loginError" class="error"></p>
+</section>
+
+<section id="appView" class="hidden">
+<header class="topbar"><div><div class="brand small">CRUNCHERY'S</div><h1 id="outletName">Outlet</h1><p class="muted">DPS</p></div>
+<div class="head-actions"><a class="ghost link-btn" href="../">Portal</a><button id="logoutBtn" class="ghost">Logout</button></div></header>
+
+<section class="card panel">
+  <div class="panel-head"><div><div class="eyebrow">DAILY PERFORMANCE</div><h2>Target Achieved</h2><p class="muted">Only submit a day when the outlet has achieved its target.</p></div></div>
+  <div class="form-grid">
+    <div><label>Date</label><input id="date" type="date"></div>
+    <div><label>Day</label><input id="dayName" readonly></div>
+    <div><label>Daily Sales</label><input id="sales" type="number" min="0" step="1" placeholder="₹"></div>
+  </div>
+  <div class="form-grid">
+    <div><label>Weekday Target</label><input id="weekdayTarget" type="number" min="0" value="12000"></div>
+    <div><label>Weekend Target</label><input id="weekendTarget" type="number" min="0" value="15000"></div>
+    <div><label>Incentive Rate %</label><input id="rate" type="number" min="0" step="0.1" value="25"></div>
+  </div>
+  <div id="targetStatus" class="status"></div>
+
+  <div class="staff-head"><h3>Staff Hours</h3><button id="addStaffBtn" class="secondary">+ Add Staff</button></div>
+  <div id="staffList"></div>
+
+  <div class="calc-grid">
+    <div><span>Target</span><strong id="target">₹0</strong></div>
+    <div><span>Excess Sales</span><strong id="excess">₹0</strong></div>
+    <div><span>Incentive Pool</span><strong id="pool">₹0</strong></div>
+    <div><span>Total Hours</span><strong id="totalHours">0</strong></div>
+    <div><span>Incentive / Hour</span><strong id="perHour">₹0</strong></div>
+  </div>
+  <button id="submitBtn" class="primary">Submit Achieved Day</button>
+  <button id="whatsappBtn" class="secondary full">WhatsApp Summary</button>
+  <p id="saveStatus" class="save-status"></p>
+</section>
+
+<section class="card panel">
+<h2>Achieved Days</h2><p class="muted">Records are automatically limited to this outlet.</p>
+<div id="records" class="records"></div>
+</section>
+</section>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore-compat.js"></script>
+<script>const firebaseConfig = {
+  apiKey: "AIzaSyDIU4hrqUMLDDwqTFN1xkTXdkVOqDfTC2c",
+  authDomain: "cruncherys-ordering.firebaseapp.com",
+  projectId: "cruncherys-ordering",
+  storageBucket: "cruncherys-ordering.firebasestorage.app",
+  messagingSenderId: "612969187132",
+  appId: "1:612969187132:web:5a8140707d0958fdcec039"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const auth = firebase.auth();
+</script>
+<script>let currentUser = null;
+let staffAccess = null;
+let confirmationResult = null;
+let recaptchaVerifier = null;
+
+const $ = id => document.getElementById(id);
+const show = (id, visible) => $(id)?.classList.toggle("hidden", !visible);
+
+function normalizePhone(value){
+  let phone = String(value || "").trim().replace(/[\s()-]/g,"");
+  if(phone.startsWith("0")) phone = "+91" + phone.slice(1);
+  if(/^\d{10}$/.test(phone)) phone = "+91" + phone;
+  return phone;
+}
+
+function friendlyAuthError(error){
+  const code = error?.code || "";
+  if(code === "auth/invalid-phone-number") return "Please enter a valid Indian mobile number.";
+  if(code === "auth/too-many-requests") return "Too many attempts. Please try again later.";
+  if(code === "auth/quota-exceeded") return "SMS quota has been reached. Please try again later.";
+  if(code === "auth/code-expired") return "This OTP has expired. Please request a new OTP.";
+  if(code === "auth/invalid-verification-code") return "Incorrect OTP. Please try again.";
+  if(code === "auth/missing-verification-code") return "Please enter the OTP.";
+  if(code === "auth/captcha-check-failed") return "reCAPTCHA verification failed. Please try again.";
+  return error?.message || "Authentication failed.";
+}
+
+/*
+  IMPORTANT:
+  Your current Firestore rules use:
+    staff_access/{phoneNumber}
+  and the phone number from Firebase Authentication.
+  Therefore the portal uses that same source instead of staff/{UID}.
+*/
+async function loadStaffAccess(user){
+  if(!user?.uid || !user.phoneNumber) throw new Error("USER_NOT_AVAILABLE");
+
+  const phone = user.phoneNumber;
+  const doc = await db.collection("staff_access").doc(phone).get();
+
+  if(!doc.exists) throw new Error("OUTLET_NOT_CONFIGURED");
+
+  const data = doc.data();
+  if(data.active === false) throw new Error("ACCESS_DISABLED");
+  if(!data.outletId) throw new Error("OUTLET_NOT_CONFIGURED");
+
+  return { ...data, phoneNumber: phone };
+}
+
+function setupRecaptcha(containerId="recaptcha-container", sendButtonId="sendOtpBtn", errorId="loginError"){
+  if(recaptchaVerifier) return;
+
+  recaptchaVerifier = new firebase.auth.RecaptchaVerifier(containerId, {
+    size: "normal",
+    callback: () => { if($(sendButtonId)) $(sendButtonId).disabled = false; },
+    "expired-callback": () => { if($(sendButtonId)) $(sendButtonId).disabled = false; }
+  });
+
+  recaptchaVerifier.render().catch(error => {
+    console.error(error);
+    if($(errorId)) $(errorId).textContent = "Could not load reCAPTCHA. Please refresh the page.";
+  });
+}
+
+async function sendOtp(){
+  $("loginError").textContent = "";
+  const phone = normalizePhone($("phone").value);
+
+  if(!/^\+91\d{10}$/.test(phone)){
+    $("loginError").textContent = "Enter a valid 10-digit Indian mobile number.";
+    return;
+  }
+
+  $("sendOtpBtn").disabled = true;
+  try{
+    setupRecaptcha();
+    confirmationResult = await auth.signInWithPhoneNumber(phone, recaptchaVerifier);
+    show("phoneStep", false);
+    show("otpStep", true);
+    $("otp").focus();
+  }catch(error){
+    console.error(error);
+    $("loginError").textContent = friendlyAuthError(error);
+    try{
+      if(recaptchaVerifier){ recaptchaVerifier.clear(); recaptchaVerifier = null; }
+      setupRecaptcha();
+    }catch(e){ console.error(e); }
+    $("sendOtpBtn").disabled = false;
+  }
+}
+
+async function verifyOtp(){
+  $("loginError").textContent = "";
+  if(!confirmationResult){
+    $("loginError").textContent = "Please request a new OTP.";
+    return;
+  }
+
+  const otp = $("otp").value.trim();
+  if(!/^\d{6}$/.test(otp)){
+    $("loginError").textContent = "Enter the 6-digit OTP.";
+    return;
+  }
+
+  $("verifyOtpBtn").disabled = true;
+  try{
+    await confirmationResult.confirm(otp);
+  }catch(error){
+    console.error(error);
+    $("loginError").textContent = friendlyAuthError(error);
+    $("verifyOtpBtn").disabled = false;
+  }
+}
+
+function resetPhoneLogin(){
+  confirmationResult = null;
+  $("otp").value = "";
+  $("loginError").textContent = "";
+  show("otpStep", false);
+  show("phoneStep", true);
+  $("sendOtpBtn").disabled = false;
+
+  try{
+    if(recaptchaVerifier){ recaptchaVerifier.clear(); recaptchaVerifier = null; }
+    setupRecaptcha();
+  }catch(error){ console.error(error); }
+}
+
+function requireStaffAccess(callback){
+  auth.onAuthStateChanged(async user => {
+    currentUser = user;
+
+    if(!user){
+      show("loginView", true);
+      show("appView", false);
+      return;
+    }
+
+    try{
+      staffAccess = await loadStaffAccess(user);
+      show("loginView", false);
+      show("appView", true);
+      callback?.(staffAccess);
+    }catch(error){
+      console.error("STAFF ACCESS ERROR:", error);
+      await auth.signOut();
+      $("loginError").textContent =
+        `${error.code || "ERROR"}: ${error.message || error}`;
+    }
+  });
+}
+
+$("sendOtpBtn")?.addEventListener("click", sendOtp);
+$("verifyOtpBtn")?.addEventListener("click", verifyOtp);
+$("changeNumberBtn")?.addEventListener("click", resetPhoneLogin);
+$("logoutBtn")?.addEventListener("click", () => auth.signOut());
+</script>
+<script src="dps.js"></script>
+</body></html>
