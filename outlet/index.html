@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crunchery's Outlet Staff</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section id="loginView" class="auth-card">
+      <div class="brand-mark">CRUNCHERY'S</div>
+      <h1>Outlet Staff Login</h1>
+      <p class="muted">Use your outlet company phone number.</p>
+
+      <div id="phoneStep">
+        <label for="phone">Mobile number</label>
+        <input id="phone" type="tel" inputmode="tel" autocomplete="tel"
+               placeholder="+91 XXXXX XXXXX" required>
+        <div id="recaptcha-container" class="recaptcha"></div>
+        <button id="sendOtpBtn" class="primary" type="button">Send OTP</button>
+      </div>
+
+      <div id="otpStep" class="hidden">
+        <label for="otp">Enter OTP</label>
+        <input id="otp" type="text" inputmode="numeric" autocomplete="one-time-code"
+               maxlength="6" placeholder="6-digit OTP">
+        <button id="verifyOtpBtn" class="primary" type="button">Verify & Login</button>
+        <button id="changeNumberBtn" class="text-btn" type="button">Change number</button>
+      </div>
+
+      <p id="loginError" class="error"></p>
+    </section>
+
+    <section id="dashboardView" class="hidden">
+      <header class="topbar">
+        <div>
+          <div class="brand-mark small">CRUNCHERY'S</div>
+          <h1 id="outletName">Outlet</h1>
+          <p id="staffName" class="muted"></p>
+        </div>
+        <button id="logoutBtn" class="ghost">Logout</button>
+      </header>
+
+      <div id="accessError" class="error-banner hidden"></div>
+
+      <section class="summary-grid">
+        <div class="summary-card">
+          <span>Menu Items</span>
+          <strong id="totalItems">0</strong>
+        </div>
+        <div class="summary-card">
+          <span>Available</span>
+          <strong id="availableItems">0</strong>
+        </div>
+        <div class="summary-card">
+          <span>Off / Sold Out</span>
+          <strong id="offItems">0</strong>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Menu Availability</h2>
+            <p class="muted">Turn an item ON when it is available for this outlet.</p>
+          </div>
+          <div class="actions">
+            <button id="allOnBtn" class="secondary">All ON</button>
+            <button id="allOffBtn" class="secondary">All OFF</button>
+          </div>
+        </div>
+
+        <div class="filter-row">
+          <input id="searchInput" type="search" placeholder="Search menu item...">
+          <select id="categoryFilter">
+            <option value="">All categories</option>
+          </select>
+        </div>
+
+        <div id="saveStatus" class="save-status"></div>
+        <div id="menuList" class="menu-list"></div>
+      </section>
+    </section>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDIU4hrqUMLDDwqTFN1xkTXdkVOqDfTC2c",
+      authDomain: "cruncherys-ordering.firebaseapp.com",
+      projectId: "cruncherys-ordering",
+      storageBucket: "cruncherys-ordering.firebasestorage.app",
+      messagingSenderId: "612969187132",
+      appId: "1:612969187132:web:5a8140707d0958fdcec039"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const auth = firebase.auth();
+  </script>
+
+  <script src="menu-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
