@@ -107,18 +107,32 @@ function friendlyAuthError(error){
   Therefore the portal uses that same source instead of staff/{UID}.
 */
 async function loadStaffAccess(user){
-  if(!user?.uid || !user.phoneNumber) throw new Error("USER_NOT_AVAILABLE");
+  if(!user?.uid || !user.phoneNumber){
+    throw new Error("USER_NOT_AVAILABLE");
+  }
 
   const phone = user.phoneNumber;
-  const doc = await db.collection("staff_access").doc(phone).get();
 
-  if(!doc.exists) throw new Error("OUTLET_NOT_CONFIGURED");
+  const doc = await db
+    .collection("staff_access")
+    .doc(phone)
+    .get();
+
+  if(!doc.exists){
+    throw new Error("OUTLET_NOT_CONFIGURED");
+  }
 
   const data = doc.data();
-  if(data.active === false) throw new Error("ACCESS_DISABLED");
-  if(!data.outletId) throw new Error("OUTLET_NOT_CONFIGURED");
 
-  return { ...data, phoneNumber: phone };
+  if(data.active === false){
+    throw new Error("ACCESS_DISABLED");
+  }
+
+  if(!data.outletId){
+    throw new Error("OUTLET_NOT_CONFIGURED");
+  }
+
+  return data;
 }
 
 function setupRecaptcha(containerId="recaptcha-container", sendButtonId="sendOtpBtn", errorId="loginError"){
