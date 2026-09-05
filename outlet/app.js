@@ -353,16 +353,14 @@ auth.onAuthStateChanged(async user => {
 
     renderCategories();
     await loadAvailability();
-  }catch(error){
-    console.error(error);
+ }catch(error){
+  console.error("STAFF LOGIN ERROR:", error);
 
-    let message = "This phone number is not configured for outlet staff access.";
-    if(error.message === "ACCESS_DISABLED") message = "Staff access for this outlet is disabled.";
-    if(error.message === "OUTLET_NOT_CONFIGURED") message = "This phone number has not been assigned to an outlet.";
+  await auth.signOut();
 
-    await auth.signOut();
-    $("loginError").textContent = message;
-  }
+  $("loginError").textContent =
+    `${error.code || "ERROR"}: ${error.message || error}`;
+}
 });
 
 // Prepare reCAPTCHA when the page loads.
