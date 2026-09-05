@@ -713,6 +713,7 @@ let selectedOutletName = "";
 let selectedOutletWhatsapp = "";
 let selectedOrderType = "";
 let availableProductIds = new Set();
+let availabilityUnsubscribe = null;
 
 const ORDER_TYPE_LABELS = {
   "dine-in": "Dine-In",
@@ -728,7 +729,13 @@ function slugifyProductName(name){
     .replace(/^-+|-+$/g, "");
 
 }
-async function loadOutletAvailability(outletId){
+function loadOutletAvailability(outletId){
+
+  // Stop listening to the previous outlet
+  if(availabilityUnsubscribe){
+    availabilityUnsubscribe();
+    availabilityUnsubscribe = null;
+  }
 
   availableProductIds = new Set();
 
@@ -737,43 +744,43 @@ async function loadOutletAvailability(outletId){
     return;
   }
 
-  try{
+  availabilityUnsubscribe = db
+    .collection("outlet_products")
+    .where("outletId", "==", outletId)
+    .onSnapshot(snapshot => {
 
-    const snapshot = await db
-      .collection("outlet_products")
-      .where("outletId", "==", outletId)
-      .where("available", "==", true)
-      .get();
+      availableProductIds = new Set();
 
-    snapshot.forEach(doc => {
+      snapshot.forEach(doc => {
 
-      const data = doc.data();
+        const data = doc.data();
 
-      if(data.productId){
-        availableProductIds.add(data.productId);
-      }
+        if(
+          data.productId &&
+          data.available === true
+        ){
+          availableProductIds.add(data.productId);
+        }
+
+      });
+
+      console.log(
+        `🔥 ${outletId}: ${availableProductIds.size} products ON`
+      );
+
+      renderMenu();
+
+    }, error => {
+
+      console.error(
+        "❌ Failed to listen to outlet availability:",
+        error
+      );
+
+      availableProductIds = new Set();
+      renderMenu();
 
     });
-
-    console.log(
-      `🔥 ${outletId}: ${availableProductIds.size} products ON`
-    );
-
-    renderMenu();
-
-  }catch(error){
-
-    console.error(
-      "❌ Failed to load outlet availability:",
-      error
-    );
-
-    alert(
-      "Unable to load the selected outlet menu. Please try again."
-    );
-
-  }
-
 }
 async function selectOutlet(outletId){
 
