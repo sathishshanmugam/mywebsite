@@ -56,3 +56,23 @@ input:focus,select:focus{border-color:#d85c16}
 .recaptcha{margin:16px 0 2px;min-height:78px}
 .text-btn{border:0;background:none;padding:10px 0;color:#6f756d;text-decoration:underline;cursor:pointer}
 .text-btn:hover{color:#d85c16}
+.topbar-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.portal-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  color:#243126;
+}
+
+@media(max-width:650px){
+  .topbar-actions{
+    flex-direction:column;
+    align-items:stretch;
+  }
+}
