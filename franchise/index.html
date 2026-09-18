@@ -629,19 +629,170 @@
       .cost-row{grid-template-columns:1fr}
       .cost-value{white-space:normal}
     }
+    /* =====================================================
+   FRANCHISE HEADER
+   ===================================================== */
+
+.franchise-header {
+  width: 100%;
+  height: 78px;
+  background: #f7f3eb;
+  border-bottom: 1px solid #ded8cd;
+  position: relative;
+  z-index: 100;
+}
+
+.franchise-header-inner {
+  width: min(1220px, calc(100% - 48px));
+  height: 100%;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+/* LOGO */
+
+.franchise-logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.franchise-logo img {
+  display: block;
+  width: 190px;
+  height: auto;
+  max-height: 58px;
+  object-fit: contain;
+}
+
+/* NAVIGATION */
+
+.franchise-nav {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  margin-left: auto;
+}
+
+.franchise-nav a {
+  color: #69736c;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.franchise-nav a:hover {
+  color: #f15a0a;
+}
+
+/* APPLY NOW */
+
+.franchise-apply {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 145px;
+  height: 50px;
+
+  border-radius: 14px;
+
+  background: #f15a0a;
+  color: white;
+
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 900;
+
+  box-shadow: 0 7px 18px rgba(241, 90, 10, .14);
+}
+
+.franchise-apply:hover {
+  background: #df4f06;
+}
+
+
+/* TABLET */
+
+@media (max-width: 900px) {
+
+  .franchise-header {
+    height: 72px;
+  }
+
+  .franchise-header-inner {
+    width: calc(100% - 32px);
+    gap: 18px;
+  }
+
+  .franchise-logo img {
+    width: 165px;
+    max-height: 50px;
+  }
+
+  .franchise-nav {
+    gap: 18px;
+  }
+
+  .franchise-nav a {
+    font-size: 12px;
+  }
+
+  .franchise-apply {
+    width: 120px;
+    height: 44px;
+    font-size: 12px;
+  }
+}
+
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+
+  .franchise-header {
+    height: 68px;
+  }
+
+  .franchise-header-inner {
+    width: calc(100% - 24px);
+  }
+
+  .franchise-logo img {
+    width: 145px;
+    max-height: 46px;
+  }
+
+  .franchise-nav {
+    display: none;
+  }
+
+  .franchise-apply {
+    width: 112px;
+    height: 42px;
+    font-size: 11px;
+  }
+}
   </style>
 </head>
 
 <body>
 
-  <header class="site-header">
-  <div class="site-header-inner">
+  <header class="franchise-header">
+  <div class="franchise-header-inner">
 
-    <a href="/" class="site-logo">
+    <!-- Crunchery's Logo -->
+    <a href="/" class="franchise-logo">
       <img src="/assets/logo.png" alt="Crunchery's">
     </a>
 
-    <nav class="site-nav">
+    <!-- Franchise Navigation -->
+    <nav class="franchise-nav">
       <a href="#overview">Overview</a>
       <a href="#investment">Investment</a>
       <a href="#break-even">Break-Even</a>
@@ -649,12 +800,10 @@
       <a href="#faq">FAQ</a>
     </nav>
 
-    <a href="#franchise-enquiry" class="site-apply-btn">
+    <!-- Apply Button -->
+    <a href="#franchise-enquiry" class="franchise-apply">
       Apply Now
     </a>
-
-  </div>
-</header>
 
   <main class="container" id="franchise-page-only">
 
