@@ -55,138 +55,191 @@ body{
 
 
 /* =========================================================
-   HEADER
+   HEADER — CRUNCHERY'S MAIN-SITE STYLE
+   Scoped to this franchise page only.
    ========================================================= */
 
 .franchise-header{
   width:100% !important;
-  height:78px !important;
-
-  background:rgba(246,241,231,.97) !important;
-
+  min-height:196px !important;
+  background:#fffaf3 !important;
   border-bottom:1px solid var(--fr-line) !important;
-
   position:sticky !important;
   top:0 !important;
   z-index:9999 !important;
-
-  backdrop-filter:blur(12px);
 }
 
 .franchise-header-inner{
   width:100% !important;
-  max-width:1400px !important;
-  height:100% !important;
-
+  max-width:1660px !important;
+  min-height:196px !important;
   margin:0 auto !important;
-  padding:0 24px !important;
-
+  padding:18px 28px 20px !important;
   display:grid !important;
-
-  grid-template-columns:
-    220px
-    minmax(0,1fr)
-    160px !important;
-
+  grid-template-columns:minmax(560px,620px) minmax(0,1fr) !important;
+  grid-template-rows:42px 1fr !important;
+  column-gap:38px !important;
   align-items:center !important;
-
-  gap:20px !important;
 }
 
-
-/* =========================================================
-   LOGO
-   ========================================================= */
-
+/* Full brand block */
 .franchise-logo{
-  width:auto !important;
-
+  grid-column:1 !important;
+  grid-row:1 / span 2 !important;
   display:flex !important;
   align-items:center !important;
   justify-content:flex-start !important;
-
+  gap:28px !important;
+  width:max-content !important;
+  max-width:100% !important;
   text-decoration:none !important;
 }
 
 .franchise-logo img{
   display:block !important;
-
-  width:52px !important;
-  height:52px !important;
-
-  max-width:52px !important;
-  max-height:52px !important;
-
+  width:128px !important;
+  height:128px !important;
+  max-width:128px !important;
+  max-height:128px !important;
+  flex:0 0 128px !important;
   object-fit:contain !important;
 }
 
+/* Wordmark beside the repository logo */
+.franchise-wordmark{
+  display:flex !important;
+  flex-direction:column !important;
+  width:430px !important;
+  max-width:100% !important;
+}
 
-/* =========================================================
-   NAV
-   ========================================================= */
+.franchise-wordmark-name{
+  font-family:"Arial Narrow","Roboto Condensed",Impact,sans-serif !important;
+  font-size:64px !important;
+  line-height:.88 !important;
+  font-weight:900 !important;
+  letter-spacing:-2px !important;
+  color:#241b16 !important;
+  white-space:nowrap !important;
+}
 
-.franchise-nav{
+.franchise-wordmark-name .orange{
+  color:#ef5b00 !important;
+}
+
+.franchise-wordmark-name sup{
+  font-family:Arial,sans-serif !important;
+  font-size:16px !important;
+  vertical-align:top !important;
+  position:relative !important;
+  top:-2px !important;
+  margin-left:3px !important;
+}
+
+.franchise-wordmark-rule{
   width:100% !important;
+  height:5px !important;
+  background:#ef5b00 !important;
+  margin:14px 0 10px !important;
+}
 
+.franchise-wordmark-tagline{
+  color:#17243d !important;
+  font-size:17px !important;
+  line-height:1 !important;
+  font-weight:950 !important;
+  letter-spacing:.7px !important;
+  white-space:nowrap !important;
+}
+
+.franchise-wordmark-tagline::before{
+  content:"★" !important;
+  margin-right:16px !important;
+}
+
+.franchise-wordmark-tagline::after{
+  content:"★" !important;
+  margin-left:16px !important;
+}
+
+/* Top-right brand promises */
+.franchise-utilities{
+  grid-column:2 !important;
+  grid-row:1 !important;
+  justify-self:end !important;
   display:flex !important;
   align-items:center !important;
-  justify-content:center !important;
+  justify-content:flex-end !important;
+  color:#3b342e !important;
+  font-size:13px !important;
+  font-weight:800 !important;
+  white-space:nowrap !important;
+}
 
-  gap:44px !important;
+.franchise-utility{
+  padding:0 18px !important;
+  border-right:1px solid #d8d0c4 !important;
+}
+
+.franchise-utility:last-child{
+  padding-right:0 !important;
+  border-right:0 !important;
+}
+
+/* Navigation row */
+.franchise-nav{
+  grid-column:2 !important;
+  grid-row:2 !important;
+  width:100% !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-end !important;
+  gap:34px !important;
+  padding-top:12px !important;
 }
 
 .franchise-nav a{
   display:block !important;
-
-  padding:28px 0 !important;
-
-  color:#606a63 !important;
-
+  padding:13px 0 !important;
+  color:#2f302d !important;
   font-size:16px !important;
-  font-weight:800 !important;
-
+  font-weight:850 !important;
   line-height:1 !important;
-
   white-space:nowrap !important;
-
   text-decoration:none !important;
-
-  transition:color .2s ease !important;
+  border-bottom:2px solid transparent !important;
+  transition:color .2s ease,border-color .2s ease !important;
 }
 
 .franchise-nav a:hover{
   color:var(--fr-accent) !important;
+  border-bottom-color:var(--fr-accent) !important;
 }
 
-
-/* =========================================================
-   APPLY BUTTON
-   ========================================================= */
-
-.franchise-apply{
-  width:150px !important;
-  height:52px !important;
-
+/* Apply Now remains part of the navigation */
+.franchise-nav .franchise-apply{
+  width:158px !important;
+  height:56px !important;
   display:flex !important;
   align-items:center !important;
   justify-content:center !important;
-
-  justify-self:end !important;
-
+  flex:0 0 158px !important;
+  padding:0 !important;
+  margin-left:10px !important;
   background:var(--fr-accent) !important;
   color:#fff !important;
-
-  border-radius:17px !important;
-
+  border:0 !important;
+  border-radius:18px !important;
   font-size:16px !important;
   font-weight:900 !important;
-
-  text-decoration:none !important;
-
-  box-shadow:
-    0 10px 25px rgba(239,91,0,.16) !important;
+  box-shadow:0 10px 25px rgba(239,91,0,.16) !important;
 }
 
+.franchise-nav .franchise-apply:hover{
+  color:#fff !important;
+  border-bottom:0 !important;
+  transform:translateY(-2px) !important;
+}
 
 /* =========================================================
    MAIN PAGE CONTAINER
@@ -1520,27 +1573,194 @@ footer{
    900px
    ========================================================= */
 
-@media (max-width:900px){
-
-  .franchise-header{
-    height:70px !important;
-  }
-
+@media (max-width:1200px){
   .franchise-header-inner{
-    display:flex !important;
-
-    justify-content:space-between !important;
-
-    padding:0 18px !important;
+    grid-template-columns:minmax(450px,520px) minmax(0,1fr) !important;
+    column-gap:22px !important;
+    padding-left:22px !important;
+    padding-right:22px !important;
   }
 
-  .franchise-nav{
-    display:none !important;
+  .franchise-logo{
+    gap:18px !important;
   }
 
   .franchise-logo img{
-    width:48px !important;
-    height:48px !important;
+    width:105px !important;
+    height:105px !important;
+    max-width:105px !important;
+    max-height:105px !important;
+    flex-basis:105px !important;
+  }
+
+  .franchise-wordmark-name{
+    font-size:52px !important;
+  }
+
+  .franchise-wordmark-rule{
+    height:4px !important;
+    margin:11px 0 8px !important;
+  }
+
+  .franchise-wordmark-tagline{
+    font-size:14px !important;
+  }
+
+  .franchise-nav{
+    gap:22px !important;
+  }
+
+  .franchise-nav a{
+    font-size:14px !important;
+  }
+
+  .franchise-nav .franchise-apply{
+    width:140px !important;
+    flex-basis:140px !important;
+  }
+}
+
+@media (max-width:1000px){
+  .franchise-header,
+  .franchise-header-inner{
+    min-height:155px !important;
+  }
+
+  .franchise-header-inner{
+    grid-template-columns:minmax(350px,430px) minmax(0,1fr) !important;
+    padding:14px 18px !important;
+    column-gap:16px !important;
+  }
+
+  .franchise-logo{
+    gap:12px !important;
+  }
+
+  .franchise-logo img{
+    width:82px !important;
+    height:82px !important;
+    max-width:82px !important;
+    max-height:82px !important;
+    flex-basis:82px !important;
+  }
+
+  .franchise-wordmark-name{
+    font-size:41px !important;
+  }
+
+  .franchise-wordmark-rule{
+    height:3px !important;
+    margin:8px 0 6px !important;
+  }
+
+  .franchise-wordmark-tagline{
+    font-size:10px !important;
+  }
+
+  .franchise-wordmark-tagline::before{
+    margin-right:8px !important;
+  }
+
+  .franchise-wordmark-tagline::after{
+    margin-left:8px !important;
+  }
+
+  .franchise-utilities{
+    font-size:10px !important;
+  }
+
+  .franchise-utility{
+    padding:0 8px !important;
+  }
+
+  .franchise-nav{
+    gap:14px !important;
+    padding-top:5px !important;
+  }
+
+  .franchise-nav a{
+    font-size:11px !important;
+  }
+
+  .franchise-nav .franchise-apply{
+    width:118px !important;
+    height:44px !important;
+    flex-basis:118px !important;
+    border-radius:13px !important;
+    font-size:12px !important;
+    margin-left:2px !important;
+  }
+}
+
+@media (max-width:900px){
+
+  .franchise-header{
+    min-height:76px !important;
+    height:76px !important;
+  }
+
+  .franchise-header-inner{
+    min-height:76px !important;
+    height:76px !important;
+    display:flex !important;
+    justify-content:space-between !important;
+    align-items:center !important;
+    padding:8px 18px !important;
+  }
+
+  .franchise-utilities{
+    display:none !important;
+  }
+
+  .franchise-nav{
+    display:flex !important;
+    width:auto !important;
+    padding:0 !important;
+    gap:0 !important;
+  }
+
+  .franchise-nav a:not(.franchise-apply){
+    display:none !important;
+  }
+
+  .franchise-logo{
+    width:auto !important;
+    max-width:72% !important;
+    gap:9px !important;
+  }
+
+  .franchise-logo img{
+    width:52px !important;
+    height:52px !important;
+    max-width:52px !important;
+    max-height:52px !important;
+    flex-basis:52px !important;
+  }
+
+  .franchise-wordmark{
+    width:auto !important;
+  }
+
+  .franchise-wordmark-name{
+    font-size:30px !important;
+  }
+
+  .franchise-wordmark-rule{
+    height:2px !important;
+    margin:5px 0 !important;
+  }
+
+  .franchise-wordmark-tagline{
+    font-size:7px !important;
+  }
+
+  .franchise-nav .franchise-apply{
+    width:112px !important;
+    height:44px !important;
+    flex-basis:112px !important;
+    margin:0 !important;
+    border-radius:13px !important;
+    font-size:12px !important;
   }
 
   #franchise-page-only{
@@ -1615,26 +1835,48 @@ footer{
 @media (max-width:600px){
 
   .franchise-header{
-    height:64px !important;
+    min-height:68px !important;
+    height:68px !important;
   }
 
   .franchise-header-inner{
-    padding:0 14px !important;
+    min-height:68px !important;
+    height:68px !important;
+    padding:7px 14px !important;
+  }
+
+  .franchise-logo{
+    gap:7px !important;
+    max-width:70% !important;
   }
 
   .franchise-logo img{
     width:44px !important;
     height:44px !important;
+    max-width:44px !important;
+    max-height:44px !important;
+    flex-basis:44px !important;
   }
 
-  .franchise-apply{
-    width:110px !important;
+  .franchise-wordmark-name{
+    font-size:23px !important;
+  }
 
-    height:42px !important;
+  .franchise-wordmark-rule{
+    height:2px !important;
+    margin:3px 0 !important;
+  }
 
-    border-radius:12px !important;
+  .franchise-wordmark-tagline{
+    font-size:5px !important;
+  }
 
-    font-size:12px !important;
+  .franchise-nav .franchise-apply{
+    width:100px !important;
+    height:40px !important;
+    flex-basis:100px !important;
+    border-radius:11px !important;
+    font-size:11px !important;
   }
 
   #franchise-page-only{
@@ -1881,30 +2123,33 @@ body > footer{
   <header class="franchise-header">
   <div class="franchise-header-inner">
 
-    <!-- Crunchery's Logo -->
-    <a href="/" class="franchise-logo">
-      <img src="/assets/logo.png" alt="Crunchery's" loading="eager">
+    <!-- Crunchery's brand -->
+    <a href="/" class="franchise-logo" aria-label="Crunchery's Home">
+      <img src="/assets/logo.png" alt="Crunchery's logo">
+      <span class="franchise-wordmark" aria-hidden="true">
+        <span class="franchise-wordmark-name">CRUNCHER<span class="orange">Y'S</span><sup>®</sup></span>
+        <span class="franchise-wordmark-rule"></span>
+        <span class="franchise-wordmark-tagline">THE DESTINATION FOR YOUR CRAVINGS</span>
+      </span>
     </a>
-    <span class="brand-wordmark">
-          <strong>CRUNCHERY'S<sup class="registered-mark">®</sup></strong>
-          <small>★ &nbsp; THE DESTINATION FOR YOUR CRAVINGS &nbsp; ★</small>
-        </span>
 
-    <!-- Franchise Navigation -->
-    <nav class="franchise-nav">
+    <div class="franchise-utilities" aria-label="Brand promises">
+      <span class="franchise-utility">🌿 No Preservatives</span>
+      <span class="franchise-utility">🧼 Hygienically Prepared</span>
+      <span class="franchise-utility">♥ Made With Love</span>
+    </div>
+
+    <nav class="franchise-nav" aria-label="Franchise navigation">
       <a href="#overview">Overview</a>
       <a href="#investment">Investment</a>
       <a href="#calculator">Break-Even</a>
       <a href="#process">Process</a>
       <a href="#faq">FAQ</a>
+      <a href="#franchise-enquiry" class="franchise-apply">Apply Now</a>
     </nav>
 
-    <!-- Apply Button -->
-    <a href="#franchise-enquiry" class="franchise-apply">
-      Apply Now
-    </a>
-   </div>
-  </header>
+  </div>
+</header>
   <main id="franchise-page-only">
 
     <!-- HERO -->
