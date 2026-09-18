@@ -91,6 +91,14 @@
       white-space:nowrap;
     }
 
+    .brand-logo{
+      display:block;
+      width:185px;
+      height:auto;
+      max-height:52px;
+      object-fit:contain;
+    }
+
     .brand-mark{
       width:38px;
       height:38px;
@@ -607,6 +615,7 @@
       .container{padding:18px}
       .card{padding:24px 20px;border-radius:22px}
       .nav{padding:12px 18px}
+      .brand-logo{width:150px;max-height:45px}
       h1{font-size:43px}
       .hero{padding-top:15px}
       .hero-visual{min-height:390px;border-radius:25px}
@@ -625,9 +634,12 @@
 
   <header class="topbar">
     <nav class="nav">
-      <a class="brand" href="/">
-        <span class="brand-mark">C</span>
-        <span>CRUNCHERY'S</span>
+      <a class="brand" href="/" aria-label="Crunchery's Home">
+        <img
+          class="brand-logo"
+          src="/assets/logo.png"
+          alt="Crunchery's"
+        >
       </a>
 
       <div class="nav-links">
@@ -642,7 +654,7 @@
     </nav>
   </header>
 
-  <main class="container">
+  <main class="container" id="franchise-page-only">
 
     <!-- HERO -->
     <section class="hero">
@@ -678,11 +690,90 @@
       </div>
     </section>
 
+    <!-- QUESTIONNAIRE -->
+    <section id="apply" class="card">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">01 — Franchise Enquiry</div>
+          <h2>Tell us about your franchise plan.</h2>
+        </div>
+        <p class="subtitle">
+          Complete the basic details below. The button will prepare a WhatsApp enquiry
+          using the information entered.
+        </p>
+      </div>
+
+      <div class="questionnaire">
+        <div class="contact-panel">
+          <div class="eyebrow" style="color:#ff9a62">Crunchery's Franchise</div>
+          <h3 style="font-size:30px">Let's explore your location.</h3>
+          <p>
+            Share your basic contact details and proposed location so the franchise
+            discussion can begin with the right information.
+          </p>
+
+          <ul class="contact-list">
+            <li>
+              <strong>Format</strong>
+              <span>South Indian Continental Fusion Cafe</span>
+            </li>
+            <li>
+              <strong>Tier</strong>
+              <span>Tier-1 | 32–40 seats</span>
+            </li>
+            <li>
+              <strong>Investment</strong>
+              <span>₹35–50 lakhs indicative range</span>
+            </li>
+            <li>
+              <strong>Sales planning</strong>
+              <span>₹6–8 lakhs estimated monthly sales</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="form-card">
+          <div class="form-grid">
+            <div class="field">
+              <label for="name">Name *</label>
+              <input id="name" type="text" placeholder="Your name">
+            </div>
+
+            <div class="field">
+              <label for="phone">Phone *</label>
+              <input id="phone" type="tel" placeholder="10-digit mobile number">
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" type="email" placeholder="you@example.com">
+            </div>
+
+            <div class="field">
+              <label for="city">City *</label>
+              <input id="city" type="text" placeholder="Proposed city">
+            </div>
+
+            <div class="field">
+              <label for="location">Proposed Location</label>
+              <input id="location" type="text" placeholder="Area / locality">
+            </div>
+
+                        <div class="field full">
+              <button class="btn btn-primary btn-block" type="button" onclick="submitEnquiry()">
+                Send Franchise Enquiry on WhatsApp
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- OVERVIEW -->
     <section id="overview" class="card">
       <div class="section-head">
         <div>
-          <div class="eyebrow">01 — Franchise Overview</div>
+          <div class="eyebrow">02 — Franchise Overview</div>
           <h2>The opportunity at a glance.</h2>
         </div>
         <p class="subtitle">
@@ -715,7 +806,7 @@
     <section class="card">
       <div class="section-head">
         <div>
-          <div class="eyebrow">02 — The Model</div>
+          <div class="eyebrow">03 — The Model</div>
           <h2>Designed around the complete cafe journey.</h2>
         </div>
       </div>
@@ -745,7 +836,7 @@
     <section id="investment" class="card">
       <div class="section-head">
         <div>
-          <div class="eyebrow">03 — Investment Breakdown</div>
+          <div class="eyebrow">04 — Investment Breakdown</div>
           <h2>Where the investment goes.</h2>
         </div>
         <p class="subtitle">
@@ -823,7 +914,7 @@
     <section id="calculator" class="card">
       <div class="section-head">
         <div>
-          <div class="eyebrow">04 — Break-Even Calculator</div>
+          <div class="eyebrow">05 — Break-Even Calculator</div>
           <h2>Know the monthly sales you need.</h2>
         </div>
         <p class="subtitle">
@@ -913,7 +1004,7 @@
     <section class="card">
       <div class="section-head">
         <div>
-          <div class="eyebrow">05 — Franchise Tier</div>
+          <div class="eyebrow">06 — Franchise Tier</div>
           <h2>Tier-1 cafe format.</h2>
         </div>
         <p class="subtitle">
@@ -954,7 +1045,7 @@
     <section id="process" class="card">
       <div class="section-head">
         <div>
-          <div class="eyebrow">06 — Franchise Process</div>
+          <div class="eyebrow">07 — Franchise Process</div>
           <h2>From enquiry to launch.</h2>
         </div>
       </div>
@@ -994,136 +1085,6 @@
           <div class="step-no">7</div>
           <strong>Launch</strong>
           <span>Open the doors</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- QUESTIONNAIRE -->
-    <section id="apply" class="card">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">07 — Franchise Questionnaire</div>
-          <h2>Tell us about your franchise plan.</h2>
-        </div>
-        <p class="subtitle">
-          Complete the basic details below. The button can prepare a WhatsApp enquiry
-          using the information entered.
-        </p>
-      </div>
-
-      <div class="questionnaire">
-        <div class="contact-panel">
-          <div class="eyebrow" style="color:#ff9a62">Crunchery's Franchise</div>
-          <h3 style="font-size:30px">Let's explore your location.</h3>
-          <p>
-            Share your proposed city, property and investment capacity so the franchise
-            discussion can begin with the right information.
-          </p>
-
-          <ul class="contact-list">
-            <li>
-              <strong>Format</strong>
-              <span>South Indian Continental Fusion Cafe</span>
-            </li>
-            <li>
-              <strong>Tier</strong>
-              <span>Tier-1 | 32–40 seats</span>
-            </li>
-            <li>
-              <strong>Investment</strong>
-              <span>₹35–50 lakhs indicative range</span>
-            </li>
-            <li>
-              <strong>Sales planning</strong>
-              <span>₹6–8 lakhs estimated monthly sales</span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="form-card">
-          <div class="form-grid">
-            <div class="field">
-              <label for="name">Name *</label>
-              <input id="name" type="text" placeholder="Your name">
-            </div>
-
-            <div class="field">
-              <label for="phone">Phone *</label>
-              <input id="phone" type="tel" placeholder="10-digit mobile number">
-            </div>
-
-            <div class="field">
-              <label for="email">Email</label>
-              <input id="email" type="email" placeholder="you@example.com">
-            </div>
-
-            <div class="field">
-              <label for="city">City *</label>
-              <input id="city" type="text" placeholder="Proposed city">
-            </div>
-
-            <div class="field">
-              <label for="location">Proposed Location</label>
-              <input id="location" type="text" placeholder="Area / locality">
-            </div>
-
-            <div class="field">
-              <label for="investmentCapacity">Investment Capacity</label>
-              <select id="investmentCapacity">
-                <option value="">Select</option>
-                <option>₹25–35 Lakhs</option>
-                <option>₹35–50 Lakhs</option>
-                <option>₹50 Lakhs+</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="experience">Business Experience</label>
-              <select id="experience">
-                <option value="">Select</option>
-                <option>First-time entrepreneur</option>
-                <option>Food & Beverage experience</option>
-                <option>Other business experience</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="timeline">Expected Timeline</label>
-              <select id="timeline">
-                <option value="">Select</option>
-                <option>Within 1–3 months</option>
-                <option>3–6 months</option>
-                <option>6–12 months</option>
-                <option>Planning stage</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="property">Property Availability</label>
-              <select id="property">
-                <option value="">Select</option>
-                <option>Property already available</option>
-                <option>Property shortlisted</option>
-                <option>Looking for property</option>
-              </select>
-            </div>
-
-            <div class="field full">
-              <label for="message">Additional Information</label>
-              <textarea id="message" placeholder="Tell us anything else about your franchise plan..."></textarea>
-            </div>
-
-            <div class="field full">
-              <button class="btn btn-primary btn-block" type="button" onclick="submitEnquiry()">
-                Send Franchise Enquiry on WhatsApp
-              </button>
-            </div>
-          </div>
-
-          <div class="form-note">
-            This front-end form prepares a WhatsApp message. Replace the WhatsApp number
-            in the script below with the official Crunchery's franchise number.
-          </div>
         </div>
       </div>
     </section>
@@ -1285,11 +1246,6 @@
       const email = document.getElementById("email").value.trim();
       const city = document.getElementById("city").value.trim();
       const location = document.getElementById("location").value.trim();
-      const investment = document.getElementById("investmentCapacity").value;
-      const experience = document.getElementById("experience").value;
-      const timeline = document.getElementById("timeline").value;
-      const property = document.getElementById("property").value;
-      const message = document.getElementById("message").value.trim();
 
       if(!name || !phone || !city){
         showToast("Please enter Name, Phone and City.");
@@ -1303,14 +1259,7 @@ Name: ${name}
 Phone: ${phone}
 Email: ${email || "-"}
 City: ${city}
-Proposed Location: ${location || "-"}
-Investment Capacity: ${investment || "-"}
-Business Experience: ${experience || "-"}
-Expected Timeline: ${timeline || "-"}
-Property Availability: ${property || "-"}
-
-Additional Information:
-${message || "-"}`;
+Proposed Location: ${location || "-"}`;
 
       const url = "https://wa.me/" + FRANCHISE_WHATSAPP + "?text=" + encodeURIComponent(text);
       window.open(url, "_blank");
