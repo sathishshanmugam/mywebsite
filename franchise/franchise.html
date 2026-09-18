@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Crunchery's Franchise – South Indian Continental Fusion Cafe. Explore investment, setup, break-even and franchise opportunities.">
+  <title>Crunchery's Franchise | South Indian Continental Fusion Cafe</title>
+
+  <style>
+    :root{
+      --bg:#f6f1e7;
+      --card:#fff;
+      --text:#24362c;
+      --muted:#737b74;
+      --line:#ded8cb;
+      --accent:#ef5b00;
+      --dark:#24362c;
+      --good:#16834b;
+      --danger:#c62828;
+      --soft:#f8f5ef;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      line-height:1.55;
+    }
+
+    a{color:inherit;text-decoration:none}
+    button,input,select,textarea{font:inherit}
+
+    .container{
+      max-width:1180px;
+      margin:auto;
+      padding:28px;
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:28px;
+      padding:30px 40px;
+      margin-bottom:18px;
+      box-shadow:0 8px 28px rgba(70,55,35,.06);
+    }
+
+    .eyebrow{
+      color:var(--accent);
+      font-size:14px;
+      font-weight:900;
+      letter-spacing:2px;
+      margin-bottom:8px;
+      text-transform:uppercase;
+    }
+
+    h1,h2,h3{margin:0 0 12px;line-height:1.12}
+    h1{font-size:clamp(40px,6vw,72px);letter-spacing:-2px}
+    h2{font-size:clamp(28px,4vw,42px);letter-spacing:-1px}
+    h3{font-size:20px}
+    p{margin:0 0 12px}
+    .subtitle{color:var(--muted);font-size:17px;max-width:760px}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(246,241,231,.94);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(222,216,203,.8);
+    }
+
+    .nav{
+      max-width:1180px;
+      margin:auto;
+      padding:14px 28px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:950;
+      letter-spacing:-.5px;
+      white-space:nowrap;
+    }
+
+    .brand-mark{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      background:var(--accent);
+      color:#fff;
+      display:grid;
+      place-items:center;
+      font-weight:950;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:22px;
+      color:var(--muted);
+      font-size:14px;
+      font-weight:800;
+    }
+
+    .nav-links a:hover{color:var(--accent)}
+
+    .btn{
+      border:0;
+      border-radius:13px;
+      padding:13px 18px;
+      font-weight:900;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      transition:.18s ease;
+    }
+
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{background:var(--accent);color:#fff}
+    .btn-dark{background:var(--dark);color:#fff}
+    .btn-light{background:#fff;color:var(--text);border:1px solid var(--line)}
+    .btn-block{width:100%}
+
+    .hero{
+      min-height:650px;
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:28px;
+      align-items:stretch;
+      padding-top:36px;
+    }
+
+    .hero-copy{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      padding:30px 0;
+    }
+
+    .hero h1 span{color:var(--accent)}
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:24px;
+    }
+
+    .hero-note{
+      display:flex;
+      gap:12px;
+      margin-top:26px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .hero-note strong{color:var(--text)}
+
+    .hero-visual{
+      min-height:540px;
+      border-radius:34px;
+      background:
+        radial-gradient(circle at 70% 20%,rgba(239,91,0,.25),transparent 28%),
+        linear-gradient(145deg,#24362c,#344d3e);
+      color:#fff;
+      padding:30px;
+      position:relative;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      box-shadow:0 18px 50px rgba(36,54,44,.18);
+    }
+
+    .hero-visual:before{
+      content:"";
+      position:absolute;
+      width:320px;
+      height:320px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.14);
+      right:-100px;
+      top:-100px;
+    }
+
+    .hero-visual:after{
+      content:"";
+      position:absolute;
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.1);
+      left:-100px;
+      bottom:-100px;
+    }
+
+    .visual-content{position:relative;z-index:2}
+    .visual-tag{
+      display:inline-block;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.16);
+      padding:7px 11px;
+      border-radius:99px;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:1px;
+      text-transform:uppercase;
+      margin-bottom:18px;
+    }
+
+    .visual-title{
+      font-size:42px;
+      line-height:1;
+      font-weight:950;
+      letter-spacing:-2px;
+      margin-bottom:12px;
+    }
+
+    .visual-copy{color:rgba(255,255,255,.75);max-width:420px}
+
+    .metric-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+      margin-top:24px;
+    }
+
+    .metric{
+      background:var(--soft);
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:20px;
+    }
+
+    .metric-value{
+      font-size:25px;
+      font-weight:950;
+      color:var(--text);
+      margin-bottom:4px;
+    }
+
+    .metric-label{font-size:13px;color:var(--muted);font-weight:700}
+
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:24px;
+      margin-bottom:22px;
+    }
+
+    .section-head .subtitle{max-width:650px}
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .grid2{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:18px;
+    }
+
+    .info-card{
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:22px;
+      background:#fff;
+    }
+
+    .info-icon{
+      width:42px;
+      height:42px;
+      border-radius:13px;
+      background:#fff1e8;
+      color:var(--accent);
+      display:grid;
+      place-items:center;
+      font-weight:950;
+      margin-bottom:14px;
+    }
+
+    .info-card p{color:var(--muted);font-size:14px}
+    .price{
+      font-size:24px;
+      font-weight:950;
+      margin-bottom:5px;
+    }
+
+    .small{font-size:13px;color:var(--muted)}
+
+    .cost-row{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:18px;
+      align-items:center;
+      padding:17px 0;
+      border-bottom:1px solid var(--line);
+    }
+
+    .cost-row:last-child{border-bottom:0}
+    .cost-title{font-weight:900}
+    .cost-desc{font-size:13px;color:var(--muted);margin-top:2px}
+    .cost-value{font-size:18px;font-weight:950;white-space:nowrap}
+
+    .calculator{
+      display:grid;
+      grid-template-columns:1fr .9fr;
+      gap:24px;
+    }
+
+    .calc-panel{
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:24px;
+      background:var(--soft);
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:16px;
+    }
+
+    .field{display:flex;flex-direction:column;gap:7px}
+    .field.full{grid-column:1/-1}
+
+    label{
+      font-size:14px;
+      font-weight:850;
+    }
+
+    input,select,textarea{
+      width:100%;
+      height:52px;
+      border:1px solid var(--line);
+      border-radius:13px;
+      padding:0 14px;
+      outline:none;
+      background:#fff;
+      color:var(--text);
+    }
+
+    textarea{
+      height:110px;
+      padding:13px 14px;
+      resize:vertical;
+    }
+
+    input:focus,select:focus,textarea:focus{
+      border-color:var(--accent);
+      box-shadow:0 0 0 3px rgba(239,91,0,.09);
+    }
+
+    .result-card{
+      background:var(--dark);
+      color:#fff;
+      border-radius:24px;
+      padding:28px;
+      min-height:100%;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .result-label{
+      color:rgba(255,255,255,.65);
+      font-size:13px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:1.4px;
+    }
+
+    .result-number{
+      font-size:clamp(38px,5vw,58px);
+      font-weight:950;
+      line-height:1;
+      letter-spacing:-2px;
+      margin:8px 0 4px;
+    }
+
+    .result-sub{color:rgba(255,255,255,.65);font-size:14px}
+    .result-divider{height:1px;background:rgba(255,255,255,.12);margin:24px 0}
+
+    .result-line{
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+      padding:9px 0;
+      color:rgba(255,255,255,.78);
+      font-size:14px;
+    }
+
+    .result-line strong{color:#fff}
+
+    .formula{
+      margin-top:auto;
+      padding-top:18px;
+      color:rgba(255,255,255,.5);
+      font-size:12px;
+      line-height:1.6;
+    }
+
+    .tier{
+      position:relative;
+      overflow:hidden;
+    }
+
+    .tier-badge{
+      position:absolute;
+      right:20px;
+      top:20px;
+      background:#fff1e8;
+      color:var(--accent);
+      padding:7px 10px;
+      border-radius:99px;
+      font-size:11px;
+      font-weight:950;
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+
+    .tier-list{
+      list-style:none;
+      margin:18px 0 0;
+      padding:0;
+    }
+
+    .tier-list li{
+      padding:9px 0;
+      border-bottom:1px solid var(--line);
+      font-size:14px;
+      color:var(--muted);
+    }
+
+    .tier-list li:last-child{border-bottom:0}
+    .tier-list li:before{
+      content:"✓";
+      color:var(--good);
+      font-weight:950;
+      margin-right:9px;
+    }
+
+    .process{
+      display:grid;
+      grid-template-columns:repeat(7,1fr);
+      gap:8px;
+      margin-top:26px;
+    }
+
+    .step{
+      text-align:center;
+      padding:16px 8px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:var(--soft);
+    }
+
+    .step-no{
+      width:34px;
+      height:34px;
+      border-radius:50%;
+      background:var(--accent);
+      color:#fff;
+      display:grid;
+      place-items:center;
+      margin:0 auto 10px;
+      font-weight:950;
+      font-size:13px;
+    }
+
+    .step strong{font-size:13px;display:block}
+    .step span{font-size:11px;color:var(--muted)}
+
+    .faq{
+      border:1px solid var(--line);
+      border-radius:18px;
+      margin-bottom:10px;
+      overflow:hidden;
+      background:#fff;
+    }
+
+    .faq button{
+      width:100%;
+      background:none;
+      border:0;
+      padding:19px 20px;
+      text-align:left;
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+      color:var(--text);
+      cursor:pointer;
+      font-weight:900;
+    }
+
+    .faq-answer{
+      display:none;
+      padding:0 20px 19px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .faq.open .faq-answer{display:block}
+    .faq.open .faq-plus{transform:rotate(45deg)}
+
+    .questionnaire{
+      display:grid;
+      grid-template-columns:.8fr 1.2fr;
+      gap:28px;
+    }
+
+    .contact-panel{
+      background:var(--dark);
+      color:#fff;
+      border-radius:24px;
+      padding:30px;
+      height:100%;
+    }
+
+    .contact-panel p{color:rgba(255,255,255,.7)}
+    .contact-list{
+      list-style:none;
+      padding:0;
+      margin:24px 0 0;
+    }
+
+    .contact-list li{
+      padding:11px 0;
+      border-bottom:1px solid rgba(255,255,255,.1);
+      font-size:14px;
+    }
+
+    .contact-list strong{display:block;color:#fff}
+    .contact-list span{color:rgba(255,255,255,.65)}
+
+    .form-card{
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:26px;
+      background:var(--soft);
+    }
+
+    .form-note{
+      color:var(--muted);
+      font-size:12px;
+      margin-top:12px;
+    }
+
+    .cta{
+      background:var(--accent);
+      color:#fff;
+      border-radius:30px;
+      padding:42px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:30px;
+    }
+
+    .cta p{color:rgba(255,255,255,.8);max-width:650px}
+    .cta .btn-light{border:0}
+
+    footer{
+      padding:10px 28px 38px;
+      text-align:center;
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .toast{
+      position:fixed;
+      right:20px;
+      bottom:20px;
+      background:var(--dark);
+      color:#fff;
+      padding:14px 18px;
+      border-radius:14px;
+      box-shadow:0 10px 30px rgba(0,0,0,.18);
+      display:none;
+      z-index:100;
+      font-size:14px;
+    }
+
+    @media(max-width:900px){
+      .nav-links{display:none}
+      .hero,.calculator,.questionnaire{grid-template-columns:1fr}
+      .hero{min-height:auto}
+      .hero-visual{min-height:430px}
+      .metric-grid{grid-template-columns:repeat(2,1fr)}
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .process{grid-template-columns:repeat(4,1fr)}
+    }
+
+    @media(max-width:600px){
+      .container{padding:18px}
+      .card{padding:24px 20px;border-radius:22px}
+      .nav{padding:12px 18px}
+      h1{font-size:43px}
+      .hero{padding-top:15px}
+      .hero-visual{min-height:390px;border-radius:25px}
+      .metric-grid,.grid,.grid2,.form-grid{grid-template-columns:1fr}
+      .process{grid-template-columns:repeat(2,1fr)}
+      .section-head{display:block}
+      .cta{padding:30px 22px;display:block}
+      .cta .btn{margin-top:12px;width:100%}
+      .cost-row{grid-template-columns:1fr}
+      .cost-value{white-space:normal}
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <nav class="nav">
+      <a class="brand" href="/">
+        <span class="brand-mark">C</span>
+        <span>CRUNCHERY'S</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#investment">Investment</a>
+        <a href="#calculator">Break-Even</a>
+        <a href="#process">Process</a>
+        <a href="#faq">FAQ</a>
+      </div>
+
+      <a class="btn btn-primary" href="#apply">Apply Now</a>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">Franchise Opportunity</div>
+        <h1>Build your own <span>Crunchery's</span> Cafe.</h1>
+        <p class="subtitle">
+          A South Indian Continental Fusion Cafe concept designed for modern customers,
+          practical operations and scalable franchise growth.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#overview">Explore Franchise</a>
+          <a class="btn btn-dark" href="#calculator">Calculate Break-Even</a>
+        </div>
+
+        <div class="hero-note">
+          <span>●</span>
+          <div><strong>Investment-led planning.</strong><br>
+          Understand setup cost, operating expenses and sales required before you commit.</div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="visual-content">
+          <div class="visual-tag">South Indian × Continental Fusion</div>
+          <div class="visual-title">A Cafe.<br>A System.<br>A Brand.</div>
+          <p class="visual-copy">
+            From site evaluation and kitchen setup to training and launch support,
+            the franchise model is structured around a complete cafe operating system.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- OVERVIEW -->
+    <section id="overview" class="card">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">01 — Franchise Overview</div>
+          <h2>The opportunity at a glance.</h2>
+        </div>
+        <p class="subtitle">
+          Key figures provided for the Crunchery's franchise model.
+          Actual project economics can vary by site, city and operating assumptions.
+        </p>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric">
+          <div class="metric-value">₹35–50L</div>
+          <div class="metric-label">Tier-1 investment range</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">₹6–8L</div>
+          <div class="metric-label">Estimated monthly sales for ROI planning</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">36 Mo.</div>
+          <div class="metric-label">Indicative ROI period</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">32–40</div>
+          <div class="metric-label">Seats</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section class="card">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">02 — The Model</div>
+          <h2>Designed around the complete cafe journey.</h2>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="info-card">
+          <div class="info-icon">01</div>
+          <h3>Concept</h3>
+          <p>South Indian Continental Fusion Cafe positioning with a contemporary customer experience.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">02</div>
+          <h3>Setup</h3>
+          <p>Planned support across interiors, kitchen equipment, electrical, plumbing and essential infrastructure.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">03</div>
+          <h3>Operations</h3>
+          <p>Management systems, software, uniforms, training and launch preparation form part of the franchise support structure.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- INVESTMENT -->
+    <section id="investment" class="card">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">03 — Investment Breakdown</div>
+          <h2>Where the investment goes.</h2>
+        </div>
+        <p class="subtitle">
+          The following components are based on the franchise cost details supplied for this model.
+        </p>
+      </div>
+
+      <div class="grid2">
+        <div class="info-card">
+          <div class="price">₹9,00,000</div>
+          <h3>Outer Space</h3>
+          <p>Tables, chairs, lights, painting and LED boards.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="price">₹7,00,000</div>
+          <h3>Management Cost</h3>
+          <p>Uniform, software, franchise component, training and selfie spot.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="price">₹11,00,000</div>
+          <h3>Kitchen Equipment</h3>
+          <p>Kitchen equipment allocation for the proposed cafe setup.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="price">₹1,25,000</div>
+          <h3>Architecture & Site Visits</h3>
+          <p>Architecture support and 5 site visits.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:24px">
+        <h3>Franchisor Scope</h3>
+
+        <div class="cost-row">
+          <div><div class="cost-title">Electrical Wiring & Plumbing</div></div>
+          <div class="cost-value">₹4,00,000</div>
+        </div>
+
+        <div class="cost-row">
+          <div><div class="cost-title">Tiles</div></div>
+          <div class="cost-value">₹1,30,000</div>
+        </div>
+
+        <div class="cost-row">
+          <div><div class="cost-title">Washbasin</div></div>
+          <div class="cost-value">₹1,00,000</div>
+        </div>
+
+        <div class="cost-row">
+          <div><div class="cost-title">Raw Products</div></div>
+          <div class="cost-value">₹2,00,000</div>
+        </div>
+
+        <div class="cost-row">
+          <div><div class="cost-title">Computer / Printer / Speaker</div></div>
+          <div class="cost-value">₹1,00,000</div>
+        </div>
+
+        <div class="cost-row">
+          <div><div class="cost-title">AC</div></div>
+          <div class="cost-value">₹2,00,000</div>
+        </div>
+      </div>
+
+      <p class="small" style="margin-top:18px">
+        Note: Individual components above are shown transparently from the supplied cost structure.
+        They should be reconciled with the final commercial quotation before signing.
+      </p>
+    </section>
+
+    <!-- CALCULATOR -->
+    <section id="calculator" class="card">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">04 — Break-Even Calculator</div>
+          <h2>Know the monthly sales you need.</h2>
+        </div>
+        <p class="subtitle">
+          Enter your expected fixed costs and variable-cost percentages.
+          The calculator updates instantly.
+        </p>
+      </div>
+
+      <div class="calculator">
+        <div class="calc-panel">
+          <div class="form-grid">
+
+            <div class="field">
+              <label for="rent">Rent / Month (₹)</label>
+              <input id="rent" type="number" min="0" value="50000">
+            </div>
+
+            <div class="field">
+              <label for="salary">Salary / Month (₹)</label>
+              <input id="salary" type="number" min="0" value="40000">
+            </div>
+
+            <div class="field">
+              <label for="raw">Raw Materials (%)</label>
+              <input id="raw" type="number" min="0" max="100" step="0.1" value="50">
+            </div>
+
+            <div class="field">
+              <label for="eb">EB / Electricity (%)</label>
+              <input id="eb" type="number" min="0" max="100" step="0.1" value="5">
+            </div>
+
+            <div class="field">
+              <label for="gst">GST (%)</label>
+              <input id="gst" type="number" min="0" max="100" step="0.1" value="5">
+            </div>
+
+            <div class="field">
+              <label for="royalty">Royalty (%)</label>
+              <input id="royalty" type="number" min="0" max="100" step="0.1" value="5">
+            </div>
+
+            <div class="field full">
+              <button class="btn btn-primary btn-block" type="button" onclick="calculateBreakEven()">
+                Calculate Break-Even
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-card">
+          <div class="result-label">Monthly Break-Even Sales</div>
+          <div class="result-number" id="monthlyBE">₹2,57,143</div>
+          <div class="result-sub">Approximate sales required to cover the entered costs.</div>
+
+          <div class="result-divider"></div>
+
+          <div class="result-line">
+            <span>Daily break-even (30 days)</span>
+            <strong id="dailyBE">₹8,571</strong>
+          </div>
+
+          <div class="result-line">
+            <span>Fixed costs</span>
+            <strong id="fixedCost">₹90,000</strong>
+          </div>
+
+          <div class="result-line">
+            <span>Total variable cost</span>
+            <strong id="variablePct">65%</strong>
+          </div>
+
+          <div class="result-line">
+            <span>Contribution margin</span>
+            <strong id="marginPct">35%</strong>
+          </div>
+
+          <div class="formula">
+            Formula: Break-Even Sales = Fixed Costs ÷
+            (1 − Total Variable Cost %).
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIERS -->
+    <section class="card">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">05 — Franchise Tier</div>
+          <h2>Tier-1 cafe format.</h2>
+        </div>
+        <p class="subtitle">
+          A 32–40 seat cafe format with an indicative investment range of ₹35–50 lakhs.
+        </p>
+      </div>
+
+      <div class="grid2">
+        <div class="info-card tier">
+          <div class="tier-badge">Tier 1</div>
+          <h3>Investment</h3>
+          <div class="price">₹35–50 Lakhs</div>
+          <p>Indicative total project investment range for the Tier-1 format.</p>
+
+          <ul class="tier-list">
+            <li>32–40 seats</li>
+            <li>South Indian Continental Fusion Cafe</li>
+            <li>Estimated monthly sales: ₹6–8 lakhs</li>
+            <li>Indicative ROI period: 36 months</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h3>Franchise Support Structure</h3>
+          <ul class="tier-list">
+            <li>Architecture & site evaluation</li>
+            <li>Interior and infrastructure planning</li>
+            <li>Kitchen equipment setup</li>
+            <li>Software and management systems</li>
+            <li>Training and launch support</li>
+            <li>Initial raw product support as specified</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section id="process" class="card">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">06 — Franchise Process</div>
+          <h2>From enquiry to launch.</h2>
+        </div>
+      </div>
+
+      <div class="process">
+        <div class="step">
+          <div class="step-no">1</div>
+          <strong>Enquiry</strong>
+          <span>Share your details</span>
+        </div>
+        <div class="step">
+          <div class="step-no">2</div>
+          <strong>Questionnaire</strong>
+          <span>Understand fit</span>
+        </div>
+        <div class="step">
+          <div class="step-no">3</div>
+          <strong>Site Evaluation</strong>
+          <span>Assess location</span>
+        </div>
+        <div class="step">
+          <div class="step-no">4</div>
+          <strong>Agreement</strong>
+          <span>Commercial process</span>
+        </div>
+        <div class="step">
+          <div class="step-no">5</div>
+          <strong>Setup</strong>
+          <span>Build the cafe</span>
+        </div>
+        <div class="step">
+          <div class="step-no">6</div>
+          <strong>Training</strong>
+          <span>Prepare the team</span>
+        </div>
+        <div class="step">
+          <div class="step-no">7</div>
+          <strong>Launch</strong>
+          <span>Open the doors</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUESTIONNAIRE -->
+    <section id="apply" class="card">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">07 — Franchise Questionnaire</div>
+          <h2>Tell us about your franchise plan.</h2>
+        </div>
+        <p class="subtitle">
+          Complete the basic details below. The button can prepare a WhatsApp enquiry
+          using the information entered.
+        </p>
+      </div>
+
+      <div class="questionnaire">
+        <div class="contact-panel">
+          <div class="eyebrow" style="color:#ff9a62">Crunchery's Franchise</div>
+          <h3 style="font-size:30px">Let's explore your location.</h3>
+          <p>
+            Share your proposed city, property and investment capacity so the franchise
+            discussion can begin with the right information.
+          </p>
+
+          <ul class="contact-list">
+            <li>
+              <strong>Format</strong>
+              <span>South Indian Continental Fusion Cafe</span>
+            </li>
+            <li>
+              <strong>Tier</strong>
+              <span>Tier-1 | 32–40 seats</span>
+            </li>
+            <li>
+              <strong>Investment</strong>
+              <span>₹35–50 lakhs indicative range</span>
+            </li>
+            <li>
+              <strong>Sales planning</strong>
+              <span>₹6–8 lakhs estimated monthly sales</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="form-card">
+          <div class="form-grid">
+            <div class="field">
+              <label for="name">Name *</label>
+              <input id="name" type="text" placeholder="Your name">
+            </div>
+
+            <div class="field">
+              <label for="phone">Phone *</label>
+              <input id="phone" type="tel" placeholder="10-digit mobile number">
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" type="email" placeholder="you@example.com">
+            </div>
+
+            <div class="field">
+              <label for="city">City *</label>
+              <input id="city" type="text" placeholder="Proposed city">
+            </div>
+
+            <div class="field">
+              <label for="location">Proposed Location</label>
+              <input id="location" type="text" placeholder="Area / locality">
+            </div>
+
+            <div class="field">
+              <label for="investmentCapacity">Investment Capacity</label>
+              <select id="investmentCapacity">
+                <option value="">Select</option>
+                <option>₹25–35 Lakhs</option>
+                <option>₹35–50 Lakhs</option>
+                <option>₹50 Lakhs+</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="experience">Business Experience</label>
+              <select id="experience">
+                <option value="">Select</option>
+                <option>First-time entrepreneur</option>
+                <option>Food & Beverage experience</option>
+                <option>Other business experience</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="timeline">Expected Timeline</label>
+              <select id="timeline">
+                <option value="">Select</option>
+                <option>Within 1–3 months</option>
+                <option>3–6 months</option>
+                <option>6–12 months</option>
+                <option>Planning stage</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="property">Property Availability</label>
+              <select id="property">
+                <option value="">Select</option>
+                <option>Property already available</option>
+                <option>Property shortlisted</option>
+                <option>Looking for property</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label for="message">Additional Information</label>
+              <textarea id="message" placeholder="Tell us anything else about your franchise plan..."></textarea>
+            </div>
+
+            <div class="field full">
+              <button class="btn btn-primary btn-block" type="button" onclick="submitEnquiry()">
+                Send Franchise Enquiry on WhatsApp
+              </button>
+            </div>
+          </div>
+
+          <div class="form-note">
+            This front-end form prepares a WhatsApp message. Replace the WhatsApp number
+            in the script below with the official Crunchery's franchise number.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="card">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">08 — FAQ</div>
+          <h2>Common questions.</h2>
+        </div>
+      </div>
+
+      <div class="faq">
+        <button type="button" onclick="toggleFaq(this)">
+          <span>What is the Tier-1 investment range?</span>
+          <span class="faq-plus">＋</span>
+        </button>
+        <div class="faq-answer">
+          The supplied Tier-1 indicative investment range is ₹35–50 lakhs.
+          The final project cost should be confirmed through the commercial quotation
+          and site-specific assessment.
+        </div>
+      </div>
+
+      <div class="faq">
+        <button type="button" onclick="toggleFaq(this)">
+          <span>How many seats are planned?</span>
+          <span class="faq-plus">＋</span>
+        </button>
+        <div class="faq-answer">
+          The Tier-1 format is planned for approximately 32–40 seats.
+        </div>
+      </div>
+
+      <div class="faq">
+        <button type="button" onclick="toggleFaq(this)">
+          <span>What monthly sales are used for ROI planning?</span>
+          <span class="faq-plus">＋</span>
+        </button>
+        <div class="faq-answer">
+          The supplied planning figure is estimated monthly sales of ₹6–8 lakhs.
+          This is a planning assumption and is not a guaranteed sales figure.
+        </div>
+      </div>
+
+      <div class="faq">
+        <button type="button" onclick="toggleFaq(this)">
+          <span>How is break-even calculated?</span>
+          <span class="faq-plus">＋</span>
+        </button>
+        <div class="faq-answer">
+          Fixed monthly costs are divided by the contribution margin. In this calculator,
+          contribution margin is 100% minus Raw Materials, EB, GST and Royalty percentages.
+        </div>
+      </div>
+
+      <div class="faq">
+        <button type="button" onclick="toggleFaq(this)">
+          <span>Is the ROI period guaranteed?</span>
+          <span class="faq-plus">＋</span>
+        </button>
+        <div class="faq-answer">
+          No. The 36-month figure is the supplied indicative ROI period for planning.
+          Actual returns depend on sales, rent, salaries, operating costs, location,
+          taxes and other commercial factors.
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="cta">
+      <div>
+        <div class="eyebrow" style="color:#fff1e8">09 — Start the Conversation</div>
+        <h2>Ready to explore a Crunchery's franchise?</h2>
+        <p>
+          Submit your basic details and start the discussion around your city,
+          location, investment capacity and launch timeline.
+        </p>
+      </div>
+
+      <div>
+        <a class="btn btn-light" href="#apply">Apply for Franchise</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © <span id="year"></span> Crunchery's. All rights reserved.
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    /*
+      CRUNCHERY'S FRANCHISE PAGE
+      --------------------------
+      Replace this number with the official franchise WhatsApp number.
+      Use country code without + or spaces.
+      Example: 919876543210
+    */
+    const FRANCHISE_WHATSAPP = "919786000383";
+
+    function money(value){
+      return "₹" + Math.round(value).toLocaleString("en-IN");
+    }
+
+    function num(id){
+      const value = parseFloat(document.getElementById(id).value);
+      return Number.isFinite(value) ? value : 0;
+    }
+
+    function calculateBreakEven(){
+      const rent = num("rent");
+      const salary = num("salary");
+
+      const raw = num("raw");
+      const eb = num("eb");
+      const gst = num("gst");
+      const royalty = num("royalty");
+
+      const fixedCost = rent + salary;
+      const variablePct = raw + eb + gst + royalty;
+      const contributionPct = 100 - variablePct;
+
+      document.getElementById("fixedCost").textContent = money(fixedCost);
+      document.getElementById("variablePct").textContent = variablePct.toFixed(1) + "%";
+      document.getElementById("marginPct").textContent = contributionPct.toFixed(1) + "%";
+
+      if(contributionPct <= 0){
+        document.getElementById("monthlyBE").textContent = "Not possible";
+        document.getElementById("dailyBE").textContent = "—";
+        showToast("Variable costs must be below 100%.");
+        return;
+      }
+
+      const monthlyBE = fixedCost / (contributionPct / 100);
+      const dailyBE = monthlyBE / 30;
+
+      document.getElementById("monthlyBE").textContent = money(monthlyBE);
+      document.getElementById("dailyBE").textContent = money(dailyBE);
+    }
+
+    function toggleFaq(button){
+      button.parentElement.classList.toggle("open");
+    }
+
+    function showToast(message){
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.style.display = "block";
+      setTimeout(() => toast.style.display = "none", 2600);
+    }
+
+    function submitEnquiry(){
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const city = document.getElementById("city").value.trim();
+      const location = document.getElementById("location").value.trim();
+      const investment = document.getElementById("investmentCapacity").value;
+      const experience = document.getElementById("experience").value;
+      const timeline = document.getElementById("timeline").value;
+      const property = document.getElementById("property").value;
+      const message = document.getElementById("message").value.trim();
+
+      if(!name || !phone || !city){
+        showToast("Please enter Name, Phone and City.");
+        return;
+      }
+
+      const text =
+`*CRUNCHERY'S FRANCHISE ENQUIRY*
+
+Name: ${name}
+Phone: ${phone}
+Email: ${email || "-"}
+City: ${city}
+Proposed Location: ${location || "-"}
+Investment Capacity: ${investment || "-"}
+Business Experience: ${experience || "-"}
+Expected Timeline: ${timeline || "-"}
+Property Availability: ${property || "-"}
+
+Additional Information:
+${message || "-"}`;
+
+      const url = "https://wa.me/" + FRANCHISE_WHATSAPP + "?text=" + encodeURIComponent(text);
+      window.open(url, "_blank");
+    }
+
+    document.querySelectorAll(
+      "#rent,#salary,#raw,#eb,#gst,#royalty"
+    ).forEach(input => {
+      input.addEventListener("input", calculateBreakEven);
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+    calculateBreakEven();
+  </script>
+
+</body>
+</html>
