@@ -2446,7 +2446,15 @@ body > footer{
     font-size:22px !important;
   }
 }
-
+/* Ensure anchored sections clear the sticky header */
+#overview,
+#investment,
+#calculator,
+#process,
+#faq,
+#franchise-enquiry{
+  scroll-margin-top:220px !important;
+}
 </style>
 </head>
 
@@ -3055,10 +3063,7 @@ body > footer{
       button.parentElement.classList.toggle("open");
     }
 
-    /* Ensure anchored sections clear the sticky header */
-#overview, #investment, #calculator, #process, #faq, #franchise-enquiry{
-  scroll-margin-top:220px !important;
-}
+
 
 /* Reliable section navigation
        Works even when this page is embedded inside Squarespace or another host. */
