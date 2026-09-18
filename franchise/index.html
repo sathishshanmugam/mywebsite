@@ -7,7 +7,7 @@
   <title>Crunchery's Franchise | South Indian Continental Fusion Cafe</title>
 
   <style>
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
 /* =========================================================
    CRUNCHERY'S FRANCHISE PAGE
    SCOPED CSS
@@ -2299,294 +2299,35 @@ body > footer{
     height:46px !important;
   }
 }
-/* =========================================================
-   FINAL CRUNCHERY'S WORDMARK
-   ========================================================= */
 
-.franchise-wordmark-name{
-  font-family:"Anton", sans-serif !important;
-  font-size:78px !important;
-  line-height:.9 !important;
-  font-weight:400 !important;
-  letter-spacing:-1px !important;
-  color:#241b16 !important;
-  white-space:nowrap !important;
-  display:block !important;
-}
-
-.franchise-wordmark-name .orange{
-  color:#ef5b00 !important;
-}
-
-.franchise-wordmark-name sup{
-  font-family:Arial,sans-serif !important;
-  font-size:17px !important;
-  font-weight:700 !important;
-  position:relative !important;
-  top:-8px !important;
-  margin-left:4px !important;
-}
 </style>
 </head>
 
 <body>
 
- <header class="franchise-site-header">
+  <header class="franchise-header">
+  <div class="franchise-header-inner">
 
-  <div class="franchise-header-top"
-       style="
-         width:100%;
-         min-height:225px;
-         box-sizing:border-box;
-         padding:22px 48px 20px;
-         display:flex;
-         align-items:center;
-         justify-content:space-between;
-         gap:40px;
-         background:#fffaf3;
-         border-bottom:1px solid #ded8cb;
-       ">
+    <!-- Crunchery's brand -->
+    <a href="/" class="franchise-logo" aria-label="Crunchery's Home">
+      <img src="/assets/logo.png" alt="Crunchery's logo">
+      <span class="franchise-wordmark" aria-hidden="true">
+        <span class="franchise-wordmark-name">CRUNCHER<span class="orange">Y'S</span><sup>®</sup></span>
+        <span class="franchise-wordmark-rule"></span>
+        <span class="franchise-wordmark-tagline">THE DESTINATION FOR YOUR CRAVINGS</span>
+      </span>
+    </a>
 
-    <!-- =====================================================
-         LEFT: CRUNCHERY'S BRANDING
-         ===================================================== -->
-
-    <div class="franchise-brand-area"
-         style="
-           flex:0 0 auto;
-           display:flex;
-           align-items:center;
-         ">
-
-      <a href="/"
-         class="franchise-brand-link"
-         aria-label="Crunchery's home"
-         style="
-           display:flex;
-           align-items:center;
-           gap:28px;
-           text-decoration:none;
-           color:inherit;
-         ">
-
-        <!-- LOGO -->
-        <img
-          src="/assets/logo.png"
-          alt="Crunchery's logo"
-          style="
-            width:150px;
-            height:150px;
-            min-width:150px;
-            object-fit:contain;
-            display:block;
-          "
-        >
-
-        <!-- WORDMARK -->
-        <span style="
-          display:flex;
-          flex-direction:column;
-          width:540px;
-        ">
-
-          <!-- CRUNCHERY'S -->
-          <span style="
-            font-family:
-              'Arial Narrow',
-              'Roboto Condensed',
-              Impact,
-              sans-serif;
-
-            font-size:76px;
-            line-height:.82;
-
-            font-weight:900;
-
-            letter-spacing:-3px;
-
-            white-space:nowrap;
-
-            color:#241b16;
-
-            transform:scaleX(.86);
-            transform-origin:left center;
-
-            display:block;
-          ">
-            CRUNCHER<span style="color:#ef5b00;">Y'S</span><sup style="
-              font-family:Arial,sans-serif;
-              font-size:18px;
-              position:relative;
-              top:-30px;
-              margin-left:4px;
-            ">®</sup>
-          </span>
-
-          <!-- ORANGE LINE -->
-          <span style="
-            width:100%;
-            height:5px;
-            background:#ef5b00;
-            display:block;
-            margin:10px 0 8px;
-          "></span>
-
-          <!-- TAGLINE -->
-          <span style="
-            width:100%;
-            color:#17233b;
-
-            font-family:
-              Arial,
-              sans-serif;
-
-            font-size:20px;
-            line-height:1;
-
-            font-weight:900;
-
-            letter-spacing:.2px;
-
-            white-space:nowrap;
-
-            text-align:center;
-          ">
-            <b style="font-size:20px;margin-right:18px;">★</b>
-            THE DESTINATION FOR YOUR CRAVINGS
-            <b style="font-size:20px;margin-left:18px;">★</b>
-          </span>
-
-        </span>
-
-      </a>
-
-    </div>
-
-
-    <!-- =====================================================
-         RIGHT: FRANCHISE NAVIGATION
-         ===================================================== -->
-
-    <div style="
-      flex:1 1 auto;
-      min-width:0;
-
-      display:flex;
-      flex-direction:column;
-      align-items:flex-end;
-      justify-content:center;
-
-      gap:28px;
-    ">
-
-      <!-- NAVIGATION -->
-      <nav class="franchise-nav"
-           style="
-             display:flex;
-             align-items:center;
-             justify-content:flex-end;
-             gap:34px;
-             width:100%;
-           ">
-
-        <a href="#overview"
-           onclick="franchiseScrollTo('overview');return false;"
-           style="
-             text-decoration:none;
-             color:#2f302d;
-             font-size:17px;
-             font-weight:850;
-             white-space:nowrap;
-           ">
-          Overview
-        </a>
-
-        <a href="#investment"
-           onclick="franchiseScrollTo('investment');return false;"
-           style="
-             text-decoration:none;
-             color:#2f302d;
-             font-size:17px;
-             font-weight:850;
-             white-space:nowrap;
-           ">
-          Investment
-        </a>
-
-        <a href="#calculator"
-           onclick="franchiseScrollTo('calculator');return false;"
-           style="
-             text-decoration:none;
-             color:#2f302d;
-             font-size:17px;
-             font-weight:850;
-             white-space:nowrap;
-           ">
-          Break-Even
-        </a>
-
-        <a href="#process"
-           onclick="franchiseScrollTo('process');return false;"
-           style="
-             text-decoration:none;
-             color:#2f302d;
-             font-size:17px;
-             font-weight:850;
-             white-space:nowrap;
-           ">
-          Process
-        </a>
-
-        <a href="#faq"
-           onclick="franchiseScrollTo('faq');return false;"
-           style="
-             text-decoration:none;
-             color:#2f302d;
-             font-size:17px;
-             font-weight:850;
-             white-space:nowrap;
-           ">
-          FAQ
-        </a>
-
-        <!-- APPLY NOW -->
-        <a href="#franchise-enquiry"
-           class="franchise-apply"
-           onclick="franchiseScrollTo('franchise-enquiry');return false;"
-           style="
-             display:flex;
-             align-items:center;
-             justify-content:center;
-
-             width:160px;
-             height:58px;
-
-             flex:0 0 160px;
-
-             background:#ef5b00;
-             color:#fff;
-
-             border-radius:18px;
-
-             text-decoration:none;
-
-             font-size:17px;
-             font-weight:900;
-
-             margin-left:8px;
-
-             box-shadow:
-               0 10px 25px rgba(239,91,0,.16);
-           ">
-          Apply Now
-        </a>
-
-      </nav>
-
-    </div>
+    <nav class="franchise-nav" aria-label="Franchise navigation">
+      <a href="#overview" onclick="franchiseScrollTo('overview'); return false;">Overview</a>
+      <a href="#investment" onclick="franchiseScrollTo('investment'); return false;">Investment</a>
+      <a href="#calculator" onclick="franchiseScrollTo('calculator'); return false;">Break-Even</a>
+      <a href="#process" onclick="franchiseScrollTo('process'); return false;">Process</a>
+      <a href="#faq" onclick="franchiseScrollTo('faq'); return false;">FAQ</a>
+      <a href="#franchise-enquiry" class="franchise-apply" onclick="franchiseScrollTo('franchise-enquiry'); return false;">Apply Now</a>
+    </nav>
 
   </div>
-
 </header>
   <main id="franchise-page-only">
 
