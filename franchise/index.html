@@ -7,6 +7,7 @@
   <title>Crunchery's Franchise | South Indian Continental Fusion Cafe</title>
 
   <style>
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
 /* =========================================================
    CRUNCHERY'S FRANCHISE PAGE
@@ -2297,6 +2298,152 @@ body > footer{
     width:120px !important;
     flex-basis:120px !important;
     height:46px !important;
+  }
+}
+
+
+/* =========================================================
+   FINAL CRUNCHERY'S BRAND OVERRIDE
+   - Crunchery's wordmark uses Anton
+   - Larger logo image
+   - Responsive sizing
+   ========================================================= */
+
+.franchise-logo{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:24px !important;
+}
+
+.franchise-logo img{
+  display:block !important;
+  width:128px !important;
+  height:128px !important;
+  max-width:128px !important;
+  max-height:128px !important;
+  flex:0 0 128px !important;
+  object-fit:contain !important;
+}
+
+.franchise-wordmark{
+  width:430px !important;
+  max-width:430px !important;
+}
+
+.franchise-wordmark-name{
+  font-family:"Anton", sans-serif !important;
+  font-size:72px !important;
+  line-height:.9 !important;
+  font-weight:400 !important;
+  letter-spacing:-.5px !important;
+  color:#241b16 !important;
+  white-space:nowrap !important;
+  display:block !important;
+}
+
+.franchise-wordmark-name .orange{
+  color:#ef5b00 !important;
+}
+
+.franchise-wordmark-name sup{
+  font-family:Arial,sans-serif !important;
+  font-size:17px !important;
+  font-weight:700 !important;
+  vertical-align:top !important;
+  position:relative !important;
+  top:-7px !important;
+  margin-left:4px !important;
+}
+
+@media (max-width:1300px) and (min-width:901px){
+  .franchise-logo img{
+    width:100px !important;
+    height:100px !important;
+    max-width:100px !important;
+    max-height:100px !important;
+    flex-basis:100px !important;
+  }
+  .franchise-wordmark{
+    width:390px !important;
+    max-width:390px !important;
+  }
+  .franchise-wordmark-name{
+    font-size:56px !important;
+  }
+  .franchise-wordmark-tagline{
+    font-size:13px !important;
+  }
+}
+
+@media (max-width:900px) and (min-width:601px){
+  .franchise-logo{
+    gap:12px !important;
+  }
+  .franchise-logo img{
+    width:70px !important;
+    height:70px !important;
+    max-width:70px !important;
+    max-height:70px !important;
+    flex-basis:70px !important;
+  }
+  .franchise-wordmark{
+    width:auto !important;
+    max-width:360px !important;
+  }
+  .franchise-wordmark-name{
+    font-size:38px !important;
+  }
+  .franchise-wordmark-tagline{
+    font-size:9px !important;
+  }
+}
+
+@media (max-width:600px){
+  .franchise-logo{
+    gap:8px !important;
+    max-width:72% !important;
+  }
+  .franchise-logo img{
+    width:48px !important;
+    height:48px !important;
+    max-width:48px !important;
+    max-height:48px !important;
+    flex-basis:48px !important;
+  }
+  .franchise-wordmark{
+    width:auto !important;
+    max-width:calc(100vw - 155px) !important;
+  }
+  .franchise-wordmark-name{
+    font-size:25px !important;
+    letter-spacing:0 !important;
+  }
+  .franchise-wordmark-name sup{
+    font-size:10px !important;
+    top:-3px !important;
+    margin-left:2px !important;
+  }
+  .franchise-wordmark-rule{
+    height:2px !important;
+    margin:3px 0 !important;
+  }
+  .franchise-wordmark-tagline{
+    font-size:5.5px !important;
+    letter-spacing:.25px !important;
+  }
+}
+
+@media (max-width:380px){
+  .franchise-logo img{
+    width:43px !important;
+    height:43px !important;
+    max-width:43px !important;
+    max-height:43px !important;
+    flex-basis:43px !important;
+  }
+  .franchise-wordmark-name{
+    font-size:22px !important;
   }
 }
 
