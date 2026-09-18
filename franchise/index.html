@@ -2010,6 +2010,11 @@ footer{
 }
 
 
+/* Anchor positioning for sticky header */
+#franchise-page-only > section[id]{
+  scroll-margin-top:220px !important;
+}
+
 /* =========================================================
    HOST-PAGE SAFETY / STANDALONE LAYOUT
    These rules keep this franchise page independent from
@@ -2071,10 +2076,10 @@ body > footer{
 
 @media (min-width:901px){
   .franchise-header-inner{
-    grid-template-columns:180px minmax(0,1fr) 160px !important;
-    max-width:1280px !important;
-    padding-left:0 !important;
-    padding-right:0 !important;
+    grid-template-columns:650px minmax(0,1fr) !important;
+    max-width:1500px !important;
+    padding-left:24px !important;
+    padding-right:24px !important;
   }
 
   #franchise-page-only{
@@ -2115,6 +2120,186 @@ body > footer{
   }
 }
 
+
+/* =========================================================
+   FINAL DESKTOP HEADER OVERRIDE
+   The header contains ONLY two layout columns:
+   LEFT = complete Crunchery's brand
+   RIGHT = navigation + Apply Now
+   ========================================================= */
+
+@media (min-width:1301px){
+  .franchise-header-inner{
+    width:100% !important;
+    max-width:none !important;
+    box-sizing:border-box !important;
+    display:grid !important;
+    grid-template-columns:minmax(570px, 620px) minmax(0, 1fr) !important;
+    grid-template-rows:1fr !important;
+    column-gap:28px !important;
+    align-items:center !important;
+    padding:18px 28px 20px !important;
+  }
+
+  .franchise-logo{
+    grid-column:1 !important;
+    grid-row:1 !important;
+    width:100% !important;
+    max-width:620px !important;
+    justify-self:start !important;
+    align-self:center !important;
+    gap:24px !important;
+  }
+
+  .franchise-logo img{
+    width:118px !important;
+    height:118px !important;
+    max-width:118px !important;
+    max-height:118px !important;
+    flex:0 0 118px !important;
+  }
+
+  .franchise-wordmark{
+    width:430px !important;
+    max-width:430px !important;
+    flex:0 0 430px !important;
+  }
+
+  .franchise-wordmark-name{
+    font-size:62px !important;
+  }
+
+  .franchise-wordmark-tagline{
+    font-size:16px !important;
+    letter-spacing:.45px !important;
+  }
+
+  .franchise-nav{
+    grid-column:2 !important;
+    grid-row:1 !important;
+    width:100% !important;
+    min-width:0 !important;
+    justify-self:stretch !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-end !important;
+    gap:24px !important;
+    padding:0 !important;
+    margin:0 !important;
+    overflow:visible !important;
+  }
+
+  .franchise-nav a{
+    font-size:15px !important;
+    flex:0 0 auto !important;
+  }
+
+  .franchise-nav .franchise-apply{
+    width:158px !important;
+    min-width:158px !important;
+    flex:0 0 158px !important;
+    margin-left:4px !important;
+  }
+}
+
+@media (min-width:901px) and (max-width:1300px){
+
+  .franchise-header-inner{
+    grid-template-columns:500px minmax(0,1fr) !important;
+    column-gap:18px !important;
+    padding-left:20px !important;
+    padding-right:20px !important;
+  }
+
+  .franchise-logo{
+    width:520px !important;
+    max-width:520px !important;
+  }
+
+  .franchise-logo img{
+    width:90px !important;
+    height:90px !important;
+    max-width:90px !important;
+    max-height:90px !important;
+    flex-basis:90px !important;
+  }
+
+  .franchise-wordmark{
+    width:390px !important;
+    max-width:390px !important;
+  }
+
+  .franchise-wordmark-name{
+    font-size:50px !important;
+  }
+
+  .franchise-wordmark-tagline{
+    font-size:12px !important;
+  }
+
+  .franchise-nav{
+    gap:14px !important;
+  }
+
+  .franchise-nav a{
+    font-size:12.5px !important;
+  }
+
+  .franchise-nav .franchise-apply{
+    width:125px !important;
+    flex-basis:125px !important;
+  }
+}
+
+
+@media (min-width:901px) and (max-width:1100px){
+
+  .franchise-header-inner{
+    grid-template-columns:430px minmax(0,1fr) !important;
+    column-gap:18px !important;
+  }
+
+  .franchise-logo{
+    width:430px !important;
+    max-width:430px !important;
+  }
+
+  .franchise-logo img{
+    width:78px !important;
+    height:78px !important;
+    max-width:78px !important;
+    max-height:78px !important;
+    flex-basis:78px !important;
+  }
+
+  .franchise-wordmark{
+    width:330px !important;
+    max-width:330px !important;
+  }
+
+  .franchise-wordmark-name{
+    font-size:42px !important;
+  }
+
+  .franchise-wordmark-tagline{
+    font-size:10px !important;
+  }
+
+  .franchise-nav{
+    gap:12px !important;
+  }
+
+  .franchise-nav a:not(.franchise-apply){
+    display:none !important;
+  }
+
+  .franchise-nav .franchise-apply{
+    width:120px !important;
+    flex-basis:120px !important;
+    height:46px !important;
+  }
+}
+
 </style>
 </head>
 
@@ -2134,12 +2319,12 @@ body > footer{
     </a>
 
     <nav class="franchise-nav" aria-label="Franchise navigation">
-      <a href="#overview">Overview</a>
-      <a href="#investment">Investment</a>
-      <a href="#calculator">Break-Even</a>
-      <a href="#process">Process</a>
-      <a href="#faq">FAQ</a>
-      <a href="#franchise-enquiry" class="franchise-apply">Apply Now</a>
+      <a href="#overview" onclick="franchiseScrollTo('overview'); return false;">Overview</a>
+      <a href="#investment" onclick="franchiseScrollTo('investment'); return false;">Investment</a>
+      <a href="#calculator" onclick="franchiseScrollTo('calculator'); return false;">Break-Even</a>
+      <a href="#process" onclick="franchiseScrollTo('process'); return false;">Process</a>
+      <a href="#faq" onclick="franchiseScrollTo('faq'); return false;">FAQ</a>
+      <a href="#franchise-enquiry" class="franchise-apply" onclick="franchiseScrollTo('franchise-enquiry'); return false;">Apply Now</a>
     </nav>
 
   </div>
@@ -2722,6 +2907,39 @@ body > footer{
     function toggleFaq(button){
       button.parentElement.classList.toggle("open");
     }
+
+    /* Ensure anchored sections clear the sticky header */
+#overview, #investment, #calculator, #process, #faq, #franchise-enquiry{
+  scroll-margin-top:220px !important;
+}
+
+/* Reliable section navigation
+       Works even when this page is embedded inside Squarespace or another host. */
+    function franchiseScrollTo(id){
+      const target = document.getElementById(id);
+      if(!target) return;
+
+      const header = document.querySelector(".franchise-header");
+      const headerHeight = header ? header.getBoundingClientRect().height : 0;
+      const targetTop = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 18;
+
+      window.scrollTo({
+        top: Math.max(0, targetTop),
+        behavior: "smooth"
+      });
+
+      history.replaceState(null, "", "#" + id);
+    }
+
+    document.querySelectorAll('.franchise-nav a[href^="#"], .hero-actions a[href^="#"], #franchise-page-only a[href^="#"]').forEach(link => {
+      link.addEventListener("click", function(event){
+        const id = this.getAttribute("href").substring(1);
+        if(document.getElementById(id)){
+          event.preventDefault();
+          franchiseScrollTo(id);
+        }
+      });
+    });
 
     function showToast(message){
       const toast = document.getElementById("toast");
