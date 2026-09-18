@@ -140,77 +140,219 @@
     .btn-light{background:#fff;color:var(--text);border:1px solid var(--line)}
     .btn-block{width:100%}
 
-    .hero{
-      min-height:650px;
-      display:grid;
-      grid-template-columns:1.15fr .85fr;
-      gap:28px;
-      align-items:stretch;
-      padding-top:36px;
-    }
+    /* =====================================================
+   HERO — FIX WIDTH & ALIGNMENT
+   ===================================================== */
 
-    .hero-copy{
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      padding:30px 0;
-    }
+.hero {
+  width: 100%;
+  min-height: 650px;
 
-    .hero h1 span{color:var(--accent)}
-    .hero-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:24px;
-    }
+  display: grid;
 
-    .hero-note{
-      display:flex;
-      gap:12px;
-      margin-top:26px;
-      color:var(--muted);
-      font-size:14px;
-    }
+  /* Equal, properly sized columns */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 
-    .hero-note strong{color:var(--text)}
+  gap: 55px;
+  align-items: stretch;
 
-    .hero-visual{
-      min-height:540px;
-      border-radius:34px;
-      background:
-        radial-gradient(circle at 70% 20%,rgba(239,91,0,.25),transparent 28%),
-        linear-gradient(145deg,#24362c,#344d3e);
-      color:#fff;
-      padding:30px;
-      position:relative;
-      overflow:hidden;
-      display:flex;
-      flex-direction:column;
-      justify-content:flex-end;
-      box-shadow:0 18px 50px rgba(36,54,44,.18);
-    }
+  padding-top: 36px;
+  box-sizing: border-box;
+}
 
-    .hero-visual:before{
-      content:"";
-      position:absolute;
-      width:320px;
-      height:320px;
-      border-radius:50%;
-      border:1px solid rgba(255,255,255,.14);
-      right:-100px;
-      top:-100px;
-    }
+.hero-copy {
+  min-width: 0;
+  width: 100%;
 
-    .hero-visual:after{
-      content:"";
-      position:absolute;
-      width:220px;
-      height:220px;
-      border-radius:50%;
-      border:1px solid rgba(255,255,255,.1);
-      left:-100px;
-      bottom:-100px;
-    }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 30px 0;
+  box-sizing: border-box;
+}
+
+.hero h1 {
+  max-width: 700px;
+}
+
+.hero .subtitle {
+  max-width: 680px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.hero-note {
+  display: flex;
+  gap: 12px;
+  margin-top: 26px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+
+/* =====================================================
+   RIGHT HERO PANEL
+   ===================================================== */
+
+.hero-visual {
+  width: 100%;
+  min-width: 0;
+  min-height: 540px;
+
+  box-sizing: border-box;
+
+  border-radius: 34px;
+
+  background:
+    radial-gradient(
+      circle at 70% 20%,
+      rgba(239,91,0,.25),
+      transparent 28%
+    ),
+    linear-gradient(
+      145deg,
+      #24362c,
+      #344d3e
+    );
+
+  color: #fff;
+
+  padding: 34px;
+
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  box-shadow:
+    0 18px 50px rgba(36,54,44,.18);
+}
+
+
+/* Keep the content from becoming too narrow */
+
+.visual-content {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 100%;
+}
+
+.visual-tag {
+  display: inline-block;
+
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.16);
+
+  padding: 8px 13px;
+  border-radius: 99px;
+
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+
+  margin-bottom: 20px;
+}
+
+.visual-title {
+  font-size: clamp(42px, 4vw, 58px);
+  line-height: .98;
+
+  font-weight: 950;
+  letter-spacing: -2.5px;
+
+  margin-bottom: 16px;
+}
+
+.visual-copy {
+  color: rgba(255,255,255,.75);
+
+  max-width: 500px;
+
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+
+/* =====================================================
+   DESKTOP — MAKE THE HERO USE THE FULL CONTENT WIDTH
+   ===================================================== */
+
+@media (min-width: 1101px) {
+
+  .hero {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, 1fr);
+
+    gap: 55px;
+  }
+
+  .hero-visual {
+    min-height: 620px;
+  }
+}
+
+
+/* =====================================================
+   TABLET
+   ===================================================== */
+
+@media (max-width: 900px) {
+
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    min-height: auto;
+  }
+
+  .hero-copy {
+    padding: 30px 0 10px;
+  }
+
+  .hero-visual {
+    min-height: 480px;
+  }
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 600px) {
+
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding-top: 15px;
+  }
+
+  .hero-visual {
+    min-height: 390px;
+    border-radius: 25px;
+    padding: 26px;
+  }
+
+  .visual-title {
+    font-size: 42px;
+  }
+
+  .visual-copy {
+    font-size: 14px;
+  }
+}
 
     .visual-content{position:relative;z-index:2}
     .visual-tag{
