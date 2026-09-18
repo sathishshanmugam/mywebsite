@@ -629,13 +629,13 @@
       .cost-row{grid-template-columns:1fr}
       .cost-value{white-space:normal}
     }
-    /* =====================================================
-   FRANCHISE HEADER
+   /* =====================================================
+   CRUNCHERY'S FRANCHISE HEADER
    ===================================================== */
 
 .franchise-header {
   width: 100%;
-  height: 78px;
+  height: 76px;
   background: #f7f3eb;
   border-bottom: 1px solid #ded8cd;
   position: relative;
@@ -643,100 +643,127 @@
 }
 
 .franchise-header-inner {
-  width: min(1220px, calc(100% - 48px));
+  width: calc(100% - 80px);
+  max-width: 1280px;
   height: 100%;
   margin: 0 auto;
 
-  display: flex;
+  display: grid;
+  grid-template-columns: 240px 1fr 160px;
   align-items: center;
-  justify-content: space-between;
-  gap: 30px;
+  column-gap: 20px;
 }
 
-/* LOGO */
+
+/* =====================================================
+   LOGO
+   ===================================================== */
 
 .franchise-logo {
   display: flex;
   align-items: center;
-  flex-shrink: 0;
+  justify-content: flex-start;
+  width: 100%;
 }
 
 .franchise-logo img {
   display: block;
   width: 190px;
   height: auto;
-  max-height: 58px;
+  max-height: 55px;
   object-fit: contain;
+  object-position: left center;
 }
 
-/* NAVIGATION */
+
+/* =====================================================
+   NAVIGATION
+   ===================================================== */
 
 .franchise-nav {
   display: flex;
   align-items: center;
-  gap: 34px;
-  margin-left: auto;
+  justify-content: center;
+  gap: 38px;
+  width: 100%;
 }
 
 .franchise-nav a {
-  color: #69736c;
+  position: relative;
+
+  color: #5f6962;
   text-decoration: none;
+
   font-size: 14px;
   font-weight: 800;
+
+  white-space: nowrap;
+
+  padding: 28px 0;
 }
 
 .franchise-nav a:hover {
   color: #f15a0a;
 }
 
-/* APPLY NOW */
+
+/* =====================================================
+   APPLY BUTTON
+   ===================================================== */
 
 .franchise-apply {
+  width: 145px;
+  height: 50px;
+
   display: flex;
   align-items: center;
   justify-content: center;
 
-  width: 145px;
-  height: 50px;
+  justify-self: end;
 
   border-radius: 14px;
 
   background: #f15a0a;
-  color: white;
+  color: #ffffff;
 
   text-decoration: none;
 
   font-size: 14px;
   font-weight: 900;
 
-  box-shadow: 0 7px 18px rgba(241, 90, 10, .14);
+  box-shadow: 0 6px 16px rgba(241, 90, 10, .12);
+
+  transition:
+    transform .2s ease,
+    background .2s ease;
 }
 
 .franchise-apply:hover {
   background: #df4f06;
+  transform: translateY(-1px);
 }
 
 
-/* TABLET */
+/* =====================================================
+   TABLET
+   ===================================================== */
 
-@media (max-width: 900px) {
-
-  .franchise-header {
-    height: 72px;
-  }
+@media (max-width: 1050px) {
 
   .franchise-header-inner {
-    width: calc(100% - 32px);
-    gap: 18px;
+    width: calc(100% - 40px);
+
+    grid-template-columns: 190px 1fr 130px;
+
+    column-gap: 12px;
   }
 
   .franchise-logo img {
     width: 165px;
-    max-height: 50px;
   }
 
   .franchise-nav {
-    gap: 18px;
+    gap: 22px;
   }
 
   .franchise-nav a {
@@ -744,28 +771,36 @@
   }
 
   .franchise-apply {
-    width: 120px;
+    width: 125px;
     height: 44px;
     font-size: 12px;
   }
 }
 
 
-/* MOBILE */
+/* =====================================================
+   MOBILE
+   ===================================================== */
 
-@media (max-width: 650px) {
+@media (max-width: 720px) {
 
   .franchise-header {
     height: 68px;
   }
 
   .franchise-header-inner {
-    width: calc(100% - 24px);
+    width: calc(100% - 28px);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
   }
 
   .franchise-logo img {
     width: 145px;
-    max-height: 46px;
+    max-height: 45px;
   }
 
   .franchise-nav {
@@ -775,6 +810,9 @@
   .franchise-apply {
     width: 112px;
     height: 42px;
+
+    border-radius: 12px;
+
     font-size: 11px;
   }
 }
