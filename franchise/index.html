@@ -2409,6 +2409,7 @@ body > footer{
       <a href="#overview" onclick="franchiseScrollTo('overview'); return false;">Overview</a>
       <a href="#investment" onclick="franchiseScrollTo('investment'); return false;">Investment</a>
       <a href="#calculator" onclick="franchiseScrollTo('calculator'); return false;">Break-Even</a>
+      <a href="#roi-projection" onclick="franchiseScrollTo('roi-projection'); return false;">ROI</a>
       <a href="#process" onclick="franchiseScrollTo('process'); return false;">Process</a>
       <a href="#faq" onclick="franchiseScrollTo('faq'); return false;">FAQ</a>
       <a href="#franchise-enquiry" class="franchise-apply" onclick="franchiseScrollTo('franchise-enquiry'); return false;">Apply Now</a>
@@ -3169,7 +3170,7 @@ Proposed Location: ${location || "-"}`;
 
 function salesMultiplier(year){
   // Sales increase by 10% every year
-  return Math.pow(1.10, year - 1);
+  return Math.pow(1.05, year - 1);
 }
 
 function monthProfit(sales, rawPct, royaltyPct, rent1, salary1, eb1, year){
