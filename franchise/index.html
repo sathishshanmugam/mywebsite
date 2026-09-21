@@ -2808,7 +2808,7 @@ body > footer{
           </div>
         </div>
         <div class="roi-error" id="roiSalesError"></div>
-        <div class="roi-table-wrap"><table class="roi-table"><thead><tr><th>Year</th><th>Monthly Sales</th><th>Raw Materials</th><th>GST</th><th>Royalty</th><th>Rent</th><th>Salary</th><th>EB</th><th>Monthly Profit</th><th>Annual Profit</th></tr></thead><tbody id="roiSalesBody"></tbody></table></div>
+        <div class="roi-table-wrap"><table class="roi-table"><thead><tr><th>Year</th><th>Monthly Sales</th><th>Raw Materials</th><th>GST</th><th>Royalty</th><th>Rent</th><th>Salary</th><th>EB</th><th>Monthly Profit</th><th>Annual Profit</th><th>Cumulative Profit</th></tr></thead><tbody id="roiSalesBody"></tbody></table></div>
       </div>
 
       <div id="roi-recovery-panel" class="roi-panel">
@@ -3255,13 +3255,46 @@ function monthProfit(sales, rawPct, royaltyPct, rent1, salary1, eb1, year){
         $("roiTargetMonthsOut").textContent = months + " months";
         $("roiRequiredProfit").textContent = fmt(investment/months);
 
-        const body=$("roiSalesBody"); body.innerHTML="";
-        const years=5;
-        for(let year=1;year<=years;year++){
-          const r=monthProfit(requiredSales,rawPct,royaltyPct,rent,salary,eb,year);
-          const row=document.createElement("tr");
-          row.innerHTML=`<td>${year}</td><td>${fmt(r.sales)}</td><td>${fmt(r.raw)}</td><td>${fmt(r.gst)}</td><td>${fmt(r.royalty)}</td><td>${fmt(r.rent)}</td><td>${fmt(r.salary)}</td><td>${fmt(r.eb)}</td><td class="roi-profit">${fmt(r.profit)}</td><td class="roi-profit">${fmt(r.profit*12)}</td>`;
-          body.appendChild(row);
+       const body = $("roiSalesBody");
+body.innerHTML = "";
+
+const years = 5;
+let cumulativeProfit = 0;
+
+for(let year = 1; year <= years; year++){
+
+  const r = monthProfit(
+    requiredSales,
+    rawPct,
+    royaltyPct,
+    rent,
+    salary,
+    eb,
+    year
+  );
+
+  const annualProfit = r.profit * 12;
+
+  cumulativeProfit += annualProfit;
+
+  const row = document.createElement("tr");
+
+  row.innerHTML = `
+    <td>${year}</td>
+    <td>${fmt(r.sales)}</td>
+    <td>${fmt(r.raw)}</td>
+    <td>${fmt(r.gst)}</td>
+    <td>${fmt(r.royalty)}</td>
+    <td>${fmt(r.rent)}</td>
+    <td>${fmt(r.salary)}</td>
+    <td>${fmt(r.eb)}</td>
+    <td class="roi-profit">${fmt(r.profit)}</td>
+    <td class="roi-profit">${fmt(annualProfit)}</td>
+    <td class="roi-profit">${fmt(cumulativeProfit)}</td>
+  `;
+
+  body.appendChild(row);
+}
         }
       }
 
