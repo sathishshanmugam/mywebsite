@@ -3336,7 +3336,7 @@ for(let year = 1; year <= years; year++){
           const r=monthProfit(sales,rawPct,royaltyPct,rent,salary,eb,year);
           cumulativeYear+=r.profit*12;
           const row=document.createElement("tr");
-          row.innerHTML=`<td>${year}</td><td>${fmt(r.sales)}</td><td>${fmt(r.raw)}</td><td>${fmt(r.gst)}</td><td>${fmt(r.royalty)}</td><td>${fmt(r.rent)}</td><td>${fmt(r.salary)}</td><td>${fmt(r.eb)}</td><td class="roi-profit">${fmt(r.profit)}</td><td class="roi-profit">${fmt(r.profit*12)}</td><td>${fmt(Math.min(cumulativeYear,investment))}</td>`;
+          row.innerHTML=`<td>${year}</td><td>${fmt(r.sales)}</td><td>${fmt(r.raw)}</td><td>${fmt(r.gst)}</td><td>${fmt(r.royalty)}</td><td>${fmt(r.rent)}</td><td>${fmt(r.salary)}</td><td>${fmt(r.eb)}</td><td class="roi-profit">${fmt(r.profit)}</td><td class="roi-profit">${fmt(r.profit*12)}</td><td>${fmt(cumulativeYear)}</td>`;
           body.appendChild(row);
         }
       }
