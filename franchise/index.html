@@ -3162,20 +3162,53 @@ Proposed Location: ${location || "-"}`;
       };
       const fmt = value => "₹" + Math.round(Number.isFinite(value) ? value : 0).toLocaleString("en-IN");
 
-      function costMultiplier(year){
-        return Math.pow(1 + ROI_ESCALATION, Math.floor((year - 1) / 2));
-      }
+     function costMultiplier(year){
+  // Rent, Salary and EB increase by 10% every 2 years
+  return Math.pow(1 + ROI_ESCALATION, Math.floor((year - 1) / 2));
+}
 
-      function monthProfit(sales, rawPct, royaltyPct, rent1, salary1, eb1, year){
-        const m = costMultiplier(year);
-        const raw = sales * rawPct / 100;
-        const gst = sales * ROI_GST;
-        const royalty = sales * royaltyPct / 100;
-        const rent = rent1 * m;
-        const salary = salary1 * m;
-        const eb = eb1 * m;
-        return { sales, raw, gst, royalty, rent, salary, eb, profit: sales - raw - gst - royalty - rent - salary - eb };
-      }
+function salesMultiplier(year){
+  // Sales increase by 10% every year
+  return Math.pow(1.10, year - 1);
+}
+
+function monthProfit(sales, rawPct, royaltyPct, rent1, salary1, eb1, year){
+
+  // Sales grow 10% every year
+  const salesGrowth = salesMultiplier(year);
+  const actualSales = sales * salesGrowth;
+
+  // Fixed costs increase 10% every 2 years
+  const costGrowth = costMultiplier(year);
+
+  const raw = actualSales * rawPct / 100;
+  const gst = actualSales * ROI_GST;
+  const royalty = actualSales * royaltyPct / 100;
+
+  const rent = rent1 * costGrowth;
+  const salary = salary1 * costGrowth;
+  const eb = eb1 * costGrowth;
+
+  const profit =
+    actualSales
+    - raw
+    - gst
+    - royalty
+    - rent
+    - salary
+    - eb;
+
+  return {
+    sales: actualSales,
+    raw,
+    gst,
+    royalty,
+    rent,
+    salary,
+    eb,
+    profit
+  };
+}
 
       function setError(id, msg){
         const el = $(id); if(!el) return;
