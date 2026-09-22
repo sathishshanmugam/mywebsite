@@ -523,167 +523,46 @@ body{
   color:var(--fr-text) !important;
 }
 
-
 /* =========================================================
-   HERO RIGHT VISUAL
+   HERO — FRANCHISE POSTER
    ========================================================= */
 
 #franchise-page-only .hero-visual{
   position:relative !important;
-
   width:100% !important;
-
-  min-width:500px !important;
-
+  min-width:0 !important;
   min-height:620px !important;
 
+  padding:0 !important;
   overflow:hidden !important;
 
   border-radius:38px !important;
 
-  background:
-    radial-gradient(
-      circle at 72% 25%,
-      rgba(239,91,0,.32),
-      transparent 27%
-    ),
-    radial-gradient(
-      circle at 25% 80%,
-      rgba(255,255,255,.06),
-      transparent 28%
-    ),
-    linear-gradient(
-      145deg,
-      #19372b 0%,
-      #264737 48%,
-      #365342 100%
-    ) !important;
-
-  color:#fff !important;
-
-  padding:48px !important;
-
-  display:flex !important;
-
-  flex-direction:column !important;
-
-  justify-content:flex-end !important;
-
-  align-items:flex-start !important;
+  background:none !important;
 
   box-shadow:
     0 25px 60px rgba(36,54,44,.16) !important;
 }
 
-
-/* =========================================================
-   HERO DECORATION
-   ========================================================= */
-
-#franchise-page-only .hero-visual::before{
-  content:"" !important;
-
-  position:absolute !important;
-
-  width:500px !important;
-  height:500px !important;
-
-  right:-230px !important;
-  top:-210px !important;
-
-  border:
-    1px solid rgba(255,255,255,.16) !important;
-
-  border-radius:50% !important;
-
-  pointer-events:none !important;
-}
-
-#franchise-page-only .hero-visual::after{
-  content:"" !important;
-
-  position:absolute !important;
-
-  width:420px !important;
-  height:420px !important;
-
-  left:-260px !important;
-  bottom:-270px !important;
-
-  border:
-    1px solid rgba(255,255,255,.09) !important;
-
-  border-radius:50% !important;
-
-  pointer-events:none !important;
-}
-
-
-/* =========================================================
-   HERO VISUAL CONTENT
-   ========================================================= */
-
-#franchise-page-only .visual-content{
-  position:relative !important;
-
-  z-index:5 !important;
+#franchise-page-only .franchise-poster{
+  display:block !important;
 
   width:100% !important;
+  height:100% !important;
 
-  max-width:540px !important;
+  min-width:100% !important;
+  min-height:620px !important;
+
+  margin:0 !important;
+  padding:0 !important;
+
+  object-fit:cover !important;
+  object-position:center center !important;
+
+  border-radius:38px !important;
 }
 
-#franchise-page-only .visual-tag{
-  display:inline-flex !important;
 
-  align-items:center !important;
-
-  padding:9px 14px !important;
-
-  margin-bottom:22px !important;
-
-  border:
-    1px solid rgba(255,255,255,.18) !important;
-
-  background:
-    rgba(255,255,255,.10) !important;
-
-  border-radius:999px !important;
-
-  color:#fff !important;
-
-  font-size:11px !important;
-
-  font-weight:900 !important;
-
-  letter-spacing:1px !important;
-
-  text-transform:uppercase !important;
-}
-
-#franchise-page-only .visual-title{
-  color:#fff !important;
-
-  font-size:clamp(48px,4.5vw,72px) !important;
-
-  font-weight:950 !important;
-
-  line-height:.95 !important;
-
-  letter-spacing:-4px !important;
-
-  margin:0 0 22px 0 !important;
-}
-
-#franchise-page-only .visual-copy{
-  color:rgba(255,255,255,.74) !important;
-
-  max-width:510px !important;
-
-  font-size:16px !important;
-
-  line-height:1.65 !important;
-}
 
 
 /* =========================================================
