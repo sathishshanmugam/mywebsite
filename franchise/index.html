@@ -2894,6 +2894,95 @@ body > footer{
 }
 </style>
 
+
+<script>
+/* Direct-load protection: #franchise-enquiry must not force the page to open at the form.
+   Keep the hash available for sharing, but neutralize the browser's automatic anchor jump. */
+(function(){
+  if (window.location.hash === '#franchise-enquiry') {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+    window.scrollTo(0, 0);
+  }
+})();
+</script>
+
+<style id="crx-full-width-opening-fix">
+
+/* =========================================================
+   FULL-WIDTH OPENING INTERIOR IMAGE
+   Breaks out of the contained franchise page so the photo
+   runs edge-to-edge like the reference franchise layout.
+   ========================================================= */
+#franchise-page-only #franchise-opening{
+  width:100vw !important;
+  max-width:none !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:0 !important;
+  height:clamp(360px,27.5vw,480px) !important;
+  min-height:0 !important;
+  padding:0 !important;
+  border-radius:0 !important;
+  overflow:hidden !important;
+  position:relative !important;
+}
+
+#franchise-page-only #franchise-opening .crx-opening-photo-media{
+  width:100vw !important;
+  max-width:none !important;
+  height:100% !important;
+  display:block !important;
+  object-fit:cover !important;
+  object-position:center center !important;
+}
+
+@media (max-width:767px){
+  #franchise-page-only #franchise-opening{
+    width:100vw !important;
+    margin-left:calc(50% - 50vw) !important;
+    height:clamp(250px,58vw,430px) !important;
+  }
+}
+
+</style>
+
+<style id="crx-intro-viewport-final">
+/* Final opening viewport: full-width landscape photo + immediate 01 story. */
+#franchise-page-only #franchise-opening{
+  width:100vw !important;
+  max-width:none !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:0 !important;
+  height:clamp(340px, 34vw, 560px) !important;
+  min-height:0 !important;
+  max-height:none !important;
+  padding:0 !important;
+  border-radius:0 !important;
+  overflow:hidden !important;
+  position:relative !important;
+}
+#franchise-page-only #franchise-opening .crx-opening-photo-media{
+  width:100% !important;
+  height:100% !important;
+  display:block !important;
+  object-fit:cover !important;
+  object-position:center center !important;
+}
+#franchise-page-only #franchise-story{
+  width:100% !important;
+  max-width:1400px !important;
+  margin:0 auto !important;
+}
+@media (max-width:767px){
+  #franchise-page-only #franchise-opening{
+    width:100vw !important;
+    margin-left:calc(50% - 50vw) !important;
+    height:58vw !important;
+    min-height:250px !important;
+    max-height:430px !important;
+  }
+}
+</style>
 </head>
 
 <body>
@@ -3569,17 +3658,16 @@ body > footer{
     }
 
 
-/* Direct franchise URL: open the franchise vision first.
-   If someone lands directly on /franchise/#franchise-enquiry, show the
-   interior + 01 Franchise story first. The enquiry form remains available
-   through the Enquiry Now / Apply Now buttons. */
+/* Direct franchise URL: always keep the landing view at the top.
+   The hash is restored without triggering a browser anchor jump. */
 (function(){
   if(window.location.hash === "#franchise-enquiry") {
     if("scrollRestoration" in history) history.scrollRestoration = "manual";
-    history.replaceState(null, "", window.location.pathname + window.location.search);
     window.scrollTo(0, 0);
-    requestAnimationFrame(function(){ window.scrollTo(0, 0); });
-    history.replaceState(null, "", window.location.pathname + window.location.search + "#franchise-enquiry");
+    requestAnimationFrame(function(){
+      window.scrollTo(0, 0);
+      history.replaceState(null, "", window.location.pathname + window.location.search + "#franchise-enquiry");
+    });
   }
 })();
 
@@ -3897,41 +3985,3 @@ for(let year = 1; year <= years; year++){
 
 </body>
 </html>
-<style id="crx-full-width-opening-fix">
-
-/* =========================================================
-   FULL-WIDTH OPENING INTERIOR IMAGE
-   Breaks out of the contained franchise page so the photo
-   runs edge-to-edge like the reference franchise layout.
-   ========================================================= */
-#franchise-page-only #franchise-opening{
-  width:100vw !important;
-  max-width:none !important;
-  margin-left:calc(50% - 50vw) !important;
-  margin-right:0 !important;
-  height:clamp(360px,35vw,620px) !important;
-  min-height:0 !important;
-  padding:0 !important;
-  border-radius:0 !important;
-  overflow:hidden !important;
-  position:relative !important;
-}
-
-#franchise-page-only #franchise-opening .crx-opening-photo-media{
-  width:100vw !important;
-  max-width:none !important;
-  height:100% !important;
-  display:block !important;
-  object-fit:cover !important;
-  object-position:center center !important;
-}
-
-@media (max-width:767px){
-  #franchise-page-only #franchise-opening{
-    width:100vw !important;
-    margin-left:calc(50% - 50vw) !important;
-    height:clamp(250px,58vw,430px) !important;
-  }
-}
-
-</style>
