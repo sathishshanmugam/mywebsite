@@ -3031,6 +3031,26 @@ body > footer{
   border-color:#d94f00 !important;
 }
 </style>
+<style id="crx-landing-mode-prepaint">
+/* Special direct landing URL: /franchise/?landing=1
+   Hides the compact franchise header so the opening viewport
+   starts directly with the interior image, matching the reference. */
+html.crx-landing-mode-root .franchise-header{display:none !important;}
+html.crx-landing-mode-root #franchise-page-only{margin-top:0 !important;padding-top:0 !important;}
+</style>
+<script id="crx-landing-mode-detect">
+(function(){
+  try{
+    var params = new URLSearchParams(window.location.search);
+    if(params.get('landing') === '1'){
+      document.documentElement.classList.add('crx-landing-mode-root');
+      document.addEventListener('DOMContentLoaded', function(){
+        document.body.classList.add('crx-landing-mode');
+      });
+    }
+  }catch(e){}
+})();
+</script>
 </head>
 
 <body>
@@ -3065,7 +3085,7 @@ body > footer{
       <img src="/assets/franchise-interior.jpg"
            alt="Crunchery's cafe interior"
            class="crx-opening-photo-media"
-           onerror="this.onerror=null;this.src='/assets/franchise-interior.jpg';">
+           onerror="this.onerror=null;this.src='/assets/franchise-poster.jpg';">
     </section>
 
     <!-- FRANCHISE 01 — STORY -->
