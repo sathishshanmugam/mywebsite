@@ -3569,6 +3569,20 @@ body > footer{
     }
 
 
+/* Direct franchise URL: open the franchise vision first.
+   If someone lands directly on /franchise/#franchise-enquiry, show the
+   interior + 01 Franchise story first. The enquiry form remains available
+   through the Enquiry Now / Apply Now buttons. */
+(function(){
+  if(window.location.hash === "#franchise-enquiry") {
+    if("scrollRestoration" in history) history.scrollRestoration = "manual";
+    history.replaceState(null, "", window.location.pathname + window.location.search);
+    window.scrollTo(0, 0);
+    requestAnimationFrame(function(){ window.scrollTo(0, 0); });
+    history.replaceState(null, "", window.location.pathname + window.location.search + "#franchise-enquiry");
+  }
+})();
+
 /* Reliable section navigation
        Works even when this page is embedded inside Squarespace or another host. */
     function franchiseScrollTo(id){
@@ -3848,7 +3862,7 @@ for(let year = 1; year <= years; year++){
        The interior image subtly moves as the visitor scrolls.
        ========================================================= */
     (function(){
-      const media = document.getElementById("franchiseOpeningMedia");
+      const media = document.querySelector("#franchise-opening .crx-opening-photo-media");
       const opening = document.getElementById("franchise-opening");
       if(!media || !opening) return;
 
