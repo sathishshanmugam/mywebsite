@@ -56,7 +56,7 @@ src="https://www.facebook.com/tr?id=1649271946754680&ev=PageView&noscript=1"/>
         <a class="active" href="#home">Home</a>
         <a href="#menu">Menu</a>
         <a href="#order">Order Online</a>
-        <a href="#franchise" class="franchise-open">Franchise</a>
+        <a href="/franchise">Franchise</a>
         <a href="#locations">Locations</a>
         <a href="#about">About Us</a>
         <a href="#contact">Contact</a>
@@ -76,7 +76,7 @@ src="https://www.facebook.com/tr?id=1649271946754680&ev=PageView&noscript=1"/>
           <p class="hero-text">South Indian flavours. Global favourites. One seriously delicious experience.</p>
           <div class="hero-actions">
             <a class="btn btn-primary btn-lg order-online-trigger" href="#order">Order Now <span>→</span></a>
-            <button class="btn btn-outline btn-lg franchise-open" type="button" data-form-url="https://forms.gle/KRje4ZQaJgVVrcX19">Become a Partner <span>↗</span></button>
+            <a class="btn btn-outline btn-lg" href="/franchise"> Become a Partner <span>↗</span></a>
           </div>
 
           <div class="trust-row">
@@ -172,7 +172,7 @@ src="https://www.facebook.com/tr?id=1649271946754680&ev=PageView&noscript=1"/>
             <div><span>⚙</span><b>Operations</b><small>Ongoing assistance</small></div>
           </div>
           <!-- Replace the URL in script.js with your existing Google Form -->
-          <button class="btn btn-primary btn-lg franchise-open" id="franchiseBtn" type="button" data-form-url="https://forms.gle/KRje4ZQaJgVVrcX19">Start Franchise Enquiry →</button>
+          <a class="btn btn-primary btn-lg" href="/franchise"> Start Franchise Enquiry →</a>
           <small class="form-note">Your existing Google Form can be connected here.</small>
         </div>
       </div>
@@ -243,46 +243,10 @@ src="https://www.facebook.com/tr?id=1649271946754680&ev=PageView&noscript=1"/>
     </section>
   </main>
 
-  <div class="form-modal" id="franchiseModal" aria-hidden="true">
-    <div class="form-modal-backdrop" data-close-franchise></div>
-    <div class="form-modal-panel" role="dialog" aria-modal="true" aria-labelledby="franchiseModalTitle">
-      <div class="franchise-modal-brand">
-        <div class="modal-brand-left">
-          <video class="modal-logo-animation" autoplay muted loop playsinline preload="auto" poster="assets/logo.png">
-            <source src="assets/logo-animation.mp4" type="video/mp4">
-            <img src="assets/logo.png" alt="Crunchery's logo">
-          </video>
-          <div>
-            <strong>CRUNCHERY'S<sup class="registered-mark">®</sup></strong>
-            <small>THE DESTINATION FOR YOUR CRAVINGS</small>
-          </div>
-        </div>
-        <button class="modal-close" type="button" data-close-franchise aria-label="Close form">×</button>
-      </div>
-      <div class="form-modal-title">
-        <span class="eyebrow">PARTNER WITH US</span>
-        <h2 id="franchiseModalTitle">Become a <span>Crunchery's Partner.</span></h2>
-        <p>Tell us a little about yourself and your plans. Our Partner Development Team will review your enquiry and get in touch.</p>
-      </div>
-      <div class="form-frame-wrap">
-        <div class="form-loading" id="franchiseLoading">
-          <div class="loading-ring"></div>
-          <b>Loading Partner Enquiry...</b>
-          <small>Preparing the Crunchery's form for you.</small>
-        </div>
-        <iframe id="franchiseFrame" title="Crunchery's Franchise Enquiry Form" loading="eager"></iframe>
-      </div>
-      <div class="modal-footer-note">
-        <span>Already have the form open?</span>
-        <a id="franchiseExternal" href="https://forms.gle/KRje4ZQaJgVVrcX19" target="_blank" rel="noopener">Open in a new tab ↗</a>
-      </div>
-    </div>
-  </div>
-
   <footer class="site-footer">
     <div class="container footer-grid">
       <div class="footer-brand"><img src="assets/logo.png" alt="Crunchery's logo"><p>Thank you for being part of our journey. We can't wait to serve your next craving.</p></div>
-      <div><h4>QUICK LINKS</h4><a href="#home">Home</a><a href="#menu">Menu</a><a href="#order">Order Online</a><a href="#franchise" class="franchise-open">Franchise</a><a href="#about">About Us</a></div>
+      <div><h4>QUICK LINKS</h4><a href="#home">Home</a><a href="#menu">Menu</a><a href="#order">Order Online</a><a href="/franchise">Franchise</a><a href="#about">About Us</a></div>
       <div><h4>HELP</h4><a href="#contact">Contact</a><a href="#locations">Locations</a><a href="#">Privacy Policy</a><a href="#">Terms & Conditions</a></div>
       <div><h4>FOLLOW US</h4><div class="socials"><a href="#" aria-label="Instagram">◎</a><a href="#" aria-label="Facebook">f</a><a href="https://wa.me/919500538222" target="_blank" rel="noopener" aria-label="WhatsApp">◉</a></div><a class="email-chip" href="mailto:cruncherys@gmail.com">✉ cruncherys@gmail.com</a></div>
     </div>
