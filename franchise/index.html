@@ -2803,91 +2803,788 @@ body > footer{
   filter:saturate(.98) contrast(1.01) !important;
 }
 
-/* 01 Franchise story */
-.crx-franchise-story{
-  width:min(1320px,calc(100% - 80px)) !important;
-  margin:0 auto !important;
-  padding:72px 0 68px !important;
-  display:grid !important;
-  grid-template-columns:minmax(360px,.78fr) minmax(0,1.22fr) !important;
-  gap:80px !important;
-  align-items:start !important;
-  background:#fff !important;
+<!-- FRANCHISE 01 — STORY -->
+<section class="crx-franchise-story crx-franchise-story-new" id="franchise-story">
+
+  <div class="crx-story-number-wrap">
+    <div class="eyebrow crx-story-kicker">01 — Franchise</div>
+  </div>
+
+  <div class="crx-story-content">
+
+    <div class="crx-story-heading">
+      Grow with <span>Crunchery's</span>
+    </div>
+
+    <p class="crx-franchise-intro">
+      Build a South Indian Continental Fusion Cafe with a distinctive customer
+      experience and a structured business model. Our franchise opportunities
+      are customizable across Tamil Nadu, with end-to-end support from
+      location selection and setup to training, marketing and launch.
+    </p>
+
+
+    <!-- FRANCHISE HIGHLIGHTS -->
+    <div class="crx-franchise-highlights">
+
+      <div class="crx-franchise-highlight">
+        <div class="crx-highlight-icon">₹</div>
+        <div class="crx-highlight-content">
+          <span>INVESTMENT</span>
+          <strong>₹15 LAKHS+</strong>
+          <small>ONWARDS</small>
+        </div>
+      </div>
+
+
+      <div class="crx-franchise-highlight">
+        <div class="crx-highlight-icon">↗</div>
+        <div class="crx-highlight-content">
+          <span>ROI TIMELINE</span>
+          <strong>24 MONTHS</strong>
+          <small>INDICATIVE</small>
+        </div>
+      </div>
+
+
+      <div class="crx-franchise-highlight">
+        <div class="crx-highlight-icon">⌂</div>
+        <div class="crx-highlight-content">
+          <span>MINIMUM AREA</span>
+          <strong>300 SQ.FT.</strong>
+          <small>APPROX.</small>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- CUSTOMIZABLE FRANCHISE BLOCK -->
+    <div class="crx-custom-franchise">
+
+      <div class="crx-custom-franchise-number">
+        01
+      </div>
+
+      <div class="crx-custom-franchise-main">
+
+        <div class="crx-custom-franchise-label">
+          CUSTOMIZABLE FRANCHISE OPPORTUNITIES
+        </div>
+
+        <h3>
+          Your location.
+          <span>Your opportunity.</span>
+        </h3>
+
+        <p>
+          Crunchery's franchise model can be adapted to different locations
+          across Tamil Nadu. We work with you to understand the location,
+          available space and business opportunity before planning the outlet.
+        </p>
+
+      </div>
+
+
+      <div class="crx-custom-franchise-points">
+
+        <div>
+          <span>01</span>
+          <strong>LOCATION</strong>
+          <small>Choose the right market</small>
+        </div>
+
+        <div>
+          <span>02</span>
+          <strong>SPACE</strong>
+          <small>Plan around your site</small>
+        </div>
+
+        <div>
+          <span>03</span>
+          <strong>SETUP</strong>
+          <small>Build the right format</small>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- SUPPORT LINE -->
+    <div class="crx-franchise-support-line">
+      <span>END-TO-END SUPPORT</span>
+      <div class="crx-support-line-items">
+        <span>LOCATION</span>
+        <b>→</b>
+        <span>DESIGN</span>
+        <b>→</b>
+        <span>SETUP</span>
+        <b>→</b>
+        <span>TRAINING</span>
+        <b>→</b>
+        <span>LAUNCH</span>
+      </div>
+    </div>
+
+
+    <div class="crx-franchise-disclaimer">
+      *Investment and ROI figures are indicative and may vary based on
+      location, format and business conditions.
+    </div>
+
+
+    <!-- ENQUIRY BUTTON -->
+    <a class="crx-enquiry-button"
+       href="#franchise-enquiry"
+       onclick="franchiseScrollTo('franchise-enquiry'); return false;">
+
+      <span>ENQUIRY NOW</span>
+      <span class="crx-arrow">→</span>
+
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- 01 — FRANCHISE NEW DESIGN -->
+<style>
+
+#franchise-page-only #franchise-story.crx-franchise-story-new{
+  background:#fff;
+  position:relative;
+  padding-top:70px !important;
+  padding-bottom:90px !important;
 }
 
-.crx-story-number-wrap{
-  position:relative !important;
-  min-height:245px !important;
+
+/* --------------------------------
+   MAIN CONTENT
+-------------------------------- */
+
+#franchise-page-only
+#franchise-story.crx-franchise-story-new
+.crx-story-content{
+  width:100%;
+  max-width:1180px;
+  margin:0 auto;
+  min-height:auto !important;
+  display:block !important;
 }
 
-.crx-story-number{
-  font-size:clamp(150px,16vw,235px) !important;
-  line-height:.72 !important;
-  letter-spacing:-12px !important;
-  font-weight:900 !important;
-  color:#ef5b00 !important;
-  margin-left:-8px !important;
-}
 
-.crx-story-label{
-  margin:24px 0 0 8px !important;
-  font-size:15px !important;
-  font-weight:900 !important;
-  letter-spacing:4px !important;
-  color:#222 !important;
-}
+/* --------------------------------
+   HEADING
+-------------------------------- */
 
+#franchise-page-only
+#franchise-story.crx-franchise-story-new
 .crx-story-heading{
-  font-size:clamp(38px,4.2vw,64px) !important;
-  line-height:1 !important;
-  letter-spacing:-3px !important;
+
+  font-size:clamp(48px,5vw,72px) !important;
+
+  line-height:.98 !important;
+
+  letter-spacing:-3.5px !important;
+
+  margin:0 0 24px !important;
+
   font-weight:900 !important;
-  color:#171717 !important;
-  margin:7px 0 24px !important;
+
+  color:#111 !important;
+
 }
 
-.crx-story-content p{
-  max-width:780px !important;
-  color:#303030 !important;
+
+#franchise-page-only
+#franchise-story.crx-franchise-story-new
+.crx-story-heading span{
+
+  color:#ef5b00;
+
+}
+
+
+/* --------------------------------
+   INTRO
+-------------------------------- */
+
+#franchise-page-only
+#franchise-story.crx-franchise-story-new
+.crx-franchise-intro{
+
+  max-width:850px !important;
+
+  margin:0 0 42px !important;
+
   font-size:18px !important;
-  line-height:1.72 !important;
-  margin:0 !important;
+
+  line-height:1.65 !important;
+
+  color:#333 !important;
+
 }
 
+
+/* --------------------------------
+   HIGHLIGHT CARDS
+-------------------------------- */
+
+.crx-franchise-highlights{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:14px;
+
+  margin-bottom:28px;
+
+}
+
+
+.crx-franchise-highlight{
+
+  min-height:128px;
+
+  border:1px solid #ded8cf;
+
+  background:#fffaf3;
+
+  display:flex;
+
+  align-items:center;
+
+  padding:22px 24px;
+
+  transition:
+    transform .25s ease,
+    border-color .25s ease;
+
+}
+
+
+.crx-franchise-highlight:hover{
+
+  transform:translateY(-3px);
+
+  border-color:#ef5b00;
+
+}
+
+
+.crx-highlight-icon{
+
+  width:58px;
+
+  height:58px;
+
+  flex:0 0 58px;
+
+  border:2px solid #ef5b00;
+
+  border-radius:50%;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  color:#ef5b00;
+
+  font-size:25px;
+
+  font-weight:800;
+
+  margin-right:18px;
+
+}
+
+
+.crx-highlight-content{
+
+  display:flex;
+
+  flex-direction:column;
+
+}
+
+
+.crx-highlight-content span{
+
+  font-size:11px;
+
+  font-weight:900;
+
+  letter-spacing:2px;
+
+  color:#555;
+
+  margin-bottom:4px;
+
+}
+
+
+.crx-highlight-content strong{
+
+  font-size:27px;
+
+  line-height:1;
+
+  font-weight:900;
+
+  color:#ef5b00;
+
+  letter-spacing:-1px;
+
+}
+
+
+.crx-highlight-content small{
+
+  font-size:10px;
+
+  font-weight:800;
+
+  letter-spacing:1.5px;
+
+  margin-top:5px;
+
+  color:#222;
+
+}
+
+
+/* --------------------------------
+   CUSTOMIZABLE FRANCHISE BLOCK
+-------------------------------- */
+
+.crx-custom-franchise{
+
+  display:grid;
+
+  grid-template-columns:
+    70px
+    1fr
+    430px;
+
+  gap:30px;
+
+  align-items:center;
+
+  background:#f7f1e8;
+
+  border-top:1px solid #e5ddd2;
+
+  border-bottom:1px solid #e5ddd2;
+
+  padding:34px 36px;
+
+  margin-top:12px;
+
+}
+
+
+.crx-custom-franchise-number{
+
+  width:52px;
+
+  height:52px;
+
+  border-radius:50%;
+
+  background:#ef5b00;
+
+  color:#fff;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:15px;
+
+  font-weight:900;
+
+}
+
+
+.crx-custom-franchise-label{
+
+  color:#ef5b00;
+
+  font-size:11px;
+
+  letter-spacing:2px;
+
+  font-weight:900;
+
+  margin-bottom:8px;
+
+}
+
+
+.crx-custom-franchise-main h3{
+
+  margin:0 0 10px;
+
+  font-size:30px;
+
+  line-height:1.05;
+
+  letter-spacing:-1.2px;
+
+  color:#111;
+
+}
+
+
+.crx-custom-franchise-main h3 span{
+
+  color:#ef5b00;
+
+}
+
+
+.crx-custom-franchise-main p{
+
+  margin:0;
+
+  max-width:610px;
+
+  font-size:14px;
+
+  line-height:1.6;
+
+  color:#444;
+
+}
+
+
+/* --------------------------------
+   CUSTOMISABLE POINTS
+-------------------------------- */
+
+.crx-custom-franchise-points{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:10px;
+
+}
+
+
+.crx-custom-franchise-points > div{
+
+  padding-left:14px;
+
+  border-left:1px solid #d8cfc2;
+
+  display:flex;
+
+  flex-direction:column;
+
+}
+
+
+.crx-custom-franchise-points span{
+
+  color:#ef5b00;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:1px;
+
+  margin-bottom:7px;
+
+}
+
+
+.crx-custom-franchise-points strong{
+
+  font-size:12px;
+
+  letter-spacing:1px;
+
+  font-weight:900;
+
+  color:#222;
+
+}
+
+
+.crx-custom-franchise-points small{
+
+  margin-top:4px;
+
+  font-size:10px;
+
+  line-height:1.3;
+
+  color:#666;
+
+}
+
+
+/* --------------------------------
+   SUPPORT LINE
+-------------------------------- */
+
+.crx-franchise-support-line{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:25px;
+
+  padding:25px 0 5px;
+
+}
+
+
+.crx-franchise-support-line > span{
+
+  font-size:11px;
+
+  font-weight:900;
+
+  letter-spacing:2px;
+
+  color:#ef5b00;
+
+  white-space:nowrap;
+
+}
+
+
+.crx-support-line-items{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:flex-end;
+
+  gap:13px;
+
+  flex-wrap:wrap;
+
+}
+
+
+.crx-support-line-items span{
+
+  font-size:10px;
+
+  letter-spacing:1.3px;
+
+  font-weight:900;
+
+  color:#333;
+
+}
+
+
+.crx-support-line-items b{
+
+  color:#ef5b00;
+
+  font-size:13px;
+
+}
+
+
+/* --------------------------------
+   DISCLAIMER
+-------------------------------- */
+
+.crx-franchise-disclaimer{
+
+  font-size:10px;
+
+  color:#777;
+
+  margin-top:18px;
+
+}
+
+
+/* --------------------------------
+   BUTTON
+-------------------------------- */
+
+#franchise-page-only
+#franchise-story.crx-franchise-story-new
 .crx-enquiry-button{
-  display:inline-flex !important;
-  align-items:center !important;
+
   margin-top:30px !important;
-  border:1.5px solid #171717 !important;
-  background:#ef5b00 !important;
-  background-color:#ef5b00 !important;
-  color:#171717 !important;
-  text-decoration:none !important;
-  min-height:62px !important;
-  font-size:14px !important;
-  font-weight:900 !important;
-  letter-spacing:3px !important;
-  transition:transform .2s ease,box-shadow .2s ease !important;
+
 }
 
-.crx-enquiry-button span:first-child{padding:0 24px !important;}
-.crx-enquiry-button .crx-arrow{
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  height:62px !important;
-  width:66px !important;
-  border-left:1.5px solid #171717 !important;
-  font-size:28px !important;
-  line-height:1 !important;
-}
-.crx-enquiry-button:hover{
-  transform:translateY(-2px) !important;
-  background:#d94f00 !important;
-  background-color:#d94f00 !important;
-  box-shadow:5px 5px 0 #171717 !important;
+
+/* --------------------------------
+   MOBILE
+-------------------------------- */
+
+@media(max-width:900px){
+
+  #franchise-page-only
+  #franchise-story.crx-franchise-story-new{
+
+    padding-top:48px !important;
+
+    padding-bottom:60px !important;
+
+  }
+
+
+  #franchise-page-only
+  #franchise-story.crx-franchise-story-new
+  .crx-story-content{
+
+    width:100%;
+
+  }
+
+
+  #franchise-page-only
+  #franchise-story.crx-franchise-story-new
+  .crx-story-heading{
+
+    font-size:42px !important;
+
+    letter-spacing:-2px !important;
+
+    line-height:1 !important;
+
+  }
+
+
+  #franchise-page-only
+  #franchise-story.crx-franchise-story-new
+  .crx-franchise-intro{
+
+    font-size:15px !important;
+
+    line-height:1.6 !important;
+
+    margin-bottom:28px !important;
+
+  }
+
+
+  .crx-franchise-highlights{
+
+    grid-template-columns:1fr;
+
+    gap:10px;
+
+  }
+
+
+  .crx-franchise-highlight{
+
+    min-height:100px;
+
+    padding:18px;
+
+  }
+
+
+  .crx-custom-franchise{
+
+    grid-template-columns:45px 1fr;
+
+    gap:18px;
+
+    padding:25px 20px;
+
+  }
+
+
+  .crx-custom-franchise-number{
+
+    width:42px;
+
+    height:42px;
+
+    font-size:13px;
+
+  }
+
+
+  .crx-custom-franchise-main h3{
+
+    font-size:25px;
+
+  }
+
+
+  .crx-custom-franchise-main p{
+
+    font-size:13px;
+
+  }
+
+
+  .crx-custom-franchise-points{
+
+    grid-column:1 / -1;
+
+    margin-top:8px;
+
+  }
+
+
+  .crx-custom-franchise-points > div{
+
+    padding-left:10px;
+
+  }
+
+
+  .crx-franchise-support-line{
+
+    align-items:flex-start;
+
+    flex-direction:column;
+
+    gap:12px;
+
+  }
+
+
+  .crx-support-line-items{
+
+    justify-content:flex-start;
+
+    gap:8px;
+
+  }
+
+
+  .crx-franchise-disclaimer{
+
+    line-height:1.5;
+
+  }
+
 }
 
+</style>
 /* Enquiry section: visible automatically after the story */
 .crx-enquiry-section{
   width:min(1320px,calc(100% - 80px)) !important;
