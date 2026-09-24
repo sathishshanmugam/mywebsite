@@ -12,7 +12,7 @@
 */
 const CONFIG = {
   GOOGLE_ORDER_FORM_URL: "",
-  FRANCHISE_FORM_URL: "https://forms.gle/KRje4ZQaJgVVrcX19",
+  FRANCHISE_FORM_URL: "https://www.cruncherys.com/franchise/",
   WHATSAPP_NUMBER: "919500538222"
 };
 
