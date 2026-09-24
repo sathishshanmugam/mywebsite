@@ -5,10 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Crunchery's Franchise – South Indian Continental Fusion Cafe. Explore investment, setup, break-even and franchise opportunities.">
   <title>Crunchery's Franchise | South Indian Continental Fusion Cafe</title>
-
-  <style>
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
-
+    <style>
+ @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 /* =========================================================
    CRUNCHERY'S FRANCHISE PAGE
    SCOPED CSS
@@ -90,7 +88,7 @@ body{
   display:flex !important;
   align-items:center !important;
   justify-content:flex-start !important;
-  gap:28px !important;
+  gap:12px !important;
   width:max-content !important;
   max-width:100% !important;
   text-decoration:none !important;
@@ -115,11 +113,11 @@ body{
 }
 
 .franchise-wordmark-name{
-  font-family:"Arial Narrow","Roboto Condensed",Impact,sans-serif !important;
+  font-family:"Anton",sans-serif !important;
   font-size:64px !important;
   line-height:.88 !important;
   font-weight:900 !important;
-  letter-spacing:-2px !important;
+  letter-spacing:2px !important;
   color:#241b16 !important;
   white-space:nowrap !important;
 }
@@ -525,167 +523,46 @@ body{
   color:var(--fr-text) !important;
 }
 
-
 /* =========================================================
-   HERO RIGHT VISUAL
+   HERO — FRANCHISE POSTER
    ========================================================= */
 
 #franchise-page-only .hero-visual{
   position:relative !important;
-
   width:100% !important;
-
-  min-width:500px !important;
-
+  min-width:0 !important;
   min-height:620px !important;
 
+  padding:0 !important;
   overflow:hidden !important;
 
   border-radius:38px !important;
 
-  background:
-    radial-gradient(
-      circle at 72% 25%,
-      rgba(239,91,0,.32),
-      transparent 27%
-    ),
-    radial-gradient(
-      circle at 25% 80%,
-      rgba(255,255,255,.06),
-      transparent 28%
-    ),
-    linear-gradient(
-      145deg,
-      #19372b 0%,
-      #264737 48%,
-      #365342 100%
-    ) !important;
-
-  color:#fff !important;
-
-  padding:48px !important;
-
-  display:flex !important;
-
-  flex-direction:column !important;
-
-  justify-content:flex-end !important;
-
-  align-items:flex-start !important;
+  background:none !important;
 
   box-shadow:
     0 25px 60px rgba(36,54,44,.16) !important;
 }
 
-
-/* =========================================================
-   HERO DECORATION
-   ========================================================= */
-
-#franchise-page-only .hero-visual::before{
-  content:"" !important;
-
-  position:absolute !important;
-
-  width:500px !important;
-  height:500px !important;
-
-  right:-230px !important;
-  top:-210px !important;
-
-  border:
-    1px solid rgba(255,255,255,.16) !important;
-
-  border-radius:50% !important;
-
-  pointer-events:none !important;
-}
-
-#franchise-page-only .hero-visual::after{
-  content:"" !important;
-
-  position:absolute !important;
-
-  width:420px !important;
-  height:420px !important;
-
-  left:-260px !important;
-  bottom:-270px !important;
-
-  border:
-    1px solid rgba(255,255,255,.09) !important;
-
-  border-radius:50% !important;
-
-  pointer-events:none !important;
-}
-
-
-/* =========================================================
-   HERO VISUAL CONTENT
-   ========================================================= */
-
-#franchise-page-only .visual-content{
-  position:relative !important;
-
-  z-index:5 !important;
+#franchise-page-only .franchise-poster{
+  display:block !important;
 
   width:100% !important;
+  height:100% !important;
 
-  max-width:540px !important;
+  min-width:100% !important;
+  min-height:620px !important;
+
+  margin:0 !important;
+  padding:0 !important;
+
+  object-fit:cover !important;
+  object-position:center center !important;
+
+  border-radius:38px !important;
 }
 
-#franchise-page-only .visual-tag{
-  display:inline-flex !important;
 
-  align-items:center !important;
-
-  padding:9px 14px !important;
-
-  margin-bottom:22px !important;
-
-  border:
-    1px solid rgba(255,255,255,.18) !important;
-
-  background:
-    rgba(255,255,255,.10) !important;
-
-  border-radius:999px !important;
-
-  color:#fff !important;
-
-  font-size:11px !important;
-
-  font-weight:900 !important;
-
-  letter-spacing:1px !important;
-
-  text-transform:uppercase !important;
-}
-
-#franchise-page-only .visual-title{
-  color:#fff !important;
-
-  font-size:clamp(48px,4.5vw,72px) !important;
-
-  font-weight:950 !important;
-
-  line-height:.95 !important;
-
-  letter-spacing:-4px !important;
-
-  margin:0 0 22px 0 !important;
-}
-
-#franchise-page-only .visual-copy{
-  color:rgba(255,255,255,.74) !important;
-
-  max-width:510px !important;
-
-  font-size:16px !important;
-
-  line-height:1.65 !important;
-}
 
 
 /* =========================================================
@@ -2016,6 +1893,11 @@ footer{
   scroll-margin-top:220px !important;
 }
 
+#franchise-opening,
+#franchise-story{
+  scroll-margin-top:220px !important;
+}
+
 /* =========================================================
    HOST-PAGE SAFETY / STANDALONE LAYOUT
    These rules keep this franchise page independent from
@@ -2135,7 +2017,7 @@ body > footer{
     max-width:none !important;
     box-sizing:border-box !important;
     display:grid !important;
-    grid-template-columns:minmax(570px, 620px) minmax(0, 1fr) !important;
+    grid-template-columns:minmax(700px, 700px) minmax(0, 1fr) !important;
     grid-template-rows:1fr !important;
     column-gap:28px !important;
     align-items:center !important;
@@ -2146,25 +2028,28 @@ body > footer{
     grid-column:1 !important;
     grid-row:1 !important;
     width:100% !important;
-    max-width:620px !important;
+    max-width:700px !important;
     justify-self:start !important;
     align-self:center !important;
-    gap:24px !important;
+    gap:0 !important;
   }
 
   .franchise-logo img{
-    width:118px !important;
-    height:118px !important;
-    max-width:118px !important;
-    max-height:118px !important;
-    flex:0 0 118px !important;
+    width:220px !important;
+    height:220px !important;
+    max-width:220px !important;
+    max-height:220px !important;
+    flex:0 0 220px !important;
+    min-width:220px !important;
+    flex-shrink:0 !important;
   }
 
   .franchise-wordmark{
-    width:430px !important;
-    max-width:430px !important;
-    flex:0 0 430px !important;
-  }
+  width:430px !important;
+  max-width:430px !important;
+  flex:0 0 430px !important;
+  margin-left:-60px !important;
+}
 
   .franchise-wordmark-name{
     font-size:62px !important;
@@ -2218,11 +2103,11 @@ body > footer{
   }
 
   .franchise-logo img{
-    width:163px !important;
-    height:163px !important;
-    max-width:163px !important;
-    max-height:163px !important;
-    flex-basis:163px !important;
+    width:90px !important;
+    height:90px !important;
+    max-width:90px !important;
+    max-height:90px !important;
+    flex-basis:90px !important;
   }
 
   .franchise-wordmark{
@@ -2266,11 +2151,11 @@ body > footer{
   }
 
   .franchise-logo img{
-    width:140px !important;
-    height:140px !important;
-    max-width:140px !important;
-    max-height:140px !important;
-    flex-basis:140px !important;
+    width:78px !important;
+    height:78px !important;
+    max-width:78px !important;
+    max-height:78px !important;
+    flex-basis:78px !important;
   }
 
   .franchise-wordmark{
@@ -2302,158 +2187,1021 @@ body > footer{
 }
 
 
+
 /* =========================================================
-   FINAL CRUNCHERY'S BRAND OVERRIDE
-   - Crunchery's wordmark uses Anton
-   - Larger logo image
-   - Responsive sizing
+   ROI PROJECTION CALCULATOR
+   ========================================================= */
+#franchise-page-only .roi-tabs{
+  display:flex !important; gap:8px !important; margin:0 0 22px !important;
+  padding:6px !important; background:var(--fr-soft) !important;
+  border:1px solid var(--fr-line) !important; border-radius:15px !important;
+  width:max-content !important; max-width:100% !important;
+}
+#franchise-page-only .roi-tab{
+  border:0 !important; background:transparent !important; color:var(--fr-muted) !important;
+  padding:13px 22px !important; border-radius:10px !important; font-size:14px !important;
+  font-weight:900 !important; cursor:pointer !important;
+}
+#franchise-page-only .roi-tab.active{background:var(--fr-dark) !important;color:#fff !important;}
+#franchise-page-only .roi-panel{display:none !important;}
+#franchise-page-only .roi-panel.active{display:block !important;}
+#franchise-page-only .roi-fixed{
+  min-height:48px !important; display:flex !important; align-items:center !important;
+  justify-content:space-between !important; padding:12px 14px !important;
+  border:1px solid var(--fr-line) !important; border-radius:12px !important;
+  background:#f1eee8 !important; color:var(--fr-text) !important; font-weight:950 !important;
+}
+#franchise-page-only .roi-fixed span{font-size:10px !important;color:var(--fr-muted) !important;text-transform:uppercase !important;letter-spacing:.8px !important;}
+#franchise-page-only .roi-note{
+  margin-top:18px !important; padding:14px 16px !important; border-radius:14px !important;
+  background:#fff !important; border:1px solid var(--fr-line) !important;
+  color:var(--fr-muted) !important; font-size:12px !important; line-height:1.55 !important;
+}
+#franchise-page-only .roi-note strong{color:var(--fr-text) !important;}
+#franchise-page-only .roi-result{
+  margin-top:22px !important; background:var(--fr-dark) !important; color:#fff !important;
+  border-radius:22px !important; padding:28px !important;
+}
+#franchise-page-only .roi-result .result-label{color:#d9d1cb !important;}
+#franchise-page-only .roi-result .result-number{color:#fff !important;}
+#franchise-page-only .roi-result .result-sub{color:#cfc6c0 !important;}
+#franchise-page-only .roi-result .result-line span{color:#bdb3ad !important;}
+#franchise-page-only .roi-result .result-line strong{color:#fff !important;}
+#franchise-page-only .roi-table-wrap{
+  width:100% !important; overflow-x:auto !important; margin-top:24px !important;
+  border:1px solid var(--fr-line) !important; border-radius:18px !important; background:#fff !important;
+}
+#franchise-page-only .roi-table{width:100% !important;min-width:1050px !important;border-collapse:collapse !important;font-size:12px !important;}
+#franchise-page-only .roi-table th{background:var(--fr-dark) !important;color:#fff !important;padding:13px 11px !important;text-align:right !important;font-size:10px !important;text-transform:uppercase !important;letter-spacing:.5px !important;white-space:nowrap !important;}
+#franchise-page-only .roi-table th:first-child,#franchise-page-only .roi-table td:first-child{text-align:center !important;}
+#franchise-page-only .roi-table td{padding:13px 11px !important;border-bottom:1px solid var(--fr-line) !important;color:var(--fr-text) !important;text-align:right !important;white-space:nowrap !important;font-weight:750 !important;}
+#franchise-page-only .roi-table tbody tr:last-child td{border-bottom:0 !important;}
+#franchise-page-only .roi-table tbody tr:nth-child(even){background:var(--fr-soft) !important;}
+#franchise-page-only .roi-profit{color:var(--fr-accent) !important;font-weight:950 !important;}
+#franchise-page-only .roi-error{display:none !important;margin-top:14px !important;padding:12px 14px !important;border-radius:12px !important;background:#fff1f1 !important;border:1px solid #efcccc !important;color:#b3261e !important;font-size:12px !important;font-weight:800 !important;}
+#franchise-page-only .roi-error.show{display:block !important;}
+@media(max-width:900px){
+  #franchise-page-only .roi-tabs{width:100% !important;}
+  #franchise-page-only .roi-tab{flex:1 !important;}
+}
+
+</style>
+
+<style id="cruncherys-logo-override">
+
+  /* CRUNCHERY'S HEADER LOGO */
+  .franchise-header .franchise-logo {
+    gap: 12px !important;
+  }
+
+  .franchise-header .franchise-logo img {
+    display: block !important;
+
+    width: 260px !important;
+    height: 260px !important;
+
+    max-width: 260px !important;
+    max-height: 260px !important;
+
+    min-width: 260px !important;
+    min-height: 260px !important;
+
+    flex: 0 0 260px !important;
+    flex-shrink: 0 !important;
+
+    object-fit: contain !important;
+  }
+  .franchise-header .franchise-wordmark {
+  margin-left:-80px !important;
+  }
+
+  .franchise-wordmark {
+    width: 430px !important;
+    max-width: 430px !important;
+    flex: 0 0 430px !important;
+  }
+
+  #franchise-page-only .franchise-wordmark-name {
+    font-family: 'Anton', sans-serif !important;
+    font-weight: 400 !important;
+  }
+
+
+/* =========================================================
+   NEW FRANCHISE LANDING FLOW
+   Interior image -> Franchise intro -> Details -> Enquiry
    ========================================================= */
 
-.franchise-logo{
+.franchise-opening{
+  width:100%;
+  position:relative;
+  height:calc(100vh - 196px);
+  min-height:620px;
+  max-height:900px;
+  overflow:hidden;
+  background:#24362c;
+}
+
+.franchise-opening-media{
+  position:absolute;
+  inset:-7%;
+  width:114%;
+  height:114%;
+  object-fit:cover;
+  object-position:center;
+  filter:saturate(.95);
+  transform:translate3d(0,0,0) scale(1.02);
+  will-change:transform;
+}
+
+.franchise-opening::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,rgba(10,18,14,.72) 0%,rgba(10,18,14,.28) 48%,rgba(10,18,14,.08) 100%),
+    linear-gradient(0deg,rgba(10,18,14,.62),transparent 45%);
+  pointer-events:none;
+}
+
+.franchise-opening-content{
+  position:relative;
+  z-index:2;
+  height:100%;
+  max-width:1500px;
+  margin:0 auto;
+  padding:70px 55px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:40px;
+  color:#fff;
+}
+
+.franchise-opening-copy{
+  max-width:760px;
+}
+
+.franchise-opening-kicker{
+  color:#ff9a62;
+  font-size:13px;
+  font-weight:950;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin-bottom:16px;
+}
+
+.franchise-opening-title{
+  margin:0 !important;
+  color:#fff !important;
+  font-size:clamp(58px,7vw,110px) !important;
+  line-height:.88 !important;
+  letter-spacing:-5px !important;
+  font-weight:950 !important;
+}
+
+.franchise-opening-title span{
+  color:#ef5b00;
+}
+
+.franchise-opening-copy p{
+  max-width:650px;
+  margin:24px 0 0;
+  color:rgba(255,255,255,.78);
+  font-size:17px;
+  line-height:1.65;
+}
+
+.franchise-opening-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:28px;
+}
+
+.franchise-opening-scroll{
+  align-self:flex-end;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  color:#fff;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.franchise-opening-scroll-line{
+  width:1px;
+  height:70px;
+  background:linear-gradient(#ef5b00,rgba(255,255,255,.15));
+}
+
+.franchise-opening-scroll-dot{
+  width:8px;
+  height:8px;
+  border:2px solid #fff;
+  border-radius:50%;
+  animation:franchiseScrollPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes franchiseScrollPulse{
+  0%,100%{transform:translateY(0);opacity:.65}
+  50%{transform:translateY(8px);opacity:1}
+}
+
+.franchise-intro{
+  width:100%;
+  padding:95px 0 85px;
+  display:grid;
+  grid-template-columns:minmax(300px,.7fr) minmax(0,1.3fr);
+  gap:80px;
+  align-items:start;
+}
+
+.franchise-intro-number{
+  font-size:clamp(130px,16vw,240px);
+  line-height:.7;
+  font-weight:950;
+  letter-spacing:-12px;
+  color:#f3dc59;
+  opacity:.95;
+}
+
+.franchise-intro-label{
+  margin-top:25px;
+  color:var(--fr-accent);
+  font-size:13px;
+  font-weight:950;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+}
+
+.franchise-intro h2{
+  font-size:clamp(44px,5vw,72px) !important;
+  line-height:.95 !important;
+  letter-spacing:-4px !important;
+  margin-bottom:25px !important;
+}
+
+.franchise-intro h2 span{
+  color:var(--fr-accent);
+}
+
+.franchise-intro-copy{
+  color:var(--fr-muted);
+  font-size:18px;
+  line-height:1.75;
+  max-width:850px;
+}
+
+.franchise-intro-highlights{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:32px;
+}
+
+.franchise-highlight{
+  padding:22px;
+  background:#fff;
+  border:1px solid var(--fr-line);
+  border-radius:18px;
+}
+
+.franchise-highlight strong{
+  display:block;
+  color:var(--fr-text);
+  font-size:16px;
+  margin-bottom:7px;
+}
+
+.franchise-highlight span{
+  color:var(--fr-muted);
+  font-size:12px;
+  line-height:1.5;
+}
+
+.franchise-enquiry-banner{
+  background:var(--fr-dark);
+  border-radius:28px;
+  padding:38px 42px;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+  margin:0 0 25px;
+}
+
+.franchise-enquiry-banner h3{
+  color:#fff !important;
+  margin:0 0 8px !important;
+  font-size:30px !important;
+}
+
+.franchise-enquiry-banner p{
+  color:rgba(255,255,255,.68);
+  margin:0;
+}
+
+@media(max-width:900px){
+  .franchise-opening{
+    height:78vh;
+    min-height:560px;
+  }
+  .franchise-opening-content{
+    padding:45px 28px;
+  }
+  .franchise-opening-scroll{display:none}
+  .franchise-intro{
+    grid-template-columns:1fr;
+    gap:25px;
+    padding:65px 0;
+  }
+  .franchise-intro-number{
+    font-size:120px;
+    letter-spacing:-8px;
+  }
+  .franchise-intro-highlights{
+    grid-template-columns:1fr;
+  }
+  .franchise-enquiry-banner{
+    display:block;
+    padding:30px 25px;
+  }
+  .franchise-enquiry-banner .btn{
+    margin-top:18px;
+    width:100%;
+  }
+}
+
+@media(max-width:600px){
+  .franchise-opening{
+    height:72vh;
+    min-height:500px;
+  }
+  .franchise-opening-content{
+    padding:30px 20px;
+  }
+  .franchise-opening-title{
+    font-size:52px !important;
+    letter-spacing:-3px !important;
+  }
+  .franchise-opening-copy p{
+    font-size:15px;
+  }
+  .franchise-opening-actions{
+    flex-direction:column;
+    align-items:stretch;
+  }
+  .franchise-opening-actions .btn{
+    width:100%;
+  }
+  .franchise-intro{
+    padding:50px 0;
+  }
+  .franchise-intro-number{
+    font-size:100px;
+  }
+}
+
+
+
+/* =========================================================
+   CRUNCHERY'S — IMAGE-FIRST FRANCHISE FLOW
+   Inspired by the reference layout supplied by the user:
+   image → 01 franchise story → enquiry form → overview → FAQ → calculators
+   ========================================================= */
+
+#franchise-page-only{
+  background:#fff !important;
+  color:#171717 !important;
+}
+
+/* Opening image: intentionally clean, with no text overlay */
+.crx-opening-photo{
+  width:100% !important;
+  height:clamp(480px,58vw,680px) !important;
+  min-height:430px !important;
+  overflow:hidden !important;
+  position:relative !important;
+  background:#222 !important;
+  border-bottom:8px solid #ef5b00 !important;
+}
+
+.crx-opening-photo-media{
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  object-position:center center !important;
+  filter:saturate(.98) contrast(1.01) !important;
+}
+
+/* 01 Franchise story */
+.crx-franchise-story{
+  width:min(1320px,calc(100% - 80px)) !important;
+  margin:0 auto !important;
+  padding:72px 0 68px !important;
+  display:grid !important;
+  grid-template-columns:minmax(360px,.78fr) minmax(0,1.22fr) !important;
+  gap:80px !important;
+  align-items:start !important;
+  background:#fff !important;
+}
+
+.crx-story-number-wrap{
+  position:relative !important;
+  min-height:245px !important;
+}
+
+.crx-story-number{
+  font-size:clamp(150px,16vw,235px) !important;
+  line-height:.72 !important;
+  letter-spacing:-12px !important;
+  font-weight:900 !important;
+  color:#ef5b00 !important;
+  margin-left:-8px !important;
+}
+
+.crx-story-label{
+  margin:24px 0 0 8px !important;
+  font-size:15px !important;
+  font-weight:900 !important;
+  letter-spacing:4px !important;
+  color:#222 !important;
+}
+
+.crx-story-heading{
+  font-size:clamp(38px,4.2vw,64px) !important;
+  line-height:1 !important;
+  letter-spacing:-3px !important;
+  font-weight:900 !important;
+  color:#171717 !important;
+  margin:7px 0 24px !important;
+}
+
+.crx-story-content p{
+  max-width:780px !important;
+  color:#303030 !important;
+  font-size:18px !important;
+  line-height:1.72 !important;
+  margin:0 !important;
+}
+
+.crx-enquiry-button{
+  display:inline-flex !important;
+  align-items:center !important;
+  margin-top:30px !important;
+  border:1.5px solid #171717 !important;
+  background:#ef5b00 !important;
+  background-color:#ef5b00 !important;
+  color:#171717 !important;
+  text-decoration:none !important;
+  min-height:62px !important;
+  font-size:14px !important;
+  font-weight:900 !important;
+  letter-spacing:3px !important;
+  transition:transform .2s ease,box-shadow .2s ease !important;
+}
+
+.crx-enquiry-button span:first-child{padding:0 24px !important;}
+.crx-enquiry-button .crx-arrow{
   display:flex !important;
   align-items:center !important;
-  justify-content:flex-start !important;
-  gap:24px !important;
+  justify-content:center !important;
+  height:62px !important;
+  width:66px !important;
+  border-left:1.5px solid #171717 !important;
+  font-size:28px !important;
+  line-height:1 !important;
+}
+.crx-enquiry-button:hover{
+  transform:translateY(-2px) !important;
+  background:#d94f00 !important;
+  background-color:#d94f00 !important;
+  box-shadow:5px 5px 0 #171717 !important;
 }
 
-.franchise-logo img{
-  display:block !important;
-  width:200px !important;
-  height:200px !important;
-  max-width:200px !important;
-  max-height:200px !important;
-  flex:0 0 90px !important;
-  object-fit:contain !important;
+/* Enquiry section: visible automatically after the story */
+.crx-enquiry-section{
+  width:min(1320px,calc(100% - 80px)) !important;
+  margin:0 auto !important;
+  padding:20px 0 92px !important;
+  background:#fff !important;
 }
 
-.franchise-wordmark{
-  width:430px !important;
-  max-width:430px !important;
+.crx-enquiry-heading .eyebrow{
+  color:#171717 !important;
+  font-size:15px !important;
+  letter-spacing:2.5px !important;
+  margin-bottom:16px !important;
 }
 
-.franchise-wordmark-name{
-  font-family:"Anton", sans-serif !important;
-  font-size:72px !important;
-  line-height:.9 !important;
-  font-weight:400 !important;
-  letter-spacing:-.5px !important;
-  color:#241b16 !important;
-  white-space:nowrap !important;
-  display:block !important;
+.crx-enquiry-heading h2{
+  font-size:clamp(38px,4.5vw,58px) !important;
+  letter-spacing:-3px !important;
+  margin-bottom:22px !important;
 }
 
-.franchise-wordmark-name .orange{
+.crx-enquiry-heading p{
+  max-width:1120px !important;
+  color:#303030 !important;
+  font-size:18px !important;
+  line-height:1.7 !important;
+  margin:0 !important;
+}
+
+.crx-form-layout{
+  display:grid !important;
+  grid-template-columns:minmax(300px,.72fr) minmax(0,1.28fr) !important;
+  gap:55px !important;
+  align-items:start !important;
+  margin-top:54px !important;
+}
+
+.crx-form-intro{
+  padding-top:5px !important;
+}
+.crx-form-mini-title{
+  font-size:13px !important;
+  font-weight:900 !important;
+  letter-spacing:2.5px !important;
   color:#ef5b00 !important;
+  margin-bottom:18px !important;
+}
+.crx-form-intro h3{
+  font-size:32px !important;
+  letter-spacing:-1.5px !important;
+  margin-bottom:14px !important;
+}
+.crx-form-intro > p{
+  color:#626262 !important;
+  font-size:16px !important;
+  line-height:1.65 !important;
+  max-width:440px !important;
+}
+.crx-form-facts{
+  margin-top:28px !important;
+  border-top:1px solid #ddd !important;
+}
+.crx-form-facts div{
+  padding:15px 0 !important;
+  border-bottom:1px solid #ddd !important;
+}
+.crx-form-facts strong{
+  display:block !important;
+  font-size:13px !important;
+  text-transform:uppercase !important;
+  letter-spacing:1.5px !important;
+  margin-bottom:4px !important;
+}
+.crx-form-facts span{
+  color:#626262 !important;
+  font-size:14px !important;
 }
 
-.franchise-wordmark-name sup{
-  font-family:Arial,sans-serif !important;
-  font-size:17px !important;
-  font-weight:700 !important;
-  vertical-align:top !important;
-  position:relative !important;
-  top:-7px !important;
-  margin-left:4px !important;
+.crx-form-card{
+  background:#f7f7f5 !important;
+  border:1px solid #dedede !important;
+  padding:34px !important;
+  border-radius:0 !important;
+}
+.crx-form-card .field input{
+  background:#fff !important;
+  border:1px solid #cfcfcf !important;
+  border-radius:0 !important;
+  min-height:52px !important;
+}
+.crx-form-card .field label{
+  color:#222 !important;
+  font-size:12px !important;
+  letter-spacing:1px !important;
+  text-transform:uppercase !important;
+}
+.crx-form-card .btn-primary{
+  border-radius:0 !important;
+  min-height:58px !important;
+  letter-spacing:1.5px !important;
 }
 
-@media (max-width:1300px) and (min-width:901px){
-  .franchise-logo img{
-    width:100px !important;
-    height:100px !important;
-    max-width:100px !important;
-    max-height:100px !important;
-    flex-basis:100px !important;
-  }
-  .franchise-wordmark{
-    width:390px !important;
-    max-width:390px !important;
-  }
-  .franchise-wordmark-name{
-    font-size:56px !important;
-  }
-  .franchise-wordmark-tagline{
-    font-size:13px !important;
-  }
+/* Make the existing overview / FAQ / calculator cards visually flatter */
+#franchise-page-only > .card{
+  border-radius:0 !important;
+  box-shadow:none !important;
+  border-top:1px solid #e4e4e4 !important;
+  padding-top:72px !important;
+  padding-bottom:72px !important;
 }
 
-@media (max-width:900px) and (min-width:601px){
+@media(max-width:900px){
+  .crx-opening-photo{height:58vh !important;min-height:360px !important;}
+  .crx-franchise-story,
+  .crx-enquiry-section{width:min(100% - 36px,720px) !important;}
+  .crx-franchise-story{grid-template-columns:1fr !important;gap:24px !important;padding:55px 0 !important;}
+  .crx-story-number-wrap{min-height:160px !important;}
+  .crx-story-number{font-size:145px !important;}
+  .crx-story-label{margin-top:16px !important;}
+  .crx-form-layout{grid-template-columns:1fr !important;gap:30px !important;}
+  .crx-form-card{padding:24px !important;}
+}
+
+</style>
+
+
+<style id="cruncherys-final-size-adjustments">
+/* Compact header + true landscape opening image */
+@media (min-width: 901px){
+  /* Compact reference-style header: keep the photo + 01 section visible in the first viewport. */
+  .franchise-header{
+    min-height:96px !important;
+    height:96px !important;
+  }
+  .franchise-header-inner{
+    min-height:96px !important;
+    height:96px !important;
+    padding:6px 28px !important;
+    grid-template-columns:360px minmax(0,1fr) !important;
+    column-gap:22px !important;
+    grid-template-rows:1fr !important;
+  }
   .franchise-logo{
-    gap:12px !important;
-  }
-  .franchise-logo img{
-    width:62px !important;
-    height:62px !important;
-    max-width:62px !important;
-    max-height:62px !important;
-    flex-basis:62px !important;
-  }
-  .franchise-wordmark{
-    width:auto !important;
+    width:360px !important;
     max-width:360px !important;
+    gap:0 !important;
+    align-items:center !important;
+  }
+  .franchise-header .franchise-logo img{
+    width:82px !important;
+    height:82px !important;
+    max-width:82px !important;
+    max-height:82px !important;
+    min-width:82px !important;
+    min-height:82px !important;
+    flex:0 0 82px !important;
+  }
+  .franchise-header .franchise-wordmark{
+    width:275px !important;
+    max-width:275px !important;
+    flex:0 0 275px !important;
+    margin-left:-10px !important;
   }
   .franchise-wordmark-name{
-    font-size:38px !important;
+    font-size:39px !important;
+    line-height:.92 !important;
   }
   .franchise-wordmark-tagline{
-    font-size:9px !important;
-  }
-}
-
-@media (max-width:600px){
-  .franchise-logo{
-    gap:8px !important;
-    max-width:72% !important;
-  }
-  .franchise-logo img{
-    width:44px !important;
-    height:44px !important;
-    max-width:44px !important;
-    max-height:44px !important;
-    flex-basis:44px !important;
-  }
-  .franchise-wordmark{
-    width:auto !important;
-    max-width:calc(100vw - 155px) !important;
-  }
-  .franchise-wordmark-name{
-    font-size:25px !important;
-    letter-spacing:0 !important;
-  }
-  .franchise-wordmark-name sup{
-    font-size:10px !important;
-    top:-3px !important;
-    margin-left:2px !important;
-  }
-  .franchise-wordmark-rule{
-    height:2px !important;
-    margin:3px 0 !important;
-  }
-  .franchise-wordmark-tagline{
-    font-size:5.5px !important;
+    font-size:8px !important;
     letter-spacing:.25px !important;
   }
+  .franchise-nav{
+    gap:20px !important;
+    align-items:center !important;
+    height:100% !important;
+  }
+  .franchise-nav a{
+    font-size:13px !important;
+    white-space:nowrap !important;
+  }
+  .franchise-nav .franchise-apply{
+    width:112px !important;
+    min-width:112px !important;
+    flex-basis:112px !important;
+    height:40px !important;
+  }
+
+  /* BurgerMan-style opening: a shallow landscape photo immediately below the header. */
+  .crx-opening-photo{
+    height:clamp(430px, 34vw, 560px) !important;
+    min-height:0 !important;
+    aspect-ratio:auto !important;
+    border-bottom:6px solid #ef5b00 !important;
+  }
+  .crx-opening-photo-media{
+    width:100% !important;
+    height:100% !important;
+    object-fit:cover !important;
+    object-position:center center !important;
+  }
 }
 
-@media (max-width:380px){
-  .franchise-logo img{
-    width:40px !important;
-    height:40px !important;
-    max-width:40px !important;
-    max-height:40px !important;
-    flex-basis:40px !important;
+@media (min-width: 901px) and (max-width: 1300px){
+  .franchise-header-inner{
+    grid-template-columns:300px minmax(0,1fr) !important;
+    padding-left:18px !important;
+    padding-right:18px !important;
+    column-gap:14px !important;
   }
-  .franchise-wordmark-name{
-    font-size:22px !important;
+  .franchise-logo{width:300px !important;max-width:300px !important;}
+  .franchise-header .franchise-logo img{width:68px !important;height:68px !important;min-width:68px !important;min-height:68px !important;flex-basis:68px !important;}
+  .franchise-header .franchise-wordmark{width:235px !important;max-width:235px !important;flex-basis:235px !important;margin-left:-4px !important;}
+  .franchise-wordmark-name{font-size:32px !important;}
+  .franchise-wordmark-tagline{font-size:7px !important;}
+  .franchise-nav{gap:12px !important;}
+  .franchise-nav a{font-size:11px !important;}
+  .franchise-nav .franchise-apply{width:92px !important;min-width:92px !important;flex-basis:92px !important;height:34px !important;}
+}
+
+@media (max-width:900px){
+  .franchise-header{min-height:96px !important;}
+  .franchise-header-inner{min-height:96px !important;height:96px !important;padding:8px 16px !important;}
+  .franchise-header .franchise-logo img{
+    width:82px !important;height:82px !important;max-width:82px !important;max-height:82px !important;
+    min-width:82px !important;min-height:82px !important;flex:0 0 82px !important;
+  }
+  .franchise-header .franchise-wordmark{width:245px !important;max-width:245px !important;flex:0 0 245px !important;margin-left:-18px !important;}
+  .franchise-wordmark-name{font-size:34px !important;}
+  .franchise-wordmark-tagline{font-size:8px !important;}
+  .crx-opening-photo{
+    height:auto !important;min-height:0 !important;aspect-ratio:2048 / 992 !important;
+    border-bottom-width:4px !important;
   }
 }
-/* Ensure anchored sections clear the sticky header */
-#overview,
-#investment,
-#calculator,
-#process,
-#faq,
-#franchise-enquiry{
-  scroll-margin-top:220px !important;
+</style>
+
+
+<script>
+/* Direct-load protection: keep /franchise/#franchise-enquiry on the landing view.
+   The actual form target is #franchise-enquiry-form, so the browser has no
+   matching #franchise-enquiry DOM anchor to jump to. */
+(function(){
+  if(window.location.hash === '#franchise-enquiry'){
+    if('scrollRestoration' in history) history.scrollRestoration='manual';
+    window.scrollTo(0,0);
+    setTimeout(function(){ window.scrollTo(0,0); },0);
+    setTimeout(function(){ window.scrollTo(0,0); },100);
+  }
+})();
+</script>
+
+<style id="crx-full-width-opening-fix">
+
+/* =========================================================
+   FULL-WIDTH OPENING INTERIOR IMAGE
+   Breaks out of the contained franchise page so the photo
+   runs edge-to-edge like the reference franchise layout.
+   ========================================================= */
+#franchise-page-only #franchise-opening{
+  width:100vw !important;
+  max-width:none !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:0 !important;
+  height:clamp(360px,27.5vw,480px) !important;
+  min-height:0 !important;
+  padding:0 !important;
+  border-radius:0 !important;
+  overflow:hidden !important;
+  position:relative !important;
+}
+
+#franchise-page-only #franchise-opening .crx-opening-photo-media{
+  width:100vw !important;
+  max-width:none !important;
+  height:100% !important;
+  display:block !important;
+  object-fit:cover !important;
+  object-position:center center !important;
+}
+
+@media (max-width:767px){
+  #franchise-page-only #franchise-opening{
+    width:100vw !important;
+    margin-left:calc(50% - 50vw) !important;
+    height:clamp(250px,58vw,430px) !important;
+  }
+}
+
+</style>
+
+<style id="crx-intro-viewport-final">
+/* Final opening viewport: full-width landscape photo + immediate 01 story. */
+#franchise-page-only #franchise-opening{
+  width:100vw !important;
+  max-width:none !important;
+  margin-left:calc(50% - 50vw) !important;
+  margin-right:0 !important;
+  height:clamp(340px, 34vw, 560px) !important;
+  min-height:0 !important;
+  max-height:none !important;
+  padding:0 !important;
+  border-radius:0 !important;
+  overflow:hidden !important;
+  position:relative !important;
+}
+#franchise-page-only #franchise-opening .crx-opening-photo-media{
+  width:100% !important;
+  height:100% !important;
+  display:block !important;
+  object-fit:cover !important;
+  object-position:center center !important;
+}
+#franchise-page-only #franchise-story{
+  width:100% !important;
+  max-width:1400px !important;
+  margin:0 auto !important;
+}
+@media (max-width:767px){
+  #franchise-page-only #franchise-opening{
+    width:100vw !important;
+    margin-left:calc(50% - 50vw) !important;
+    height:58vw !important;
+    min-height:250px !important;
+    max-height:430px !important;
+  }
+}
+</style>
+
+<style id="crx-orange-enquiry-final">
+#franchise-page-only a.franchise-hero-cta,
+#franchise-page-only .franchise-hero-cta,
+#franchise-page-only a[href="#franchise-enquiry"].franchise-hero-cta,
+#franchise-page-only button.franchise-hero-cta {
+  background:#ef5b00 !important;
+  background-color:#ef5b00 !important;
+  color:#fff !important;
+  border-color:#ef5b00 !important;
+}
+#franchise-page-only a.franchise-hero-cta:hover,
+#franchise-page-only .franchise-hero-cta:hover {
+  background:#d94f00 !important;
+  background-color:#d94f00 !important;
+  color:#fff !important;
+  border-color:#d94f00 !important;
+}
+</style>
+<style id="crx-landing-mode-prepaint">
+/* Special direct landing URL: /franchise/?landing=1
+   Hides the compact franchise header so the opening viewport
+   starts directly with the interior image, matching the reference. */
+html.crx-landing-mode-root .franchise-header{display:none !important;}
+html.crx-landing-mode-root #franchise-page-only{margin-top:0 !important;padding-top:0 !important;}
+</style>
+<script id="crx-landing-mode-detect">
+(function(){
+  try{
+    var params = new URLSearchParams(window.location.search);
+    if(params.get('landing') === '1'){
+      document.documentElement.classList.add('crx-landing-mode-root');
+      document.addEventListener('DOMContentLoaded', function(){
+        document.body.classList.add('crx-landing-mode');
+      });
+    }
+  }catch(e){}
+})();
+</script>
+
+<style id="crx-story-compact-final">
+/* Final BurgerMan-style story sizing */
+@media (min-width:901px){
+  #franchise-page-only #franchise-story{
+    width:min(1260px,calc(100% - 120px)) !important;
+    max-width:1260px !important;
+    padding:58px 0 72px !important;
+    grid-template-columns:minmax(280px,.58fr) minmax(0,1.42fr) !important;
+    gap:72px !important;
+    align-items:start !important;
+  }
+
+  /* Match the compact section-label treatment used by 02 — FRANCHISE OVERVIEW. */
+  #franchise-page-only #franchise-story .crx-story-number-wrap{
+    min-height:0 !important;
+    display:flex !important;
+    align-items:center !important;
+    gap:14px !important;
+    padding-top:6px !important;
+  }
+
+  #franchise-page-only #franchise-story .crx-story-number{
+    font-size:30px !important;
+    line-height:1 !important;
+    letter-spacing:5px !important;
+    font-weight:900 !important;
+    margin:0 !important;
+    color:#ef5b00 !important;
+  }
+
+  #franchise-page-only #franchise-story .crx-story-number::after{
+    content:'—' !important;
+    margin-left:12px !important;
+  }
+
+  #franchise-page-only #franchise-story .crx-story-label{
+    margin:0 !important;
+    font-size:30px !important;
+    line-height:1 !important;
+    font-weight:900 !important;
+    letter-spacing:5px !important;
+    color:#ef5b00 !important;
+  }
+
+  #franchise-page-only #franchise-story .crx-story-content{
+    min-height:360px !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:flex-start !important;
+  }
+
+  #franchise-page-only #franchise-story .crx-story-heading{
+    font-size:clamp(42px,4vw,58px) !important;
+    line-height:1.02 !important;
+    letter-spacing:-2.8px !important;
+    margin:4px 0 22px !important;
+  }
+
+  #franchise-page-only #franchise-story .crx-story-content p{
+    max-width:800px !important;
+    font-size:17px !important;
+    line-height:1.65 !important;
+  }
+
+  #franchise-page-only #franchise-story .crx-enquiry-button{
+    margin-top:auto !important;
+    min-height:58px !important;
+  }
+
+  #franchise-page-only #franchise-story .crx-enquiry-button .crx-arrow{
+    height:58px !important;
+    width:62px !important;
+  }
+}
+
+@media (max-width:900px){
+  #franchise-page-only #franchise-story .crx-story-number{
+    font-size:125px !important;
+    letter-spacing:-7px !important;
+  }
+}
+</style>
+
+<style id="crx-story-kicker-final">
+/* Final lock: 01 label is intentionally identical in size to the site's 02 eyebrow. */
+#franchise-page-only #franchise-story .crx-story-kicker{
+  font-size:14px !important;
+  line-height:1 !important;
+  letter-spacing:2.5px !important;
+  font-weight:900 !important;
+  color:#ef5b00 !important;
+  text-transform:uppercase !important;
+  margin:0 0 18px !important;
+  padding:0 !important;
+  border:0 !important;
+  text-decoration:none !important;
+}
+#franchise-page-only #franchise-story .crx-story-kicker::before,
+#franchise-page-only #franchise-story .crx-story-kicker::after{
+  content:none !important;
+  display:none !important;
+}
+</style>
+
+<script>
+/* Direct /franchise/#franchise-story loads should open at the landing view.
+   The hash is preserved for sharing, but the page starts at the top so the
+   complete interior image and the compact 01 story are visible together. */
+(function(){
+  if(window.location.hash === '#franchise-story'){
+    if('scrollRestoration' in history) history.scrollRestoration='manual';
+    window.scrollTo(0,0);
+    setTimeout(function(){ window.scrollTo(0,0); },0);
+    setTimeout(function(){ window.scrollTo(0,0); },100);
+  }
+})();
+</script>
+
+<style id="crx-01-label-lock">
+/* 01 — Franchise uses the exact same section-label treatment as 02 — Franchise Overview. */
+#franchise-page-only #franchise-story .crx-story-number-wrap{
+  display:block !important;
+  min-height:0 !important;
+  padding:0 !important;
+  margin:0 !important;
+}
+#franchise-page-only #franchise-story .crx-story-kicker{
+  color:var(--fr-accent) !important;
+  font-size:14px !important;
+  font-weight:900 !important;
+  letter-spacing:2.5px !important;
+  line-height:1 !important;
+  text-transform:uppercase !important;
+  margin:0 0 18px !important;
+  padding:0 !important;
+  border:0 !important;
+  text-decoration:none !important;
+  box-shadow:none !important;
+}
+#franchise-page-only #franchise-story .crx-story-kicker::before,
+#franchise-page-only #franchise-story .crx-story-kicker::after{
+  content:none !important;
+  display:none !important;
+}
+#franchise-page-only #franchise-story .crx-story-number,
+#franchise-page-only #franchise-story .crx-story-dash,
+#franchise-page-only #franchise-story .crx-story-label{
+  font-size:inherit !important;
+  letter-spacing:inherit !important;
+  line-height:inherit !important;
 }
 </style>
 </head>
@@ -2469,129 +3217,101 @@ body > footer{
       <span class="franchise-wordmark" aria-hidden="true">
         <span class="franchise-wordmark-name">CRUNCHER<span class="orange">Y'S</span><sup>®</sup></span>
         <span class="franchise-wordmark-rule"></span>
-        <span class="franchise-wordmark-tagline">BUSINESS PARTNERSHIP PROGRAM</span>
+        <span class="franchise-wordmark-tagline">THE DESTINATION FOR YOUR CRAVINGS</span>
       </span>
     </a>
 
     <nav class="franchise-nav" aria-label="Franchise navigation">
+      <a href="#franchise-story" onclick="franchiseScrollTo('franchise-story'); return false;">Franchise</a>
       <a href="#overview" onclick="franchiseScrollTo('overview'); return false;">Overview</a>
-      <a href="#investment" onclick="franchiseScrollTo('investment'); return false;">Investment</a>
-      <a href="#calculator" onclick="franchiseScrollTo('calculator'); return false;">Break-Even</a>
-      <a href="#process" onclick="franchiseScrollTo('process'); return false;">Process</a>
       <a href="#faq" onclick="franchiseScrollTo('faq'); return false;">FAQ</a>
+      <a href="#calculator" onclick="franchiseScrollTo('calculator'); return false;">Break-Even</a>
+      <a href="#roi-projection" onclick="franchiseScrollTo('roi-projection'); return false;">ROI</a>
       <a href="#franchise-enquiry" class="franchise-apply" onclick="franchiseScrollTo('franchise-enquiry'); return false;">Apply Now</a>
     </nav>
 
   </div>
 </header>
   <main id="franchise-page-only">
+    <!-- OPENING INTERIOR IMAGE -->
+    <section class="crx-opening-photo" id="franchise-opening" aria-label="Crunchery's cafe interior">
+      <img src="/assets/franchise-interior.jpg"
+           alt="Crunchery's cafe interior"
+           class="crx-opening-photo-media"
+           onerror="this.onerror=null;this.src='/assets/franchise-poster.jpg';">
+    </section>
 
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-copy">
-        <div class="eyebrow">Franchise Opportunity</div>
-        <h1>Build your own <span>Crunchery's</span> Cafe.</h1>
-        <p class="subtitle">
-          A South Indian Continental Fusion Cafe concept designed for modern customers,
-          practical operations and scalable franchise growth.
-        </p>
-
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#overview">Explore Franchise</a>
-          <a class="btn btn-dark" href="#calculator">Calculate Break-Even</a>
-        </div>
-
-        <div class="hero-note">
-          <span>●</span>
-          <div><strong>Investment-led planning.</strong><br>
-          Understand setup cost, operating expenses and sales required before you commit.</div>
-        </div>
+    <!-- FRANCHISE 01 — STORY -->
+    <section class="crx-franchise-story" id="franchise-story">
+      <div class="crx-story-number-wrap">
+        <div class="eyebrow crx-story-kicker">01 — Franchise</div>
       </div>
 
-      <div class="hero-visual">
-        <div class="visual-content">
-          <div class="visual-tag">South Indian × Continental Fusion</div>
-          <div class="visual-title">A Cafe.<br>A System.<br>A Brand.</div>
-          <p class="visual-copy">
-            From site evaluation and kitchen setup to training and launch support,
-            the franchise model is structured around a complete cafe operating system.
-          </p>
-        </div>
+      <div class="crx-story-content">
+        <div class="crx-story-heading">Grow with Crunchery's</div>
+        <p>
+          Build a South Indian Continental Fusion Cafe with a distinctive customer experience,
+          practical operations and franchise support across setup, training and launch.
+          Explore the opportunity, understand the investment and share your proposed location
+          with our team.
+        </p>
+        <a class="crx-enquiry-button"
+           href="#franchise-enquiry"
+           onclick="franchiseScrollTo('franchise-enquiry'); return false;">
+          <span>ENQUIRY NOW</span><span class="crx-arrow">→</span>
+        </a>
       </div>
     </section>
 
-    <!-- QUESTIONNAIRE -->
-    <section id="franchise-enquiry" class="card">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">01 — Franchise Enquiry</div>
-          <h2>Tell us about your franchise plan.</h2>
-        </div>
-        <p class="subtitle">
-          Complete the basic details below. The button will prepare a WhatsApp enquiry
-          using the information entered.
+    <!-- LET'S TALK BUSINESS — ENQUIRY FORM -->
+    <section id="franchise-enquiry-form" class="crx-enquiry-section">
+      <div class="crx-enquiry-heading">
+        <div class="eyebrow">LET'S TALK BUSINESS</div>
+        <h2>Tell us about your franchise plan.</h2>
+        <p>
+          Crunchery's is inviting enquiries from energetic, people-focused franchise partners
+          who are looking to start a new cafe business. Share your details and proposed location,
+          and our team will get in touch.
         </p>
       </div>
 
-      <div class="questionnaire">
-        <div class="contact-panel">
-          <div class="eyebrow" style="color:#ff9a62">Crunchery's Franchise</div>
-          <h3 style="font-size:30px">Let's explore your location.</h3>
-          <p>
-            Share your basic contact details and proposed location so the franchise
-            discussion can begin with the right information.
-          </p>
-
-          <ul class="contact-list">
-            <li>
-              <strong>Format</strong>
-              <span>South Indian Continental Fusion Cafe</span>
-            </li>
-            <li>
-              <strong>Tier</strong>
-              <span>Tier-1 | 32–40 seats</span>
-            </li>
-            <li>
-              <strong>Investment</strong>
-              <span>₹35–50 lakhs indicative range</span>
-            </li>
-            <li>
-              <strong>Sales planning</strong>
-              <span>₹6–8 lakhs estimated monthly sales</span>
-            </li>
-          </ul>
+      <div class="crx-form-layout">
+        <div class="crx-form-intro">
+          <div class="crx-form-mini-title">CRUNCHERY'S FRANCHISE</div>
+          <h3>Let's explore your location.</h3>
+          <p>Start with a few basic details. The rest of the franchise discussion can follow.</p>
+          <div class="crx-form-facts">
+            <div><strong>Format</strong><span>South Indian Continental Fusion Cafe</span></div>
+            <div><strong>Tier</strong><span>Tier-1 · 32–40 seats</span></div>
+            <div><strong>Investment</strong><span>₹35–50 lakhs indicative range</span></div>
+          </div>
         </div>
 
-        <div class="form-card">
+        <div class="crx-form-card">
           <div class="form-grid">
             <div class="field">
               <label for="name">Name *</label>
               <input id="name" type="text" placeholder="Your name">
             </div>
-
             <div class="field">
               <label for="phone">Phone *</label>
               <input id="phone" type="tel" placeholder="10-digit mobile number">
             </div>
-
             <div class="field">
               <label for="email">Email</label>
               <input id="email" type="email" placeholder="you@example.com">
             </div>
-
             <div class="field">
               <label for="city">City *</label>
               <input id="city" type="text" placeholder="Proposed city">
             </div>
-
-            <div class="field">
+            <div class="field full">
               <label for="location">Proposed Location</label>
               <input id="location" type="text" placeholder="Area / locality">
             </div>
-
-                        <div class="field full">
+            <div class="field full">
               <button class="btn btn-primary btn-block" type="button" onclick="submitEnquiry()">
-                Send Franchise Enquiry on WhatsApp
+                SEND FRANCHISE ENQUIRY ON WHATSAPP
               </button>
             </div>
           </div>
@@ -2600,406 +3320,500 @@ body > footer{
     </section>
 
     <!-- OVERVIEW -->
-    <section id="overview" class="card">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">02 — Franchise Overview</div>
-          <h2>The opportunity at a glance.</h2>
-        </div>
-        <p class="subtitle">
-          Key figures provided for the Crunchery's franchise model.
-          Actual project economics can vary by site, city and operating assumptions.
-        </p>
-      </div>
-
-      <div class="metric-grid">
-        <div class="metric">
-          <div class="metric-value">₹35–50L</div>
-          <div class="metric-label">Tier-1 investment range</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">₹6–8L</div>
-          <div class="metric-label">Estimated monthly sales for ROI planning</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">36 Mo.</div>
-          <div class="metric-label">Indicative ROI period</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">32–40</div>
-          <div class="metric-label">Seats</div>
-        </div>
-      </div>
-    </section>
+        <section id="overview" class="card">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">02 — Franchise Overview</div>
+              <h2>The opportunity at a glance.</h2>
+            </div>
+            <p class="subtitle">
+              Key figures provided for the Crunchery's franchise model.
+              Actual project economics can vary by site, city and operating assumptions.
+            </p>
+          </div>
+    
+          <div class="metric-grid">
+            <div class="metric">
+              <div class="metric-value">₹35–50L</div>
+              <div class="metric-label">Tier-1 investment range</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value">₹6–8L</div>
+              <div class="metric-label">Estimated monthly sales for ROI planning</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value">36 Mo.</div>
+              <div class="metric-label">Indicative ROI period</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value">32–40</div>
+              <div class="metric-label">Seats</div>
+            </div>
+          </div>
+        </section>
+    
+        
 
     <!-- WHY -->
-    <section class="card">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">03 — The Model</div>
-          <h2>Designed around the complete cafe journey.</h2>
-        </div>
-      </div>
-
-      <div class="grid">
-        <div class="info-card">
-          <div class="info-icon">01</div>
-          <h3>Concept</h3>
-          <p>South Indian Continental Fusion Cafe positioning with a contemporary customer experience.</p>
-        </div>
-
-        <div class="info-card">
-          <div class="info-icon">02</div>
-          <h3>Setup</h3>
-          <p>Planned support across interiors, kitchen equipment, electrical, plumbing and essential infrastructure.</p>
-        </div>
-
-        <div class="info-card">
-          <div class="info-icon">03</div>
-          <h3>Operations</h3>
-          <p>Management systems, software, uniforms, training and launch preparation form part of the franchise support structure.</p>
-        </div>
-      </div>
-    </section>
+        <section class="card">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">03 — The Model</div>
+              <h2>Designed around the complete cafe journey.</h2>
+            </div>
+          </div>
+    
+          <div class="grid">
+            <div class="info-card">
+              <div class="info-icon">01</div>
+              <h3>Concept</h3>
+              <p>South Indian Continental Fusion Cafe positioning with a contemporary customer experience.</p>
+            </div>
+    
+            <div class="info-card">
+              <div class="info-icon">02</div>
+              <h3>Setup</h3>
+              <p>Planned support across interiors, kitchen equipment, electrical, plumbing and essential infrastructure.</p>
+            </div>
+    
+            <div class="info-card">
+              <div class="info-icon">03</div>
+              <h3>Operations</h3>
+              <p>Management systems, software, uniforms, training and launch preparation form part of the franchise support structure.</p>
+            </div>
+          </div>
+        </section>
+    
+        
 
     <!-- INVESTMENT -->
-    <section id="investment" class="card">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">04 — Investment Breakdown</div>
-          <h2>Where the investment goes.</h2>
-        </div>
-        <p class="subtitle">
-          The following components are based on the franchise cost details supplied for this model.
-        </p>
-      </div>
-
-      <div class="grid2">
-        <div class="info-card">
-          <div class="price">₹9,00,000</div>
-          <h3>Outer Space</h3>
-          <p>Tables, chairs, lights, painting and LED boards.</p>
-        </div>
-
-        <div class="info-card">
-          <div class="price">₹7,00,000</div>
-          <h3>Management Cost</h3>
-          <p>Uniform, software, franchise component, training and selfie spot.</p>
-        </div>
-
-        <div class="info-card">
-          <div class="price">₹11,00,000</div>
-          <h3>Kitchen Equipment</h3>
-          <p>Kitchen equipment allocation for the proposed cafe setup.</p>
-        </div>
-
-        <div class="info-card">
-          <div class="price">₹1,25,000</div>
-          <h3>Architecture & Site Visits</h3>
-          <p>Architecture support and 5 site visits.</p>
-        </div>
-      </div>
-
-      <div style="margin-top:24px">
-        <h3>Franchisor Scope</h3>
-
-        <div class="cost-row">
-          <div><div class="cost-title">Electrical Wiring & Plumbing</div></div>
-          <div class="cost-value">₹4,00,000</div>
-        </div>
-
-        <div class="cost-row">
-          <div><div class="cost-title">Tiles</div></div>
-          <div class="cost-value">₹1,30,000</div>
-        </div>
-
-        <div class="cost-row">
-          <div><div class="cost-title">Washbasin</div></div>
-          <div class="cost-value">₹1,00,000</div>
-        </div>
-
-        <div class="cost-row">
-          <div><div class="cost-title">Raw Products</div></div>
-          <div class="cost-value">₹2,00,000</div>
-        </div>
-
-        <div class="cost-row">
-          <div><div class="cost-title">Computer / Printer / Speaker</div></div>
-          <div class="cost-value">₹1,00,000</div>
-        </div>
-
-        <div class="cost-row">
-          <div><div class="cost-title">AC</div></div>
-          <div class="cost-value">₹2,00,000</div>
-        </div>
-      </div>
-
-      <p class="small" style="margin-top:18px">
-        Note: Individual components above are shown transparently from the supplied cost structure.
-        They should be reconciled with the final commercial quotation before signing.
-      </p>
-    </section>
-
-    <!-- CALCULATOR -->
-    <section id="calculator" class="card">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">05 — Break-Even Calculator</div>
-          <h2>Know the monthly sales you need.</h2>
-        </div>
-        <p class="subtitle">
-          Enter your expected fixed costs and variable-cost percentages.
-          The calculator updates instantly.
-        </p>
-      </div>
-
-      <div class="calculator">
-        <div class="calc-panel">
-          <div class="form-grid">
-
-            <div class="field">
-              <label for="rent">Rent / Month (₹)</label>
-              <input id="rent" type="number" min="0" value="50000">
+        <section id="investment" class="card">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">04 — Investment Breakdown</div>
+              <h2>Where the investment goes.</h2>
             </div>
-
-            <div class="field">
-              <label for="salary">Salary / Month (₹)</label>
-              <input id="salary" type="number" min="0" value="40000">
+            <p class="subtitle">
+              The following components are based on the franchise cost details supplied for this model.
+            </p>
+          </div>
+    
+          <div class="grid2">
+            <div class="info-card">
+              <div class="price">₹9,00,000</div>
+              <h3>Outer Space</h3>
+              <p>Tables, chairs, lights, painting and LED boards.</p>
             </div>
-
-            <div class="field">
-              <label for="raw">Raw Materials (%)</label>
-              <input id="raw" type="number" min="0" max="100" step="0.1" value="50">
+    
+            <div class="info-card">
+              <div class="price">₹7,00,000</div>
+              <h3>Management Cost</h3>
+              <p>Uniform, software, franchise component, training and selfie spot.</p>
             </div>
-
-            <div class="field">
-              <label for="eb">EB / Electricity (%)</label>
-              <input id="eb" type="number" min="0" max="100" step="0.1" value="5">
+    
+            <div class="info-card">
+              <div class="price">₹11,00,000</div>
+              <h3>Kitchen Equipment</h3>
+              <p>Kitchen equipment allocation for the proposed cafe setup.</p>
             </div>
-
-            <div class="field">
-              <label for="gst">GST (%)</label>
-              <input id="gst" type="number" min="0" max="100" step="0.1" value="5">
-            </div>
-
-            <div class="field">
-              <label for="royalty">Royalty (%)</label>
-              <input id="royalty" type="number" min="0" max="100" step="0.1" value="5">
-            </div>
-
-            <div class="field full">
-              <button class="btn btn-primary btn-block" type="button" onclick="calculateBreakEven()">
-                Calculate Break-Even
-              </button>
+    
+            <div class="info-card">
+              <div class="price">₹1,25,000</div>
+              <h3>Architecture & Site Visits</h3>
+              <p>Architecture support and 5 site visits.</p>
             </div>
           </div>
-        </div>
-
-        <div class="result-card">
-          <div class="result-label">Monthly Break-Even Sales</div>
-          <div class="result-number" id="monthlyBE">₹2,57,143</div>
-          <div class="result-sub">Approximate sales required to cover the entered costs.</div>
-
-          <div class="result-divider"></div>
-
-          <div class="result-line">
-            <span>Daily break-even (30 days)</span>
-            <strong id="dailyBE">₹8,571</strong>
+    
+          <div style="margin-top:24px">
+            <h3>Franchisor Scope</h3>
+    
+            <div class="cost-row">
+              <div><div class="cost-title">Electrical Wiring & Plumbing</div></div>
+              <div class="cost-value">₹4,00,000</div>
+            </div>
+    
+            <div class="cost-row">
+              <div><div class="cost-title">Tiles</div></div>
+              <div class="cost-value">₹1,30,000</div>
+            </div>
+    
+            <div class="cost-row">
+              <div><div class="cost-title">Washbasin</div></div>
+              <div class="cost-value">₹1,00,000</div>
+            </div>
+    
+            <div class="cost-row">
+              <div><div class="cost-title">Raw Products</div></div>
+              <div class="cost-value">₹2,00,000</div>
+            </div>
+    
+            <div class="cost-row">
+              <div><div class="cost-title">Computer / Printer / Speaker</div></div>
+              <div class="cost-value">₹1,00,000</div>
+            </div>
+    
+            <div class="cost-row">
+              <div><div class="cost-title">AC</div></div>
+              <div class="cost-value">₹2,00,000</div>
+            </div>
           </div>
-
-          <div class="result-line">
-            <span>Fixed costs</span>
-            <strong id="fixedCost">₹90,000</strong>
-          </div>
-
-          <div class="result-line">
-            <span>Total variable cost</span>
-            <strong id="variablePct">65%</strong>
-          </div>
-
-          <div class="result-line">
-            <span>Contribution margin</span>
-            <strong id="marginPct">35%</strong>
-          </div>
-
-          <div class="formula">
-            Formula: Break-Even Sales = Fixed Costs ÷
-            (1 − Total Variable Cost %).
-          </div>
-        </div>
-      </div>
-    </section>
+    
+          <p class="small" style="margin-top:18px">
+            Note: Individual components above are shown transparently from the supplied cost structure.
+            They should be reconciled with the final commercial quotation before signing.
+          </p>
+        </section>
+    
+        
 
     <!-- TIERS -->
-    <section class="card">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">06 — Franchise Tier</div>
-          <h2>Tier-1 cafe format.</h2>
-        </div>
-        <p class="subtitle">
-          A 32–40 seat cafe format with an indicative investment range of ₹35–50 lakhs.
-        </p>
-      </div>
-
-      <div class="grid2">
-        <div class="info-card tier">
-          <div class="tier-badge">Tier 1</div>
-          <h3>Investment</h3>
-          <div class="price">₹35–50 Lakhs</div>
-          <p>Indicative total project investment range for the Tier-1 format.</p>
-
-          <ul class="tier-list">
-            <li>32–40 seats</li>
-            <li>South Indian Continental Fusion Cafe</li>
-            <li>Estimated monthly sales: ₹6–8 lakhs</li>
-            <li>Indicative ROI period: 36 months</li>
-          </ul>
-        </div>
-
-        <div class="info-card">
-          <h3>Franchise Support Structure</h3>
-          <ul class="tier-list">
-            <li>Architecture & site evaluation</li>
-            <li>Interior and infrastructure planning</li>
-            <li>Kitchen equipment setup</li>
-            <li>Software and management systems</li>
-            <li>Training and launch support</li>
-            <li>Initial raw product support as specified</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+        <section class="card">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">05 — Franchise Tier</div>
+              <h2>Tier-1 cafe format.</h2>
+            </div>
+            <p class="subtitle">
+              A 32–40 seat cafe format with an indicative investment range of ₹35–50 lakhs.
+            </p>
+          </div>
+    
+          <div class="grid2">
+            <div class="info-card tier">
+              <div class="tier-badge">Tier 1</div>
+              <h3>Investment</h3>
+              <div class="price">₹35–50 Lakhs</div>
+              <p>Indicative total project investment range for the Tier-1 format.</p>
+    
+              <ul class="tier-list">
+                <li>32–40 seats</li>
+                <li>South Indian Continental Fusion Cafe</li>
+                <li>Estimated monthly sales: ₹6–8 lakhs</li>
+                <li>Indicative ROI period: 36 months</li>
+              </ul>
+            </div>
+    
+            <div class="info-card">
+              <h3>Franchise Support Structure</h3>
+              <ul class="tier-list">
+                <li>Architecture & site evaluation</li>
+                <li>Interior and infrastructure planning</li>
+                <li>Kitchen equipment setup</li>
+                <li>Software and management systems</li>
+                <li>Training and launch support</li>
+                <li>Initial raw product support as specified</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+    
+        
 
     <!-- PROCESS -->
-    <section id="process" class="card">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">07 — Franchise Process</div>
-          <h2>From enquiry to launch.</h2>
-        </div>
-      </div>
-
-      <div class="process">
-        <div class="step">
-          <div class="step-no">1</div>
-          <strong>Enquiry</strong>
-          <span>Share your details</span>
-        </div>
-        <div class="step">
-          <div class="step-no">2</div>
-          <strong>Questionnaire</strong>
-          <span>Understand fit</span>
-        </div>
-        <div class="step">
-          <div class="step-no">3</div>
-          <strong>Site Evaluation</strong>
-          <span>Assess location</span>
-        </div>
-        <div class="step">
-          <div class="step-no">4</div>
-          <strong>Agreement</strong>
-          <span>Commercial process</span>
-        </div>
-        <div class="step">
-          <div class="step-no">5</div>
-          <strong>Setup</strong>
-          <span>Build the cafe</span>
-        </div>
-        <div class="step">
-          <div class="step-no">6</div>
-          <strong>Training</strong>
-          <span>Prepare the team</span>
-        </div>
-        <div class="step">
-          <div class="step-no">7</div>
-          <strong>Launch</strong>
-          <span>Open the doors</span>
-        </div>
-      </div>
-    </section>
+        <section id="process" class="card">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">06 — Franchise Process</div>
+              <h2>From enquiry to launch.</h2>
+            </div>
+          </div>
+    
+          <div class="process">
+            <div class="step">
+              <div class="step-no">1</div>
+              <strong>Enquiry</strong>
+              <span>Share your details</span>
+            </div>
+            <div class="step">
+              <div class="step-no">2</div>
+              <strong>Questionnaire</strong>
+              <span>Understand fit</span>
+            </div>
+            <div class="step">
+              <div class="step-no">3</div>
+              <strong>Site Evaluation</strong>
+              <span>Assess location</span>
+            </div>
+            <div class="step">
+              <div class="step-no">4</div>
+              <strong>Agreement</strong>
+              <span>Commercial process</span>
+            </div>
+            <div class="step">
+              <div class="step-no">5</div>
+              <strong>Setup</strong>
+              <span>Build the cafe</span>
+            </div>
+            <div class="step">
+              <div class="step-no">6</div>
+              <strong>Training</strong>
+              <span>Prepare the team</span>
+            </div>
+            <div class="step">
+              <div class="step-no">7</div>
+              <strong>Launch</strong>
+              <span>Open the doors</span>
+            </div>
+          </div>
+        </section>
+    
+        
 
     <!-- FAQ -->
-    <section id="faq" class="card">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">08 — FAQ</div>
-          <h2>Common questions.</h2>
-        </div>
-      </div>
+        <section id="faq" class="card">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">03 — FAQ</div>
+              <h2>Common questions.</h2>
+            </div>
+          </div>
+    
+          <div class="faq">
+            <button type="button" onclick="toggleFaq(this)">
+              <span>What is the Tier-1 investment range?</span>
+              <span class="faq-plus">＋</span>
+            </button>
+            <div class="faq-answer">
+              The supplied Tier-1 indicative investment range is ₹35–50 lakhs.
+              The final project cost should be confirmed through the commercial quotation
+              and site-specific assessment.
+            </div>
+          </div>
+    
+          <div class="faq">
+            <button type="button" onclick="toggleFaq(this)">
+              <span>How many seats are planned?</span>
+              <span class="faq-plus">＋</span>
+            </button>
+            <div class="faq-answer">
+              The Tier-1 format is planned for approximately 32–40 seats.
+            </div>
+          </div>
+    
+          <div class="faq">
+            <button type="button" onclick="toggleFaq(this)">
+              <span>What monthly sales are used for ROI planning?</span>
+              <span class="faq-plus">＋</span>
+            </button>
+            <div class="faq-answer">
+              The supplied planning figure is estimated monthly sales of ₹6–8 lakhs.
+              This is a planning assumption and is not a guaranteed sales figure.
+            </div>
+          </div>
+    
+          <div class="faq">
+            <button type="button" onclick="toggleFaq(this)">
+              <span>How is break-even calculated?</span>
+              <span class="faq-plus">＋</span>
+            </button>
+            <div class="faq-answer">
+              Fixed monthly costs are divided by the contribution margin. In this calculator,
+              contribution margin is 100% minus Raw Materials, EB, GST and Royalty percentages.
+            </div>
+          </div>
+    
+          <div class="faq">
+            <button type="button" onclick="toggleFaq(this)">
+              <span>Is the ROI period guaranteed?</span>
+              <span class="faq-plus">＋</span>
+            </button>
+            <div class="faq-answer">
+              No. The 36-month figure is the supplied indicative ROI period for planning.
+              Actual returns depend on sales, rent, salaries, operating costs, location,
+              taxes and other commercial factors.
+            </div>
+          </div>
+        </section>
 
-      <div class="faq">
-        <button type="button" onclick="toggleFaq(this)">
-          <span>What is the Tier-1 investment range?</span>
-          <span class="faq-plus">＋</span>
-        </button>
-        <div class="faq-answer">
-          The supplied Tier-1 indicative investment range is ₹35–50 lakhs.
-          The final project cost should be confirmed through the commercial quotation
-          and site-specific assessment.
-        </div>
-      </div>
+    <!-- CALCULATOR -->
+        <section id="calculator" class="card">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">04 — Break-Even Calculator</div>
+              <h2>Know the monthly sales you need.</h2>
+            </div>
+            <p class="subtitle">
+              Enter your expected fixed costs and variable-cost percentages.
+              The calculator updates instantly.
+            </p>
+          </div>
+    
+          <div class="calculator">
+            <div class="calc-panel">
+              <div class="form-grid">
+    
+                <div class="field">
+                  <label for="rent">Rent / Month (₹)</label>
+                  <input id="rent" type="number" min="0" value="50000">
+                </div>
+    
+                <div class="field">
+                  <label for="salary">Salary / Month (₹)</label>
+                  <input id="salary" type="number" min="0" value="40000">
+                </div>
+    
+                <div class="field">
+                  <label for="raw">Raw Materials (%)</label>
+                  <input id="raw" type="number" min="0" max="100" step="0.1" value="50">
+                </div>
+    
+                <div class="field">
+                  <label for="eb">EB / Electricity (%)</label>
+                  <input id="eb" type="number" min="0" max="100" step="0.1" value="5">
+                </div>
+    
+                <div class="field">
+                  <label for="gst">GST (%)</label>
+                  <input id="gst" type="number" min="0" max="100" step="0.1" value="5">
+                </div>
+    
+                <div class="field">
+                  <label for="royalty">Royalty (%)</label>
+                  <input id="royalty" type="number" min="0" max="100" step="0.1" value="5">
+                </div>
+    
+                <div class="field full">
+                  <button class="btn btn-primary btn-block" type="button" onclick="calculateBreakEven()">
+                    Calculate Break-Even
+                  </button>
+                </div>
+              </div>
+            </div>
+    
+            <div class="result-card">
+              <div class="result-label">Monthly Break-Even Sales</div>
+              <div class="result-number" id="monthlyBE">₹2,57,143</div>
+              <div class="result-sub">Approximate sales required to cover the entered costs.</div>
+    
+              <div class="result-divider"></div>
+    
+              <div class="result-line">
+                <span>Daily break-even (30 days)</span>
+                <strong id="dailyBE">₹8,571</strong>
+              </div>
+    
+              <div class="result-line">
+                <span>Fixed costs</span>
+                <strong id="fixedCost">₹90,000</strong>
+              </div>
+    
+              <div class="result-line">
+                <span>Total variable cost</span>
+                <strong id="variablePct">65%</strong>
+              </div>
+    
+              <div class="result-line">
+                <span>Contribution margin</span>
+                <strong id="marginPct">35%</strong>
+              </div>
+    
+              <div class="formula">
+                Formula: Break-Even Sales = Fixed Costs ÷
+                (1 − Total Variable Cost %).
+              </div>
+            </div>
+          </div>
+        </section>
+    
+    
+    
+        
 
-      <div class="faq">
-        <button type="button" onclick="toggleFaq(this)">
-          <span>How many seats are planned?</span>
-          <span class="faq-plus">＋</span>
-        </button>
-        <div class="faq-answer">
-          The Tier-1 format is planned for approximately 32–40 seats.
-        </div>
-      </div>
-
-      <div class="faq">
-        <button type="button" onclick="toggleFaq(this)">
-          <span>What monthly sales are used for ROI planning?</span>
-          <span class="faq-plus">＋</span>
-        </button>
-        <div class="faq-answer">
-          The supplied planning figure is estimated monthly sales of ₹6–8 lakhs.
-          This is a planning assumption and is not a guaranteed sales figure.
-        </div>
-      </div>
-
-      <div class="faq">
-        <button type="button" onclick="toggleFaq(this)">
-          <span>How is break-even calculated?</span>
-          <span class="faq-plus">＋</span>
-        </button>
-        <div class="faq-answer">
-          Fixed monthly costs are divided by the contribution margin. In this calculator,
-          contribution margin is 100% minus Raw Materials, EB, GST and Royalty percentages.
-        </div>
-      </div>
-
-      <div class="faq">
-        <button type="button" onclick="toggleFaq(this)">
-          <span>Is the ROI period guaranteed?</span>
-          <span class="faq-plus">＋</span>
-        </button>
-        <div class="faq-answer">
-          No. The 36-month figure is the supplied indicative ROI period for planning.
-          Actual returns depend on sales, rent, salaries, operating costs, location,
-          taxes and other commercial factors.
-        </div>
-      </div>
-    </section>
+    <!-- ROI PROJECTION CALCULATOR -->
+        <section id="roi-projection" class="card">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">06 — Franchise ROI Calculator</div>
+              <h2>Plan your sales and investment recovery.</h2>
+            </div>
+            <p class="subtitle">Use either calculator to understand the sales required for a target recovery period or estimate how many months your investment may take to recover, with a full 5-year projection.</p>
+          </div>
+    
+          <div class="roi-tabs" role="tablist" aria-label="ROI calculator type">
+            <button type="button" class="roi-tab active" data-roi-tab="sales">Sales Required</button>
+            <button type="button" class="roi-tab" data-roi-tab="recovery">Investment Recovery</button>
+          </div>
+    
+          <div id="roi-sales-panel" class="roi-panel active">
+            <div class="calculator">
+              <div class="calc-panel">
+                <div class="form-grid">
+                  <div class="field"><label for="roiSalesInvestment">Investment Amount (₹)</label><input id="roiSalesInvestment" type="number" min="0" step="10000" value="1700000"></div>
+                  <div class="field"><label for="roiTargetMonths">Target Recovery Period (Months)</label><input id="roiTargetMonths" type="number" min="1" max="240" step="1" value="24"></div>
+                  <div class="field"><label for="roiSalesRaw">Raw Materials (%)</label><input id="roiSalesRaw" type="number" min="0" max="99" step="0.1" value="50"></div>
+                  <div class="field"><label for="roiSalesRent">Rent / Month (Year 1)</label><input id="roiSalesRent" type="number" min="0" step="1000" value="30000"></div>
+                  <div class="field"><label for="roiSalesSalary">Salary / Month (Year 1)</label><input id="roiSalesSalary" type="number" min="0" step="1000" value="45000"></div>
+                  <div class="field"><label for="roiSalesEb">EB / Electricity / Month (Year 1)</label><input id="roiSalesEb" type="number" min="0" step="500" value="20000"></div>
+                  <div class="field"><label for="roiSalesRoyalty">Royalty (%)</label><input id="roiSalesRoyalty" type="number" min="0" max="99" step="0.1" value="3"></div>
+                  <div class="field"><label>GST</label><div class="roi-fixed">5% <span>Fixed</span></div></div>
+                  <div class="field full"><button class="btn btn-primary btn-block" type="button" id="roiSalesCalculate">Calculate Required Sales</button></div>
+                </div>
+                <div class="roi-note"><strong>Cost escalation:</strong> Rent, Salary and EB use Year 1 monthly values. They stay unchanged in Years 1–2, increase by 10% in Year 3, stay at that level in Year 4, and increase by another 10% in Year 5. <strong>GST is fixed at 5%.</strong></div>
+              </div>
+              <div class="roi-result">
+                <div class="result-label">Required Monthly Sales</div>
+                <div class="result-number" id="roiRequiredSales">₹0</div>
+                <div class="result-sub">Sales required each month, using the selected target recovery period and the cost escalation rules.</div>
+                <div class="result-divider"></div>
+                <div class="result-line"><span>Investment</span><strong id="roiSalesInvestmentOut">₹0</strong></div>
+                <div class="result-line"><span>Target recovery</span><strong id="roiTargetMonthsOut">0 months</strong></div>
+                <div class="result-line"><span>Average profit required / month</span><strong id="roiRequiredProfit">₹0</strong></div>
+                <div class="result-line"><span>GST</span><strong>5% fixed</strong></div>
+              </div>
+            </div>
+            <div class="roi-error" id="roiSalesError"></div>
+            <div class="roi-table-wrap"><table class="roi-table"><thead><tr><th>Year</th><th>Monthly Sales</th><th>Raw Materials</th><th>GST</th><th>Royalty</th><th>Rent</th><th>Salary</th><th>EB</th><th>Monthly Profit</th><th>Annual Profit</th><th>Cumulative Profit</th></tr></thead><tbody id="roiSalesBody"></tbody></table></div>
+          </div>
+    
+          <div id="roi-recovery-panel" class="roi-panel">
+            <div class="calculator">
+              <div class="calc-panel">
+                <div class="form-grid">
+                  <div class="field"><label for="roiRecoveryInvestment">Investment Amount (₹)</label><input id="roiRecoveryInvestment" type="number" min="0" step="10000" value="1700000"></div>
+                  <div class="field"><label for="roiExpectedSales">Expected Monthly Sales (₹)</label><input id="roiExpectedSales" type="number" min="0" step="5000" value="700000"></div>
+                  <div class="field"><label for="roiRecoveryRaw">Raw Materials (%)</label><input id="roiRecoveryRaw" type="number" min="0" max="99" step="0.1" value="50"></div>
+                  <div class="field"><label for="roiRecoveryRent">Rent / Month (Year 1)</label><input id="roiRecoveryRent" type="number" min="0" step="1000" value="30000"></div>
+                  <div class="field"><label for="roiRecoverySalary">Salary / Month (Year 1)</label><input id="roiRecoverySalary" type="number" min="0" step="1000" value="45000"></div>
+                  <div class="field"><label for="roiRecoveryEb">EB / Electricity / Month (Year 1)</label><input id="roiRecoveryEb" type="number" min="0" step="500" value="20000"></div>
+                  <div class="field"><label for="roiRecoveryRoyalty">Royalty (%)</label><input id="roiRecoveryRoyalty" type="number" min="0" max="99" step="0.1" value="3"></div>
+                  <div class="field"><label>GST</label><div class="roi-fixed">5% <span>Fixed</span></div></div>
+                  <div class="field full"><button class="btn btn-primary btn-block" type="button" id="roiRecoveryCalculate">Calculate Recovery Period</button></div>
+                </div>
+                <div class="roi-note"><strong>Cost escalation:</strong> Rent, Salary and EB use Year 1 monthly values. They stay unchanged in Years 1–2, increase by 10% in Year 3, stay at that level in Year 4, and increase by another 10% in Year 5. <strong>GST is fixed at 5%.</strong></div>
+              </div>
+              <div class="roi-result">
+                <div class="result-label">Estimated Investment Recovery</div>
+                <div class="result-number" id="roiRecoveryMonths">0 months</div>
+                <div class="result-sub">Estimated time for cumulative outlet profit to recover the initial investment.</div>
+                <div class="result-divider"></div>
+                <div class="result-line"><span>Investment</span><strong id="roiRecoveryInvestmentOut">₹0</strong></div>
+                <div class="result-line"><span>Expected monthly sales</span><strong id="roiExpectedSalesOut">₹0</strong></div>
+                <div class="result-line"><span>Year 1 monthly profit</span><strong id="roiYear1Profit">₹0</strong></div>
+                <div class="result-line"><span>GST</span><strong>5% fixed</strong></div>
+              </div>
+            </div>
+            <div class="roi-error" id="roiRecoveryError"></div>
+            <div class="roi-table-wrap"><table class="roi-table"><thead><tr><th>Year</th><th>Monthly Sales</th><th>Raw Materials</th><th>GST</th><th>Royalty</th><th>Rent</th><th>Salary</th><th>EB</th><th>Monthly Profit</th><th>Annual Profit</th><th>Cumulative Profit</th></tr></thead><tbody id="roiRecoveryBody"></tbody></table></div>
+          </div>
+        </section>
+    
+        
 
     <!-- FINAL CTA -->
-    <section class="cta">
-      <div>
-        <div class="eyebrow" style="color:#fff1e8">09 — Start the Conversation</div>
-        <h2>Ready to explore a Crunchery's franchise?</h2>
-        <p>
-          Submit your basic details and start the discussion around your city,
-          location, investment capacity and launch timeline.
-        </p>
-      </div>
-
-      <div>
-        <a class="btn btn-light" href="#franchise-enquiry">Apply for Franchise</a>
-      </div>
-    </section>
+        <section class="cta">
+          <div>
+            <div class="eyebrow" style="color:#fff1e8">10 — Start the Conversation</div>
+            <h2>Ready to explore a Crunchery's franchise?</h2>
+            <p>
+              Submit your basic details and start the discussion around your city,
+              location, investment capacity and launch timeline.
+            </p>
+          </div>
+    
+          <div>
+            <a class="btn btn-light" href="#franchise-enquiry" onclick="franchiseScrollTo('franchise-enquiry');return false;">Apply for Franchise</a>
+          </div>
+        </section>
 
   </main>
 
@@ -3064,10 +3878,24 @@ body > footer{
     }
 
 
+/* Direct franchise URL: always keep the landing view at the top.
+   The public hash is retained for sharing, but it is NOT a DOM id. */
+(function(){
+  function keepLanding(){
+    if(window.location.hash === '#franchise-enquiry' || window.location.hash === '#franchise-story'){
+      if('scrollRestoration' in history) history.scrollRestoration='manual';
+      window.scrollTo(0,0);
+    }
+  }
+  keepLanding();
+  window.addEventListener('load', keepLanding);
+  window.addEventListener('pageshow', keepLanding);
+})();
 
 /* Reliable section navigation
        Works even when this page is embedded inside Squarespace or another host. */
     function franchiseScrollTo(id){
+      if(id === "franchise-enquiry") id = "franchise-enquiry-form";
       const target = document.getElementById(id);
       if(!target) return;
 
@@ -3080,15 +3908,16 @@ body > footer{
         behavior: "smooth"
       });
 
-      history.replaceState(null, "", "#" + id);
+      history.replaceState(null, "", "#" + (id === "franchise-enquiry-form" ? "franchise-enquiry" : id));
     }
 
     document.querySelectorAll('.franchise-nav a[href^="#"], .hero-actions a[href^="#"], #franchise-page-only a[href^="#"]').forEach(link => {
       link.addEventListener("click", function(event){
-        const id = this.getAttribute("href").substring(1);
+        const rawId = this.getAttribute("href").substring(1);
+        const id = rawId === "franchise-enquiry" ? "franchise-enquiry-form" : rawId;
         if(document.getElementById(id)){
           event.preventDefault();
-          franchiseScrollTo(id);
+          franchiseScrollTo(rawId);
         }
       });
     });
@@ -3133,7 +3962,249 @@ Proposed Location: ${location || "-"}`;
 
     document.getElementById("year").textContent = new Date().getFullYear();
     calculateBreakEven();
-  </script>
+
+    /* =========================================================
+       WORKING ROI CALCULATOR
+       GST = fixed 5%; Rent/Salary/EB escalate 10% every 2 years.
+       This is intentionally separate from the existing Break-Even calculator.
+       ========================================================= */
+    (function(){
+      const ROI_GST = 0.05;
+      const ROI_ESCALATION = 0.10;
+
+      const $ = id => document.getElementById(id);
+      const n = id => {
+        const el = $(id);
+        const v = el ? parseFloat(el.value) : 0;
+        return Number.isFinite(v) ? Math.max(0, v) : 0;
+      };
+      const fmt = value => "₹" + Math.round(Number.isFinite(value) ? value : 0).toLocaleString("en-IN");
+
+     function costMultiplier(year){
+  // Rent, Salary and EB increase by 10% every 2 years
+  return Math.pow(1 + ROI_ESCALATION, Math.floor((year - 1) / 2));
+}
+
+function salesMultiplier(year){
+  // Sales increase by 10% every year
+  return Math.pow(1.05, year - 1);
+}
+
+function monthProfit(sales, rawPct, royaltyPct, rent1, salary1, eb1, year){
+
+  // Sales grow 10% every year
+  const salesGrowth = salesMultiplier(year);
+  const actualSales = sales * salesGrowth;
+
+  // Fixed costs increase 10% every 2 years
+  const costGrowth = costMultiplier(year);
+
+  const raw = actualSales * rawPct / 100;
+  const gst = actualSales * ROI_GST;
+  const royalty = actualSales * royaltyPct / 100;
+
+  const rent = rent1 * costGrowth;
+  const salary = salary1 * costGrowth;
+  const eb = eb1 * costGrowth;
+
+  const profit =
+    actualSales
+    - raw
+    - gst
+    - royalty
+    - rent
+    - salary
+    - eb;
+
+  return {
+    sales: actualSales,
+    raw,
+    gst,
+    royalty,
+    rent,
+    salary,
+    eb,
+    profit
+  };
+}
+
+      function setError(id, msg){
+        const el = $(id); if(!el) return;
+        el.textContent = msg || ""; el.classList.toggle("show", !!msg);
+      }
+
+      function switchROI(mode){
+        document.querySelectorAll("#roi-projection .roi-tab").forEach(b => b.classList.toggle("active", b.dataset.roiTab === mode));
+        $("roi-sales-panel").classList.toggle("active", mode === "sales");
+        $("roi-recovery-panel").classList.toggle("active", mode === "recovery");
+        if(mode === "sales") calculateSalesRequiredROI(); else calculateInvestmentRecoveryROI();
+      }
+
+      function calculateSalesRequiredROI(){
+        setError("roiSalesError", "");
+        const investment = n("roiSalesInvestment");
+        const months = Math.max(1, Math.min(240, Math.round(n("roiTargetMonths"))));
+        const rawPct = Math.min(99, n("roiSalesRaw"));
+        const royaltyPct = Math.min(99, n("roiSalesRoyalty"));
+        const rent = n("roiSalesRent"), salary = n("roiSalesSalary"), eb = n("roiSalesEb");
+        if(investment <= 0){ setError("roiSalesError", "Please enter an investment amount greater than zero."); return; }
+        if(rawPct + royaltyPct + 5 >= 100){ setError("roiSalesError", "Raw Materials + GST + Royalty must be below 100%."); return; }
+
+        const cumulative = sales => {
+          let total = 0;
+          for(let month=1; month<=months; month++){
+            const year = Math.ceil(month / 12);
+            total += monthProfit(sales, rawPct, royaltyPct, rent, salary, eb, year).profit;
+          }
+          return total;
+        };
+
+        let low = 0, high = 1000000;
+        while(cumulative(high) < investment && high < 100000000) high *= 2;
+        if(cumulative(high) < investment){ setError("roiSalesError", "The required sales level is outside the calculator range."); return; }
+        for(let i=0;i<100;i++){
+          const mid=(low+high)/2;
+          if(cumulative(mid) >= investment) high=mid; else low=mid;
+        }
+        const requiredSales = high;
+        $("roiRequiredSales").textContent = fmt(requiredSales);
+        $("roiSalesInvestmentOut").textContent = fmt(investment);
+        $("roiTargetMonthsOut").textContent = months + " months";
+        $("roiRequiredProfit").textContent = fmt(investment/months);
+
+       const body = $("roiSalesBody");
+body.innerHTML = "";
+
+const years = 5;
+let cumulativeProfit = 0;
+
+for(let year = 1; year <= years; year++){
+
+  const r = monthProfit(
+    requiredSales,
+    rawPct,
+    royaltyPct,
+    rent,
+    salary,
+    eb,
+    year
+  );
+
+  const annualProfit = r.profit * 12;
+
+  cumulativeProfit += annualProfit;
+
+  const row = document.createElement("tr");
+
+  row.innerHTML = `
+    <td>${year}</td>
+    <td>${fmt(r.sales)}</td>
+    <td>${fmt(r.raw)}</td>
+    <td>${fmt(r.gst)}</td>
+    <td>${fmt(r.royalty)}</td>
+    <td>${fmt(r.rent)}</td>
+    <td>${fmt(r.salary)}</td>
+    <td>${fmt(r.eb)}</td>
+    <td class="roi-profit">${fmt(r.profit)}</td>
+    <td class="roi-profit">${fmt(annualProfit)}</td>
+    <td class="roi-profit">${fmt(cumulativeProfit)}</td>
+  `;
+
+  body.appendChild(row);
+}
+        
+      }
+
+      function calculateInvestmentRecoveryROI(){
+        setError("roiRecoveryError", "");
+        const investment=n("roiRecoveryInvestment"), sales=n("roiExpectedSales");
+        const rawPct=Math.min(99,n("roiRecoveryRaw")), royaltyPct=Math.min(99,n("roiRecoveryRoyalty"));
+        const rent=n("roiRecoveryRent"), salary=n("roiRecoverySalary"), eb=n("roiRecoveryEb");
+        if(investment<=0){setError("roiRecoveryError","Please enter an investment amount greater than zero.");return;}
+        if(sales<=0){setError("roiRecoveryError","Please enter expected monthly sales greater than zero.");return;}
+        if(rawPct+royaltyPct+5>=100){setError("roiRecoveryError","Raw Materials + GST + Royalty must be below 100%.");return;}
+
+        let cumulative=0, recoveryMonth=null;
+        const maxMonths=60;
+        for(let month=1;month<=maxMonths;month++){
+          const year=Math.ceil(month/12);
+          const r=monthProfit(sales,rawPct,royaltyPct,rent,salary,eb,year);
+          const before=cumulative;
+          cumulative+=r.profit;
+          if(cumulative>=investment){
+            if(r.profit>0) recoveryMonth=(month-1)+((investment-before)/r.profit); else recoveryMonth=month;
+            break;
+          }
+        }
+        $("roiRecoveryInvestmentOut").textContent=fmt(investment);
+        $("roiExpectedSalesOut").textContent=fmt(sales);
+        const y1=monthProfit(sales,rawPct,royaltyPct,rent,salary,eb,1);
+        $("roiYear1Profit").textContent=fmt(y1.profit);
+        const body=$("roiRecoveryBody"); body.innerHTML="";
+        if(recoveryMonth===null){
+          $("roiRecoveryMonths").textContent="Beyond 5 years";
+          setError("roiRecoveryError","The investment is not recovered within the 5-year projection period.");
+        } else {
+          $("roiRecoveryMonths").textContent=recoveryMonth.toFixed(1)+" months";
+        }
+        const years=5;
+        let cumulativeYear=0;
+        for(let year=1;year<=years;year++){
+          const r=monthProfit(sales,rawPct,royaltyPct,rent,salary,eb,year);
+          cumulativeYear+=r.profit*12;
+          const row=document.createElement("tr");
+          row.innerHTML=`<td>${year}</td><td>${fmt(r.sales)}</td><td>${fmt(r.raw)}</td><td>${fmt(r.gst)}</td><td>${fmt(r.royalty)}</td><td>${fmt(r.rent)}</td><td>${fmt(r.salary)}</td><td>${fmt(r.eb)}</td><td class="roi-profit">${fmt(r.profit)}</td><td class="roi-profit">${fmt(r.profit*12)}</td><td>${fmt(cumulativeYear)}</td>`;
+          body.appendChild(row);
+        }
+      }
+
+      document.querySelectorAll("#roi-projection .roi-tab").forEach(button=>button.addEventListener("click",()=>switchROI(button.dataset.roiTab)));
+      ["roiSalesInvestment","roiTargetMonths","roiSalesRaw","roiSalesRent","roiSalesSalary","roiSalesEb","roiSalesRoyalty"].forEach(id=>$(id)?.addEventListener("input",calculateSalesRequiredROI));
+      ["roiRecoveryInvestment","roiExpectedSales","roiRecoveryRaw","roiRecoveryRent","roiRecoverySalary","roiRecoveryEb","roiRecoveryRoyalty"].forEach(id=>$(id)?.addEventListener("input",calculateInvestmentRecoveryROI));
+      $("roiSalesCalculate")?.addEventListener("click",calculateSalesRequiredROI);
+      $("roiRecoveryCalculate")?.addEventListener("click",calculateInvestmentRecoveryROI);
+      calculateSalesRequiredROI();
+      calculateInvestmentRecoveryROI();
+    })();
+
+  
+    /* =========================================================
+       IMAGE-FIRST SCROLL EXPERIENCE
+       The interior image subtly moves as the visitor scrolls.
+       ========================================================= */
+    (function(){
+      const media = document.querySelector("#franchise-opening .crx-opening-photo-media");
+      const opening = document.getElementById("franchise-opening");
+      if(!media || !opening) return;
+
+      let ticking = false;
+
+      function updateOpening(){
+        const rect = opening.getBoundingClientRect();
+        const vh = window.innerHeight || 1;
+        const progress = Math.max(0, Math.min(1, (vh - rect.top) / (vh + rect.height)));
+
+        const y = (progress - .5) * -70;
+        const scale = 1.02 + progress * .035;
+
+        media.style.transform =
+          "translate3d(0," + y.toFixed(1) + "px,0) scale(" + scale.toFixed(3) + ")";
+
+        ticking = false;
+      }
+
+      window.addEventListener("scroll", function(){
+        if(!ticking){
+          window.requestAnimationFrame(updateOpening);
+          ticking = true;
+        }
+      }, {passive:true});
+
+      window.addEventListener("resize", updateOpening);
+      updateOpening();
+    })();
+
+</script>
 
 </body>
 </html>
