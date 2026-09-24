@@ -2245,6 +2245,209 @@ body > footer{
   #franchise-page-only .roi-tab{flex:1 !important;}
 }
 
+
+
+/* =========================================================
+   MOBILE FRANCHISE MENU — MOBILE ONLY
+   Kept inside the main stylesheet so Squarespace never renders
+   this CSS as visible page text.
+   ========================================================= */
+
+/* =========================================================
+   MOBILE SECTION MENU
+   Desktop remains unchanged.
+   ========================================================= */
+.crx-mobile-menu-toggle{
+  display:none !important;
+}
+.crx-mobile-menu{
+  display:none !important;
+}
+
+@media (max-width:900px){
+  .franchise-header-inner{
+    position:relative !important;
+  }
+
+  .crx-mobile-menu-toggle{
+    display:flex !important;
+    position:absolute !important;
+    top:50% !important;
+    right:18px !important;
+    transform:translateY(-50%) !important;
+    width:44px !important;
+    height:44px !important;
+    min-width:44px !important;
+    min-height:44px !important;
+    flex:0 0 44px !important;
+    margin:0 !important;
+    padding:9px !important;
+    border:0 !important;
+    border-radius:10px !important;
+    background:#fff !important;
+    align-items:center !important;
+    justify-content:center !important;
+    flex-direction:column !important;
+    gap:5px !important;
+    cursor:pointer !important;
+    position:relative !important;
+    z-index:2147483001 !important;
+  }
+
+  .crx-mobile-menu-toggle span{
+    display:block !important;
+    width:24px !important;
+    height:2.5px !important;
+    border-radius:4px !important;
+    background:#171717 !important;
+  }
+
+  .crx-mobile-menu-toggle[aria-expanded="true"] span:nth-child(1){
+    transform:translateY(7.5px) rotate(45deg) !important;
+  }
+  .crx-mobile-menu-toggle[aria-expanded="true"] span:nth-child(2){
+    opacity:0 !important;
+  }
+  .crx-mobile-menu-toggle[aria-expanded="true"] span:nth-child(3){
+    transform:translateY(-7.5px) rotate(-45deg) !important;
+  }
+
+  .franchise-header .franchise-nav{
+    display:none !important;
+  }
+
+  /* Menu is outside the sticky header and therefore always sits above the page. */
+  #crx-mobile-menu{
+    display:block !important;
+    position:fixed !important;
+    inset:0 !important;
+    width:100vw !important;
+    height:100vh !important;
+    margin:0 !important;
+    padding:0 !important;
+    background:rgba(0,0,0,.42) !important;
+    opacity:0 !important;
+    visibility:hidden !important;
+    pointer-events:none !important;
+    z-index:2147483000 !important;
+    transition:opacity .2s ease, visibility .2s ease !important;
+  }
+
+  #crx-mobile-menu.is-open{
+    opacity:1 !important;
+    visibility:visible !important;
+    pointer-events:auto !important;
+  }
+
+  #crx-mobile-menu .crx-mobile-menu-panel{
+    position:absolute !important;
+    top:0 !important;
+    right:0 !important;
+    width:min(88vw,360px) !important;
+    height:100% !important;
+    min-height:100% !important;
+    margin:0 !important;
+    padding:82px 24px 28px !important;
+    box-sizing:border-box !important;
+    background:#fffaf3 !important;
+    box-shadow:-15px 0 40px rgba(0,0,0,.16) !important;
+    transform:translateX(100%) !important;
+    transition:transform .25s ease !important;
+    overflow-y:auto !important;
+  }
+
+  #crx-mobile-menu.is-open .crx-mobile-menu-panel{
+    transform:translateX(0) !important;
+  }
+
+  #crx-mobile-menu .crx-mobile-menu-close{
+    position:absolute !important;
+    top:18px !important;
+    right:18px !important;
+    width:42px !important;
+    height:42px !important;
+    border:1px solid #ddd4c7 !important;
+    border-radius:50% !important;
+    background:#fff !important;
+    color:#171717 !important;
+    font-size:28px !important;
+    line-height:1 !important;
+    cursor:pointer !important;
+  }
+
+  #crx-mobile-menu .crx-mobile-menu-title{
+    display:block !important;
+    margin:0 0 18px !important;
+    color:#ef5b00 !important;
+    font-size:13px !important;
+    font-weight:900 !important;
+    letter-spacing:3px !important;
+  }
+
+  #crx-mobile-menu .crx-mobile-menu-panel > a{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    width:100% !important;
+    box-sizing:border-box !important;
+    padding:18px 2px !important;
+    border-bottom:1px solid #e2dbd0 !important;
+    color:#24362c !important;
+    text-decoration:none !important;
+    font-size:18px !important;
+    font-weight:850 !important;
+  }
+
+  #crx-mobile-menu .crx-mobile-menu-panel > a::after{
+    content:'→' !important;
+    color:#ef5b00 !important;
+    font-size:20px !important;
+  }
+
+  #crx-mobile-menu .crx-mobile-menu-panel > a.crx-mobile-menu-apply{
+    margin-top:22px !important;
+    padding:16px 18px !important;
+    border:0 !important;
+    border-radius:12px !important;
+    background:#ef5b00 !important;
+    color:#fff !important;
+    justify-content:center !important;
+    gap:16px !important;
+    box-shadow:0 10px 24px rgba(239,91,0,.18) !important;
+  }
+
+  #crx-mobile-menu .crx-mobile-menu-panel > a.crx-mobile-menu-apply::after{
+    content:none !important;
+  }
+}
+
+@media (max-width:380px){
+  .crx-mobile-menu-toggle{
+    width:40px !important;
+    height:40px !important;
+    min-width:40px !important;
+    min-height:40px !important;
+    flex-basis:40px !important;
+  }
+  .crx-mobile-menu-toggle span{
+    width:22px !important;
+  }
+  #crx-mobile-menu .crx-mobile-menu-panel{
+    width:92vw !important;
+    padding-left:20px !important;
+    padding-right:20px !important;
+  }
+}
+
+
+/* MOBILE ONLY: remove the duplicate ENQUIRY NOW button from the 01 Franchise section.
+   Desktop keeps the original ENQUIRY NOW button unchanged. */
+@media (max-width:900px){
+  #franchise-page-only #franchise-story .crx-enquiry-button{
+    display:none !important;
+  }
+}
+
 </style>
 
 <style id="cruncherys-logo-override">
@@ -3204,6 +3407,230 @@ html.crx-landing-mode-root #franchise-page-only{margin-top:0 !important;padding-
   line-height:inherit !important;
 }
 </style>
+
+<style id="cruncherys-mobile-only-final">
+/* =========================================================
+   MOBILE-ONLY UPDATE
+   Desktop/tablet styles above remain unchanged.
+   ========================================================= */
+
+@media (max-width:900px){
+
+  /* Compact mobile header */
+  .franchise-header,
+  .franchise-header-inner{
+    min-height:68px !important;
+    height:68px !important;
+  }
+
+  .franchise-header-inner{
+    width:100% !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    gap:8px !important;
+    padding:7px 14px !important;
+    box-sizing:border-box !important;
+  }
+
+  .franchise-logo{
+    width:auto !important;
+    max-width:calc(100% - 108px) !important;
+    min-width:0 !important;
+    flex:1 1 auto !important;
+    display:flex !important;
+    align-items:center !important;
+    gap:7px !important;
+    overflow:hidden !important;
+  }
+
+  .franchise-header .franchise-logo img{
+    width:44px !important;
+    height:44px !important;
+    min-width:44px !important;
+    min-height:44px !important;
+    max-width:44px !important;
+    max-height:44px !important;
+    flex:0 0 44px !important;
+  }
+
+  .franchise-header .franchise-wordmark{
+    width:auto !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    flex:0 1 auto !important;
+    margin-left:0 !important;
+    overflow:hidden !important;
+  }
+
+  .franchise-header .franchise-wordmark-name{
+    font-size:23px !important;
+    line-height:.92 !important;
+    letter-spacing:1px !important;
+    white-space:nowrap !important;
+  }
+
+  .franchise-header .franchise-wordmark-name sup{
+    font-size:8px !important;
+  }
+
+  .franchise-header .franchise-wordmark-rule{
+    height:2px !important;
+    margin:3px 0 !important;
+  }
+
+  .franchise-header .franchise-wordmark-tagline{
+    font-size:5px !important;
+    line-height:1 !important;
+    letter-spacing:.25px !important;
+    white-space:nowrap !important;
+  }
+
+  /* Mobile navigation: only Apply Now is shown */
+  .franchise-header .franchise-nav{
+    display:flex !important;
+    width:auto !important;
+    min-width:100px !important;
+    flex:0 0 100px !important;
+    align-items:center !important;
+    justify-content:flex-end !important;
+    gap:0 !important;
+    padding:0 !important;
+    margin:0 !important;
+  }
+
+  .franchise-header .franchise-nav a:not(.franchise-apply){
+    display:none !important;
+  }
+
+  /* Properly contained Apply Now button */
+  .franchise-header .franchise-nav .franchise-apply{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:100px !important;
+    min-width:100px !important;
+    max-width:100px !important;
+    height:40px !important;
+    min-height:40px !important;
+    flex:0 0 100px !important;
+    flex-shrink:0 !important;
+    padding:0 !important;
+    margin:0 !important;
+    border-radius:11px !important;
+    font-size:11px !important;
+    line-height:1 !important;
+    white-space:nowrap !important;
+    box-sizing:border-box !important;
+  }
+
+  /* Keep the mobile form card itself as the Apply Now destination. */
+  #franchise-page-only #franchise-enquiry-form .crx-form-card{
+    scroll-margin-top:84px !important;
+  }
+}
+
+@media (max-width:380px){
+  .franchise-header-inner{
+    padding-left:11px !important;
+    padding-right:11px !important;
+  }
+
+  .franchise-logo{
+    max-width:calc(100% - 96px) !important;
+  }
+
+  .franchise-header .franchise-logo img{
+    width:40px !important;
+    height:40px !important;
+    min-width:40px !important;
+    min-height:40px !important;
+    max-width:40px !important;
+    max-height:40px !important;
+    flex-basis:40px !important;
+  }
+
+  .franchise-header .franchise-wordmark-name{
+    font-size:20px !important;
+  }
+
+  .franchise-header .franchise-nav{
+    min-width:92px !important;
+    flex-basis:92px !important;
+  }
+
+  .franchise-header .franchise-nav .franchise-apply{
+    width:92px !important;
+    min-width:92px !important;
+    max-width:92px !important;
+    flex-basis:92px !important;
+    height:36px !important;
+    min-height:36px !important;
+    font-size:10px !important;
+  }
+}
+
+
+/* =========================================================
+   MOBILE APPLY NOW — positioned beside the 01 section
+   Desktop remains completely unchanged.
+   ========================================================= */
+.crx-mobile-apply{
+  display:none !important;
+}
+
+@media (max-width:900px){
+  /* Remove the high header Apply Now on mobile.
+     A more reachable button is placed beside 01 — Franchise below. */
+  .franchise-header .franchise-nav .franchise-apply{
+    display:none !important;
+  }
+
+  #franchise-page-only .crx-mobile-apply{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    width:190px !important;
+    max-width:190px !important;
+    min-height:52px !important;
+    margin:22px 0 0 0 !important;
+    padding:0 16px 0 20px !important;
+    background:#ef5b00 !important;
+    color:#fff !important;
+    border:2px solid #171717 !important;
+    border-radius:0 !important;
+    text-decoration:none !important;
+    font-size:13px !important;
+    line-height:1 !important;
+    font-weight:900 !important;
+    letter-spacing:2px !important;
+    box-sizing:border-box !important;
+  }
+
+  #franchise-page-only .crx-mobile-apply span:last-child{
+    font-size:25px !important;
+    line-height:1 !important;
+    letter-spacing:0 !important;
+  }
+
+  #franchise-page-only .crx-mobile-apply:active{
+    transform:translateY(1px) !important;
+  }
+}
+
+@media (max-width:380px){
+  #franchise-page-only .crx-mobile-apply{
+    width:175px !important;
+    max-width:175px !important;
+    min-height:50px !important;
+    margin-top:18px !important;
+    font-size:12px !important;
+  }
+}
+</style>
+
+
+
 </head>
 
 <body>
@@ -3230,8 +3657,29 @@ html.crx-landing-mode-root #franchise-page-only{margin-top:0 !important;padding-
       <a href="#franchise-enquiry" class="franchise-apply" onclick="franchiseScrollTo('franchise-enquiry'); return false;">Apply Now</a>
     </nav>
 
+
+
+    <!-- MOBILE MENU TOGGLE -->
+    <button class="crx-mobile-menu-toggle" type="button" aria-label="Open franchise menu" aria-expanded="false" aria-controls="crx-mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
+
+  <!-- MOBILE MENU: moved to body by JS so Squarespace cannot clip it -->
+  <div class="crx-mobile-menu" id="crx-mobile-menu" aria-hidden="true">
+    <div class="crx-mobile-menu-panel">
+    <button class="crx-mobile-menu-close" type="button" aria-label="Close menu">&times;</button>
+    <div class="crx-mobile-menu-title">MENU</div>
+    <a href="#franchise-story">Franchise</a>
+    <a href="#overview">Overview</a>
+    <a href="#faq">FAQ</a>
+    <a href="#calculator">Break-Even</a>
+    <a href="#roi-projection">ROI</a>
+    <a class="crx-mobile-menu-apply" href="#franchise-enquiry">Apply Now <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+
   <main id="franchise-page-only">
     <!-- OPENING INTERIOR IMAGE -->
     <section class="crx-opening-photo" id="franchise-opening" aria-label="Crunchery's cafe interior">
@@ -3245,6 +3693,9 @@ html.crx-landing-mode-root #franchise-page-only{margin-top:0 !important;padding-
     <section class="crx-franchise-story" id="franchise-story">
       <div class="crx-story-number-wrap">
         <div class="eyebrow crx-story-kicker">01 — Franchise</div>
+        <a class="crx-mobile-apply" href="#franchise-enquiry" onclick="franchiseScrollTo('franchise-enquiry'); return false;">
+          <span>APPLY NOW</span><span aria-hidden="true">→</span>
+        </a>
       </div>
 
       <div class="crx-story-content">
@@ -3895,20 +4346,38 @@ html.crx-landing-mode-root #franchise-page-only{margin-top:0 !important;padding-
 /* Reliable section navigation
        Works even when this page is embedded inside Squarespace or another host. */
     function franchiseScrollTo(id){
-      if(id === "franchise-enquiry") id = "franchise-enquiry-form";
-      const target = document.getElementById(id);
+      const isMobile = window.matchMedia("(max-width: 900px)").matches;
+      const isEnquiry = id === "franchise-enquiry";
+
+      let target;
+
+      if(isEnquiry){
+        /* Desktop keeps the existing enquiry-section behaviour.
+           Mobile goes directly to the actual form fields. */
+        target = isMobile
+          ? document.querySelector("#franchise-enquiry-form .crx-form-card")
+          : document.getElementById("franchise-enquiry-form");
+      }else{
+        target = document.getElementById(id);
+      }
+
       if(!target) return;
 
       const header = document.querySelector(".franchise-header");
       const headerHeight = header ? header.getBoundingClientRect().height : 0;
-      const targetTop = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 18;
+      const extraOffset = isMobile && isEnquiry ? 12 : 18;
+      const targetTop =
+        target.getBoundingClientRect().top +
+        window.pageYOffset -
+        headerHeight -
+        extraOffset;
 
       window.scrollTo({
         top: Math.max(0, targetTop),
         behavior: "smooth"
       });
 
-      history.replaceState(null, "", "#" + (id === "franchise-enquiry-form" ? "franchise-enquiry" : id));
+      history.replaceState(null, "", "#" + (isEnquiry ? "franchise-enquiry" : id));
     }
 
     document.querySelectorAll('.franchise-nav a[href^="#"], .hero-actions a[href^="#"], #franchise-page-only a[href^="#"]').forEach(link => {
@@ -4204,6 +4673,94 @@ for(let year = 1; year <= years; year++){
       updateOpening();
     })();
 
+</script>
+
+
+<script id="crx-mobile-menu-js">
+(function(){
+  function initMobileMenu(){
+    const toggle = document.querySelector('.crx-mobile-menu-toggle');
+    const menu = document.getElementById('crx-mobile-menu');
+    if(!toggle || !menu) return;
+
+    /* Squarespace can wrap code blocks in containers. Move the overlay to body
+       so position:fixed and z-index work reliably on real mobile devices. */
+    if(menu.parentElement !== document.body){
+      document.body.appendChild(menu);
+    }
+
+    const panel = menu.querySelector('.crx-mobile-menu-panel');
+    const close = menu.querySelector('.crx-mobile-menu-close');
+
+    function closeMenu(){
+      menu.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded','false');
+      toggle.setAttribute('aria-label','Open franchise menu');
+      menu.setAttribute('aria-hidden','true');
+      menu.style.opacity='0';
+      menu.style.visibility='hidden';
+      menu.style.pointerEvents='none';
+      if(panel) panel.style.transform='translateX(100%)';
+      document.body.style.overflow='';
+    }
+
+    function openMenu(){
+      menu.classList.add('is-open');
+      toggle.setAttribute('aria-expanded','true');
+      toggle.setAttribute('aria-label','Close franchise menu');
+      menu.setAttribute('aria-hidden','false');
+      menu.style.display='block';
+      menu.style.opacity='1';
+      menu.style.visibility='visible';
+      menu.style.pointerEvents='auto';
+      menu.style.zIndex='2147483000';
+      if(panel) panel.style.transform='translateX(0)';
+      document.body.style.overflow='hidden';
+    }
+
+    toggle.addEventListener('click', function(event){
+      event.preventDefault();
+      event.stopPropagation();
+      if(menu.classList.contains('is-open')) closeMenu();
+      else openMenu();
+    });
+
+    if(close) close.addEventListener('click', function(event){
+      event.preventDefault();
+      closeMenu();
+    });
+
+    menu.addEventListener('click', function(event){
+      if(event.target === menu){
+        closeMenu();
+        return;
+      }
+      const link = event.target.closest('a[href^="#"]');
+      if(!link) return;
+      event.preventDefault();
+      const rawId = link.getAttribute('href').substring(1);
+      closeMenu();
+      setTimeout(function(){
+        if(typeof franchiseScrollTo === 'function'){
+          franchiseScrollTo(rawId);
+        }else{
+          const target = document.getElementById(rawId === 'franchise-enquiry' ? 'franchise-enquiry-form' : rawId);
+          if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      },120);
+    });
+
+    document.addEventListener('keydown', function(event){
+      if(event.key === 'Escape' && menu.classList.contains('is-open')) closeMenu();
+    });
+
+    /* Start closed even if Squarespace rehydrates the block. */
+    closeMenu();
+  }
+
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initMobileMenu);
+  else initMobileMenu();
+})();
 </script>
 
 </body>
