@@ -4249,26 +4249,6 @@ function setupForms(){
 
 });
 
-  const modal = $("franchiseModal");
-  const frame = $("franchiseFrame");
-  const external = $("franchiseExternal");
-
-  document.querySelectorAll(".franchise-open").forEach(btn => {
-    btn.addEventListener("click",()=>{
-      if(!franchiseValid){
-        alert("The franchise enquiry form is not configured yet.");
-        return;
-      }
-      external.href = CONFIG.FRANCHISE_FORM_URL;
-      if(!frame.src) frame.src = CONFIG.FRANCHISE_FORM_URL;
-      const loading = $("franchiseLoading");
-      if (loading) loading.style.display = "flex";
-      frame.onload = () => { if (loading) loading.style.display = "none"; };
-      modal.classList.add("open");
-      modal.setAttribute("aria-hidden","false");
-      document.body.style.overflow = "hidden";
-    });
-  });
 
   document.querySelectorAll("[data-close-franchise]").forEach(el => {
     el.addEventListener("click", closeFranchiseModal);
@@ -4279,12 +4259,6 @@ function setupForms(){
   });
 }
 
-function closeFranchiseModal(){
-  const modal = $("franchiseModal");
-  modal.classList.remove("open");
-  modal.setAttribute("aria-hidden","true");
-  document.body.style.overflow = "";
-}
 
 function escapeHtml(s){
   return String(s ?? "").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
