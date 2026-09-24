@@ -2896,13 +2896,15 @@ body > footer{
 
 
 <script>
-/* Direct-load protection: #franchise-enquiry must not force the page to open at the form.
-   Keep the hash available for sharing, but neutralize the browser's automatic anchor jump. */
+/* Direct-load protection: keep /franchise/#franchise-enquiry on the landing view.
+   The actual form target is #franchise-enquiry-form, so the browser has no
+   matching #franchise-enquiry DOM anchor to jump to. */
 (function(){
-  if (window.location.hash === '#franchise-enquiry') {
-    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-    history.replaceState(null, '', window.location.pathname + window.location.search);
-    window.scrollTo(0, 0);
+  if(window.location.hash === '#franchise-enquiry'){
+    if('scrollRestoration' in history) history.scrollRestoration='manual';
+    window.scrollTo(0,0);
+    setTimeout(function(){ window.scrollTo(0,0); },0);
+    setTimeout(function(){ window.scrollTo(0,0); },100);
   }
 })();
 </script>
@@ -3044,7 +3046,7 @@ body > footer{
     </section>
 
     <!-- LET'S TALK BUSINESS — ENQUIRY FORM -->
-    <section id="franchise-enquiry" class="crx-enquiry-section">
+    <section id="franchise-enquiry-form" class="crx-enquiry-section">
       <div class="crx-enquiry-heading">
         <div class="eyebrow">LET'S TALK BUSINESS</div>
         <h2>Tell us about your franchise plan.</h2>
@@ -3659,21 +3661,23 @@ body > footer{
 
 
 /* Direct franchise URL: always keep the landing view at the top.
-   The hash is restored without triggering a browser anchor jump. */
+   The public hash is retained for sharing, but it is NOT a DOM id. */
 (function(){
-  if(window.location.hash === "#franchise-enquiry") {
-    if("scrollRestoration" in history) history.scrollRestoration = "manual";
-    window.scrollTo(0, 0);
-    requestAnimationFrame(function(){
-      window.scrollTo(0, 0);
-      history.replaceState(null, "", window.location.pathname + window.location.search + "#franchise-enquiry");
-    });
+  function keepLanding(){
+    if(window.location.hash === '#franchise-enquiry'){
+      if('scrollRestoration' in history) history.scrollRestoration='manual';
+      window.scrollTo(0,0);
+    }
   }
+  keepLanding();
+  window.addEventListener('load', keepLanding);
+  window.addEventListener('pageshow', keepLanding);
 })();
 
 /* Reliable section navigation
        Works even when this page is embedded inside Squarespace or another host. */
     function franchiseScrollTo(id){
+      if(id === "franchise-enquiry") id = "franchise-enquiry-form";
       const target = document.getElementById(id);
       if(!target) return;
 
@@ -3686,15 +3690,16 @@ body > footer{
         behavior: "smooth"
       });
 
-      history.replaceState(null, "", "#" + id);
+      history.replaceState(null, "", "#" + (id === "franchise-enquiry-form" ? "franchise-enquiry" : id));
     }
 
     document.querySelectorAll('.franchise-nav a[href^="#"], .hero-actions a[href^="#"], #franchise-page-only a[href^="#"]').forEach(link => {
       link.addEventListener("click", function(event){
-        const id = this.getAttribute("href").substring(1);
+        const rawId = this.getAttribute("href").substring(1);
+        const id = rawId === "franchise-enquiry" ? "franchise-enquiry-form" : rawId;
         if(document.getElementById(id)){
           event.preventDefault();
-          franchiseScrollTo(id);
+          franchiseScrollTo(rawId);
         }
       });
     });
