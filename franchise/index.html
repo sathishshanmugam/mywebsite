@@ -3366,6 +3366,64 @@ html.crx-landing-mode-root #franchise-page-only{margin-top:0 !important;padding-
     font-size:10px !important;
   }
 }
+
+
+/* =========================================================
+   MOBILE APPLY NOW — positioned beside the 01 section
+   Desktop remains completely unchanged.
+   ========================================================= */
+.crx-mobile-apply{
+  display:none !important;
+}
+
+@media (max-width:900px){
+  /* Remove the high header Apply Now on mobile.
+     A more reachable button is placed beside 01 — Franchise below. */
+  .franchise-header .franchise-nav .franchise-apply{
+    display:none !important;
+  }
+
+  #franchise-page-only .crx-mobile-apply{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    width:190px !important;
+    max-width:190px !important;
+    min-height:52px !important;
+    margin:22px 0 0 0 !important;
+    padding:0 16px 0 20px !important;
+    background:#ef5b00 !important;
+    color:#fff !important;
+    border:2px solid #171717 !important;
+    border-radius:0 !important;
+    text-decoration:none !important;
+    font-size:13px !important;
+    line-height:1 !important;
+    font-weight:900 !important;
+    letter-spacing:2px !important;
+    box-sizing:border-box !important;
+  }
+
+  #franchise-page-only .crx-mobile-apply span:last-child{
+    font-size:25px !important;
+    line-height:1 !important;
+    letter-spacing:0 !important;
+  }
+
+  #franchise-page-only .crx-mobile-apply:active{
+    transform:translateY(1px) !important;
+  }
+}
+
+@media (max-width:380px){
+  #franchise-page-only .crx-mobile-apply{
+    width:175px !important;
+    max-width:175px !important;
+    min-height:50px !important;
+    margin-top:18px !important;
+    font-size:12px !important;
+  }
+}
 </style>
 
 </head>
@@ -3409,6 +3467,9 @@ html.crx-landing-mode-root #franchise-page-only{margin-top:0 !important;padding-
     <section class="crx-franchise-story" id="franchise-story">
       <div class="crx-story-number-wrap">
         <div class="eyebrow crx-story-kicker">01 — Franchise</div>
+        <a class="crx-mobile-apply" href="#franchise-enquiry" onclick="franchiseScrollTo('franchise-enquiry'); return false;">
+          <span>APPLY NOW</span><span aria-hidden="true">→</span>
+        </a>
       </div>
 
       <div class="crx-story-content">
