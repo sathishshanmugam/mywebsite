@@ -3427,6 +3427,184 @@ html.crx-landing-mode-root #franchise-page-only{margin-top:0 !important;padding-
 </style>
 
 
+
+<style id="crx-mobile-menu">
+/* =========================================================
+   MOBILE SECTION MENU
+   Desktop remains unchanged.
+   ========================================================= */
+.crx-mobile-menu-toggle,
+.crx-mobile-menu{
+  display:none !important;
+}
+
+@media (max-width:900px){
+  .franchise-header-inner{
+    position:relative !important;
+  }
+
+  /* Mobile top-right menu icon */
+  .franchise-header .crx-mobile-menu-toggle{
+    display:flex !important;
+    width:44px !important;
+    height:44px !important;
+    min-width:44px !important;
+    min-height:44px !important;
+    flex:0 0 44px !important;
+    margin:0 !important;
+    padding:9px !important;
+    border:0 !important;
+    border-radius:10px !important;
+    background:#fff !important;
+    align-items:center !important;
+    justify-content:center !important;
+    flex-direction:column !important;
+    gap:5px !important;
+    cursor:pointer !important;
+    box-shadow:none !important;
+    position:relative !important;
+    z-index:10002 !important;
+  }
+
+  .franchise-header .crx-mobile-menu-toggle span{
+    display:block !important;
+    width:24px !important;
+    height:2.5px !important;
+    border-radius:4px !important;
+    background:#171717 !important;
+    transition:transform .2s ease, opacity .2s ease !important;
+  }
+
+  .franchise-header .crx-mobile-menu-toggle[aria-expanded="true"] span:nth-child(1){
+    transform:translateY(7.5px) rotate(45deg) !important;
+  }
+  .franchise-header .crx-mobile-menu-toggle[aria-expanded="true"] span:nth-child(2){
+    opacity:0 !important;
+  }
+  .franchise-header .crx-mobile-menu-toggle[aria-expanded="true"] span:nth-child(3){
+    transform:translateY(-7.5px) rotate(-45deg) !important;
+  }
+
+  /* Hide desktop navigation on mobile; hamburger replaces it. */
+  .franchise-header .franchise-nav{
+    display:none !important;
+  }
+
+  .franchise-header .crx-mobile-menu{
+    display:block !important;
+    position:fixed !important;
+    inset:0 !important;
+    width:100vw !important;
+    height:100vh !important;
+    background:rgba(0,0,0,.42) !important;
+    opacity:0 !important;
+    visibility:hidden !important;
+    pointer-events:none !important;
+    transition:opacity .2s ease, visibility .2s ease !important;
+    z-index:10000 !important;
+  }
+
+  .franchise-header .crx-mobile-menu.is-open{
+    opacity:1 !important;
+    visibility:visible !important;
+    pointer-events:auto !important;
+  }
+
+  .franchise-header .crx-mobile-menu-panel{
+    position:absolute !important;
+    top:0 !important;
+    right:0 !important;
+    width:min(88vw,360px) !important;
+    min-height:100% !important;
+    padding:82px 24px 28px !important;
+    background:#fffaf3 !important;
+    box-shadow:-15px 0 40px rgba(0,0,0,.16) !important;
+    transform:translateX(100%) !important;
+    transition:transform .25s ease !important;
+    overflow-y:auto !important;
+  }
+
+  .franchise-header .crx-mobile-menu.is-open .crx-mobile-menu-panel{
+    transform:translateX(0) !important;
+  }
+
+  .franchise-header .crx-mobile-menu-close{
+    position:absolute !important;
+    top:18px !important;
+    right:18px !important;
+    width:42px !important;
+    height:42px !important;
+    border:1px solid #ddd4c7 !important;
+    border-radius:50% !important;
+    background:#fff !important;
+    color:#171717 !important;
+    font-size:28px !important;
+    line-height:1 !important;
+    cursor:pointer !important;
+  }
+
+  .franchise-header .crx-mobile-menu-title{
+    margin:0 0 18px !important;
+    color:#ef5b00 !important;
+    font-size:13px !important;
+    font-weight:900 !important;
+    letter-spacing:3px !important;
+  }
+
+  .franchise-header .crx-mobile-menu-panel > a{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    width:100% !important;
+    padding:18px 2px !important;
+    border-bottom:1px solid #e2dbd0 !important;
+    color:#24362c !important;
+    text-decoration:none !important;
+    font-size:18px !important;
+    font-weight:850 !important;
+  }
+
+  .franchise-header .crx-mobile-menu-panel > a::after{
+    content:'→' !important;
+    color:#ef5b00 !important;
+    font-size:20px !important;
+  }
+
+  .franchise-header .crx-mobile-menu-panel > a.crx-mobile-menu-apply{
+    margin-top:22px !important;
+    padding:16px 18px !important;
+    border:0 !important;
+    border-radius:12px !important;
+    background:#ef5b00 !important;
+    color:#fff !important;
+    justify-content:center !important;
+    gap:16px !important;
+    box-shadow:0 10px 24px rgba(239,91,0,.18) !important;
+  }
+
+  .franchise-header .crx-mobile-menu-panel > a.crx-mobile-menu-apply::after{
+    content:none !important;
+  }
+}
+
+@media (max-width:380px){
+  .franchise-header .crx-mobile-menu-toggle{
+    width:40px !important;
+    height:40px !important;
+    min-width:40px !important;
+    min-height:40px !important;
+    flex-basis:40px !important;
+  }
+  .franchise-header .crx-mobile-menu-toggle span{
+    width:22px !important;
+  }
+  .franchise-header .crx-mobile-menu-panel{
+    width:92vw !important;
+    padding-left:20px !important;
+    padding-right:20px !important;
+  }
+}
+</style>
 <style id="crx-mobile-hide-enquiry-button">
 /* MOBILE ONLY: remove the duplicate ENQUIRY NOW button from the 01 Franchise section.
    Desktop keeps the original ENQUIRY NOW button unchanged. */
@@ -3461,6 +3639,24 @@ html.crx-landing-mode-root #franchise-page-only{margin-top:0 !important;padding-
       <a href="#roi-projection" onclick="franchiseScrollTo('roi-projection'); return false;">ROI</a>
       <a href="#franchise-enquiry" class="franchise-apply" onclick="franchiseScrollTo('franchise-enquiry'); return false;">Apply Now</a>
     </nav>
+
+    <!-- MOBILE MENU -->
+    <button class="crx-mobile-menu-toggle" type="button" aria-label="Open franchise menu" aria-expanded="false" aria-controls="crx-mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="crx-mobile-menu" id="crx-mobile-menu" aria-hidden="true">
+      <div class="crx-mobile-menu-panel">
+        <button class="crx-mobile-menu-close" type="button" aria-label="Close menu">&times;</button>
+        <div class="crx-mobile-menu-title">FRANCHISE MENU</div>
+        <a href="#franchise-story">Franchise</a>
+        <a href="#overview">Overview</a>
+        <a href="#faq">FAQ</a>
+        <a href="#calculator">Break-Even</a>
+        <a href="#roi-projection">ROI</a>
+        <a class="crx-mobile-menu-apply" href="#franchise-enquiry">Apply Now <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
 
   </div>
 </header>
@@ -4457,6 +4653,62 @@ for(let year = 1; year <= years; year++){
       updateOpening();
     })();
 
+</script>
+
+
+<script id="crx-mobile-menu-js">
+(function(){
+  const toggle = document.querySelector('.crx-mobile-menu-toggle');
+  const menu = document.getElementById('crx-mobile-menu');
+  const close = document.querySelector('.crx-mobile-menu-close');
+  if(!toggle || !menu) return;
+
+  function closeMenu(){
+    menu.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded','false');
+    menu.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+  }
+
+  function openMenu(){
+    menu.classList.add('is-open');
+    toggle.setAttribute('aria-expanded','true');
+    menu.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+  }
+
+  toggle.addEventListener('click', function(){
+    if(menu.classList.contains('is-open')) closeMenu();
+    else openMenu();
+  });
+
+  close?.addEventListener('click', closeMenu);
+
+  menu.addEventListener('click', function(event){
+    if(event.target === menu){
+      closeMenu();
+      return;
+    }
+
+    const link = event.target.closest('a[href^="#"]');
+    if(!link) return;
+
+    event.preventDefault();
+    const rawId = link.getAttribute('href').substring(1);
+    closeMenu();
+
+    // Give the panel time to close, then use the existing reliable scroll function.
+    setTimeout(function(){
+      if(typeof franchiseScrollTo === 'function'){
+        franchiseScrollTo(rawId);
+      }
+    }, 80);
+  });
+
+  document.addEventListener('keydown', function(event){
+    if(event.key === 'Escape') closeMenu();
+  });
+})();
 </script>
 
 </body>
