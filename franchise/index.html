@@ -3605,6 +3605,72 @@ html.crx-landing-mode-root #franchise-page-only{margin-top:0 !important;padding-
   }
 }
 </style>
+<style id="crx-mobile-menu-body-fix">
+@media (max-width:900px){
+  body > #crx-mobile-menu{
+    display:block !important;
+    position:fixed !important;
+    inset:0 !important;
+    width:100vw !important;
+    height:100vh !important;
+    background:rgba(0,0,0,.42) !important;
+    opacity:0 !important;
+    visibility:hidden !important;
+    pointer-events:none !important;
+    z-index:2147483000 !important;
+    transition:opacity .2s ease, visibility .2s ease !important;
+  }
+  body > #crx-mobile-menu.is-open{
+    opacity:1 !important;
+    visibility:visible !important;
+    pointer-events:auto !important;
+  }
+  body > #crx-mobile-menu .crx-mobile-menu-panel{
+    position:absolute !important;
+    top:0 !important;
+    right:0 !important;
+    width:min(88vw,360px) !important;
+    height:100% !important;
+    min-height:100% !important;
+    padding:82px 24px 28px !important;
+    background:#fffaf3 !important;
+    box-shadow:-15px 0 40px rgba(0,0,0,.16) !important;
+    transform:translateX(100%) !important;
+    overflow-y:auto !important;
+  }
+  body > #crx-mobile-menu.is-open .crx-mobile-menu-panel{
+    transform:translateX(0) !important;
+  }
+  body > #crx-mobile-menu .crx-mobile-menu-close{
+    position:absolute !important;
+    top:18px !important;
+    right:18px !important;
+    z-index:2 !important;
+  }
+  body > #crx-mobile-menu .crx-mobile-menu-title,
+  body > #crx-mobile-menu .crx-mobile-menu-panel > a{
+    display:flex !important;
+  }
+  body > #crx-mobile-menu .crx-mobile-menu-title{
+    color:#ef5b00 !important;
+    font-size:13px !important;
+    font-weight:900 !important;
+    letter-spacing:3px !important;
+    margin:0 0 18px !important;
+  }
+  body > #crx-mobile-menu .crx-mobile-menu-panel > a{
+    align-items:center !important;
+    justify-content:space-between !important;
+    width:100% !important;
+    padding:18px 2px !important;
+    border-bottom:1px solid #e2dbd0 !important;
+    color:#24362c !important;
+    text-decoration:none !important;
+    font-size:18px !important;
+    font-weight:850 !important;
+  }
+}
+</style>
 <style id="crx-mobile-hide-enquiry-button">
 /* MOBILE ONLY: remove the duplicate ENQUIRY NOW button from the 01 Franchise section.
    Desktop keeps the original ENQUIRY NOW button unchanged. */
@@ -4658,56 +4724,72 @@ for(let year = 1; year <= years; year++){
 
 <script id="crx-mobile-menu-js">
 (function(){
-  const toggle = document.querySelector('.crx-mobile-menu-toggle');
-  const menu = document.getElementById('crx-mobile-menu');
-  const close = document.querySelector('.crx-mobile-menu-close');
-  if(!toggle || !menu) return;
+  function initMobileMenu(){
+    const toggle = document.querySelector('.crx-mobile-menu-toggle');
+    const menu = document.getElementById('crx-mobile-menu');
+    if(!toggle || !menu) return;
 
-  function closeMenu(){
-    menu.classList.remove('is-open');
-    toggle.setAttribute('aria-expanded','false');
-    menu.setAttribute('aria-hidden','true');
-    document.body.style.overflow='';
-  }
-
-  function openMenu(){
-    menu.classList.add('is-open');
-    toggle.setAttribute('aria-expanded','true');
-    menu.setAttribute('aria-hidden','false');
-    document.body.style.overflow='hidden';
-  }
-
-  toggle.addEventListener('click', function(){
-    if(menu.classList.contains('is-open')) closeMenu();
-    else openMenu();
-  });
-
-  close?.addEventListener('click', closeMenu);
-
-  menu.addEventListener('click', function(event){
-    if(event.target === menu){
-      closeMenu();
-      return;
+    /* Move the menu outside the sticky header so Squarespace/header stacking
+       cannot clip or hide the menu panel. */
+    if(menu.parentElement !== document.body){
+      document.body.appendChild(menu);
     }
 
-    const link = event.target.closest('a[href^="#"]');
-    if(!link) return;
+    const close = menu.querySelector('.crx-mobile-menu-close');
 
-    event.preventDefault();
-    const rawId = link.getAttribute('href').substring(1);
-    closeMenu();
+    function closeMenu(){
+      menu.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded','false');
+      menu.setAttribute('aria-hidden','true');
+      document.body.style.overflow='';
+    }
 
-    // Give the panel time to close, then use the existing reliable scroll function.
-    setTimeout(function(){
-      if(typeof franchiseScrollTo === 'function'){
-        franchiseScrollTo(rawId);
+    function openMenu(){
+      menu.classList.add('is-open');
+      toggle.setAttribute('aria-expanded','true');
+      menu.setAttribute('aria-hidden','false');
+      document.body.style.overflow='hidden';
+    }
+
+    toggle.addEventListener('click', function(event){
+      event.preventDefault();
+      event.stopPropagation();
+      if(menu.classList.contains('is-open')) closeMenu();
+      else openMenu();
+    });
+
+    if(close) close.addEventListener('click', closeMenu);
+
+    menu.addEventListener('click', function(event){
+      if(event.target === menu){
+        closeMenu();
+        return;
       }
-    }, 80);
-  });
 
-  document.addEventListener('keydown', function(event){
-    if(event.key === 'Escape') closeMenu();
-  });
+      const link = event.target.closest('a[href^="#"]');
+      if(!link) return;
+
+      event.preventDefault();
+      const rawId = link.getAttribute('href').substring(1);
+      closeMenu();
+
+      setTimeout(function(){
+        if(typeof franchiseScrollTo === 'function'){
+          franchiseScrollTo(rawId);
+        } else {
+          const target = document.getElementById(rawId);
+          if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      }, 120);
+    });
+
+    document.addEventListener('keydown', function(event){
+      if(event.key === 'Escape') closeMenu();
+    });
+  }
+
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initMobileMenu);
+  else initMobileMenu();
 })();
 </script>
 
