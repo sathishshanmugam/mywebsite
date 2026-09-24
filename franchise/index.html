@@ -3051,6 +3051,159 @@ html.crx-landing-mode-root #franchise-page-only{margin-top:0 !important;padding-
   }catch(e){}
 })();
 </script>
+
+<style id="crx-story-compact-final">
+/* Final BurgerMan-style story sizing */
+@media (min-width:901px){
+  #franchise-page-only #franchise-story{
+    width:min(1260px,calc(100% - 120px)) !important;
+    max-width:1260px !important;
+    padding:58px 0 72px !important;
+    grid-template-columns:minmax(280px,.58fr) minmax(0,1.42fr) !important;
+    gap:72px !important;
+    align-items:start !important;
+  }
+
+  /* Match the compact section-label treatment used by 02 — FRANCHISE OVERVIEW. */
+  #franchise-page-only #franchise-story .crx-story-number-wrap{
+    min-height:0 !important;
+    display:flex !important;
+    align-items:center !important;
+    gap:14px !important;
+    padding-top:6px !important;
+  }
+
+  #franchise-page-only #franchise-story .crx-story-number{
+    font-size:30px !important;
+    line-height:1 !important;
+    letter-spacing:5px !important;
+    font-weight:900 !important;
+    margin:0 !important;
+    color:#ef5b00 !important;
+  }
+
+  #franchise-page-only #franchise-story .crx-story-number::after{
+    content:'—' !important;
+    margin-left:12px !important;
+  }
+
+  #franchise-page-only #franchise-story .crx-story-label{
+    margin:0 !important;
+    font-size:30px !important;
+    line-height:1 !important;
+    font-weight:900 !important;
+    letter-spacing:5px !important;
+    color:#ef5b00 !important;
+  }
+
+  #franchise-page-only #franchise-story .crx-story-content{
+    min-height:360px !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:flex-start !important;
+  }
+
+  #franchise-page-only #franchise-story .crx-story-heading{
+    font-size:clamp(42px,4vw,58px) !important;
+    line-height:1.02 !important;
+    letter-spacing:-2.8px !important;
+    margin:4px 0 22px !important;
+  }
+
+  #franchise-page-only #franchise-story .crx-story-content p{
+    max-width:800px !important;
+    font-size:17px !important;
+    line-height:1.65 !important;
+  }
+
+  #franchise-page-only #franchise-story .crx-enquiry-button{
+    margin-top:auto !important;
+    min-height:58px !important;
+  }
+
+  #franchise-page-only #franchise-story .crx-enquiry-button .crx-arrow{
+    height:58px !important;
+    width:62px !important;
+  }
+}
+
+@media (max-width:900px){
+  #franchise-page-only #franchise-story .crx-story-number{
+    font-size:125px !important;
+    letter-spacing:-7px !important;
+  }
+}
+</style>
+
+<style id="crx-story-kicker-final">
+/* Final lock: 01 label is intentionally identical in size to the site's 02 eyebrow. */
+#franchise-page-only #franchise-story .crx-story-kicker{
+  font-size:14px !important;
+  line-height:1 !important;
+  letter-spacing:2.5px !important;
+  font-weight:900 !important;
+  color:#ef5b00 !important;
+  text-transform:uppercase !important;
+  margin:0 0 18px !important;
+  padding:0 !important;
+  border:0 !important;
+  text-decoration:none !important;
+}
+#franchise-page-only #franchise-story .crx-story-kicker::before,
+#franchise-page-only #franchise-story .crx-story-kicker::after{
+  content:none !important;
+  display:none !important;
+}
+</style>
+
+<script>
+/* Direct /franchise/#franchise-story loads should open at the landing view.
+   The hash is preserved for sharing, but the page starts at the top so the
+   complete interior image and the compact 01 story are visible together. */
+(function(){
+  if(window.location.hash === '#franchise-story'){
+    if('scrollRestoration' in history) history.scrollRestoration='manual';
+    window.scrollTo(0,0);
+    setTimeout(function(){ window.scrollTo(0,0); },0);
+    setTimeout(function(){ window.scrollTo(0,0); },100);
+  }
+})();
+</script>
+
+<style id="crx-01-label-lock">
+/* 01 — Franchise uses the exact same section-label treatment as 02 — Franchise Overview. */
+#franchise-page-only #franchise-story .crx-story-number-wrap{
+  display:block !important;
+  min-height:0 !important;
+  padding:0 !important;
+  margin:0 !important;
+}
+#franchise-page-only #franchise-story .crx-story-kicker{
+  color:var(--fr-accent) !important;
+  font-size:14px !important;
+  font-weight:900 !important;
+  letter-spacing:2.5px !important;
+  line-height:1 !important;
+  text-transform:uppercase !important;
+  margin:0 0 18px !important;
+  padding:0 !important;
+  border:0 !important;
+  text-decoration:none !important;
+  box-shadow:none !important;
+}
+#franchise-page-only #franchise-story .crx-story-kicker::before,
+#franchise-page-only #franchise-story .crx-story-kicker::after{
+  content:none !important;
+  display:none !important;
+}
+#franchise-page-only #franchise-story .crx-story-number,
+#franchise-page-only #franchise-story .crx-story-dash,
+#franchise-page-only #franchise-story .crx-story-label{
+  font-size:inherit !important;
+  letter-spacing:inherit !important;
+  line-height:inherit !important;
+}
+</style>
 </head>
 
 <body>
@@ -3091,8 +3244,7 @@ html.crx-landing-mode-root #franchise-page-only{margin-top:0 !important;padding-
     <!-- FRANCHISE 01 — STORY -->
     <section class="crx-franchise-story" id="franchise-story">
       <div class="crx-story-number-wrap">
-        <div class="crx-story-number">01</div>
-        <div class="crx-story-label">FRANCHISE</div>
+        <div class="eyebrow crx-story-kicker">01 — Franchise</div>
       </div>
 
       <div class="crx-story-content">
@@ -3730,7 +3882,7 @@ html.crx-landing-mode-root #franchise-page-only{margin-top:0 !important;padding-
    The public hash is retained for sharing, but it is NOT a DOM id. */
 (function(){
   function keepLanding(){
-    if(window.location.hash === '#franchise-enquiry'){
+    if(window.location.hash === '#franchise-enquiry' || window.location.hash === '#franchise-story'){
       if('scrollRestoration' in history) history.scrollRestoration='manual';
       window.scrollTo(0,0);
     }
