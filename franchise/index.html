@@ -3426,6 +3426,16 @@ html.crx-landing-mode-root #franchise-page-only{margin-top:0 !important;padding-
 }
 </style>
 
+
+<style id="crx-mobile-hide-enquiry-button">
+/* MOBILE ONLY: remove the duplicate ENQUIRY NOW button from the 01 Franchise section.
+   Desktop keeps the original ENQUIRY NOW button unchanged. */
+@media (max-width:900px){
+  #franchise-page-only #franchise-story .crx-enquiry-button{
+    display:none !important;
+  }
+}
+</style>
 </head>
 
 <body>
