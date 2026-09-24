@@ -5240,6 +5240,1025 @@ html.crx-landing-mode-root #franchise-page-only{margin-top:0 !important;padding-
   }
 }
 </style>
+
+<style id="crx-franchise-v5-overrides">
+/* =========================================
+   CRUNCHERY'S FRANCHISE V5
+   Cleaner facts + snapshot tabs
+   ========================================= */
+
+@media (min-width:901px){
+  #franchise-page-only #franchise-story.crx-franchise-story-final{
+    width:min(1380px,calc(100% - 120px)) !important;
+    max-width:1380px !important;
+    margin:0 auto !important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+    gap:72px !important;
+    align-items:start !important;
+  }
+
+  #franchise-page-only .crx-franchise-final-left,
+  #franchise-page-only .crx-franchise-final-right{
+    width:100% !important;
+    min-width:0 !important;
+  }
+
+  #franchise-page-only .crx-franchise-final-left{
+    padding-right:10px !important;
+  }
+
+  #franchise-page-only .crx-story-heading-final{
+    max-width:590px !important;
+  }
+
+  #franchise-page-only .crx-franchise-intro-final{
+    max-width:610px !important;
+  }
+
+  /* Three facts only: clean 2-column grid */
+  #franchise-page-only .crx-final-stat-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:16px !important;
+  }
+
+  #franchise-page-only .crx-final-stat{
+    min-width:0 !important;
+  }
+
+  /* No separate customizable card */
+  #franchise-page-only .crx-final-custom-model{
+    background:transparent !important;
+    border:0 !important;
+    padding:28px 0 10px !important;
+    margin:0 !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading{
+    width:100% !important;
+  }
+
+  #franchise-page-only .crx-final-eyebrow{
+    color:#ef5b00 !important;
+  }
+
+  /* Inline earning highlight instead of orange box */
+  #franchise-page-only .crx-earn-inline-final{
+    margin-top:42px !important;
+    padding:18px 0 20px !important;
+    border-top:1px solid #ded8cf !important;
+    border-bottom:1px solid #ded8cf !important;
+    display:flex !important;
+    align-items:baseline !important;
+    gap:14px !important;
+    flex-wrap:wrap !important;
+  }
+
+  #franchise-page-only .crx-earn-inline-label{
+    display:block !important;
+    width:100% !important;
+    color:#ef5b00 !important;
+    font-size:11px !important;
+    font-weight:900 !important;
+    letter-spacing:2.4px !important;
+  }
+
+  #franchise-page-only .crx-earn-inline-final strong{
+    color:#24362c !important;
+    font-size:25px !important;
+    line-height:1 !important;
+    font-weight:900 !important;
+    letter-spacing:-.7px !important;
+  }
+
+  #franchise-page-only .crx-earn-inline-final em{
+    color:#ef5b00 !important;
+    font-style:normal !important;
+  }
+
+  #franchise-page-only .crx-earn-inline-period{
+    font-size:10px !important;
+    font-weight:900 !important;
+    letter-spacing:1.7px !important;
+    color:#333 !important;
+  }
+}
+
+/* ===== ENQUIRY: full-width + snapshot tabs ===== */
+#franchise-page-only .crx-enquiry-tabs-section{
+  width:min(1380px,calc(100% - 120px)) !important;
+  max-width:1380px !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+#franchise-page-only .crx-enquiry-tabs-section .crx-enquiry-heading{
+  max-width:none !important;
+}
+
+#franchise-page-only .crx-franchise-snapshot{
+  margin-top:38px !important;
+  border-top:1px solid #ded8cf !important;
+  border-bottom:1px solid #ded8cf !important;
+  background:#fffaf3 !important;
+}
+
+#franchise-page-only .crx-snapshot-title{
+  padding:15px 22px 0 !important;
+  color:#ef5b00 !important;
+  font-size:10px !important;
+  font-weight:900 !important;
+  letter-spacing:2.4px !important;
+}
+
+#franchise-page-only .crx-snapshot-tabs{
+  display:flex !important;
+  width:100% !important;
+  overflow-x:auto !important;
+  scrollbar-width:none !important;
+}
+
+#franchise-page-only .crx-snapshot-tabs::-webkit-scrollbar{display:none !important;}
+
+#franchise-page-only .crx-snapshot-tab{
+  appearance:none !important;
+  border:0 !important;
+  border-right:1px solid #ded8cf !important;
+  background:transparent !important;
+  color:#24362c !important;
+  min-height:58px !important;
+  padding:0 22px !important;
+  font-size:10px !important;
+  font-weight:900 !important;
+  letter-spacing:1.7px !important;
+  cursor:pointer !important;
+  white-space:nowrap !important;
+}
+
+#franchise-page-only .crx-snapshot-tab:first-child{
+  border-left:0 !important;
+}
+
+#franchise-page-only .crx-snapshot-tab.is-active{
+  color:#ef5b00 !important;
+  box-shadow:inset 0 -3px 0 #ef5b00 !important;
+}
+
+#franchise-page-only .crx-snapshot-panel{
+  display:flex !important;
+  align-items:center !important;
+  gap:18px !important;
+  min-height:70px !important;
+  padding:12px 22px !important;
+  border-top:1px solid #ded8cf !important;
+}
+
+#franchise-page-only .crx-snapshot-panel-label{
+  color:#ef5b00 !important;
+  font-size:10px !important;
+  font-weight:900 !important;
+  letter-spacing:1.8px !important;
+  min-width:150px !important;
+}
+
+#franchise-page-only .crx-snapshot-panel-value{
+  color:#24362c !important;
+  font-size:18px !important;
+  font-weight:800 !important;
+}
+
+#franchise-page-only .crx-form-card-full{
+  width:100% !important;
+  margin-top:22px !important;
+}
+
+#franchise-page-only .crx-form-card-heading{
+  display:flex !important;
+  align-items:flex-end !important;
+  justify-content:space-between !important;
+  gap:30px !important;
+  margin-bottom:20px !important;
+}
+
+#franchise-page-only .crx-form-card-heading h3{
+  margin:4px 0 0 !important;
+}
+
+#franchise-page-only .crx-form-card-note{
+  font-size:13px !important;
+  color:#666 !important;
+}
+
+@media(max-width:900px){
+  #franchise-page-only #franchise-story.crx-franchise-story-final{
+    width:100% !important;
+    grid-template-columns:1fr !important;
+  }
+
+  #franchise-page-only .crx-franchise-final-left,
+  #franchise-page-only .crx-franchise-final-right{
+    width:100% !important;
+  }
+
+  #franchise-page-only .crx-final-stat-grid{
+    grid-template-columns:1fr 1fr !important;
+  }
+
+  #franchise-page-only .crx-earn-inline-final{
+    margin-top:28px !important;
+    padding:16px 0 18px !important;
+  }
+
+  #franchise-page-only .crx-earn-inline-final strong{
+    font-size:22px !important;
+  }
+
+  #franchise-page-only .crx-enquiry-tabs-section{
+    width:min(100% - 36px,720px) !important;
+  }
+
+  #franchise-page-only .crx-snapshot-tab{
+    min-height:52px !important;
+    padding:0 16px !important;
+  }
+
+  #franchise-page-only .crx-snapshot-panel{
+    align-items:flex-start !important;
+    flex-direction:column !important;
+    gap:6px !important;
+    padding:14px 18px !important;
+  }
+
+  #franchise-page-only .crx-snapshot-panel-label{
+    min-width:0 !important;
+  }
+
+  #franchise-page-only .crx-snapshot-panel-value{
+    font-size:16px !important;
+  }
+
+  #franchise-page-only .crx-form-card-heading{
+    align-items:flex-start !important;
+    flex-direction:column !important;
+    gap:6px !important;
+  }
+}
+
+@media(max-width:520px){
+  #franchise-page-only .crx-final-stat-grid{
+    grid-template-columns:1fr !important;
+  }
+
+  #franchise-page-only .crx-snapshot-title{
+    padding-left:16px !important;
+  }
+
+  #franchise-page-only .crx-snapshot-tab{
+    padding:0 13px !important;
+    font-size:9px !important;
+  }
+}
+</style>
+
+<style id="crx-franchise-v6-clean-aligned">
+/* =========================================================
+   V6 — CLEAN / ALIGNED FRANCHISE SECTION
+   Remove top fact cards + enquiry snapshot tabs.
+   Keep balanced 50/50 editorial layout.
+   ========================================================= */
+
+@media (min-width:901px){
+
+  #franchise-page-only #franchise-story.crx-franchise-story-final{
+    width:min(1380px,calc(100% - 120px)) !important;
+    max-width:1380px !important;
+    margin:0 auto !important;
+    padding:68px 0 76px !important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+    gap:78px !important;
+    align-items:start !important;
+  }
+
+  #franchise-page-only .crx-franchise-final-left,
+  #franchise-page-only .crx-franchise-final-right{
+    width:100% !important;
+    min-width:0 !important;
+    padding:0 !important;
+  }
+
+  #franchise-page-only .crx-story-kicker-final{
+    margin:4px 0 58px !important;
+  }
+
+  #franchise-page-only .crx-story-heading-final{
+    max-width:620px !important;
+    margin-bottom:30px !important;
+  }
+
+  #franchise-page-only .crx-franchise-intro-final{
+    max-width:620px !important;
+    margin-bottom:38px !important;
+  }
+
+  /* Keep the earning highlight visually strong, but compact. */
+  #franchise-page-only .crx-earn-inline-final{
+    max-width:620px !important;
+    margin-top:34px !important;
+  }
+
+  /* Right column now starts directly with the customizable model. */
+  #franchise-page-only .crx-final-custom-model{
+    margin-top:0 !important;
+    padding-top:4px !important;
+    padding-bottom:28px !important;
+    border-top:0 !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading{
+    width:100% !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading h3{
+    max-width:680px !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading p{
+    max-width:690px !important;
+  }
+
+  #franchise-page-only .crx-final-model-steps{
+    max-width:690px !important;
+  }
+
+  #franchise-page-only .crx-final-support{
+    max-width:100% !important;
+  }
+
+  #franchise-page-only .crx-final-bottom{
+    max-width:100% !important;
+  }
+
+  /* Snapshot tabs are intentionally removed. */
+  #franchise-page-only .crx-franchise-snapshot{
+    display:none !important;
+  }
+
+  #franchise-page-only .crx-enquiry-tabs-section{
+    margin-top:0 !important;
+  }
+
+}
+
+@media (max-width:900px){
+
+  #franchise-page-only #franchise-story.crx-franchise-story-final{
+    width:100% !important;
+    max-width:none !important;
+    margin:0 !important;
+    padding:48px 18px 60px !important;
+    grid-template-columns:1fr !important;
+    gap:38px !important;
+  }
+
+  #franchise-page-only .crx-franchise-final-left,
+  #franchise-page-only .crx-franchise-final-right{
+    width:100% !important;
+    min-width:0 !important;
+    padding:0 !important;
+  }
+
+  #franchise-page-only .crx-final-stat-grid{
+    display:none !important;
+  }
+
+  #franchise-page-only .crx-final-custom-model{
+    margin-top:0 !important;
+    padding-top:0 !important;
+  }
+
+  #franchise-page-only .crx-franchise-snapshot{
+    display:none !important;
+  }
+
+  #franchise-page-only .crx-enquiry-tabs-section{
+    width:min(100% - 36px,720px) !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+  }
+
+}
+</style>
+
+
+<style id="crx-franchise-v7-earning-right">
+/* V7 — Earning potential moved to right column, above customizable model */
+
+@media (min-width:901px){
+
+  #franchise-page-only .crx-earning-right-final{
+    width:100% !important;
+    margin:0 0 42px !important;
+    padding:0 0 28px !important;
+    border-bottom:1px solid #ddd7cd !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-final{
+    width:100% !important;
+    max-width:none !important;
+    margin:0 !important;
+    padding:0 !important;
+    border:0 !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-label{
+    margin-bottom:10px !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-main{
+    display:flex !important;
+    align-items:baseline !important;
+    flex-wrap:wrap !important;
+    gap:8px 12px !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-main strong{
+    font-size:clamp(34px,3.2vw,52px) !important;
+    line-height:.95 !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-main span{
+    font-size:12px !important;
+    letter-spacing:2px !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-note{
+    margin-top:12px !important;
+    max-width:650px !important;
+  }
+
+}
+
+@media (max-width:900px){
+
+  #franchise-page-only .crx-earning-right-final{
+    width:100% !important;
+    margin:0 0 30px !important;
+  }
+
+}
+</style>
+
+
+<style id="crx-franchise-v8-earning-highlight">
+/* =========================================================
+   V8 — REMOVE LOCATION / SPACE / FORMAT DETAIL ROW
+   EMPHASIZE EARNING POTENTIAL
+   ========================================================= */
+
+@media (min-width:901px){
+
+  #franchise-page-only .crx-earning-right-final{
+    margin:0 0 42px !important;
+    padding:28px 32px 30px !important;
+    background:#fff3e8 !important;
+    border:1px solid #ef5b00 !important;
+    border-left:7px solid #ef5b00 !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-final{
+    display:grid !important;
+    grid-template-columns:1fr auto !important;
+    align-items:end !important;
+    gap:8px 20px !important;
+    width:100% !important;
+    margin:0 !important;
+    padding:0 !important;
+    border:0 !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-label{
+    grid-column:1 / -1 !important;
+    color:#ef5b00 !important;
+    font-size:12px !important;
+    font-weight:900 !important;
+    letter-spacing:3px !important;
+    margin:0 0 3px !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-final strong{
+    color:#24362c !important;
+    font-size:clamp(36px,3.1vw,54px) !important;
+    line-height:.95 !important;
+    letter-spacing:-2px !important;
+    white-space:nowrap !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-final strong em{
+    color:#ef5b00 !important;
+    font-style:normal !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-period{
+    color:#24362c !important;
+    font-size:12px !important;
+    font-weight:900 !important;
+    letter-spacing:2.5px !important;
+    white-space:nowrap !important;
+    padding-bottom:5px !important;
+  }
+
+  /* With the detail row removed, keep the customizable heading clean. */
+  #franchise-page-only .crx-final-custom-model{
+    margin-top:0 !important;
+    padding-top:0 !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading p,
+  #franchise-page-only .crx-final-model-steps{
+    display:none !important;
+  }
+
+}
+
+@media (max-width:900px){
+
+  #franchise-page-only .crx-earning-right-final{
+    margin:0 0 30px !important;
+    padding:22px 20px 24px !important;
+    background:#fff3e8 !important;
+    border:1px solid #ef5b00 !important;
+    border-left:5px solid #ef5b00 !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-final{
+    display:block !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-label{
+    display:block !important;
+    margin-bottom:8px !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-final strong{
+    display:block !important;
+    font-size:34px !important;
+    line-height:1 !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-period{
+    display:block !important;
+    margin-top:8px !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading p,
+  #franchise-page-only .crx-final-model-steps{
+    display:none !important;
+  }
+
+}
+</style>
+
+
+<style id="crx-franchise-v9-number-highlights">
+/* =========================================================
+   V9 — MATCHED HIGHLIGHT TREATMENT
+   Earning Potential + Customizable Opportunity
+   styled like the key-number cards
+   ========================================================= */
+
+@media (min-width:901px){
+
+  /* EARNING POTENTIAL */
+  #franchise-page-only .crx-earning-right-final{
+    margin:0 0 22px !important;
+    padding:22px 26px !important;
+    background:#fffaf3 !important;
+    border:1px solid #ded8cf !important;
+    border-left:1px solid #ded8cf !important;
+    min-height:118px !important;
+    display:flex !important;
+    align-items:center !important;
+    box-sizing:border-box !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-final{
+    width:100% !important;
+    display:grid !important;
+    grid-template-columns:1fr auto !important;
+    align-items:center !important;
+    gap:8px 18px !important;
+    margin:0 !important;
+    padding:0 !important;
+    border:0 !important;
+    background:transparent !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-label{
+    grid-column:1 / -1 !important;
+    color:#ef5b00 !important;
+    font-size:11px !important;
+    font-weight:900 !important;
+    letter-spacing:2.5px !important;
+    margin:0 0 1px !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-final strong{
+    color:#ef5b00 !important;
+    font-size:clamp(31px,2.6vw,44px) !important;
+    line-height:.95 !important;
+    letter-spacing:-1.5px !important;
+    white-space:nowrap !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-period{
+    color:#222 !important;
+    font-size:10px !important;
+    font-weight:900 !important;
+    letter-spacing:2px !important;
+    white-space:nowrap !important;
+    padding-bottom:2px !important;
+  }
+
+  /* CUSTOMIZABLE OPPORTUNITY — same visual language as the number highlights */
+  #franchise-page-only .crx-final-custom-model{
+    margin:0 !important;
+    padding:22px 26px !important;
+    background:#fffaf3 !important;
+    border:1px solid #ef5b00 !important;
+    min-height:118px !important;
+    box-sizing:border-box !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading{
+    width:100% !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading .crx-final-custom-label{
+    color:#ef5b00 !important;
+    font-size:11px !important;
+    font-weight:900 !important;
+    letter-spacing:2.5px !important;
+    margin:0 0 8px !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading h3{
+    margin:0 !important;
+    font-size:clamp(29px,2.5vw,43px) !important;
+    line-height:.95 !important;
+    letter-spacing:-1.5px !important;
+    color:#24362c !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading h3 span{
+    color:#ef5b00 !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading p{
+    display:none !important;
+  }
+
+  #franchise-page-only .crx-final-model-steps{
+    display:none !important;
+  }
+
+}
+
+@media (max-width:900px){
+
+  #franchise-page-only .crx-earning-right-final{
+    margin:0 0 12px !important;
+    padding:20px !important;
+    min-height:105px !important;
+    background:#fffaf3 !important;
+    border:1px solid #ded8cf !important;
+    border-left:1px solid #ded8cf !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-final{
+    display:block !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-label{
+    display:block !important;
+    margin-bottom:7px !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-final strong{
+    display:inline-block !important;
+    color:#ef5b00 !important;
+    font-size:31px !important;
+    line-height:1 !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-period{
+    display:inline-block !important;
+    margin-left:7px !important;
+  }
+
+  #franchise-page-only .crx-final-custom-model{
+    margin:0 !important;
+    padding:20px !important;
+    min-height:105px !important;
+    background:#fffaf3 !important;
+    border:1px solid #ef5b00 !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading h3{
+    font-size:29px !important;
+  }
+
+}
+</style>
+
+
+<style id="crx-franchise-v10-green-aligned">
+/* =========================================================
+   V10 — RIGHT COLUMN / GREEN HIGHLIGHTS
+   ========================================================= */
+
+@media (min-width:901px){
+
+  /* Keep the right column aligned to one common left edge. */
+  #franchise-page-only .crx-franchise-final-right{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:stretch !important;
+    justify-content:flex-start !important;
+    width:100% !important;
+    min-width:0 !important;
+    padding-top:0 !important;
+  }
+
+  /* Both highlight blocks use the exact same geometry. */
+  #franchise-page-only .crx-earning-right-final,
+  #franchise-page-only .crx-final-custom-model{
+    width:100% !important;
+    max-width:none !important;
+    min-height:150px !important;
+    box-sizing:border-box !important;
+    margin-left:0 !important;
+    margin-right:0 !important;
+    border-radius:0 !important;
+  }
+
+  /* EARNING POTENTIAL */
+  #franchise-page-only .crx-earning-right-final{
+    margin-top:0 !important;
+    margin-bottom:18px !important;
+    padding:27px 34px !important;
+    background:#f7f4ec !important;
+    border:1px solid #ddd8ce !important;
+    border-left:6px solid #24362c !important;
+    display:flex !important;
+    align-items:center !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-final{
+    display:block !important;
+    width:100% !important;
+    margin:0 !important;
+    padding:0 !important;
+    border:0 !important;
+    background:transparent !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-label{
+    display:block !important;
+    color:#24362c !important;
+    font-size:12px !important;
+    font-weight:900 !important;
+    letter-spacing:3px !important;
+    line-height:1.1 !important;
+    margin:0 0 10px !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-final strong{
+    display:inline !important;
+    color:#24362c !important;
+    font-size:clamp(34px,3vw,48px) !important;
+    line-height:.98 !important;
+    letter-spacing:-2px !important;
+    white-space:nowrap !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-final strong em{
+    color:#ef5b00 !important;
+    font-style:normal !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-period{
+    display:inline !important;
+    color:#24362c !important;
+    font-size:11px !important;
+    font-weight:900 !important;
+    letter-spacing:2.5px !important;
+    margin-left:12px !important;
+    white-space:nowrap !important;
+  }
+
+  /* CUSTOMIZABLE FRANCHISE MODEL */
+  #franchise-page-only .crx-final-custom-model{
+    margin-top:0 !important;
+    margin-bottom:0 !important;
+    padding:27px 34px !important;
+    background:#f7f4ec !important;
+    border:1px solid #24362c !important;
+    border-left:6px solid #24362c !important;
+    display:flex !important;
+    align-items:center !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading{
+    width:100% !important;
+    margin:0 !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading .crx-final-custom-label{
+    display:block !important;
+    color:#24362c !important;
+    font-size:12px !important;
+    font-weight:900 !important;
+    letter-spacing:3px !important;
+    line-height:1.1 !important;
+    margin:0 0 10px !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading h3{
+    margin:0 !important;
+    color:#24362c !important;
+    font-size:clamp(34px,3vw,48px) !important;
+    line-height:.98 !important;
+    letter-spacing:-2px !important;
+    font-weight:900 !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading h3 span{
+    color:#ef5b00 !important;
+  }
+
+  /* Hide secondary explanatory material so the two highlights stay visually equal. */
+  #franchise-page-only .crx-final-custom-heading p,
+  #franchise-page-only .crx-final-model-steps{
+    display:none !important;
+  }
+
+  /* Keep support/enquiry content aligned to the same right-column width. */
+  #franchise-page-only .crx-final-support,
+  #franchise-page-only .crx-final-bottom{
+    width:100% !important;
+    max-width:none !important;
+  }
+
+}
+
+@media (max-width:900px){
+
+  #franchise-page-only .crx-earning-right-final,
+  #franchise-page-only .crx-final-custom-model{
+    width:100% !important;
+    min-height:112px !important;
+    box-sizing:border-box !important;
+    border-radius:0 !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final{
+    margin-bottom:12px !important;
+    padding:21px 20px !important;
+    background:#f7f4ec !important;
+    border:1px solid #ddd8ce !important;
+    border-left:5px solid #24362c !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-label{
+    color:#24362c !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-final strong{
+    color:#24362c !important;
+    font-size:31px !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-final strong em{
+    color:#ef5b00 !important;
+  }
+
+  #franchise-page-only .crx-final-custom-model{
+    padding:21px 20px !important;
+    background:#f7f4ec !important;
+    border:1px solid #24362c !important;
+    border-left:5px solid #24362c !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading .crx-final-custom-label{
+    color:#24362c !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading h3{
+    color:#24362c !important;
+    font-size:29px !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading h3 span{
+    color:#ef5b00 !important;
+  }
+
+}
+</style>
+
+
+<style id="crx-franchise-v11-matching-highlight">
+/* =========================================================
+   V11 — EARNING POTENTIAL MATCHES CUSTOMIZABLE MODEL
+   Same typography + green/orange treatment
+   ========================================================= */
+
+@media (min-width:901px){
+
+  #franchise-page-only .crx-earning-right-final{
+    background:#f7f4ec !important;
+    border:1px solid #24362c !important;
+    border-left:6px solid #24362c !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-label{
+    color:#ef5b00 !important;
+    font-size:12px !important;
+    font-weight:900 !important;
+    letter-spacing:3px !important;
+    line-height:1.1 !important;
+    margin:0 0 12px !important;
+  }
+
+  /* Match the customizable model's dark-green headline treatment. */
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-final strong{
+    color:#24362c !important;
+    font-size:clamp(34px,3vw,48px) !important;
+    line-height:.98 !important;
+    letter-spacing:-2px !important;
+    font-weight:900 !important;
+    white-space:nowrap !important;
+  }
+
+  /* Highlight only the ₹15 LAKHS value in the same Crunchery orange. */
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-final strong em{
+    color:#ef5b00 !important;
+    font-style:normal !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-period{
+    color:#24362c !important;
+    font-size:11px !important;
+    font-weight:900 !important;
+    letter-spacing:2.5px !important;
+    margin-left:12px !important;
+    white-space:nowrap !important;
+  }
+
+  /* Ensure the customizable model retains the exact same hierarchy. */
+  #franchise-page-only .crx-final-custom-heading .crx-final-custom-label{
+    color:#ef5b00 !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading h3{
+    color:#24362c !important;
+    font-weight:900 !important;
+    letter-spacing:-2px !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading h3 span{
+    color:#ef5b00 !important;
+  }
+
+}
+
+@media (max-width:900px){
+
+  #franchise-page-only .crx-earning-right-final{
+    background:#f7f4ec !important;
+    border:1px solid #24362c !important;
+    border-left:5px solid #24362c !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-label{
+    color:#ef5b00 !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-final strong{
+    color:#24362c !important;
+    font-weight:900 !important;
+    letter-spacing:-1.5px !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-final strong em{
+    color:#ef5b00 !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-period{
+    color:#24362c !important;
+  }
+
+}
+</style>
+
 </head>
 
 <body>
@@ -5321,90 +6340,28 @@ html.crx-landing-mode-root #franchise-page-only{margin-top:0 !important;padding-
       customizable to your location, space and market, with end-to-end support from
       planning and setup to training, marketing and launch.
     </p>
-
-    <div class="crx-earn-card-final">
-      <div class="crx-earn-eyebrow-final">EARNING POTENTIAL</div>
-      <div class="crx-earn-title-final">EARN UP TO</div>
-      <div class="crx-earn-amount-final">₹15 LAKHS</div>
-      <div class="crx-earn-period-final">PER YEAR*</div>
-      <p>Indicative earning potential based on business performance and operating conditions.</p>
-    </div>
-  </div>
+</div>
 
 
   <div class="crx-franchise-final-right">
 
-    <!-- FOUR CORE FRANCHISE FACTS -->
-    <div class="crx-final-stat-grid">
-
-      <div class="crx-final-stat">
-        <div class="crx-final-stat-icon">₹</div>
-        <div class="crx-final-stat-copy">
-          <span>INVESTMENT</span>
-          <strong>₹15 LAKHS</strong>
-          <small>ONWARDS</small>
-        </div>
-      </div>
-
-      <div class="crx-final-stat">
-        <div class="crx-final-stat-icon">↗</div>
-        <div class="crx-final-stat-copy">
-          <span>ROI TIMELINE</span>
-          <strong>24 MONTHS</strong>
-          <small>INDICATIVE</small>
-        </div>
-      </div>
-
-      <div class="crx-final-stat">
-        <div class="crx-final-stat-icon">⌂</div>
-        <div class="crx-final-stat-copy">
-          <span>MINIMUM AREA</span>
-          <strong>300 SQ.FT.</strong>
-          <small>APPROX.</small>
-        </div>
-      </div>
-
-      <div class="crx-final-stat crx-final-stat-custom">
-        <div class="crx-final-stat-icon">✦</div>
-        <div class="crx-final-stat-copy">
-          <span>FRANCHISE MODEL</span>
-          <strong>CUSTOMIZABLE</strong>
-          <small>BY LOCATION &amp; FORMAT</small>
-        </div>
-      </div>
-
+    <!-- CUSTOMIZABLE MODEL -->
+    
+    <div class="crx-earning-right-final">
+      <div class="crx-earn-inline-final">
+      <span class="crx-earn-inline-label">EARNING POTENTIAL</span>
+      <strong>EARN UP TO <em>₹15 LAKHS</em></strong>
+      <span class="crx-earn-inline-period">PER YEAR*</span>
+    </div>
     </div>
 
-
-    <!-- CUSTOMIZABLE MODEL — NO SEPARATE BOX -->
     <div class="crx-final-custom-model">
 
       <div class="crx-final-custom-heading">
         <div class="crx-final-eyebrow">CUSTOMIZABLE FRANCHISE MODEL</div>
         <h3>Your location. <span>Your opportunity.</span></h3>
-        <p>
-          We can plan the franchise format around your proposed location, available space
-          and local market, helping identify the right outlet format before development.
-        </p>
       </div>
-
-      <div class="crx-final-model-steps">
-        <div>
-          <b>01</b>
-          <strong>LOCATION</strong>
-          <small>Choose the right market</small>
-        </div>
-        <div>
-          <b>02</b>
-          <strong>SPACE</strong>
-          <small>Plan around your site</small>
-        </div>
-        <div>
-          <b>03</b>
-          <strong>FORMAT</strong>
-          <small>Build the right model</small>
-        </div>
-      </div>
+    </div>
 
     </div>
 
@@ -5440,56 +6397,48 @@ html.crx-landing-mode-root #franchise-page-only{margin-top:0 !important;padding-
 </section>
 
 <!-- LET'S TALK BUSINESS — ENQUIRY FORM -->
-    <section id="franchise-enquiry-form" class="crx-enquiry-section">
+    <section id="franchise-enquiry-form" class="crx-enquiry-section crx-enquiry-tabs-section">
       <div class="crx-enquiry-heading">
         <div class="eyebrow">LET'S TALK BUSINESS</div>
         <h2>Tell us about your franchise plan.</h2>
         <p>
-          Crunchery's is inviting enquiries from energetic, people-focused franchise partners
-          who are looking to start a new cafe business. Share your details and proposed location,
-          and our team will get in touch.
+          Share your details and proposed location. Our team will get in touch to discuss
+          the right Crunchery's franchise format for your opportunity.
         </p>
-      </div>
-
-      <div class="crx-form-layout">
-        <div class="crx-form-intro">
-          <div class="crx-form-mini-title">CRUNCHERY'S FRANCHISE</div>
-          <h3>Let's explore your location.</h3>
-          <p>Start with a few basic details. The rest of the franchise discussion can follow.</p>
-          <div class="crx-form-facts">
-            <div><strong>Format</strong><span>South Indian Continental Fusion Cafe</span></div>
-            <div><strong>Tier</strong><span>Tier-1 · 32–40 seats</span></div>
-            <div><strong>Investment</strong><span>₹35–50 lakhs indicative range</span></div>
+      </div><div class="crx-form-card crx-form-card-full">
+        <div class="crx-form-card-heading">
+          <div>
+            <div class="crx-form-mini-title">CRUNCHERY'S FRANCHISE</div>
+            <h3>Let's discuss your location.</h3>
           </div>
+          <div class="crx-form-card-note">Fill in the details below and we'll take it from there.</div>
         </div>
 
-        <div class="crx-form-card">
-          <div class="form-grid">
-            <div class="field">
-              <label for="name">Name *</label>
-              <input id="name" type="text" placeholder="Your name">
-            </div>
-            <div class="field">
-              <label for="phone">Phone *</label>
-              <input id="phone" type="tel" placeholder="10-digit mobile number">
-            </div>
-            <div class="field">
-              <label for="email">Email</label>
-              <input id="email" type="email" placeholder="you@example.com">
-            </div>
-            <div class="field">
-              <label for="city">City *</label>
-              <input id="city" type="text" placeholder="Proposed city">
-            </div>
-            <div class="field full">
-              <label for="location">Proposed Location</label>
-              <input id="location" type="text" placeholder="Area / locality">
-            </div>
-            <div class="field full">
-              <button class="btn btn-primary btn-block" type="button" onclick="submitEnquiry()">
-                SEND FRANCHISE ENQUIRY ON WHATSAPP
-              </button>
-            </div>
+        <div class="form-grid">
+          <div class="field">
+            <label for="name">Name *</label>
+            <input id="name" type="text" placeholder="Your name">
+          </div>
+          <div class="field">
+            <label for="phone">Phone *</label>
+            <input id="phone" type="tel" placeholder="10-digit mobile number">
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="you@example.com">
+          </div>
+          <div class="field">
+            <label for="city">City *</label>
+            <input id="city" type="text" placeholder="Proposed city">
+          </div>
+          <div class="field full">
+            <label for="location">Proposed Location</label>
+            <input id="location" type="text" placeholder="Area / locality">
+          </div>
+          <div class="field full">
+            <button class="btn btn-primary btn-block" type="button" onclick="submitEnquiry()">
+              SEND FRANCHISE ENQUIRY ON WHATSAPP
+            </button>
           </div>
         </div>
       </div>
@@ -6487,6 +7436,5 @@ for(let year = 1; year <= years; year++){
   else initMobileMenu();
 })();
 </script>
-
 </body>
 </html>
