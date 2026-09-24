@@ -3204,6 +3204,170 @@ html.crx-landing-mode-root #franchise-page-only{margin-top:0 !important;padding-
   line-height:inherit !important;
 }
 </style>
+
+<style id="cruncherys-mobile-only-final">
+/* =========================================================
+   MOBILE-ONLY UPDATE
+   Desktop/tablet styles above remain unchanged.
+   ========================================================= */
+
+@media (max-width:900px){
+
+  /* Compact mobile header */
+  .franchise-header,
+  .franchise-header-inner{
+    min-height:68px !important;
+    height:68px !important;
+  }
+
+  .franchise-header-inner{
+    width:100% !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    gap:8px !important;
+    padding:7px 14px !important;
+    box-sizing:border-box !important;
+  }
+
+  .franchise-logo{
+    width:auto !important;
+    max-width:calc(100% - 108px) !important;
+    min-width:0 !important;
+    flex:1 1 auto !important;
+    display:flex !important;
+    align-items:center !important;
+    gap:7px !important;
+    overflow:hidden !important;
+  }
+
+  .franchise-header .franchise-logo img{
+    width:44px !important;
+    height:44px !important;
+    min-width:44px !important;
+    min-height:44px !important;
+    max-width:44px !important;
+    max-height:44px !important;
+    flex:0 0 44px !important;
+  }
+
+  .franchise-header .franchise-wordmark{
+    width:auto !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    flex:0 1 auto !important;
+    margin-left:0 !important;
+    overflow:hidden !important;
+  }
+
+  .franchise-header .franchise-wordmark-name{
+    font-size:23px !important;
+    line-height:.92 !important;
+    letter-spacing:1px !important;
+    white-space:nowrap !important;
+  }
+
+  .franchise-header .franchise-wordmark-name sup{
+    font-size:8px !important;
+  }
+
+  .franchise-header .franchise-wordmark-rule{
+    height:2px !important;
+    margin:3px 0 !important;
+  }
+
+  .franchise-header .franchise-wordmark-tagline{
+    font-size:5px !important;
+    line-height:1 !important;
+    letter-spacing:.25px !important;
+    white-space:nowrap !important;
+  }
+
+  /* Mobile navigation: only Apply Now is shown */
+  .franchise-header .franchise-nav{
+    display:flex !important;
+    width:auto !important;
+    min-width:100px !important;
+    flex:0 0 100px !important;
+    align-items:center !important;
+    justify-content:flex-end !important;
+    gap:0 !important;
+    padding:0 !important;
+    margin:0 !important;
+  }
+
+  .franchise-header .franchise-nav a:not(.franchise-apply){
+    display:none !important;
+  }
+
+  /* Properly contained Apply Now button */
+  .franchise-header .franchise-nav .franchise-apply{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:100px !important;
+    min-width:100px !important;
+    max-width:100px !important;
+    height:40px !important;
+    min-height:40px !important;
+    flex:0 0 100px !important;
+    flex-shrink:0 !important;
+    padding:0 !important;
+    margin:0 !important;
+    border-radius:11px !important;
+    font-size:11px !important;
+    line-height:1 !important;
+    white-space:nowrap !important;
+    box-sizing:border-box !important;
+  }
+
+  /* Keep the mobile form card itself as the Apply Now destination. */
+  #franchise-page-only #franchise-enquiry-form .crx-form-card{
+    scroll-margin-top:84px !important;
+  }
+}
+
+@media (max-width:380px){
+  .franchise-header-inner{
+    padding-left:11px !important;
+    padding-right:11px !important;
+  }
+
+  .franchise-logo{
+    max-width:calc(100% - 96px) !important;
+  }
+
+  .franchise-header .franchise-logo img{
+    width:40px !important;
+    height:40px !important;
+    min-width:40px !important;
+    min-height:40px !important;
+    max-width:40px !important;
+    max-height:40px !important;
+    flex-basis:40px !important;
+  }
+
+  .franchise-header .franchise-wordmark-name{
+    font-size:20px !important;
+  }
+
+  .franchise-header .franchise-nav{
+    min-width:92px !important;
+    flex-basis:92px !important;
+  }
+
+  .franchise-header .franchise-nav .franchise-apply{
+    width:92px !important;
+    min-width:92px !important;
+    max-width:92px !important;
+    flex-basis:92px !important;
+    height:36px !important;
+    min-height:36px !important;
+    font-size:10px !important;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -3895,20 +4059,38 @@ html.crx-landing-mode-root #franchise-page-only{margin-top:0 !important;padding-
 /* Reliable section navigation
        Works even when this page is embedded inside Squarespace or another host. */
     function franchiseScrollTo(id){
-      if(id === "franchise-enquiry") id = "franchise-enquiry-form";
-      const target = document.getElementById(id);
+      const isMobile = window.matchMedia("(max-width: 900px)").matches;
+      const isEnquiry = id === "franchise-enquiry";
+
+      let target;
+
+      if(isEnquiry){
+        /* Desktop keeps the existing enquiry-section behaviour.
+           Mobile goes directly to the actual form fields. */
+        target = isMobile
+          ? document.querySelector("#franchise-enquiry-form .crx-form-card")
+          : document.getElementById("franchise-enquiry-form");
+      }else{
+        target = document.getElementById(id);
+      }
+
       if(!target) return;
 
       const header = document.querySelector(".franchise-header");
       const headerHeight = header ? header.getBoundingClientRect().height : 0;
-      const targetTop = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 18;
+      const extraOffset = isMobile && isEnquiry ? 12 : 18;
+      const targetTop =
+        target.getBoundingClientRect().top +
+        window.pageYOffset -
+        headerHeight -
+        extraOffset;
 
       window.scrollTo({
         top: Math.max(0, targetTop),
         behavior: "smooth"
       });
 
-      history.replaceState(null, "", "#" + (id === "franchise-enquiry-form" ? "franchise-enquiry" : id));
+      history.replaceState(null, "", "#" + (isEnquiry ? "franchise-enquiry" : id));
     }
 
     document.querySelectorAll('.franchise-nav a[href^="#"], .hero-actions a[href^="#"], #franchise-page-only a[href^="#"]').forEach(link => {
