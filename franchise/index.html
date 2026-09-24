@@ -1893,6 +1893,11 @@ footer{
   scroll-margin-top:220px !important;
 }
 
+#franchise-opening,
+#franchise-story{
+  scroll-margin-top:220px !important;
+}
+
 /* =========================================================
    HOST-PAGE SAFETY / STANDALONE LAYOUT
    These rules keep this franchise page independent from
@@ -2281,6 +2286,525 @@ body > footer{
     font-weight: 400 !important;
   }
 
+
+/* =========================================================
+   NEW FRANCHISE LANDING FLOW
+   Interior image -> Franchise intro -> Details -> Enquiry
+   ========================================================= */
+
+.franchise-opening{
+  width:100%;
+  position:relative;
+  height:calc(100vh - 196px);
+  min-height:620px;
+  max-height:900px;
+  overflow:hidden;
+  background:#24362c;
+}
+
+.franchise-opening-media{
+  position:absolute;
+  inset:-7%;
+  width:114%;
+  height:114%;
+  object-fit:cover;
+  object-position:center;
+  filter:saturate(.95);
+  transform:translate3d(0,0,0) scale(1.02);
+  will-change:transform;
+}
+
+.franchise-opening::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,rgba(10,18,14,.72) 0%,rgba(10,18,14,.28) 48%,rgba(10,18,14,.08) 100%),
+    linear-gradient(0deg,rgba(10,18,14,.62),transparent 45%);
+  pointer-events:none;
+}
+
+.franchise-opening-content{
+  position:relative;
+  z-index:2;
+  height:100%;
+  max-width:1500px;
+  margin:0 auto;
+  padding:70px 55px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:40px;
+  color:#fff;
+}
+
+.franchise-opening-copy{
+  max-width:760px;
+}
+
+.franchise-opening-kicker{
+  color:#ff9a62;
+  font-size:13px;
+  font-weight:950;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin-bottom:16px;
+}
+
+.franchise-opening-title{
+  margin:0 !important;
+  color:#fff !important;
+  font-size:clamp(58px,7vw,110px) !important;
+  line-height:.88 !important;
+  letter-spacing:-5px !important;
+  font-weight:950 !important;
+}
+
+.franchise-opening-title span{
+  color:#ef5b00;
+}
+
+.franchise-opening-copy p{
+  max-width:650px;
+  margin:24px 0 0;
+  color:rgba(255,255,255,.78);
+  font-size:17px;
+  line-height:1.65;
+}
+
+.franchise-opening-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:28px;
+}
+
+.franchise-opening-scroll{
+  align-self:flex-end;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  color:#fff;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.franchise-opening-scroll-line{
+  width:1px;
+  height:70px;
+  background:linear-gradient(#ef5b00,rgba(255,255,255,.15));
+}
+
+.franchise-opening-scroll-dot{
+  width:8px;
+  height:8px;
+  border:2px solid #fff;
+  border-radius:50%;
+  animation:franchiseScrollPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes franchiseScrollPulse{
+  0%,100%{transform:translateY(0);opacity:.65}
+  50%{transform:translateY(8px);opacity:1}
+}
+
+.franchise-intro{
+  width:100%;
+  padding:95px 0 85px;
+  display:grid;
+  grid-template-columns:minmax(300px,.7fr) minmax(0,1.3fr);
+  gap:80px;
+  align-items:start;
+}
+
+.franchise-intro-number{
+  font-size:clamp(130px,16vw,240px);
+  line-height:.7;
+  font-weight:950;
+  letter-spacing:-12px;
+  color:#f3dc59;
+  opacity:.95;
+}
+
+.franchise-intro-label{
+  margin-top:25px;
+  color:var(--fr-accent);
+  font-size:13px;
+  font-weight:950;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+}
+
+.franchise-intro h2{
+  font-size:clamp(44px,5vw,72px) !important;
+  line-height:.95 !important;
+  letter-spacing:-4px !important;
+  margin-bottom:25px !important;
+}
+
+.franchise-intro h2 span{
+  color:var(--fr-accent);
+}
+
+.franchise-intro-copy{
+  color:var(--fr-muted);
+  font-size:18px;
+  line-height:1.75;
+  max-width:850px;
+}
+
+.franchise-intro-highlights{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:32px;
+}
+
+.franchise-highlight{
+  padding:22px;
+  background:#fff;
+  border:1px solid var(--fr-line);
+  border-radius:18px;
+}
+
+.franchise-highlight strong{
+  display:block;
+  color:var(--fr-text);
+  font-size:16px;
+  margin-bottom:7px;
+}
+
+.franchise-highlight span{
+  color:var(--fr-muted);
+  font-size:12px;
+  line-height:1.5;
+}
+
+.franchise-enquiry-banner{
+  background:var(--fr-dark);
+  border-radius:28px;
+  padding:38px 42px;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+  margin:0 0 25px;
+}
+
+.franchise-enquiry-banner h3{
+  color:#fff !important;
+  margin:0 0 8px !important;
+  font-size:30px !important;
+}
+
+.franchise-enquiry-banner p{
+  color:rgba(255,255,255,.68);
+  margin:0;
+}
+
+@media(max-width:900px){
+  .franchise-opening{
+    height:78vh;
+    min-height:560px;
+  }
+  .franchise-opening-content{
+    padding:45px 28px;
+  }
+  .franchise-opening-scroll{display:none}
+  .franchise-intro{
+    grid-template-columns:1fr;
+    gap:25px;
+    padding:65px 0;
+  }
+  .franchise-intro-number{
+    font-size:120px;
+    letter-spacing:-8px;
+  }
+  .franchise-intro-highlights{
+    grid-template-columns:1fr;
+  }
+  .franchise-enquiry-banner{
+    display:block;
+    padding:30px 25px;
+  }
+  .franchise-enquiry-banner .btn{
+    margin-top:18px;
+    width:100%;
+  }
+}
+
+@media(max-width:600px){
+  .franchise-opening{
+    height:72vh;
+    min-height:500px;
+  }
+  .franchise-opening-content{
+    padding:30px 20px;
+  }
+  .franchise-opening-title{
+    font-size:52px !important;
+    letter-spacing:-3px !important;
+  }
+  .franchise-opening-copy p{
+    font-size:15px;
+  }
+  .franchise-opening-actions{
+    flex-direction:column;
+    align-items:stretch;
+  }
+  .franchise-opening-actions .btn{
+    width:100%;
+  }
+  .franchise-intro{
+    padding:50px 0;
+  }
+  .franchise-intro-number{
+    font-size:100px;
+  }
+}
+
+
+
+/* =========================================================
+   CRUNCHERY'S — IMAGE-FIRST FRANCHISE FLOW
+   Inspired by the reference layout supplied by the user:
+   image → 01 franchise story → enquiry form → overview → FAQ → calculators
+   ========================================================= */
+
+#franchise-page-only{
+  background:#fff !important;
+  color:#171717 !important;
+}
+
+/* Opening image: intentionally clean, with no text overlay */
+.crx-opening-photo{
+  width:100% !important;
+  height:clamp(480px,58vw,680px) !important;
+  min-height:430px !important;
+  overflow:hidden !important;
+  position:relative !important;
+  background:#222 !important;
+  border-bottom:8px solid #ef5b00 !important;
+}
+
+.crx-opening-photo-media{
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  object-position:center center !important;
+  filter:saturate(.98) contrast(1.01) !important;
+}
+
+/* 01 Franchise story */
+.crx-franchise-story{
+  width:min(1320px,calc(100% - 80px)) !important;
+  margin:0 auto !important;
+  padding:72px 0 68px !important;
+  display:grid !important;
+  grid-template-columns:minmax(360px,.78fr) minmax(0,1.22fr) !important;
+  gap:80px !important;
+  align-items:start !important;
+  background:#fff !important;
+}
+
+.crx-story-number-wrap{
+  position:relative !important;
+  min-height:245px !important;
+}
+
+.crx-story-number{
+  font-size:clamp(150px,16vw,235px) !important;
+  line-height:.72 !important;
+  letter-spacing:-12px !important;
+  font-weight:900 !important;
+  color:#f4d83f !important;
+  margin-left:-8px !important;
+}
+
+.crx-story-label{
+  margin:24px 0 0 8px !important;
+  font-size:15px !important;
+  font-weight:900 !important;
+  letter-spacing:4px !important;
+  color:#222 !important;
+}
+
+.crx-story-heading{
+  font-size:clamp(38px,4.2vw,64px) !important;
+  line-height:1 !important;
+  letter-spacing:-3px !important;
+  font-weight:900 !important;
+  color:#171717 !important;
+  margin:7px 0 24px !important;
+}
+
+.crx-story-content p{
+  max-width:780px !important;
+  color:#303030 !important;
+  font-size:18px !important;
+  line-height:1.72 !important;
+  margin:0 !important;
+}
+
+.crx-enquiry-button{
+  display:inline-flex !important;
+  align-items:center !important;
+  margin-top:30px !important;
+  border:1.5px solid #171717 !important;
+  background:#f4d83f !important;
+  color:#171717 !important;
+  text-decoration:none !important;
+  min-height:62px !important;
+  font-size:14px !important;
+  font-weight:900 !important;
+  letter-spacing:3px !important;
+  transition:transform .2s ease,box-shadow .2s ease !important;
+}
+
+.crx-enquiry-button span:first-child{padding:0 24px !important;}
+.crx-enquiry-button .crx-arrow{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  height:62px !important;
+  width:66px !important;
+  border-left:1.5px solid #171717 !important;
+  font-size:28px !important;
+  line-height:1 !important;
+}
+.crx-enquiry-button:hover{
+  transform:translateY(-2px) !important;
+  box-shadow:5px 5px 0 #171717 !important;
+}
+
+/* Enquiry section: visible automatically after the story */
+.crx-enquiry-section{
+  width:min(1320px,calc(100% - 80px)) !important;
+  margin:0 auto !important;
+  padding:20px 0 92px !important;
+  background:#fff !important;
+}
+
+.crx-enquiry-heading .eyebrow{
+  color:#171717 !important;
+  font-size:15px !important;
+  letter-spacing:2.5px !important;
+  margin-bottom:16px !important;
+}
+
+.crx-enquiry-heading h2{
+  font-size:clamp(38px,4.5vw,58px) !important;
+  letter-spacing:-3px !important;
+  margin-bottom:22px !important;
+}
+
+.crx-enquiry-heading p{
+  max-width:1120px !important;
+  color:#303030 !important;
+  font-size:18px !important;
+  line-height:1.7 !important;
+  margin:0 !important;
+}
+
+.crx-form-layout{
+  display:grid !important;
+  grid-template-columns:minmax(300px,.72fr) minmax(0,1.28fr) !important;
+  gap:55px !important;
+  align-items:start !important;
+  margin-top:54px !important;
+}
+
+.crx-form-intro{
+  padding-top:5px !important;
+}
+.crx-form-mini-title{
+  font-size:13px !important;
+  font-weight:900 !important;
+  letter-spacing:2.5px !important;
+  color:#ef5b00 !important;
+  margin-bottom:18px !important;
+}
+.crx-form-intro h3{
+  font-size:32px !important;
+  letter-spacing:-1.5px !important;
+  margin-bottom:14px !important;
+}
+.crx-form-intro > p{
+  color:#626262 !important;
+  font-size:16px !important;
+  line-height:1.65 !important;
+  max-width:440px !important;
+}
+.crx-form-facts{
+  margin-top:28px !important;
+  border-top:1px solid #ddd !important;
+}
+.crx-form-facts div{
+  padding:15px 0 !important;
+  border-bottom:1px solid #ddd !important;
+}
+.crx-form-facts strong{
+  display:block !important;
+  font-size:13px !important;
+  text-transform:uppercase !important;
+  letter-spacing:1.5px !important;
+  margin-bottom:4px !important;
+}
+.crx-form-facts span{
+  color:#626262 !important;
+  font-size:14px !important;
+}
+
+.crx-form-card{
+  background:#f7f7f5 !important;
+  border:1px solid #dedede !important;
+  padding:34px !important;
+  border-radius:0 !important;
+}
+.crx-form-card .field input{
+  background:#fff !important;
+  border:1px solid #cfcfcf !important;
+  border-radius:0 !important;
+  min-height:52px !important;
+}
+.crx-form-card .field label{
+  color:#222 !important;
+  font-size:12px !important;
+  letter-spacing:1px !important;
+  text-transform:uppercase !important;
+}
+.crx-form-card .btn-primary{
+  border-radius:0 !important;
+  min-height:58px !important;
+  letter-spacing:1.5px !important;
+}
+
+/* Make the existing overview / FAQ / calculator cards visually flatter */
+#franchise-page-only > .card{
+  border-radius:0 !important;
+  box-shadow:none !important;
+  border-top:1px solid #e4e4e4 !important;
+  padding-top:72px !important;
+  padding-bottom:72px !important;
+}
+
+@media(max-width:900px){
+  .crx-opening-photo{height:58vh !important;min-height:360px !important;}
+  .crx-franchise-story,
+  .crx-enquiry-section{width:min(100% - 36px,720px) !important;}
+  .crx-franchise-story{grid-template-columns:1fr !important;gap:24px !important;padding:55px 0 !important;}
+  .crx-story-number-wrap{min-height:160px !important;}
+  .crx-story-number{font-size:145px !important;}
+  .crx-story-label{margin-top:16px !important;}
+  .crx-form-layout{grid-template-columns:1fr !important;gap:30px !important;}
+  .crx-form-card{padding:24px !important;}
+}
+
 </style>
 
 </head>
@@ -2301,122 +2825,97 @@ body > footer{
     </a>
 
     <nav class="franchise-nav" aria-label="Franchise navigation">
+      <a href="#franchise-story" onclick="franchiseScrollTo('franchise-story'); return false;">Franchise</a>
       <a href="#overview" onclick="franchiseScrollTo('overview'); return false;">Overview</a>
-      <a href="#investment" onclick="franchiseScrollTo('investment'); return false;">Investment</a>
+      <a href="#faq" onclick="franchiseScrollTo('faq'); return false;">FAQ</a>
       <a href="#calculator" onclick="franchiseScrollTo('calculator'); return false;">Break-Even</a>
       <a href="#roi-projection" onclick="franchiseScrollTo('roi-projection'); return false;">ROI</a>
-      <a href="#process" onclick="franchiseScrollTo('process'); return false;">Process</a>
-      <a href="#faq" onclick="franchiseScrollTo('faq'); return false;">FAQ</a>
       <a href="#franchise-enquiry" class="franchise-apply" onclick="franchiseScrollTo('franchise-enquiry'); return false;">Apply Now</a>
     </nav>
 
   </div>
 </header>
   <main id="franchise-page-only">
-
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-copy">
-        <div class="eyebrow">Franchise Opportunity</div>
-        <h1>Build your own <span>Crunchery's</span> Cafe.</h1>
-        <p class="subtitle">
-          A South Indian Continental Fusion Cafe concept designed for modern customers,
-          practical operations and scalable franchise growth.
-        </p>
-
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#overview">Explore Franchise</a>
-          <a class="btn btn-dark" href="#calculator">Calculate Break-Even</a>
-        </div>
-
-        <div class="hero-note">
-          <span>●</span>
-          <div><strong>Investment-led planning.</strong><br>
-          Understand setup cost, operating expenses and sales required before you commit.</div>
-        </div>
-      </div>
-
-      <div class="hero-visual">
-  <img
-    src="/assets/franchise-poster.jpg"
-    alt="Crunchery's Franchise Opportunities"
-    class="franchise-poster"
-  >
-</div>
+    <!-- OPENING INTERIOR IMAGE -->
+    <section class="crx-opening-photo" id="franchise-opening" aria-label="Crunchery's cafe interior">
+      <img src="/assets/franchise-interior.jpg"
+           alt="Crunchery's cafe interior"
+           class="crx-opening-photo-media"
+           onerror="this.onerror=null;this.src='/assets/franchise-poster.jpg';">
     </section>
 
-    <!-- QUESTIONNAIRE -->
-    <section id="franchise-enquiry" class="card">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">01 — Franchise Enquiry</div>
-          <h2>Tell us about your franchise plan.</h2>
-        </div>
-        <p class="subtitle">
-          Complete the basic details below. The button will prepare a WhatsApp enquiry
-          using the information entered.
+    <!-- FRANCHISE 01 — STORY -->
+    <section class="crx-franchise-story" id="franchise-story">
+      <div class="crx-story-number-wrap">
+        <div class="crx-story-number">01</div>
+        <div class="crx-story-label">FRANCHISE</div>
+      </div>
+
+      <div class="crx-story-content">
+        <div class="crx-story-heading">Grow with Crunchery's</div>
+        <p>
+          Build a South Indian Continental Fusion Cafe with a distinctive customer experience,
+          practical operations and franchise support across setup, training and launch.
+          Explore the opportunity, understand the investment and share your proposed location
+          with our team.
+        </p>
+        <a class="crx-enquiry-button"
+           href="#franchise-enquiry"
+           onclick="franchiseScrollTo('franchise-enquiry'); return false;">
+          <span>ENQUIRY NOW</span><span class="crx-arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- LET'S TALK BUSINESS — ENQUIRY FORM -->
+    <section id="franchise-enquiry" class="crx-enquiry-section">
+      <div class="crx-enquiry-heading">
+        <div class="eyebrow">LET'S TALK BUSINESS</div>
+        <h2>Tell us about your franchise plan.</h2>
+        <p>
+          Crunchery's is inviting enquiries from energetic, people-focused franchise partners
+          who are looking to start a new cafe business. Share your details and proposed location,
+          and our team will get in touch.
         </p>
       </div>
 
-      <div class="questionnaire">
-        <div class="contact-panel">
-          <div class="eyebrow" style="color:#ff9a62">Crunchery's Franchise</div>
-          <h3 style="font-size:30px">Let's explore your location.</h3>
-          <p>
-            Share your basic contact details and proposed location so the franchise
-            discussion can begin with the right information.
-          </p>
-
-          <ul class="contact-list">
-            <li>
-              <strong>Format</strong>
-              <span>South Indian Continental Fusion Cafe</span>
-            </li>
-            <li>
-              <strong>Tier</strong>
-              <span>Tier-1 | 32–40 seats</span>
-            </li>
-            <li>
-              <strong>Investment</strong>
-              <span>₹35–50 lakhs indicative range</span>
-            </li>
-            <li>
-              <strong>Sales planning</strong>
-              <span>₹6–8 lakhs estimated monthly sales</span>
-            </li>
-          </ul>
+      <div class="crx-form-layout">
+        <div class="crx-form-intro">
+          <div class="crx-form-mini-title">CRUNCHERY'S FRANCHISE</div>
+          <h3>Let's explore your location.</h3>
+          <p>Start with a few basic details. The rest of the franchise discussion can follow.</p>
+          <div class="crx-form-facts">
+            <div><strong>Format</strong><span>South Indian Continental Fusion Cafe</span></div>
+            <div><strong>Tier</strong><span>Tier-1 · 32–40 seats</span></div>
+            <div><strong>Investment</strong><span>₹35–50 lakhs indicative range</span></div>
+          </div>
         </div>
 
-        <div class="form-card">
+        <div class="crx-form-card">
           <div class="form-grid">
             <div class="field">
               <label for="name">Name *</label>
               <input id="name" type="text" placeholder="Your name">
             </div>
-
             <div class="field">
               <label for="phone">Phone *</label>
               <input id="phone" type="tel" placeholder="10-digit mobile number">
             </div>
-
             <div class="field">
               <label for="email">Email</label>
               <input id="email" type="email" placeholder="you@example.com">
             </div>
-
             <div class="field">
               <label for="city">City *</label>
               <input id="city" type="text" placeholder="Proposed city">
             </div>
-
-            <div class="field">
+            <div class="field full">
               <label for="location">Proposed Location</label>
               <input id="location" type="text" placeholder="Area / locality">
             </div>
-
-                        <div class="field full">
+            <div class="field full">
               <button class="btn btn-primary btn-block" type="button" onclick="submitEnquiry()">
-                Send Franchise Enquiry on WhatsApp
+                SEND FRANCHISE ENQUIRY ON WHATSAPP
               </button>
             </div>
           </div>
@@ -2425,486 +2924,500 @@ body > footer{
     </section>
 
     <!-- OVERVIEW -->
-    <section id="overview" class="card">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">02 — Franchise Overview</div>
-          <h2>The opportunity at a glance.</h2>
-        </div>
-        <p class="subtitle">
-          Key figures provided for the Crunchery's franchise model.
-          Actual project economics can vary by site, city and operating assumptions.
-        </p>
-      </div>
-
-      <div class="metric-grid">
-        <div class="metric">
-          <div class="metric-value">₹35–50L</div>
-          <div class="metric-label">Tier-1 investment range</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">₹6–8L</div>
-          <div class="metric-label">Estimated monthly sales for ROI planning</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">36 Mo.</div>
-          <div class="metric-label">Indicative ROI period</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">32–40</div>
-          <div class="metric-label">Seats</div>
-        </div>
-      </div>
-    </section>
+        <section id="overview" class="card">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">02 — Franchise Overview</div>
+              <h2>The opportunity at a glance.</h2>
+            </div>
+            <p class="subtitle">
+              Key figures provided for the Crunchery's franchise model.
+              Actual project economics can vary by site, city and operating assumptions.
+            </p>
+          </div>
+    
+          <div class="metric-grid">
+            <div class="metric">
+              <div class="metric-value">₹35–50L</div>
+              <div class="metric-label">Tier-1 investment range</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value">₹6–8L</div>
+              <div class="metric-label">Estimated monthly sales for ROI planning</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value">36 Mo.</div>
+              <div class="metric-label">Indicative ROI period</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value">32–40</div>
+              <div class="metric-label">Seats</div>
+            </div>
+          </div>
+        </section>
+    
+        
 
     <!-- WHY -->
-    <section class="card">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">03 — The Model</div>
-          <h2>Designed around the complete cafe journey.</h2>
-        </div>
-      </div>
-
-      <div class="grid">
-        <div class="info-card">
-          <div class="info-icon">01</div>
-          <h3>Concept</h3>
-          <p>South Indian Continental Fusion Cafe positioning with a contemporary customer experience.</p>
-        </div>
-
-        <div class="info-card">
-          <div class="info-icon">02</div>
-          <h3>Setup</h3>
-          <p>Planned support across interiors, kitchen equipment, electrical, plumbing and essential infrastructure.</p>
-        </div>
-
-        <div class="info-card">
-          <div class="info-icon">03</div>
-          <h3>Operations</h3>
-          <p>Management systems, software, uniforms, training and launch preparation form part of the franchise support structure.</p>
-        </div>
-      </div>
-    </section>
+        <section class="card">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">03 — The Model</div>
+              <h2>Designed around the complete cafe journey.</h2>
+            </div>
+          </div>
+    
+          <div class="grid">
+            <div class="info-card">
+              <div class="info-icon">01</div>
+              <h3>Concept</h3>
+              <p>South Indian Continental Fusion Cafe positioning with a contemporary customer experience.</p>
+            </div>
+    
+            <div class="info-card">
+              <div class="info-icon">02</div>
+              <h3>Setup</h3>
+              <p>Planned support across interiors, kitchen equipment, electrical, plumbing and essential infrastructure.</p>
+            </div>
+    
+            <div class="info-card">
+              <div class="info-icon">03</div>
+              <h3>Operations</h3>
+              <p>Management systems, software, uniforms, training and launch preparation form part of the franchise support structure.</p>
+            </div>
+          </div>
+        </section>
+    
+        
 
     <!-- INVESTMENT -->
-    <section id="investment" class="card">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">04 — Investment Breakdown</div>
-          <h2>Where the investment goes.</h2>
-        </div>
-        <p class="subtitle">
-          The following components are based on the franchise cost details supplied for this model.
-        </p>
-      </div>
-
-      <div class="grid2">
-        <div class="info-card">
-          <div class="price">₹9,00,000</div>
-          <h3>Outer Space</h3>
-          <p>Tables, chairs, lights, painting and LED boards.</p>
-        </div>
-
-        <div class="info-card">
-          <div class="price">₹7,00,000</div>
-          <h3>Management Cost</h3>
-          <p>Uniform, software, franchise component, training and selfie spot.</p>
-        </div>
-
-        <div class="info-card">
-          <div class="price">₹11,00,000</div>
-          <h3>Kitchen Equipment</h3>
-          <p>Kitchen equipment allocation for the proposed cafe setup.</p>
-        </div>
-
-        <div class="info-card">
-          <div class="price">₹1,25,000</div>
-          <h3>Architecture & Site Visits</h3>
-          <p>Architecture support and 5 site visits.</p>
-        </div>
-      </div>
-
-      <div style="margin-top:24px">
-        <h3>Franchisor Scope</h3>
-
-        <div class="cost-row">
-          <div><div class="cost-title">Electrical Wiring & Plumbing</div></div>
-          <div class="cost-value">₹4,00,000</div>
-        </div>
-
-        <div class="cost-row">
-          <div><div class="cost-title">Tiles</div></div>
-          <div class="cost-value">₹1,30,000</div>
-        </div>
-
-        <div class="cost-row">
-          <div><div class="cost-title">Washbasin</div></div>
-          <div class="cost-value">₹1,00,000</div>
-        </div>
-
-        <div class="cost-row">
-          <div><div class="cost-title">Raw Products</div></div>
-          <div class="cost-value">₹2,00,000</div>
-        </div>
-
-        <div class="cost-row">
-          <div><div class="cost-title">Computer / Printer / Speaker</div></div>
-          <div class="cost-value">₹1,00,000</div>
-        </div>
-
-        <div class="cost-row">
-          <div><div class="cost-title">AC</div></div>
-          <div class="cost-value">₹2,00,000</div>
-        </div>
-      </div>
-
-      <p class="small" style="margin-top:18px">
-        Note: Individual components above are shown transparently from the supplied cost structure.
-        They should be reconciled with the final commercial quotation before signing.
-      </p>
-    </section>
-
-    <!-- CALCULATOR -->
-    <section id="calculator" class="card">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">05 — Break-Even Calculator</div>
-          <h2>Know the monthly sales you need.</h2>
-        </div>
-        <p class="subtitle">
-          Enter your expected fixed costs and variable-cost percentages.
-          The calculator updates instantly.
-        </p>
-      </div>
-
-      <div class="calculator">
-        <div class="calc-panel">
-          <div class="form-grid">
-
-            <div class="field">
-              <label for="rent">Rent / Month (₹)</label>
-              <input id="rent" type="number" min="0" value="50000">
+        <section id="investment" class="card">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">04 — Investment Breakdown</div>
+              <h2>Where the investment goes.</h2>
             </div>
-
-            <div class="field">
-              <label for="salary">Salary / Month (₹)</label>
-              <input id="salary" type="number" min="0" value="40000">
+            <p class="subtitle">
+              The following components are based on the franchise cost details supplied for this model.
+            </p>
+          </div>
+    
+          <div class="grid2">
+            <div class="info-card">
+              <div class="price">₹9,00,000</div>
+              <h3>Outer Space</h3>
+              <p>Tables, chairs, lights, painting and LED boards.</p>
             </div>
-
-            <div class="field">
-              <label for="raw">Raw Materials (%)</label>
-              <input id="raw" type="number" min="0" max="100" step="0.1" value="50">
+    
+            <div class="info-card">
+              <div class="price">₹7,00,000</div>
+              <h3>Management Cost</h3>
+              <p>Uniform, software, franchise component, training and selfie spot.</p>
             </div>
-
-            <div class="field">
-              <label for="eb">EB / Electricity (%)</label>
-              <input id="eb" type="number" min="0" max="100" step="0.1" value="5">
+    
+            <div class="info-card">
+              <div class="price">₹11,00,000</div>
+              <h3>Kitchen Equipment</h3>
+              <p>Kitchen equipment allocation for the proposed cafe setup.</p>
             </div>
-
-            <div class="field">
-              <label for="gst">GST (%)</label>
-              <input id="gst" type="number" min="0" max="100" step="0.1" value="5">
-            </div>
-
-            <div class="field">
-              <label for="royalty">Royalty (%)</label>
-              <input id="royalty" type="number" min="0" max="100" step="0.1" value="5">
-            </div>
-
-            <div class="field full">
-              <button class="btn btn-primary btn-block" type="button" onclick="calculateBreakEven()">
-                Calculate Break-Even
-              </button>
+    
+            <div class="info-card">
+              <div class="price">₹1,25,000</div>
+              <h3>Architecture & Site Visits</h3>
+              <p>Architecture support and 5 site visits.</p>
             </div>
           </div>
-        </div>
-
-        <div class="result-card">
-          <div class="result-label">Monthly Break-Even Sales</div>
-          <div class="result-number" id="monthlyBE">₹2,57,143</div>
-          <div class="result-sub">Approximate sales required to cover the entered costs.</div>
-
-          <div class="result-divider"></div>
-
-          <div class="result-line">
-            <span>Daily break-even (30 days)</span>
-            <strong id="dailyBE">₹8,571</strong>
-          </div>
-
-          <div class="result-line">
-            <span>Fixed costs</span>
-            <strong id="fixedCost">₹90,000</strong>
-          </div>
-
-          <div class="result-line">
-            <span>Total variable cost</span>
-            <strong id="variablePct">65%</strong>
-          </div>
-
-          <div class="result-line">
-            <span>Contribution margin</span>
-            <strong id="marginPct">35%</strong>
-          </div>
-
-          <div class="formula">
-            Formula: Break-Even Sales = Fixed Costs ÷
-            (1 − Total Variable Cost %).
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-
-    <!-- ROI PROJECTION CALCULATOR -->
-    <section id="roi-projection" class="card">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">06 — Franchise ROI Calculator</div>
-          <h2>Plan your sales and investment recovery.</h2>
-        </div>
-        <p class="subtitle">Use either calculator to understand the sales required for a target recovery period or estimate how many months your investment may take to recover, with a full 5-year projection.</p>
-      </div>
-
-      <div class="roi-tabs" role="tablist" aria-label="ROI calculator type">
-        <button type="button" class="roi-tab active" data-roi-tab="sales">Sales Required</button>
-        <button type="button" class="roi-tab" data-roi-tab="recovery">Investment Recovery</button>
-      </div>
-
-      <div id="roi-sales-panel" class="roi-panel active">
-        <div class="calculator">
-          <div class="calc-panel">
-            <div class="form-grid">
-              <div class="field"><label for="roiSalesInvestment">Investment Amount (₹)</label><input id="roiSalesInvestment" type="number" min="0" step="10000" value="1700000"></div>
-              <div class="field"><label for="roiTargetMonths">Target Recovery Period (Months)</label><input id="roiTargetMonths" type="number" min="1" max="240" step="1" value="24"></div>
-              <div class="field"><label for="roiSalesRaw">Raw Materials (%)</label><input id="roiSalesRaw" type="number" min="0" max="99" step="0.1" value="50"></div>
-              <div class="field"><label for="roiSalesRent">Rent / Month (Year 1)</label><input id="roiSalesRent" type="number" min="0" step="1000" value="30000"></div>
-              <div class="field"><label for="roiSalesSalary">Salary / Month (Year 1)</label><input id="roiSalesSalary" type="number" min="0" step="1000" value="45000"></div>
-              <div class="field"><label for="roiSalesEb">EB / Electricity / Month (Year 1)</label><input id="roiSalesEb" type="number" min="0" step="500" value="20000"></div>
-              <div class="field"><label for="roiSalesRoyalty">Royalty (%)</label><input id="roiSalesRoyalty" type="number" min="0" max="99" step="0.1" value="3"></div>
-              <div class="field"><label>GST</label><div class="roi-fixed">5% <span>Fixed</span></div></div>
-              <div class="field full"><button class="btn btn-primary btn-block" type="button" id="roiSalesCalculate">Calculate Required Sales</button></div>
+    
+          <div style="margin-top:24px">
+            <h3>Franchisor Scope</h3>
+    
+            <div class="cost-row">
+              <div><div class="cost-title">Electrical Wiring & Plumbing</div></div>
+              <div class="cost-value">₹4,00,000</div>
             </div>
-            <div class="roi-note"><strong>Cost escalation:</strong> Rent, Salary and EB use Year 1 monthly values. They stay unchanged in Years 1–2, increase by 10% in Year 3, stay at that level in Year 4, and increase by another 10% in Year 5. <strong>GST is fixed at 5%.</strong></div>
-          </div>
-          <div class="roi-result">
-            <div class="result-label">Required Monthly Sales</div>
-            <div class="result-number" id="roiRequiredSales">₹0</div>
-            <div class="result-sub">Sales required each month, using the selected target recovery period and the cost escalation rules.</div>
-            <div class="result-divider"></div>
-            <div class="result-line"><span>Investment</span><strong id="roiSalesInvestmentOut">₹0</strong></div>
-            <div class="result-line"><span>Target recovery</span><strong id="roiTargetMonthsOut">0 months</strong></div>
-            <div class="result-line"><span>Average profit required / month</span><strong id="roiRequiredProfit">₹0</strong></div>
-            <div class="result-line"><span>GST</span><strong>5% fixed</strong></div>
-          </div>
-        </div>
-        <div class="roi-error" id="roiSalesError"></div>
-        <div class="roi-table-wrap"><table class="roi-table"><thead><tr><th>Year</th><th>Monthly Sales</th><th>Raw Materials</th><th>GST</th><th>Royalty</th><th>Rent</th><th>Salary</th><th>EB</th><th>Monthly Profit</th><th>Annual Profit</th><th>Cumulative Profit</th></tr></thead><tbody id="roiSalesBody"></tbody></table></div>
-      </div>
-
-      <div id="roi-recovery-panel" class="roi-panel">
-        <div class="calculator">
-          <div class="calc-panel">
-            <div class="form-grid">
-              <div class="field"><label for="roiRecoveryInvestment">Investment Amount (₹)</label><input id="roiRecoveryInvestment" type="number" min="0" step="10000" value="1700000"></div>
-              <div class="field"><label for="roiExpectedSales">Expected Monthly Sales (₹)</label><input id="roiExpectedSales" type="number" min="0" step="5000" value="700000"></div>
-              <div class="field"><label for="roiRecoveryRaw">Raw Materials (%)</label><input id="roiRecoveryRaw" type="number" min="0" max="99" step="0.1" value="50"></div>
-              <div class="field"><label for="roiRecoveryRent">Rent / Month (Year 1)</label><input id="roiRecoveryRent" type="number" min="0" step="1000" value="30000"></div>
-              <div class="field"><label for="roiRecoverySalary">Salary / Month (Year 1)</label><input id="roiRecoverySalary" type="number" min="0" step="1000" value="45000"></div>
-              <div class="field"><label for="roiRecoveryEb">EB / Electricity / Month (Year 1)</label><input id="roiRecoveryEb" type="number" min="0" step="500" value="20000"></div>
-              <div class="field"><label for="roiRecoveryRoyalty">Royalty (%)</label><input id="roiRecoveryRoyalty" type="number" min="0" max="99" step="0.1" value="3"></div>
-              <div class="field"><label>GST</label><div class="roi-fixed">5% <span>Fixed</span></div></div>
-              <div class="field full"><button class="btn btn-primary btn-block" type="button" id="roiRecoveryCalculate">Calculate Recovery Period</button></div>
+    
+            <div class="cost-row">
+              <div><div class="cost-title">Tiles</div></div>
+              <div class="cost-value">₹1,30,000</div>
             </div>
-            <div class="roi-note"><strong>Cost escalation:</strong> Rent, Salary and EB use Year 1 monthly values. They stay unchanged in Years 1–2, increase by 10% in Year 3, stay at that level in Year 4, and increase by another 10% in Year 5. <strong>GST is fixed at 5%.</strong></div>
+    
+            <div class="cost-row">
+              <div><div class="cost-title">Washbasin</div></div>
+              <div class="cost-value">₹1,00,000</div>
+            </div>
+    
+            <div class="cost-row">
+              <div><div class="cost-title">Raw Products</div></div>
+              <div class="cost-value">₹2,00,000</div>
+            </div>
+    
+            <div class="cost-row">
+              <div><div class="cost-title">Computer / Printer / Speaker</div></div>
+              <div class="cost-value">₹1,00,000</div>
+            </div>
+    
+            <div class="cost-row">
+              <div><div class="cost-title">AC</div></div>
+              <div class="cost-value">₹2,00,000</div>
+            </div>
           </div>
-          <div class="roi-result">
-            <div class="result-label">Estimated Investment Recovery</div>
-            <div class="result-number" id="roiRecoveryMonths">0 months</div>
-            <div class="result-sub">Estimated time for cumulative outlet profit to recover the initial investment.</div>
-            <div class="result-divider"></div>
-            <div class="result-line"><span>Investment</span><strong id="roiRecoveryInvestmentOut">₹0</strong></div>
-            <div class="result-line"><span>Expected monthly sales</span><strong id="roiExpectedSalesOut">₹0</strong></div>
-            <div class="result-line"><span>Year 1 monthly profit</span><strong id="roiYear1Profit">₹0</strong></div>
-            <div class="result-line"><span>GST</span><strong>5% fixed</strong></div>
-          </div>
-        </div>
-        <div class="roi-error" id="roiRecoveryError"></div>
-        <div class="roi-table-wrap"><table class="roi-table"><thead><tr><th>Year</th><th>Monthly Sales</th><th>Raw Materials</th><th>GST</th><th>Royalty</th><th>Rent</th><th>Salary</th><th>EB</th><th>Monthly Profit</th><th>Annual Profit</th><th>Cumulative Profit</th></tr></thead><tbody id="roiRecoveryBody"></tbody></table></div>
-      </div>
-    </section>
+    
+          <p class="small" style="margin-top:18px">
+            Note: Individual components above are shown transparently from the supplied cost structure.
+            They should be reconciled with the final commercial quotation before signing.
+          </p>
+        </section>
+    
+        
 
     <!-- TIERS -->
-    <section class="card">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">06 — Franchise Tier</div>
-          <h2>Tier-1 cafe format.</h2>
-        </div>
-        <p class="subtitle">
-          A 32–40 seat cafe format with an indicative investment range of ₹35–50 lakhs.
-        </p>
-      </div>
-
-      <div class="grid2">
-        <div class="info-card tier">
-          <div class="tier-badge">Tier 1</div>
-          <h3>Investment</h3>
-          <div class="price">₹35–50 Lakhs</div>
-          <p>Indicative total project investment range for the Tier-1 format.</p>
-
-          <ul class="tier-list">
-            <li>32–40 seats</li>
-            <li>South Indian Continental Fusion Cafe</li>
-            <li>Estimated monthly sales: ₹6–8 lakhs</li>
-            <li>Indicative ROI period: 36 months</li>
-          </ul>
-        </div>
-
-        <div class="info-card">
-          <h3>Franchise Support Structure</h3>
-          <ul class="tier-list">
-            <li>Architecture & site evaluation</li>
-            <li>Interior and infrastructure planning</li>
-            <li>Kitchen equipment setup</li>
-            <li>Software and management systems</li>
-            <li>Training and launch support</li>
-            <li>Initial raw product support as specified</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+        <section class="card">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">05 — Franchise Tier</div>
+              <h2>Tier-1 cafe format.</h2>
+            </div>
+            <p class="subtitle">
+              A 32–40 seat cafe format with an indicative investment range of ₹35–50 lakhs.
+            </p>
+          </div>
+    
+          <div class="grid2">
+            <div class="info-card tier">
+              <div class="tier-badge">Tier 1</div>
+              <h3>Investment</h3>
+              <div class="price">₹35–50 Lakhs</div>
+              <p>Indicative total project investment range for the Tier-1 format.</p>
+    
+              <ul class="tier-list">
+                <li>32–40 seats</li>
+                <li>South Indian Continental Fusion Cafe</li>
+                <li>Estimated monthly sales: ₹6–8 lakhs</li>
+                <li>Indicative ROI period: 36 months</li>
+              </ul>
+            </div>
+    
+            <div class="info-card">
+              <h3>Franchise Support Structure</h3>
+              <ul class="tier-list">
+                <li>Architecture & site evaluation</li>
+                <li>Interior and infrastructure planning</li>
+                <li>Kitchen equipment setup</li>
+                <li>Software and management systems</li>
+                <li>Training and launch support</li>
+                <li>Initial raw product support as specified</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+    
+        
 
     <!-- PROCESS -->
-    <section id="process" class="card">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">07 — Franchise Process</div>
-          <h2>From enquiry to launch.</h2>
-        </div>
-      </div>
-
-      <div class="process">
-        <div class="step">
-          <div class="step-no">1</div>
-          <strong>Enquiry</strong>
-          <span>Share your details</span>
-        </div>
-        <div class="step">
-          <div class="step-no">2</div>
-          <strong>Questionnaire</strong>
-          <span>Understand fit</span>
-        </div>
-        <div class="step">
-          <div class="step-no">3</div>
-          <strong>Site Evaluation</strong>
-          <span>Assess location</span>
-        </div>
-        <div class="step">
-          <div class="step-no">4</div>
-          <strong>Agreement</strong>
-          <span>Commercial process</span>
-        </div>
-        <div class="step">
-          <div class="step-no">5</div>
-          <strong>Setup</strong>
-          <span>Build the cafe</span>
-        </div>
-        <div class="step">
-          <div class="step-no">6</div>
-          <strong>Training</strong>
-          <span>Prepare the team</span>
-        </div>
-        <div class="step">
-          <div class="step-no">7</div>
-          <strong>Launch</strong>
-          <span>Open the doors</span>
-        </div>
-      </div>
-    </section>
+        <section id="process" class="card">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">06 — Franchise Process</div>
+              <h2>From enquiry to launch.</h2>
+            </div>
+          </div>
+    
+          <div class="process">
+            <div class="step">
+              <div class="step-no">1</div>
+              <strong>Enquiry</strong>
+              <span>Share your details</span>
+            </div>
+            <div class="step">
+              <div class="step-no">2</div>
+              <strong>Questionnaire</strong>
+              <span>Understand fit</span>
+            </div>
+            <div class="step">
+              <div class="step-no">3</div>
+              <strong>Site Evaluation</strong>
+              <span>Assess location</span>
+            </div>
+            <div class="step">
+              <div class="step-no">4</div>
+              <strong>Agreement</strong>
+              <span>Commercial process</span>
+            </div>
+            <div class="step">
+              <div class="step-no">5</div>
+              <strong>Setup</strong>
+              <span>Build the cafe</span>
+            </div>
+            <div class="step">
+              <div class="step-no">6</div>
+              <strong>Training</strong>
+              <span>Prepare the team</span>
+            </div>
+            <div class="step">
+              <div class="step-no">7</div>
+              <strong>Launch</strong>
+              <span>Open the doors</span>
+            </div>
+          </div>
+        </section>
+    
+        
 
     <!-- FAQ -->
-    <section id="faq" class="card">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">08 — FAQ</div>
-          <h2>Common questions.</h2>
-        </div>
-      </div>
+        <section id="faq" class="card">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">03 — FAQ</div>
+              <h2>Common questions.</h2>
+            </div>
+          </div>
+    
+          <div class="faq">
+            <button type="button" onclick="toggleFaq(this)">
+              <span>What is the Tier-1 investment range?</span>
+              <span class="faq-plus">＋</span>
+            </button>
+            <div class="faq-answer">
+              The supplied Tier-1 indicative investment range is ₹35–50 lakhs.
+              The final project cost should be confirmed through the commercial quotation
+              and site-specific assessment.
+            </div>
+          </div>
+    
+          <div class="faq">
+            <button type="button" onclick="toggleFaq(this)">
+              <span>How many seats are planned?</span>
+              <span class="faq-plus">＋</span>
+            </button>
+            <div class="faq-answer">
+              The Tier-1 format is planned for approximately 32–40 seats.
+            </div>
+          </div>
+    
+          <div class="faq">
+            <button type="button" onclick="toggleFaq(this)">
+              <span>What monthly sales are used for ROI planning?</span>
+              <span class="faq-plus">＋</span>
+            </button>
+            <div class="faq-answer">
+              The supplied planning figure is estimated monthly sales of ₹6–8 lakhs.
+              This is a planning assumption and is not a guaranteed sales figure.
+            </div>
+          </div>
+    
+          <div class="faq">
+            <button type="button" onclick="toggleFaq(this)">
+              <span>How is break-even calculated?</span>
+              <span class="faq-plus">＋</span>
+            </button>
+            <div class="faq-answer">
+              Fixed monthly costs are divided by the contribution margin. In this calculator,
+              contribution margin is 100% minus Raw Materials, EB, GST and Royalty percentages.
+            </div>
+          </div>
+    
+          <div class="faq">
+            <button type="button" onclick="toggleFaq(this)">
+              <span>Is the ROI period guaranteed?</span>
+              <span class="faq-plus">＋</span>
+            </button>
+            <div class="faq-answer">
+              No. The 36-month figure is the supplied indicative ROI period for planning.
+              Actual returns depend on sales, rent, salaries, operating costs, location,
+              taxes and other commercial factors.
+            </div>
+          </div>
+        </section>
 
-      <div class="faq">
-        <button type="button" onclick="toggleFaq(this)">
-          <span>What is the Tier-1 investment range?</span>
-          <span class="faq-plus">＋</span>
-        </button>
-        <div class="faq-answer">
-          The supplied Tier-1 indicative investment range is ₹35–50 lakhs.
-          The final project cost should be confirmed through the commercial quotation
-          and site-specific assessment.
-        </div>
-      </div>
+    <!-- CALCULATOR -->
+        <section id="calculator" class="card">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">04 — Break-Even Calculator</div>
+              <h2>Know the monthly sales you need.</h2>
+            </div>
+            <p class="subtitle">
+              Enter your expected fixed costs and variable-cost percentages.
+              The calculator updates instantly.
+            </p>
+          </div>
+    
+          <div class="calculator">
+            <div class="calc-panel">
+              <div class="form-grid">
+    
+                <div class="field">
+                  <label for="rent">Rent / Month (₹)</label>
+                  <input id="rent" type="number" min="0" value="50000">
+                </div>
+    
+                <div class="field">
+                  <label for="salary">Salary / Month (₹)</label>
+                  <input id="salary" type="number" min="0" value="40000">
+                </div>
+    
+                <div class="field">
+                  <label for="raw">Raw Materials (%)</label>
+                  <input id="raw" type="number" min="0" max="100" step="0.1" value="50">
+                </div>
+    
+                <div class="field">
+                  <label for="eb">EB / Electricity (%)</label>
+                  <input id="eb" type="number" min="0" max="100" step="0.1" value="5">
+                </div>
+    
+                <div class="field">
+                  <label for="gst">GST (%)</label>
+                  <input id="gst" type="number" min="0" max="100" step="0.1" value="5">
+                </div>
+    
+                <div class="field">
+                  <label for="royalty">Royalty (%)</label>
+                  <input id="royalty" type="number" min="0" max="100" step="0.1" value="5">
+                </div>
+    
+                <div class="field full">
+                  <button class="btn btn-primary btn-block" type="button" onclick="calculateBreakEven()">
+                    Calculate Break-Even
+                  </button>
+                </div>
+              </div>
+            </div>
+    
+            <div class="result-card">
+              <div class="result-label">Monthly Break-Even Sales</div>
+              <div class="result-number" id="monthlyBE">₹2,57,143</div>
+              <div class="result-sub">Approximate sales required to cover the entered costs.</div>
+    
+              <div class="result-divider"></div>
+    
+              <div class="result-line">
+                <span>Daily break-even (30 days)</span>
+                <strong id="dailyBE">₹8,571</strong>
+              </div>
+    
+              <div class="result-line">
+                <span>Fixed costs</span>
+                <strong id="fixedCost">₹90,000</strong>
+              </div>
+    
+              <div class="result-line">
+                <span>Total variable cost</span>
+                <strong id="variablePct">65%</strong>
+              </div>
+    
+              <div class="result-line">
+                <span>Contribution margin</span>
+                <strong id="marginPct">35%</strong>
+              </div>
+    
+              <div class="formula">
+                Formula: Break-Even Sales = Fixed Costs ÷
+                (1 − Total Variable Cost %).
+              </div>
+            </div>
+          </div>
+        </section>
+    
+    
+    
+        
 
-      <div class="faq">
-        <button type="button" onclick="toggleFaq(this)">
-          <span>How many seats are planned?</span>
-          <span class="faq-plus">＋</span>
-        </button>
-        <div class="faq-answer">
-          The Tier-1 format is planned for approximately 32–40 seats.
-        </div>
-      </div>
-
-      <div class="faq">
-        <button type="button" onclick="toggleFaq(this)">
-          <span>What monthly sales are used for ROI planning?</span>
-          <span class="faq-plus">＋</span>
-        </button>
-        <div class="faq-answer">
-          The supplied planning figure is estimated monthly sales of ₹6–8 lakhs.
-          This is a planning assumption and is not a guaranteed sales figure.
-        </div>
-      </div>
-
-      <div class="faq">
-        <button type="button" onclick="toggleFaq(this)">
-          <span>How is break-even calculated?</span>
-          <span class="faq-plus">＋</span>
-        </button>
-        <div class="faq-answer">
-          Fixed monthly costs are divided by the contribution margin. In this calculator,
-          contribution margin is 100% minus Raw Materials, EB, GST and Royalty percentages.
-        </div>
-      </div>
-
-      <div class="faq">
-        <button type="button" onclick="toggleFaq(this)">
-          <span>Is the ROI period guaranteed?</span>
-          <span class="faq-plus">＋</span>
-        </button>
-        <div class="faq-answer">
-          No. The 36-month figure is the supplied indicative ROI period for planning.
-          Actual returns depend on sales, rent, salaries, operating costs, location,
-          taxes and other commercial factors.
-        </div>
-      </div>
-    </section>
+    <!-- ROI PROJECTION CALCULATOR -->
+        <section id="roi-projection" class="card">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">06 — Franchise ROI Calculator</div>
+              <h2>Plan your sales and investment recovery.</h2>
+            </div>
+            <p class="subtitle">Use either calculator to understand the sales required for a target recovery period or estimate how many months your investment may take to recover, with a full 5-year projection.</p>
+          </div>
+    
+          <div class="roi-tabs" role="tablist" aria-label="ROI calculator type">
+            <button type="button" class="roi-tab active" data-roi-tab="sales">Sales Required</button>
+            <button type="button" class="roi-tab" data-roi-tab="recovery">Investment Recovery</button>
+          </div>
+    
+          <div id="roi-sales-panel" class="roi-panel active">
+            <div class="calculator">
+              <div class="calc-panel">
+                <div class="form-grid">
+                  <div class="field"><label for="roiSalesInvestment">Investment Amount (₹)</label><input id="roiSalesInvestment" type="number" min="0" step="10000" value="1700000"></div>
+                  <div class="field"><label for="roiTargetMonths">Target Recovery Period (Months)</label><input id="roiTargetMonths" type="number" min="1" max="240" step="1" value="24"></div>
+                  <div class="field"><label for="roiSalesRaw">Raw Materials (%)</label><input id="roiSalesRaw" type="number" min="0" max="99" step="0.1" value="50"></div>
+                  <div class="field"><label for="roiSalesRent">Rent / Month (Year 1)</label><input id="roiSalesRent" type="number" min="0" step="1000" value="30000"></div>
+                  <div class="field"><label for="roiSalesSalary">Salary / Month (Year 1)</label><input id="roiSalesSalary" type="number" min="0" step="1000" value="45000"></div>
+                  <div class="field"><label for="roiSalesEb">EB / Electricity / Month (Year 1)</label><input id="roiSalesEb" type="number" min="0" step="500" value="20000"></div>
+                  <div class="field"><label for="roiSalesRoyalty">Royalty (%)</label><input id="roiSalesRoyalty" type="number" min="0" max="99" step="0.1" value="3"></div>
+                  <div class="field"><label>GST</label><div class="roi-fixed">5% <span>Fixed</span></div></div>
+                  <div class="field full"><button class="btn btn-primary btn-block" type="button" id="roiSalesCalculate">Calculate Required Sales</button></div>
+                </div>
+                <div class="roi-note"><strong>Cost escalation:</strong> Rent, Salary and EB use Year 1 monthly values. They stay unchanged in Years 1–2, increase by 10% in Year 3, stay at that level in Year 4, and increase by another 10% in Year 5. <strong>GST is fixed at 5%.</strong></div>
+              </div>
+              <div class="roi-result">
+                <div class="result-label">Required Monthly Sales</div>
+                <div class="result-number" id="roiRequiredSales">₹0</div>
+                <div class="result-sub">Sales required each month, using the selected target recovery period and the cost escalation rules.</div>
+                <div class="result-divider"></div>
+                <div class="result-line"><span>Investment</span><strong id="roiSalesInvestmentOut">₹0</strong></div>
+                <div class="result-line"><span>Target recovery</span><strong id="roiTargetMonthsOut">0 months</strong></div>
+                <div class="result-line"><span>Average profit required / month</span><strong id="roiRequiredProfit">₹0</strong></div>
+                <div class="result-line"><span>GST</span><strong>5% fixed</strong></div>
+              </div>
+            </div>
+            <div class="roi-error" id="roiSalesError"></div>
+            <div class="roi-table-wrap"><table class="roi-table"><thead><tr><th>Year</th><th>Monthly Sales</th><th>Raw Materials</th><th>GST</th><th>Royalty</th><th>Rent</th><th>Salary</th><th>EB</th><th>Monthly Profit</th><th>Annual Profit</th><th>Cumulative Profit</th></tr></thead><tbody id="roiSalesBody"></tbody></table></div>
+          </div>
+    
+          <div id="roi-recovery-panel" class="roi-panel">
+            <div class="calculator">
+              <div class="calc-panel">
+                <div class="form-grid">
+                  <div class="field"><label for="roiRecoveryInvestment">Investment Amount (₹)</label><input id="roiRecoveryInvestment" type="number" min="0" step="10000" value="1700000"></div>
+                  <div class="field"><label for="roiExpectedSales">Expected Monthly Sales (₹)</label><input id="roiExpectedSales" type="number" min="0" step="5000" value="700000"></div>
+                  <div class="field"><label for="roiRecoveryRaw">Raw Materials (%)</label><input id="roiRecoveryRaw" type="number" min="0" max="99" step="0.1" value="50"></div>
+                  <div class="field"><label for="roiRecoveryRent">Rent / Month (Year 1)</label><input id="roiRecoveryRent" type="number" min="0" step="1000" value="30000"></div>
+                  <div class="field"><label for="roiRecoverySalary">Salary / Month (Year 1)</label><input id="roiRecoverySalary" type="number" min="0" step="1000" value="45000"></div>
+                  <div class="field"><label for="roiRecoveryEb">EB / Electricity / Month (Year 1)</label><input id="roiRecoveryEb" type="number" min="0" step="500" value="20000"></div>
+                  <div class="field"><label for="roiRecoveryRoyalty">Royalty (%)</label><input id="roiRecoveryRoyalty" type="number" min="0" max="99" step="0.1" value="3"></div>
+                  <div class="field"><label>GST</label><div class="roi-fixed">5% <span>Fixed</span></div></div>
+                  <div class="field full"><button class="btn btn-primary btn-block" type="button" id="roiRecoveryCalculate">Calculate Recovery Period</button></div>
+                </div>
+                <div class="roi-note"><strong>Cost escalation:</strong> Rent, Salary and EB use Year 1 monthly values. They stay unchanged in Years 1–2, increase by 10% in Year 3, stay at that level in Year 4, and increase by another 10% in Year 5. <strong>GST is fixed at 5%.</strong></div>
+              </div>
+              <div class="roi-result">
+                <div class="result-label">Estimated Investment Recovery</div>
+                <div class="result-number" id="roiRecoveryMonths">0 months</div>
+                <div class="result-sub">Estimated time for cumulative outlet profit to recover the initial investment.</div>
+                <div class="result-divider"></div>
+                <div class="result-line"><span>Investment</span><strong id="roiRecoveryInvestmentOut">₹0</strong></div>
+                <div class="result-line"><span>Expected monthly sales</span><strong id="roiExpectedSalesOut">₹0</strong></div>
+                <div class="result-line"><span>Year 1 monthly profit</span><strong id="roiYear1Profit">₹0</strong></div>
+                <div class="result-line"><span>GST</span><strong>5% fixed</strong></div>
+              </div>
+            </div>
+            <div class="roi-error" id="roiRecoveryError"></div>
+            <div class="roi-table-wrap"><table class="roi-table"><thead><tr><th>Year</th><th>Monthly Sales</th><th>Raw Materials</th><th>GST</th><th>Royalty</th><th>Rent</th><th>Salary</th><th>EB</th><th>Monthly Profit</th><th>Annual Profit</th><th>Cumulative Profit</th></tr></thead><tbody id="roiRecoveryBody"></tbody></table></div>
+          </div>
+        </section>
+    
+        
 
     <!-- FINAL CTA -->
-    <section class="cta">
-      <div>
-        <div class="eyebrow" style="color:#fff1e8">09 — Start the Conversation</div>
-        <h2>Ready to explore a Crunchery's franchise?</h2>
-        <p>
-          Submit your basic details and start the discussion around your city,
-          location, investment capacity and launch timeline.
-        </p>
-      </div>
-
-      <div>
-        <a class="btn btn-light" href="#franchise-enquiry">Apply for Franchise</a>
-      </div>
-    </section>
+        <section class="cta">
+          <div>
+            <div class="eyebrow" style="color:#fff1e8">10 — Start the Conversation</div>
+            <h2>Ready to explore a Crunchery's franchise?</h2>
+            <p>
+              Submit your basic details and start the discussion around your city,
+              location, investment capacity and launch timeline.
+            </p>
+          </div>
+    
+          <div>
+            <a class="btn btn-light" href="#franchise-enquiry" onclick="franchiseScrollTo('franchise-enquiry');return false;">Apply for Franchise</a>
+          </div>
+        </section>
 
   </main>
 
@@ -3242,7 +3755,44 @@ for(let year = 1; year <= years; year++){
       calculateInvestmentRecoveryROI();
     })();
 
-  </script>
+  
+    /* =========================================================
+       IMAGE-FIRST SCROLL EXPERIENCE
+       The interior image subtly moves as the visitor scrolls.
+       ========================================================= */
+    (function(){
+      const media = document.getElementById("franchiseOpeningMedia");
+      const opening = document.getElementById("franchise-opening");
+      if(!media || !opening) return;
+
+      let ticking = false;
+
+      function updateOpening(){
+        const rect = opening.getBoundingClientRect();
+        const vh = window.innerHeight || 1;
+        const progress = Math.max(0, Math.min(1, (vh - rect.top) / (vh + rect.height)));
+
+        const y = (progress - .5) * -70;
+        const scale = 1.02 + progress * .035;
+
+        media.style.transform =
+          "translate3d(0," + y.toFixed(1) + "px,0) scale(" + scale.toFixed(3) + ")";
+
+        ticking = false;
+      }
+
+      window.addEventListener("scroll", function(){
+        if(!ticking){
+          window.requestAnimationFrame(updateOpening);
+          ticking = true;
+        }
+      }, {passive:true});
+
+      window.addEventListener("resize", updateOpening);
+      updateOpening();
+    })();
+
+</script>
 
 </body>
 </html>
