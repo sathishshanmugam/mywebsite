@@ -140,7 +140,7 @@ body{
   height:5px !important;
   background:#ef5b00 !important;
   margin:14px 0 10px !important;
-}
+display:none !important;}
 
 .franchise-wordmark-tagline{
   color:#17243d !important;
@@ -6662,6 +6662,102 @@ html.crx-landing-mode-root #franchise-page-only{margin-top:0 !important;padding-
   }
 }
 </style>
+
+<style id="cruncherys-business-partnership-header-fix">
+/* Crunchery's Business Partnership header refinement */
+.franchise-header-inner{
+  align-items:center !important;
+}
+
+.franchise-logo{
+  align-items:center !important;
+}
+
+.franchise-wordmark{
+  justify-content:center !important;
+  width:650px !important;
+  max-width:650px !important;
+}
+
+.franchise-wordmark-name{
+  display:block !important;
+  white-space:nowrap !important;
+  line-height:.92 !important;
+  color:#241b16 !important;
+}
+
+.franchise-wordmark-name .orange{
+  color:#ef5b00 !important;
+}
+
+.franchise-wordmark-rule{
+  width:100% !important;
+  height:5px !important;
+  margin:14px 0 0 !important;
+  background:#ef5b00 !important;
+}
+
+@media (min-width:1301px){
+  .franchise-logo{
+    align-items:center !important;
+  }
+
+  .franchise-wordmark{
+    width:650px !important;
+    max-width:650px !important;
+    flex:0 0 650px !important;
+    margin-left:-35px !important;
+  }
+
+  .franchise-wordmark-name{
+    font-size:42px !important;
+    line-height:.94 !important;
+    letter-spacing:1px !important;
+  }
+
+  .franchise-wordmark-rule{
+    width:100% !important;
+    height:5px !important;
+    margin:13px 0 0 !important;
+  }
+}
+
+@media (min-width:901px) and (max-width:1300px){
+  .franchise-wordmark{
+    width:500px !important;
+    max-width:500px !important;
+    margin-left:0 !important;
+  }
+
+  .franchise-wordmark-name{
+    font-size:38px !important;
+    line-height:.94 !important;
+  }
+
+  .franchise-wordmark-rule{
+    width:100% !important;
+    height:4px !important;
+    margin:10px 0 0 !important;
+  }
+}
+
+@media (max-width:900px){
+  .franchise-wordmark{
+    width:auto !important;
+    max-width:100% !important;
+    margin-left:0 !important;
+  }
+
+  .franchise-wordmark-name{
+    line-height:.92 !important;
+  }
+
+  .franchise-wordmark-rule{
+    width:100% !important;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -7699,3 +7795,8 @@ for(let year = 1; year <= years; year++){
 </script>
 </body>
 </html>
+<style id="cruncherys-remove-wordmark-underline">
+.franchise-wordmark-rule{
+  display:none !important;
+}
+</style>
