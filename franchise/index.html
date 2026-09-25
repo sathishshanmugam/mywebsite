@@ -6294,6 +6294,208 @@ html.crx-landing-mode-root #franchise-page-only{margin-top:0 !important;padding-
   }
 }
 </style>
+
+<style id="crx-franchise-v12-mobile-matched-typography">
+/* MOBILE: Earning Potential uses the same typography scale as Customizable Franchise Model. */
+@media (max-width:900px){
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-label{
+    display:block !important;
+    color:#ef5b00 !important;
+    font-size:12px !important;
+    font-weight:900 !important;
+    letter-spacing:3px !important;
+    line-height:1.1 !important;
+    margin:0 0 10px !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-final strong{
+    display:block !important;
+    color:#24362c !important;
+    font-size:29px !important;
+    line-height:.98 !important;
+    letter-spacing:-2px !important;
+    font-weight:900 !important;
+    white-space:normal !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-final strong em{
+    color:#ef5b00 !important;
+    font-style:normal !important;
+  }
+
+  #franchise-page-only .crx-earning-right-final .crx-earn-inline-period{
+    display:block !important;
+    color:#24362c !important;
+    font-size:12px !important;
+    font-weight:900 !important;
+    letter-spacing:2.5px !important;
+    line-height:1.1 !important;
+    margin:10px 0 0 !important;
+  }
+}
+</style>
+
+
+<style id="crx-swap-custom-label-heading">
+/* ONE CHANGE — swap the visual hierarchy of the customizable-model label
+   and the "Your location. Your opportunity." headline. */
+
+@media (min-width:901px){
+  #franchise-page-only .crx-final-custom-heading .crx-final-eyebrow{
+    color:#24362c !important;
+    font-size:clamp(34px,3vw,48px) !important;
+    line-height:.98 !important;
+    letter-spacing:-2px !important;
+    font-weight:900 !important;
+    margin:0 0 10px !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading h3{
+    color:#ef5b00 !important;
+    font-size:12px !important;
+    line-height:1.1 !important;
+    letter-spacing:3px !important;
+    font-weight:900 !important;
+    margin:0 !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading h3 span{
+    color:#ef5b00 !important;
+  }
+}
+
+@media (max-width:900px){
+  #franchise-page-only .crx-final-custom-heading .crx-final-eyebrow{
+    color:#24362c !important;
+    font-size:clamp(31px,8.5vw,42px) !important;
+    line-height:.98 !important;
+    letter-spacing:-1.8px !important;
+    font-weight:950 !important;
+    margin:0 0 10px !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading h3{
+    color:#ef5b00 !important;
+    font-size:12px !important;
+    line-height:1.1 !important;
+    letter-spacing:3px !important;
+    font-weight:900 !important;
+    margin:0 !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading h3 span{
+    color:#ef5b00 !important;
+  }
+}
+</style>
+
+
+<style id="crx-correct-swap-order">
+/* Corrected order:
+   Large headline first: "Your location. Your opportunity."
+   Small label underneath: "CUSTOMIZABLE FRANCHISE MODEL"
+*/
+
+#franchise-page-only .crx-final-custom-heading{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-start !important;
+}
+
+#franchise-page-only .crx-final-custom-heading h3{
+  order:1 !important;
+  margin:0 0 12px !important;
+  color:#24362c !important;
+  font-size:clamp(34px,3vw,48px) !important;
+  line-height:.98 !important;
+  letter-spacing:-2px !important;
+  font-weight:950 !important;
+}
+
+#franchise-page-only .crx-final-custom-heading h3 span{
+  color:#ef5b00 !important;
+}
+
+#franchise-page-only .crx-final-custom-heading .crx-final-eyebrow{
+  order:2 !important;
+  margin:0 !important;
+  color:#ef5b00 !important;
+  font-size:12px !important;
+  line-height:1.1 !important;
+  letter-spacing:3px !important;
+  font-weight:900 !important;
+}
+
+@media (max-width:900px){
+  #franchise-page-only .crx-final-custom-heading h3{
+    font-size:clamp(31px,8.5vw,42px) !important;
+    line-height:.98 !important;
+    letter-spacing:-1.8px !important;
+    margin-bottom:10px !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading .crx-final-eyebrow{
+    font-size:12px !important;
+    letter-spacing:3px !important;
+  }
+}
+</style>
+
+
+<style id="crx-customizable-match-earning">
+/* Typography correction:
+   CUSTOMIZABLE FRANCHISE MODEL = same visual scale as EARNING POTENTIAL
+   Your location. Your opportunity. = smaller supporting line.
+*/
+
+#franchise-page-only .crx-final-custom-heading{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-start !important;
+}
+
+#franchise-page-only .crx-final-custom-heading .crx-final-eyebrow{
+  order:2 !important;
+  color:#24362c !important;
+  font-size:clamp(34px,3vw,48px) !important;
+  line-height:.98 !important;
+  letter-spacing:-2px !important;
+  font-weight:950 !important;
+  margin:10px 0 0 !important;
+}
+
+#franchise-page-only .crx-final-custom-heading h3{
+  order:1 !important;
+  color:#ef5b00 !important;
+  font-size:12px !important;
+  line-height:1.1 !important;
+  letter-spacing:3px !important;
+  font-weight:900 !important;
+  margin:0 !important;
+}
+
+#franchise-page-only .crx-final-custom-heading h3 span{
+  color:#ef5b00 !important;
+}
+
+@media (max-width:900px){
+  #franchise-page-only .crx-final-custom-heading .crx-final-eyebrow{
+    font-size:clamp(31px,8.5vw,42px) !important;
+    line-height:.98 !important;
+    letter-spacing:-1.8px !important;
+    font-weight:950 !important;
+    margin-top:10px !important;
+  }
+
+  #franchise-page-only .crx-final-custom-heading h3{
+    font-size:12px !important;
+    line-height:1.1 !important;
+    letter-spacing:3px !important;
+    font-weight:900 !important;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -6393,8 +6595,8 @@ html.crx-landing-mode-root #franchise-page-only{margin-top:0 !important;padding-
     <div class="crx-final-custom-model">
 
       <div class="crx-final-custom-heading">
-        <div class="crx-final-eyebrow">CUSTOMIZABLE FRANCHISE MODEL</div>
         <h3>Your location. <span>Your opportunity.</span></h3>
+        <div class="crx-final-eyebrow">CUSTOMIZABLE FRANCHISE MODEL</div>
       </div>
     </div>
 
