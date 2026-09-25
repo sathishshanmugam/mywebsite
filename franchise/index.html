@@ -6259,6 +6259,41 @@ html.crx-landing-mode-root #franchise-page-only{margin-top:0 !important;padding-
 }
 </style>
 
+
+<style id="crx-enquiry-between-custom-disclaimer">
+/* Desktop: place ENQUIRY NOW between the customizable model and the disclaimer. */
+@media (min-width:901px){
+  #franchise-page-only .crx-final-bottom{
+    position:relative !important;
+    display:block !important;
+    min-height:132px !important;
+    padding-top:0 !important;
+  }
+
+  #franchise-page-only .crx-final-bottom .crx-enquiry-button-final{
+    position:absolute !important;
+    top:-116px !important;
+    right:0 !important;
+    margin:0 !important;
+  }
+
+  #franchise-page-only .crx-final-bottom .crx-final-disclaimer{
+    width:100% !important;
+    max-width:650px !important;
+    margin-left:auto !important;
+    margin-right:0 !important;
+    padding-top:18px !important;
+    text-align:left !important;
+  }
+}
+
+/* Mobile keeps the existing stacked arrangement. */
+@media (max-width:900px){
+  #franchise-page-only .crx-final-bottom .crx-enquiry-button-final{
+    position:static !important;
+  }
+}
+</style>
 </head>
 
 <body>
