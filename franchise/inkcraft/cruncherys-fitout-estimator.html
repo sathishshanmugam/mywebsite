@@ -1,0 +1,937 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crunchery's franchise fit-out estimator — Ink Craft Design Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js" crossorigin></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js" crossorigin></script>
+<style>
+  html, body { margin: 0; padding: 0; background: #F7F6F3; }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  input, select, button { font-family: inherit; }
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  input[type=number] { -moz-appearance: textfield; }
+  #fallback { font: 14px/1.6 Helvetica, Arial, sans-serif; color: #1B2138;
+              max-width: 520px; margin: 80px auto; padding: 0 24px; }
+  @media print { .noprint { display: none; } }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<div id="fallback">
+  <h2 style="margin:0 0 8px">The estimator could not start</h2>
+  <p>This file loads React from a CDN, so it needs an internet connection the first time it runs.
+     Reconnect and reload. Everything else &mdash; the rates, the logos, the calculations &mdash; is inside this file.</p>
+</div>
+<script>
+(function () {
+  if (!window.React || !window.ReactDOM) return;
+  document.getElementById("fallback").style.display = "none";
+  try {
+(() => {
+  // app.jsx
+  var { useState, useEffect, useMemo, useRef } = React;
+  var store = typeof window !== "undefined" && window.storage ? window.storage : {
+    get: async (k) => {
+      const v = localStorage.getItem(k);
+      if (v === null) throw new Error("not found");
+      return { key: k, value: v };
+    },
+    set: async (k, v) => {
+      localStorage.setItem(k, v);
+      return { key: k, value: v };
+    },
+    list: async (p = "") => ({ keys: Object.keys(localStorage).filter((k) => k.startsWith(p)) })
+  };
+  var C = {
+    navy: "#1B2138",
+    navySoft: "#2B3350",
+    orange: "#F58A1F",
+    orangeSoft: "#FDF0DF",
+    paper: "#F7F6F3",
+    studio: "#E6E5E1",
+    card: "#FFFFFF",
+    line: "#DEDBD4",
+    lineDark: "#C3BFB6",
+    muted: "#75716A",
+    green: "#3F7D5C",
+    red: "#B3452F"
+  };
+  var FONT = `'Inter','Helvetica Neue',Helvetica,Arial,sans-serif`;
+  var inr = (n) => "\u20B9" + Math.round(n || 0).toLocaleString("en-IN", { maximumFractionDigits: 0 });
+  var num = (v) => isNaN(parseFloat(v)) ? 0 : parseFloat(v);
+  var TIERS = {
+    T1: {
+      name: "Tier 1",
+      band: [35e5, 5e6],
+      seatsMin: 32,
+      seatsMax: 40,
+      outer: 9e5,
+      mgmt: 7e5,
+      kitchen: 11e5,
+      archFee: 125e3,
+      visits: 5,
+      outerOptional: false,
+      note: "Flagship cafe, high footfall"
+    },
+    T2: {
+      name: "Tier 2",
+      band: [25e5, 3e6],
+      seatsMin: 20,
+      seatsMax: 24,
+      outer: 6e5,
+      mgmt: 65e4,
+      kitchen: 11e5,
+      archFee: 1e5,
+      visits: 5,
+      outerOptional: false,
+      note: "Medium capacity cafe"
+    },
+    T3: {
+      name: "Tier 3",
+      band: [15e5, 2e6],
+      seatsMin: 0,
+      seatsMax: 16,
+      outer: 6e5,
+      mgmt: 6e5,
+      kitchen: 6e5,
+      archFee: 75e3,
+      visits: 3,
+      outerOptional: true,
+      note: "Small outlet, kiosk or cloud kitchen"
+    },
+    T4A: {
+      name: "Tier 4A",
+      band: [9e5, 12e5],
+      seatsMin: 0,
+      seatsMax: 12,
+      outer: 6e5,
+      mgmt: 4e5,
+      kitchen: 3e5,
+      archFee: 5e4,
+      visits: 3,
+      outerOptional: true,
+      note: "Kiosk \u2014 sandwich, burger, starters, drinks"
+    },
+    T4B: {
+      name: "Tier 4B",
+      band: [1e6, 12e5],
+      seatsMin: 0,
+      seatsMax: 12,
+      outer: 6e5,
+      mgmt: 4e5,
+      kitchen: 4e5,
+      archFee: 5e4,
+      visits: 3,
+      outerOptional: true,
+      note: "Kiosk \u2014 pizza, pasta, starters, drinks"
+    }
+  };
+  var SEATING = [
+    { k: "s2", label: "2-seater table", per: 2, area: 28, note: `2'0" x 2'0" top` },
+    { k: "s4", label: "4-seater table", per: 4, area: 56, note: `3'0" x 3'0" top` },
+    { k: "s6", label: "6-seater table", per: 6, area: 80, note: `6'0" x 2'6" top` },
+    { k: "hc", label: "High chair at ledge", per: 1, area: 11, note: `1'6" deep ledge` },
+    { k: "bq", label: "Banquette seat", per: 1, area: 12, note: "wall-fixed sofa" }
+  ];
+  var SEED = {
+    // Preliminaries
+    P01: 25e3,
+    P02: 12,
+    P03: 18e3,
+    // Civil
+    C01: 35,
+    C02: 48,
+    C03: 138,
+    C04: 32,
+    C05: 68e3,
+    C06: 1850,
+    C08: 95e3,
+    C07: 340,
+    // Flooring
+    "FL.1": 115,
+    "FL.2": 168,
+    "FL.3": 245,
+    FL04: 68,
+    FL05: 95,
+    // Walls
+    "WA.1": 28,
+    "WA.2": 42,
+    "WA.3": 95,
+    "WA.4": 215,
+    "WA.5": 280,
+    WA04: 105,
+    // Ceiling
+    "CE.1": 78,
+    "CE.2": 112,
+    "CE.3": 168,
+    CE04: 125,
+    // Electrical
+    E01: 52e3,
+    E02: 875,
+    E03: 1650,
+    "LT.1": 480,
+    "LT.2": 950,
+    "LT.3": 2400,
+    E05: 1450,
+    E06: 145,
+    E07: 540,
+    // HVAC — rates are per TR so the three systems compare directly
+    "AC.1": 31e3,
+    "AC.2": 41e3,
+    "AC.3": 52e3,
+    H02: 118e3,
+    H03: 5200,
+    // Plumbing
+    PL01: 1750,
+    PL02: 2200,
+    "SN.1": 18e3,
+    "SN.2": 32e3,
+    "SN.3": 58e3,
+    PL04: 36e3,
+    PL05: 24e3,
+    PL06: 32e3,
+    // Kitchen + counters (brand locked)
+    K01: 85e4,
+    K02: 165e3,
+    K03: 2400,
+    K04: 2950,
+    K05: 1850,
+    // Furniture
+    "T2.1": 6500,
+    "T2.2": 11e3,
+    "T2.3": 18e3,
+    "T4.1": 9500,
+    "T4.2": 16e3,
+    "T4.3": 26e3,
+    "T6.1": 14e3,
+    "T6.2": 23e3,
+    "T6.3": 38e3,
+    "CH.1": 1800,
+    "CH.2": 3200,
+    "CH.3": 6500,
+    "HS.1": 2400,
+    "HS.2": 4200,
+    "HS.3": 7800,
+    FU06: 1450,
+    FU07: 2800,
+    // Signage (brand locked)
+    S01: 2450,
+    S02: 42e3,
+    S03: 1950,
+    S04: 480,
+    S05: 185,
+    // Handover
+    Z01: 4400,
+    Z02: 14,
+    Z03: 25e3
+  };
+  var GROUPS = {
+    flooring: {
+      title: "Dining floor",
+      question: "What goes on the floor in the seating area?",
+      unit: "sqft",
+      tiers: [
+        { id: "FL.1", name: "Matt vitrified 600x600", desc: "Plain matt tile, straight joint" },
+        { id: "FL.2", name: "Double-charge 800x800", desc: "Harder wearing, fewer joints" },
+        { id: "FL.3", name: "Large format GVT / wood finish", desc: "800x1600, glue-fixed" }
+      ]
+    },
+    wall: {
+      title: "Dining wall finish",
+      question: "How are the dining walls finished?",
+      unit: "sqft",
+      tiers: [
+        { id: "WA.1", name: "Two coats of paint", desc: "Straight onto existing plaster, no putty" },
+        { id: "WA.2", name: "Putty and emulsion", desc: "Two coats over smooth putty" },
+        { id: "WA.3", name: "Texture and stencil", desc: "Roller texture with brand stencil" },
+        { id: "WA.4", name: "Designer wall tiles", desc: "Patterned tile, full height on feature walls" },
+        { id: "WA.5", name: "WPC louvre panelling", desc: "Charcoal louvres on batten frame" }
+      ]
+    },
+    ac: {
+      title: "Air conditioning",
+      question: "Which system cools the dining area?",
+      unit: "TR",
+      tiers: [
+        { id: "AC.1", name: "Wall-mounted split", desc: "Lowest cost, visible units, simplest service" },
+        { id: "AC.2", name: "Cassette", desc: "Flush in the false ceiling, four-way throw" },
+        { id: "AC.3", name: "Ductable", desc: "Concealed unit with ducting and grilles" }
+      ]
+    },
+    ceiling: {
+      title: "Dining ceiling",
+      question: "How is the ceiling treated over the seating?",
+      unit: "sqft",
+      tiers: [
+        { id: "CE.1", name: "Exposed services, painted", desc: "Services dressed and sprayed dark" },
+        { id: "CE.2", name: "Plain gypsum false ceiling", desc: "Flat board on GI framing" },
+        { id: "CE.3", name: "Gypsum with coves and rafts", desc: "Stepped rafts, concealed cove light" }
+      ]
+    },
+    lighting: {
+      title: "Dining light fittings",
+      question: "What fittings light the seating area?",
+      unit: "nos",
+      tiers: [
+        { id: "LT.1", name: "LED panel and downlight", desc: "12W recessed, warm white" },
+        { id: "LT.2", name: "COB spots on profile", desc: "Aimable 12W COB, 3000K" },
+        { id: "LT.3", name: "Pendants over tables", desc: "Decorative pendant plus track" }
+      ]
+    },
+    furniture: {
+      title: "Tables and chairs",
+      question: "Which furniture range?",
+      unit: "set",
+      tiers: [
+        { id: "1", name: "Powder-coated MS and laminate", desc: "MS frame, HPL top, PP chair" },
+        { id: "2", name: "Solid wood and upholstery", desc: "Rubberwood legs, cushioned seat" },
+        { id: "3", name: "Designer range", desc: "Compact laminate top, moulded seat" }
+      ]
+    },
+    sanitary: {
+      title: "Toilet fittings",
+      question: "Which sanitaryware and CP fittings?",
+      unit: "set",
+      tiers: [
+        { id: "SN.1", name: "Standard", desc: "EWC, basin, health faucet" },
+        { id: "SN.2", name: "Mid range", desc: "Wall-hung EWC, counter basin" },
+        { id: "SN.3", name: "Premium", desc: "Concealed cistern, sensor tap" }
+      ]
+    }
+  };
+  function Swatch({ group, tier }) {
+    const box = { width: "100%", height: 88, display: "block" };
+    const g = (id) => `${group}${tier}${id}`;
+    if (group === "flooring") {
+      const size = [22, 30, 46][tier - 1];
+      const fill = ["#D9D6CF", "#BFB8AC", "#A9805A"][tier - 1];
+      return /* @__PURE__ */ React.createElement("svg", { viewBox: "0 0 140 88", style: box }, /* @__PURE__ */ React.createElement("defs", null, /* @__PURE__ */ React.createElement("pattern", { id: g("p"), width: size, height: size, patternUnits: "userSpaceOnUse" }, /* @__PURE__ */ React.createElement("rect", { width: size, height: size, fill }), /* @__PURE__ */ React.createElement("rect", { width: size, height: size, fill: "none", stroke: "#FFF", strokeWidth: "1.5" }))), /* @__PURE__ */ React.createElement("rect", { width: "140", height: "88", fill: `url(#${g("p")})` }));
+    }
+    if (group === "wall") {
+      return /* @__PURE__ */ React.createElement("svg", { viewBox: "0 0 140 88", style: box }, tier === 1 && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("rect", { width: "140", height: "88", fill: "#E8E4DA" }), Array.from({ length: 26 }).map((_, i) => /* @__PURE__ */ React.createElement("rect", { key: i, x: i * 47 % 140, y: i * 31 % 88, width: "9", height: "4", fill: "#DFDACE" }))), tier === 2 && /* @__PURE__ */ React.createElement("rect", { width: "140", height: "88", fill: "#F0EDE6" }), tier === 3 && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("rect", { width: "140", height: "88", fill: "#E2DCD0" }), Array.from({ length: 40 }).map((_, i) => /* @__PURE__ */ React.createElement("circle", { key: i, cx: i * 37 % 140, cy: i * 53 % 88, r: "2.4", fill: "#CFC6B4" }))), tier === 4 && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("rect", { width: "140", height: "88", fill: "#D8CFC0" }), Array.from({ length: 4 }).map(
+        (_, r) => Array.from({ length: 6 }).map((_2, c) => /* @__PURE__ */ React.createElement("g", { key: `${r}${c}` }, /* @__PURE__ */ React.createElement("rect", { x: c * 24 + 1, y: r * 23 + 1, width: "22", height: "21", fill: "#C9BCA6" }), /* @__PURE__ */ React.createElement("path", { d: `M${c * 24 + 12} ${r * 23 + 4} l7 7 -7 7 -7 -7 Z`, fill: "#8E7F68", opacity: ".65" })))
+      )), tier === 5 && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("rect", { width: "140", height: "88", fill: "#3A3733" }), Array.from({ length: 14 }).map((_, i) => /* @__PURE__ */ React.createElement("rect", { key: i, x: i * 10 + 2, y: "0", width: "5", height: "88", fill: "#4E4A44" }))));
+    }
+    if (group === "ac") {
+      return /* @__PURE__ */ React.createElement("svg", { viewBox: "0 0 140 88", style: box }, /* @__PURE__ */ React.createElement("rect", { width: "140", height: "88", fill: "#EEF0F1" }), /* @__PURE__ */ React.createElement("rect", { x: "0", y: "0", width: "140", height: "16", fill: "#E1E3E4" }), tier === 1 && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("rect", { x: "88", y: "22", width: "42", height: "15", rx: "4", fill: "#FFF", stroke: "#C6C9CB" }), /* @__PURE__ */ React.createElement("path", { d: "M92 40 L128 40 L120 62 L100 62 Z", fill: "#BFD4DD", opacity: ".5" })), tier === 2 && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("rect", { x: "48", y: "4", width: "44", height: "12", rx: "2", fill: "#FFF", stroke: "#C6C9CB" }), /* @__PURE__ */ React.createElement("path", { d: "M48 16 L20 52 L36 52 L52 20 Z", fill: "#BFD4DD", opacity: ".5" }), /* @__PURE__ */ React.createElement("path", { d: "M92 16 L120 52 L104 52 L88 20 Z", fill: "#BFD4DD", opacity: ".5" })), tier === 3 && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("rect", { x: "4", y: "3", width: "132", height: "10", fill: "#D3D6D8" }), [26, 70, 114].map((x) => /* @__PURE__ */ React.createElement("g", { key: x }, /* @__PURE__ */ React.createElement("rect", { x: x - 13, y: "13", width: "26", height: "6", fill: "#FFF", stroke: "#C6C9CB" }), /* @__PURE__ */ React.createElement("path", { d: `M${x - 13} 19 L${x + 13} 19 L${x + 7} 46 L${x - 7} 46 Z`, fill: "#BFD4DD", opacity: ".45" })))));
+    }
+    if (group === "ceiling") {
+      return /* @__PURE__ */ React.createElement("svg", { viewBox: "0 0 140 88", style: box }, /* @__PURE__ */ React.createElement("rect", { width: "140", height: "88", fill: tier === 1 ? "#2A2A2C" : "#F0EEE9" }), tier === 1 && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("rect", { x: "0", y: "26", width: "140", height: "7", fill: "#3E3E42" }), /* @__PURE__ */ React.createElement("rect", { x: "0", y: "52", width: "140", height: "4", fill: "#3E3E42" }), /* @__PURE__ */ React.createElement("circle", { cx: "34", cy: "66", r: "5", fill: "#F58A1F", opacity: ".8" }), /* @__PURE__ */ React.createElement("circle", { cx: "104", cy: "66", r: "5", fill: "#F58A1F", opacity: ".8" })), tier === 2 && /* @__PURE__ */ React.createElement("rect", { x: "10", y: "10", width: "120", height: "68", fill: "none", stroke: "#DCD8CF", strokeWidth: "2" }), tier === 3 && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("rect", { x: "8", y: "8", width: "124", height: "72", fill: "#E6E3DC" }), /* @__PURE__ */ React.createElement("rect", { x: "22", y: "20", width: "96", height: "48", fill: "#F7F5F0" }), /* @__PURE__ */ React.createElement("rect", { x: "22", y: "20", width: "96", height: "48", fill: "none", stroke: C.orange, strokeWidth: "2", opacity: ".6" })));
+    }
+    if (group === "lighting") {
+      return /* @__PURE__ */ React.createElement("svg", { viewBox: "0 0 140 88", style: box }, /* @__PURE__ */ React.createElement("rect", { width: "140", height: "88", fill: "#20242F" }), tier === 1 && [30, 70, 110].map((x) => /* @__PURE__ */ React.createElement("rect", { key: x, x: x - 14, y: "18", width: "28", height: "7", rx: "2", fill: "#FFE7BF" })), tier === 2 && [30, 70, 110].map((x) => /* @__PURE__ */ React.createElement("g", { key: x }, /* @__PURE__ */ React.createElement("rect", { x: x - 6, y: "14", width: "12", height: "12", rx: "2", fill: "#EDE7DC" }), /* @__PURE__ */ React.createElement("path", { d: `M${x - 20} 78 L${x} 26 L${x + 20} 78 Z`, fill: "#FFD79A", opacity: ".28" }))), tier === 3 && [36, 104].map((x) => /* @__PURE__ */ React.createElement("g", { key: x }, /* @__PURE__ */ React.createElement("line", { x1: x, y1: "0", x2: x, y2: "24", stroke: "#8C8577", strokeWidth: "1.5" }), /* @__PURE__ */ React.createElement("path", { d: `M${x - 16} 44 L${x + 16} 44 L${x + 9} 24 L${x - 9} 24 Z`, fill: C.orange }), /* @__PURE__ */ React.createElement("path", { d: `M${x - 26} 82 L${x} 46 L${x + 26} 82 Z`, fill: "#FFD79A", opacity: ".3" }))));
+    }
+    if (group === "furniture") {
+      const seat = ["#C8C4BC", "#8E6A4A", "#2F3440"][tier - 1];
+      return /* @__PURE__ */ React.createElement("svg", { viewBox: "0 0 140 88", style: box }, /* @__PURE__ */ React.createElement("rect", { width: "140", height: "88", fill: "#F1EFE9" }), /* @__PURE__ */ React.createElement("rect", { x: "34", y: "34", width: "72", height: "6", rx: "2", fill: tier === 1 ? "#B9B4AA" : "#7A5A3C" }), /* @__PURE__ */ React.createElement("rect", { x: "66", y: "40", width: "8", height: "30", fill: "#9A948A" }), /* @__PURE__ */ React.createElement("rect", { x: "52", y: "68", width: "36", height: "5", rx: "2", fill: "#9A948A" }), [24, 116].map((x) => /* @__PURE__ */ React.createElement("g", { key: x }, /* @__PURE__ */ React.createElement("rect", { x: x - 10, y: "42", width: "20", height: "6", rx: tier === 3 ? 3 : 1, fill: seat }), /* @__PURE__ */ React.createElement("rect", { x: x - 10, y: "20", width: "20", height: "22", rx: tier === 3 ? 8 : 2, fill: seat }), /* @__PURE__ */ React.createElement("rect", { x: x - 8, y: "48", width: "3", height: "22", fill: "#9A948A" }), /* @__PURE__ */ React.createElement("rect", { x: x + 5, y: "48", width: "3", height: "22", fill: "#9A948A" }))));
+    }
+    return /* @__PURE__ */ React.createElement("svg", { viewBox: "0 0 140 88", style: box }, /* @__PURE__ */ React.createElement("rect", { width: "140", height: "88", fill: "#EFF1F0" }), /* @__PURE__ */ React.createElement("rect", { x: "24", y: tier === 1 ? 40 : 34, width: "34", height: tier === 1 ? 34 : 26, rx: "6", fill: "#FFF", stroke: "#CFCFCB" }), /* @__PURE__ */ React.createElement("ellipse", { cx: "96", cy: "44", rx: "20", ry: tier === 3 ? 9 : 12, fill: "#FFF", stroke: "#CFCFCB" }), /* @__PURE__ */ React.createElement("rect", { x: "94", y: "24", width: "4", height: "14", fill: tier === 3 ? C.orange : "#B9B9B4" }));
+  }
+  var LOGO_CRUNCHERYS = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEfCAMAAACZLOgaAAAB/lBMVEUAAAD4kQYQGC8BAQD+sh3+/v7xjQcDAQAAAAACAQDLy8sAAAABAAABAAD3mCZkOUH4pyRaNEEuJjTX1tbMdwUoFwGvZgRTMz2UVgMVEhFYMwL7qhpGKQEqGACNVzjn5uZILDplOwIvGgB2Rzz9tScjFAB0RAJJKgDaggb9xVD4uUo2NjZ4RgA6IgGqaDLlSUi2dy+3t7f//wDKei45IQDQhisdEQBULUSCTANwRkcREQ2Jh4iop6fqiypVAACYmJhXNABmOj1mZmbXlShVVVVYNABGRkZpOwDoewIdEQB/AAB2dnaSVgCbZTMdEQA8AABCJwDLlkr/wzWhXgQwGwDWRUjZpE23hkv1ogA9IwCWaEivZgDkV0L/zADQdQD/mABKJgBjOACMPEWLTACCTTuGWUWoeUn+wBkqHAAiHjV8UkmGY2nvdTYYEgWUcm67gS6mj5ivPUjcPEy7cAzIvMX/0U3i298hEwE9IwJvQQZ6UTv/AACYfYbamB7KursAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA043lEAAAAgHRSTlMA//78////0E+w/20uj//////////+/////v///23/////UP//j/8x/////xn//////wL/T/+s////WP///wP/Kv////8a/xX/kwL/Ev9yBEX///8y////BzD/Df8FDAcSJf8R/////xL/////KP///////////6VkJ/8B////AK335rIAACnOSURBVHja5X2JX9tItq5BYKmQClvewGDMYgwkLIEkbBfoBMgy6WydpZPupKenu6eX6e7pZd7M3HeX997ffuucKklVkiyVZGPIvPrNpAEbrPPVOd/ZaikULnPcvP96aekZJcQ0jdAwTULpM+v164eFf8nx1S+WTUlE7LjBkLCdwr8SDkz0HpI3YfSEwXI+fNkdKyR7vTWzcjDdaNRqa0VprNVqjcb0weLMZl15O0PhAxbellW+PrMy3agVR9JGsVhrTC+2JBzMDxIE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";
+  var LOGO_INK_MONO = "data:image/png;base64,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";
+  var LOGO_INK_LOCKUP = "data:image/png;base64,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";
+  function CruncherysMark({ size = 44 }) {
+    return /* @__PURE__ */ React.createElement(
+      "img",
+      {
+        src: LOGO_CRUNCHERYS,
+        alt: "Crunchery's",
+        style: { height: size, width: "auto", display: "block" }
+      }
+    );
+  }
+  function InkCraftMark() {
+    return /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 10 } }, /* @__PURE__ */ React.createElement("img", { src: LOGO_INK_MONO, alt: "", style: { height: 34, width: "auto", display: "block" } }), /* @__PURE__ */ React.createElement("div", { style: { lineHeight: 1.25 } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 12.5, fontWeight: 800, letterSpacing: "0.02em", color: "#111" } }, "INK CRAFT STUDIO"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 9.5, color: C.muted } }, "Architecture | Interior design | Product design | BIM")));
+  }
+  function InkCraftLockup({ height = 132 }) {
+    return /* @__PURE__ */ React.createElement("img", { src: LOGO_INK_LOCKUP, alt: "Ink Craft Studio", style: { height, width: "auto", display: "block" } });
+  }
+  var Field = ({ label, hint, children }) => /* @__PURE__ */ React.createElement("label", { style: { display: "block", marginBottom: 16 } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 13, fontWeight: 600, color: C.navy, marginBottom: 5 } }, label), hint && /* @__PURE__ */ React.createElement("div", { style: { fontSize: 12, color: C.muted, marginBottom: 6 } }, hint), children);
+  var inputStyle = {
+    width: "100%",
+    padding: "9px 11px",
+    border: `1px solid ${C.lineDark}`,
+    borderRadius: 3,
+    fontSize: 14,
+    fontFamily: FONT,
+    background: "#FFF",
+    color: C.navy,
+    outline: "none",
+    fontVariantNumeric: "tabular-nums"
+  };
+  var Btn = ({ children, onClick, kind = "solid", disabled, style }) => {
+    const base = {
+      padding: "10px 18px",
+      fontSize: 13,
+      fontWeight: 600,
+      fontFamily: FONT,
+      borderRadius: 3,
+      cursor: disabled ? "not-allowed" : "pointer",
+      opacity: disabled ? 0.45 : 1,
+      border: "1px solid",
+      ...style
+    };
+    const kinds = {
+      solid: { background: C.navy, color: "#FFF", borderColor: C.navy },
+      ghost: { background: "transparent", color: C.navy, borderColor: C.lineDark },
+      accent: { background: C.orange, color: C.navy, borderColor: C.orange }
+    };
+    return /* @__PURE__ */ React.createElement("button", { onClick: disabled ? void 0 : onClick, disabled, style: { ...base, ...kinds[kind] } }, children);
+  };
+  var Check = ({ label, checked, onChange }) => /* @__PURE__ */ React.createElement(
+    "label",
+    {
+      style: {
+        display: "flex",
+        alignItems: "center",
+        gap: 10,
+        padding: "10px 12px",
+        border: `1px solid ${checked ? C.navy : C.line}`,
+        background: checked ? "#FFF" : "transparent",
+        borderRadius: 3,
+        cursor: "pointer",
+        fontSize: 13,
+        color: C.navy
+      }
+    },
+    /* @__PURE__ */ React.createElement("input", { type: "checkbox", checked, onChange: (e) => onChange(e.target.checked) }),
+    label
+  );
+  function App() {
+    const [step, setStep] = useState(0);
+    const [rates, setRates] = useState(SEED);
+    const [saved, setSaved] = useState("");
+    const fileRef = useRef(null);
+    const [proj, setProj] = useState({ outlet: "", partner: "", city: "", code: "", tier: "T1" });
+    const [space, setSpace] = useState({ carpet: 1200, frontage: 20, height: 11, floor: "Ground" });
+    const [shell, setShell] = useState({
+      oldFitout: false,
+      floorLevel: false,
+      plastered: false,
+      toilet: false,
+      water: false,
+      drainage: false,
+      shutter: false,
+      mezzanine: false,
+      ac: true,
+      power: 0
+    });
+    const [zone, setZone] = useState({ kL: 24, kW: 14, toiletArea: 70, fixedFoh: 150, toilets: 2, hasToilets: true });
+    const [seats, setSeats] = useState({ s2: 0, s4: 0, s6: 0, hc: 0, bq: 0 });
+    const [choice, setChoice] = useState({ flooring: "2", wall: "2", ceiling: "2", lighting: "2", furniture: "2", sanitary: "2", ac: "2" });
+    const [withGst, setWithGst] = useState(false);
+    const [projList, setProjList] = useState(null);
+    const [printHtml, setPrintHtml] = useState("");
+    const [customs, setCustoms] = useState({});
+    const [ov, setOv] = useState({});
+    const [extras, setExtras] = useState([]);
+    const [markup, setMarkup] = useState({ ohp: 12, cont: 5, fee: 7, gst: 18 });
+    useEffect(() => {
+      (async () => {
+        try {
+          const r = await store.get("crunchery:rates");
+          if (r) setRates({ ...SEED, ...JSON.parse(r.value) });
+        } catch (e) {
+        }
+      })();
+    }, []);
+    const saveRates = async (next) => {
+      setRates(next);
+      try {
+        await store.set("crunchery:rates", JSON.stringify(next));
+      } catch (e) {
+      }
+    };
+    const saveProject = async () => {
+      const key = `crunchery:project:${(proj.code || proj.outlet || "untitled").replace(/[^A-Za-z0-9_-]/g, "_")}`;
+      const payload = { proj, space, shell, zone, seats, choice, customs, ov, extras, markup, withGst, rates, at: (/* @__PURE__ */ new Date()).toISOString() };
+      try {
+        await store.set(key, JSON.stringify(payload));
+        setSaved(`Saved as ${key.split(":").pop()}`);
+      } catch (e) {
+        setSaved("Could not save. Check the outlet name and try again.");
+      }
+      setTimeout(() => setSaved(""), 3500);
+    };
+    const g = useMemo(() => {
+      const carpet = num(space.carpet);
+      const frontage = num(space.frontage) || Math.sqrt(carpet) || 1;
+      const depth = carpet / frontage;
+      const perim = 2 * (frontage + depth);
+      const ht = num(space.height) || 10;
+      const kL = num(zone.kL), kW = num(zone.kW);
+      const boh = kL * kW;
+      const hasT = !!zone.hasToilets;
+      const toiletArea = hasT ? num(zone.toiletArea) : 0;
+      const toilets = hasT ? num(zone.toilets) : 0;
+      const foh = Math.max(0, carpet - boh - toiletArea);
+      const dining = Math.max(0, foh - num(zone.fixedFoh));
+      const usedArea = SEATING.reduce((s, t) => s + num(seats[t.k]) * t.area, 0);
+      const totalSeats = SEATING.reduce((s, t) => s + num(seats[t.k]) * t.per, 0);
+      const nbcCap = Math.floor(carpet / 16);
+      const T = TIERS[proj.tier];
+      const areaCap = Math.floor(dining / 14);
+      const seatCap = Math.min(areaCap, nbcCap, T.seatsMax);
+      const bohPerim = 2 * (kL + kW);
+      return { carpet, frontage, depth, perim, ht, boh, bohPerim, kL, kW, toiletArea, toilets, hasT, foh, dining, usedArea, totalSeats, nbcCap, T, areaCap, seatCap };
+    }, [space, zone, seats, proj.tier]);
+    const R = (id) => num(rates[id]);
+    const boq = useMemo(() => {
+      const L = [];
+      const add = (id, mod, desc, unit, qty, rate, flag) => {
+        if (qty > 0.01 && rate > 0) L.push({ id, mod, desc, unit, qty: Math.round(qty * 100) / 100, rate, flag });
+      };
+      const wallArea = g.perim * g.ht * 0.85;
+      const bohPerim = g.bohPerim;
+      add("P01", "Preliminaries", "Site mobilisation, barricading and protection of shopfront", "LS", 1, R("P01"), "COND");
+      add("P02", "Preliminaries", "Debris removal and disposal", "sqft", g.carpet, R("P02"), "COND");
+      add("P03", "Preliminaries", "Temporary power and water for works", "LS", 1, R("P03"), "COND");
+      if (shell.oldFitout) add("C01", "Civil", "Dismantling existing finishes and fittings", "sqft", g.carpet, R("C01"), "COND");
+      if (!shell.floorLevel) add("C02", "Civil", "Floor levelling screed, 40mm", "sqft", g.carpet, R("C02"), "COND");
+      add("C03", "Civil", "Partition walls 4in AAC/brick incl. plaster \u2014 kitchen and toilet separation", "sqft", (bohPerim * 0.6 + Math.sqrt(Math.max(g.toiletArea, 1)) * 4) * g.ht, R("C03"), "COND");
+      if (!shell.plastered) add("C04", "Civil", "Internal plastering, 12mm cement", "sqft", g.perim * g.ht, R("C04"), "COND");
+      if (g.hasT && !shell.toilet) add("C05", "Civil", "Toilet construction \u2014 waterproofing, tiling, door and frame", "nos", g.toilets, R("C05"), "COND");
+      if (shell.mezzanine) {
+        add("C06", "Civil", "Mezzanine \u2014 MS beams and joists, profile deck, RCC topping (approx. 15 kg steel per sqft)", "sqft", g.carpet * 0.2, R("C06"), "COND");
+        add("C08", "Civil", "MS staircase to mezzanine with treads and railing", "nos", 1, R("C08"), "COND");
+      }
+      if (!shell.shutter) add("C07", "Civil", "Shopfront glazing and rolling shutter", "sqft", g.frontage * g.ht, R("C07"), "COND");
+      add(`FL.${choice.flooring}`, "Flooring", `Dining floor \u2014 ${GROUPS.flooring.tiers[choice.flooring - 1]?.name || "selection"}`, "sqft", g.foh * 1.05, R(`FL.${choice.flooring}`), "CHOICE");
+      add("FL04", "Flooring", "Skirting, 4in high", "rft", g.perim * 0.9, R("FL04"), "CHOICE");
+      add("FL05", "Flooring", "Anti-skid tile to kitchen and toilets", "sqft", (g.boh + g.toiletArea) * 1.05, R("FL05"), "COND");
+      add(`WA.${choice.wall}`, "Walls", `Dining wall finish \u2014 ${GROUPS.wall.tiers[choice.wall - 1]?.name || "selection"}`, "sqft", wallArea, R(`WA.${choice.wall}`), "CHOICE");
+      add("WA04", "Walls", "Glazed wall tiling to kitchen, up to 7ft", "sqft", bohPerim * 7, R("WA04"), "COND");
+      add(`CE.${choice.ceiling}`, "Ceiling", `Dining ceiling \u2014 ${GROUPS.ceiling.tiers[choice.ceiling - 1]?.name || "selection"}`, "sqft", g.foh, R(`CE.${choice.ceiling}`), "CHOICE");
+      add("CE04", "Ceiling", "Washable grid ceiling to kitchen", "sqft", g.boh, R("CE04"), "COND");
+      add("E01", "Electrical", "Main distribution board, MCBs and earthing", "LS", 1, R("E01"), "COND");
+      add("E02", "Electrical", "Wiring points \u2014 light, fan and socket", "nos", Math.ceil(g.carpet / 38), R("E02"), "COND");
+      add("E03", "Electrical", "Power points for kitchen equipment", "nos", 12, R("E03"), "LOCK");
+      add(`LT.${choice.lighting}`, "Electrical", `Dining light fittings \u2014 ${GROUPS.lighting.tiers[choice.lighting - 1]?.name || "selection"}`, "nos", Math.ceil(g.foh / 45), R(`LT.${choice.lighting}`), "CHOICE");
+      add("E07", "Electrical", "Utility fittings to kitchen, store and toilets", "nos", Math.ceil((g.boh + g.toiletArea) / 60), R("E07"), "COND");
+      add("E05", "Electrical", "CCTV points with cabling and conduit \u2014 cameras and recorder by others", "nos", Math.max(4, Math.ceil(g.carpet / 350)), R("E05"), "COND");
+      add("E06", "Electrical", "Cable trays, conduits and raceways", "rft", g.perim * 1.2, R("E06"), "COND");
+      if (shell.ac) add(`AC.${choice.ac}`, "HVAC", `Air conditioning \u2014 ${GROUPS.ac.tiers[choice.ac - 1]?.name || "selection"}, incl. piping, install and commissioning`, "TR", Math.ceil(g.foh / 110), R(`AC.${choice.ac}`), "CHOICE");
+      add("H02", "HVAC", "Kitchen exhaust hood, ducting and blower", "LS", 1, R("H02"), "LOCK");
+      add("H03", "HVAC", "Fresh air and exhaust fans", "nos", 4, R("H03"), "COND");
+      add("PL01", "Plumbing", "Water supply points, CPVC", "nos", g.hasT ? 8 : 4, R("PL01"), "COND");
+      add("PL02", "Plumbing", "Drainage lines, traps and gully", "nos", g.hasT ? 6 : 3, R("PL02"), "COND");
+      if (g.hasT) add(`SN.${choice.sanitary}`, "Plumbing", `Sanitaryware and CP fittings \u2014 ${GROUPS.sanitary.tiers[choice.sanitary - 1]?.name || "selection"}`, "set", g.toilets, R(`SN.${choice.sanitary}`), "CHOICE");
+      if (!shell.water) add("PL04", "Plumbing", "Overhead tank 1000L, pump and connecting plumbing", "LS", 1, R("PL04"), "COND");
+      add("PL05", "Plumbing", "Grease trap for kitchen waste", "nos", 1, R("PL05"), "LOCK");
+      add("PL06", "Plumbing", "Water purifier \u2014 commercial RO with storage and connections", "nos", 1, R("PL06"), "LOCK");
+      add("K03", "Kitchen and counters", "Billing and POS counter, solid surface with brand fascia", "rft", 12, R("K03"), "LOCK");
+      add("K04", "Kitchen and counters", "Display and pickup counter", "rft", 10, R("K04"), "LOCK");
+      add("K05", "Kitchen and counters", "Back counter and beverage station", "rft", 8, R("K05"), "LOCK");
+      const ft = choice.furniture;
+      add(`T2.${ft}`, "Furniture", "2-seater table", "nos", num(seats.s2), R(`T2.${ft}`), "CHOICE");
+      add(`T4.${ft}`, "Furniture", "4-seater table", "nos", num(seats.s4), R(`T4.${ft}`), "CHOICE");
+      add(`T6.${ft}`, "Furniture", "6-seater table", "nos", num(seats.s6), R(`T6.${ft}`), "CHOICE");
+      add(`CH.${ft}`, "Furniture", "Dining chair", "nos", num(seats.s2) * 2 + num(seats.s4) * 4 + num(seats.s6) * 6, R(`CH.${ft}`), "CHOICE");
+      add(`HS.${ft}`, "Furniture", "High stool", "nos", num(seats.hc), R(`HS.${ft}`), "CHOICE");
+      add("FU06", "Furniture", "High ledge counter with support brackets", "rft", num(seats.hc) * 2, R("FU06"), "CHOICE");
+      add("FU07", "Furniture", "Banquette seating, upholstered", "rft", num(seats.bq) * 2, R("FU07"), "CHOICE");
+      add("S01", "Signage and branding", "Main facade signage \u2014 ACP with backlit acrylic letters", "sqft", g.frontage * 3, R("S01"), "LOCK");
+      add("S02", "Signage and branding", "Illuminated logo disc", "nos", 1, R("S02"), "LOCK");
+      add("S03", "Signage and branding", "Backlit menu board", "sqft", 24, R("S03"), "LOCK");
+      add("S04", "Signage and branding", "Brand graphic wall", "sqft", 80, R("S04"), "LOCK");
+      add("S05", "Signage and branding", "Window vinyl and door branding", "sqft", 60, R("S05"), "LOCK");
+      add("Z01", "Handover", "Fire extinguishers, 6kg ABC", "nos", Math.max(2, Math.ceil(g.carpet / 600)), R("Z01"), "COND");
+      add("Z02", "Handover", "Deep cleaning and handover", "sqft", g.carpet, R("Z02"), "COND");
+      add("Z03", "Handover", "Statutory drawings and licence assistance", "LS", 1, R("Z03"), "COND");
+      Object.entries(customs).forEach(([grp, cu]) => {
+        if (!cu) return;
+        L.push({
+          id: `CU.${grp}`,
+          mod: GROUPS[grp].title,
+          desc: `${GROUPS[grp].title} \u2014 partner's own selection: ${cu.note || "image supplied"}`,
+          unit: GROUPS[grp].unit,
+          qty: num(cu.qty) || 1,
+          rate: num(cu.rate),
+          flag: "CUSTOM"
+        });
+      });
+      extras.forEach((e, i) => L.push({ id: `EX.${i}`, mod: e.mod || "Additional items", desc: e.desc, unit: e.unit, qty: num(e.qty), rate: num(e.rate), flag: "EXTRA" }));
+      return L.map((l) => {
+        const o = ov[l.id] || {};
+        const qty = o.qty !== void 0 ? num(o.qty) : l.qty;
+        const rate = o.rate !== void 0 ? num(o.rate) : l.rate;
+        return { ...l, qty, rate, removed: !!o.removed, amount: o.removed ? 0 : qty * rate };
+      });
+    }, [g, shell, zone, choice, seats, rates, customs, extras, ov, space]);
+    const totals = useMemo(() => {
+      const works = boq.reduce((s, l) => s + l.amount, 0);
+      const ohp = works * num(markup.ohp) / 100;
+      const cont = works * num(markup.cont) / 100;
+      const fee = g.T.archFee;
+      const sub = works + ohp + cont + fee;
+      const gst = withGst ? sub * num(markup.gst) / 100 : 0;
+      const grand = sub + gst;
+      const toCruncherys = g.T.mgmt + g.T.kitchen;
+      const investment = toCruncherys + grand;
+      return {
+        works,
+        ohp,
+        cont,
+        fee,
+        sub,
+        gst,
+        grand,
+        toCruncherys,
+        investment,
+        psf: g.carpet ? investment / g.carpet : 0
+      };
+    }, [boq, markup, g.carpet, g.T, withGst]);
+    const modules = useMemo(() => {
+      const m = {};
+      boq.forEach((l) => {
+        (m[l.mod] = m[l.mod] || []).push(l);
+      });
+      return m;
+    }, [boq]);
+    const openLoad = async () => {
+      try {
+        const res = await store.list("crunchery:project:");
+        const keys = res && res.keys || [];
+        if (!keys.length) {
+          setSaved("No saved projects on this device yet.");
+          setTimeout(() => setSaved(""), 3500);
+          return;
+        }
+        const items = [];
+        for (const k of keys) {
+          try {
+            const rec = await store.get(k);
+            const d = JSON.parse(rec.value);
+            items.push({ key: k, name: d.proj?.outlet || k.split(":").pop(), tier: d.proj?.tier, at: d.at });
+          } catch (e) {
+          }
+        }
+        items.sort((a, b) => String(b.at).localeCompare(String(a.at)));
+        setProjList(items);
+      } catch (e) {
+        setSaved("Could not read saved projects.");
+        setTimeout(() => setSaved(""), 3500);
+      }
+    };
+    const loadProject = async (key) => {
+      try {
+        const rec = await store.get(key);
+        const d = JSON.parse(rec.value);
+        if (d.proj) setProj({ tier: "T1", ...d.proj });
+        if (d.space) setSpace(d.space);
+        if (d.shell) setShell(d.shell);
+        if (d.zone) setZone({ hasToilets: true, ...d.zone });
+        if (d.seats) setSeats(d.seats);
+        if (d.choice) setChoice(d.choice);
+        setCustoms(d.customs || {});
+        setOv(d.ov || {});
+        setExtras(d.extras || []);
+        if (d.markup) setMarkup(d.markup);
+        setWithGst(!!d.withGst);
+        if (d.rates) setRates({ ...SEED, ...d.rates });
+        setProjList(null);
+        setStep(6);
+        setSaved(`Loaded ${d.proj?.outlet || "project"}`);
+        setTimeout(() => setSaved(""), 3e3);
+      } catch (e) {
+        setSaved("Could not open that project.");
+        setTimeout(() => setSaved(""), 3500);
+      }
+    };
+    const downloadPdf = () => {
+      const lines = boq.filter((l) => !l.removed);
+      const mods = {};
+      lines.forEach((l) => {
+        (mods[l.mod] = mods[l.mod] || []).push(l);
+      });
+      const esc = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+      const money = (n) => "Rs " + Math.round(n || 0).toLocaleString("en-IN");
+      const tag = { LOCK: "brand standard", CHOICE: "selection", CUSTOM: "to be priced", COND: "", EXTRA: "" };
+      const body = Object.entries(mods).map(([mod, ls]) => `
+      <tr class="mod"><td colspan="5">${esc(mod)}</td><td class="r">${money(ls.reduce((a, b) => a + b.amount, 0))}</td></tr>
+      ${ls.map((l) => `<tr>
+        <td class="code">${esc(l.id)}</td>
+        <td>${esc(l.desc)}${tag[l.flag] ? `<span class="tag">${tag[l.flag]}</span>` : ""}</td>
+        <td class="c">${esc(l.unit)}</td>
+        <td class="r">${l.qty.toLocaleString("en-IN")}</td>
+        <td class="r">${money(l.rate)}</td>
+        <td class="r">${money(l.amount)}</td></tr>`).join("")}
+    `).join("");
+      const sum = [
+        ["Works priced in this bill", totals.works],
+        [`Contractor overheads and profit at ${markup.ohp}%`, totals.ohp],
+        [`Contingency at ${markup.cont}%`, totals.cont],
+        [`Architecture and site visits, ${g.T.name}, ${g.T.visits} visits`, totals.fee]
+      ].map(([l, v]) => `<tr><td>${esc(l)}</td><td class="r">${money(v)}</td></tr>`).join("") + `<tr class="tot"><td>Turnkey contract value</td><td class="r">${money(totals.sub)}</td></tr>` + (withGst ? `<tr><td>GST at ${markup.gst}%</td><td class="r">${money(totals.gst)}</td></tr>
+                    <tr class="tot"><td>Contract value payable</td><td class="r">${money(totals.grand)}</td></tr>` : `<tr><td class="note" colspan="2">GST extra at actuals.</td></tr>`);
+      const html = `<style>
+ @page { size: A4; margin: 14mm 12mm; }
+ #printarea { font: 10.5px/1.5 Helvetica, Arial, sans-serif; color: #1B2138; }
+ #printarea header { display: flex; justify-content: space-between; align-items: flex-start;
+          border-bottom: 2px solid #1B2138; padding-bottom: 10px; margin-bottom: 14px; }
+ #printarea img.c { height: 46px; } #printarea img.i { height: 54px; }
+ #printarea h1 { font-size: 17px; margin: 0 0 3px; }
+ .meta { font-size: 10px; color: #75716A; }
+ #printarea h2 { font-size: 12.5px; margin: 20px 0 7px; border-bottom: 1px solid #DEDBD4; padding-bottom: 4px; }
+ #printarea table { width: 100%; border-collapse: collapse; }
+ #printarea td, #printarea th { padding: 4px 5px; border-bottom: 1px solid #EFEDE8; vertical-align: top; }
+ #printarea th { background: #1B2138; color: #fff; font-weight: 600; font-size: 9.5px; text-align: left; }
+ .r { text-align: right; white-space: nowrap; } .c { text-align: center; }
+ .code { color: #75716A; width: 42px; }
+ tr.mod td { background: #F1EFEA; font-weight: 700; font-size: 10.5px; }
+ tr.tot td { font-weight: 700; border-top: 1.5px solid #1B2138; }
+ .tag { display: inline-block; margin-left: 6px; font-size: 8px; color: #75716A;
+        border: 1px solid #C3BFB6; border-radius: 2px; padding: 0 3px; }
+ .note { color: #B3452F; font-weight: 600; }
+ .grand { display: flex; justify-content: space-between; align-items: baseline;
+          border-top: 2px solid #1B2138; margin-top: 12px; padding-top: 9px; font-size: 15px; font-weight: 700; }
+ #printarea footer { margin-top: 26px; padding-top: 12px; border-top: 1px solid #DEDBD4;
+          display: flex; justify-content: space-between; align-items: flex-end; font-size: 9px; color: #75716A; }
+ #printarea tr { break-inside: avoid; }
+ @media screen { #printarea { display: none; } }
+ @media print {
+   #root > div > *:not(#printarea) { display: none !important; }
+   body > div:not(#root) { display: none !important; }
+   #printarea { display: block !important; }
+   html, body, #root, #root > div { background: #fff !important; margin: 0 !important; padding: 0 !important; min-height: 0 !important; }
+ }
+</style>
+<header>
+  <div><img class="c" src="${LOGO_CRUNCHERYS}"></div>
+  <div style="text-align:right">
+    <h1>${esc(proj.outlet || "New outlet")}</h1>
+    <div class="meta">${esc([proj.city, proj.code].filter(Boolean).join(" &middot; "))}</div>
+    <div class="meta">${g.T.name} &middot; ${Math.round(g.carpet)} sqft carpet &middot; ${g.totalSeats} seats</div>
+    <div class="meta">${esc(proj.partner || "")}</div>
+  </div>
+</header>
+
+<h2>Bill of quantities</h2>
+<table><thead><tr><th>Item</th><th>Description</th><th class="c">Unit</th><th class="r">Qty</th><th class="r">Rate</th><th class="r">Amount</th></tr></thead>
+<tbody>${body}</tbody></table>
+
+<h2>Turnkey contract</h2>
+<table>${sum}</table>
+
+<h2>Total investment</h2>
+<table>
+ <tr><td>Paid to Crunchery's &mdash; management ${money(g.T.mgmt)}, kitchen equipment ${money(g.T.kitchen)}</td><td class="r">${money(totals.toCruncherys)}</td></tr>
+ <tr><td>Turnkey contract, Ink Craft Design Studio &mdash; everything else</td><td class="r">${money(totals.grand)}</td></tr>
+</table>
+<div class="grand"><span>Total investment</span><span>${money(totals.investment)}</span></div>
+<div class="meta" style="margin-top:5px">${g.T.name} band ${money(g.T.band[0])} to ${money(g.T.band[1])} &middot; ${money(totals.psf)} per sqft of carpet area</div>
+
+<h2>Exclusions and terms</h2>
+<ul style="margin:0;padding-left:16px">
+  <li>Chimney and kitchen exhaust are subject to site conditions and are not included at a firm price.</li>
+  <li>Excludes rent, deposits, statutory and licence fees, EB load sanction and deposit, and GST unless stated above.</li>
+  <li>Excludes any work below the floor slab, structural strengthening, and anything concealed until opened up.</li>
+  <li>Kitchen equipment and the management package are supplied by Crunchery's and are outside this contract.</li>
+  <li>Rates hold for 60 days from the date of this estimate and are confirmed against vendor quotations before signing.</li>
+  <li>Quantities follow the carpet area and selections recorded at this revision. Changes are re-priced as a variation.</li>
+</ul>
+
+<footer>
+  <div style="max-width:62%">Estimate prepared for ${esc(proj.partner || "the franchise partner")}.
+    ${(/* @__PURE__ */ new Date()).toLocaleDateString("en-IN")}.
+    ${esc(proj.code || "")}</div>
+  <img class="i" src="${LOGO_INK_LOCKUP}">
+</footer>`;
+      setPrintHtml(html);
+    };
+    useEffect(() => {
+      if (!printHtml) return;
+      const t = setTimeout(() => {
+        window.print();
+        setPrintHtml("");
+      }, 250);
+      return () => clearTimeout(t);
+    }, [printHtml]);
+    const onUpload = (grp, file) => {
+      const r = new FileReader();
+      r.onload = () => setCustoms((c) => ({ ...c, [grp]: { ...c[grp] || {}, img: r.result, rate: c[grp]?.rate || 0, qty: 1 } }));
+      r.readAsDataURL(file);
+    };
+    const STEPS = ["Outlet", "The space", "What exists", "Zoning", "Seating", "Selections", "Bill of quantities", "Rates"];
+    const over = g.usedArea > g.dining + 0.5 || g.totalSeats > g.T.seatsMax;
+    return /* @__PURE__ */ React.createElement("div", { style: { fontFamily: FONT, background: C.paper, minHeight: "100vh", color: C.navy } }, /* @__PURE__ */ React.createElement("div", { id: "printarea", dangerouslySetInnerHTML: { __html: printHtml } }), /* @__PURE__ */ React.createElement("div", { style: { background: C.studio, borderBottom: `1px solid ${C.lineDark}`, padding: "12px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12 } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 14 } }, /* @__PURE__ */ React.createElement(CruncherysMark, null), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 15, fontWeight: 700 } }, "Franchise fit-out estimator"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 12, color: C.muted } }, proj.outlet || "New outlet", proj.city ? `, ${proj.city}` : "", " \u2014 ", TIERS[proj.tier].name))), /* @__PURE__ */ React.createElement(InkCraftMark, null)), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: 4, padding: "10px 20px", overflowX: "auto", borderBottom: `1px solid ${C.line}`, background: "#FFF" } }, STEPS.map((s, i) => /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        key: s,
+        onClick: () => setStep(i),
+        style: {
+          padding: "7px 13px",
+          fontSize: 12.5,
+          fontFamily: FONT,
+          whiteSpace: "nowrap",
+          cursor: "pointer",
+          border: `1px solid ${i === step ? C.navy : "transparent"}`,
+          borderRadius: 3,
+          background: i === step ? C.navy : "transparent",
+          color: i === step ? "#FFF" : C.muted,
+          fontWeight: i === step ? 600 : 500
+        }
+      },
+      /* @__PURE__ */ React.createElement("span", { style: { opacity: 0.6, marginRight: 7, fontVariantNumeric: "tabular-nums" } }, i + 1),
+      s
+    ))), /* @__PURE__ */ React.createElement("div", { style: { maxWidth: 1080, margin: "0 auto", padding: "24px 20px 140px" } }, step === 0 && /* @__PURE__ */ React.createElement(Panel, { title: "Which outlet is this?", sub: "Everything downstream is stored against this record." }, /* @__PURE__ */ React.createElement(Field, { label: "Outlet name" }, /* @__PURE__ */ React.createElement("input", { style: inputStyle, value: proj.outlet, onChange: (e) => setProj({ ...proj, outlet: e.target.value }), placeholder: "Crunchery's Gandhipuram" })), /* @__PURE__ */ React.createElement(Field, { label: "Franchise partner" }, /* @__PURE__ */ React.createElement("input", { style: inputStyle, value: proj.partner, onChange: (e) => setProj({ ...proj, partner: e.target.value }) })), /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 } }, /* @__PURE__ */ React.createElement(Field, { label: "City" }, /* @__PURE__ */ React.createElement("input", { style: inputStyle, value: proj.city, onChange: (e) => setProj({ ...proj, city: e.target.value }) })), /* @__PURE__ */ React.createElement(Field, { label: "Project code" }, /* @__PURE__ */ React.createElement("input", { style: inputStyle, value: proj.code, onChange: (e) => setProj({ ...proj, code: e.target.value }), placeholder: "CRN001" }))), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 13, fontWeight: 600, marginTop: 8, marginBottom: 8 } }, "Franchise tier"), /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(170px,1fr))", gap: 10 } }, Object.entries(TIERS).map(([k, t]) => {
+      const on = proj.tier === k;
+      return /* @__PURE__ */ React.createElement(
+        "button",
+        {
+          key: k,
+          onClick: () => setProj({ ...proj, tier: k }),
+          style: {
+            textAlign: "left",
+            padding: "12px 14px",
+            cursor: "pointer",
+            fontFamily: FONT,
+            background: on ? C.orangeSoft : "#FFF",
+            border: `2px solid ${on ? C.orange : C.line}`,
+            borderRadius: 3
+          }
+        },
+        /* @__PURE__ */ React.createElement("div", { style: { fontSize: 14, fontWeight: 700, color: C.navy } }, t.name),
+        /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11.5, color: C.muted, margin: "3px 0 7px" } }, t.note),
+        /* @__PURE__ */ React.createElement("div", { style: { fontSize: 12, fontVariantNumeric: "tabular-nums", color: C.navy } }, inr(t.band[0]), " \u2013 ", inr(t.band[1])),
+        /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11.5, color: C.muted, marginTop: 2 } }, t.seatsMin ? `${t.seatsMin}\u2013${t.seatsMax}` : `up to ${t.seatsMax}`, " seats \xB7 fee ", inr(t.archFee), " / ", t.visits, " visits")
+      );
+    }))), step === 1 && /* @__PURE__ */ React.createElement(Panel, { title: "The space you have taken", sub: "Carpet area drives almost every quantity in the bill. Measure inside the walls." }, /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(210px,1fr))", gap: 16 } }, /* @__PURE__ */ React.createElement(Field, { label: "Carpet area (sqft)" }, /* @__PURE__ */ React.createElement("input", { type: "number", style: inputStyle, value: space.carpet, onChange: (e) => setSpace({ ...space, carpet: e.target.value }) })), /* @__PURE__ */ React.createElement(Field, { label: "Frontage width (ft)", hint: "The shopfront side" }, /* @__PURE__ */ React.createElement("input", { type: "number", style: inputStyle, value: space.frontage, onChange: (e) => setSpace({ ...space, frontage: e.target.value }) })), /* @__PURE__ */ React.createElement(Field, { label: "Clear height (ft)", hint: "Floor to underside of slab" }, /* @__PURE__ */ React.createElement("input", { type: "number", style: inputStyle, value: space.height, onChange: (e) => setSpace({ ...space, height: e.target.value }) })), /* @__PURE__ */ React.createElement(Field, { label: "Floor level" }, /* @__PURE__ */ React.createElement("select", { style: inputStyle, value: space.floor, onChange: (e) => setSpace({ ...space, floor: e.target.value }) }, /* @__PURE__ */ React.createElement("option", null, "Ground"), /* @__PURE__ */ React.createElement("option", null, "First"), /* @__PURE__ */ React.createElement("option", null, "Basement"), /* @__PURE__ */ React.createElement("option", null, "Upper with lift")))), /* @__PURE__ */ React.createElement(Readout, { items: [["Depth", `${g.depth.toFixed(1)} ft`], ["Perimeter", `${g.perim.toFixed(0)} rft`], ["Wall area", `${Math.round(g.perim * g.ht * 0.85)} sqft`]] })), step === 2 && /* @__PURE__ */ React.createElement(Panel, { title: "What already exists in the shell", sub: "Tick only what is genuinely there and usable. Anything unticked becomes a cost line." }, /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(230px,1fr))", gap: 10 } }, /* @__PURE__ */ React.createElement(Check, { label: "Old fit-out to be stripped out", checked: shell.oldFitout, onChange: (v) => setShell({ ...shell, oldFitout: v }) }), /* @__PURE__ */ React.createElement(Check, { label: "Floor is level and screeded", checked: shell.floorLevel, onChange: (v) => setShell({ ...shell, floorLevel: v }) }), /* @__PURE__ */ React.createElement(Check, { label: "Walls are plastered", checked: shell.plastered, onChange: (v) => setShell({ ...shell, plastered: v }) }), /* @__PURE__ */ React.createElement(Check, { label: "Toilet already built", checked: shell.toilet, onChange: (v) => setShell({ ...shell, toilet: v }) }), /* @__PURE__ */ React.createElement(Check, { label: "Water connection available", checked: shell.water, onChange: (v) => setShell({ ...shell, water: v }) }), /* @__PURE__ */ React.createElement(Check, { label: "Drainage connection available", checked: shell.drainage, onChange: (v) => setShell({ ...shell, drainage: v }) }), /* @__PURE__ */ React.createElement(Check, { label: "Shutter or shopfront in place", checked: shell.shutter, onChange: (v) => setShell({ ...shell, shutter: v }) }), /* @__PURE__ */ React.createElement(Check, { label: "Mezzanine to be built", checked: shell.mezzanine, onChange: (v) => setShell({ ...shell, mezzanine: v }) }), /* @__PURE__ */ React.createElement(Check, { label: "Air conditioned dining", checked: shell.ac, onChange: (v) => setShell({ ...shell, ac: v }) })), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 18, maxWidth: 260 } }, /* @__PURE__ */ React.createElement(Field, { label: "Sanctioned power (kW)", hint: "Below 25 kW usually needs an upgrade" }, /* @__PURE__ */ React.createElement("input", { type: "number", style: inputStyle, value: shell.power, onChange: (e) => setShell({ ...shell, power: e.target.value }) })))), step === 3 && /* @__PURE__ */ React.createElement(Panel, { title: "How the area splits", sub: "Set the kitchen out by its actual dimensions, then toilets, then the fixed front counters. What is left over is what can hold seats." }, /* @__PURE__ */ React.createElement("div", { style: { marginBottom: 18, maxWidth: 420 } }, /* @__PURE__ */ React.createElement(Check, { label: "This outlet has its own toilets", checked: zone.hasToilets, onChange: (v) => setZone({ ...zone, hasToilets: v }) }), !zone.hasToilets && /* @__PURE__ */ React.createElement("div", { style: { fontSize: 12.5, color: C.muted, marginTop: 7 } }, "Typical for a kiosk or food-court unit sharing the building's facilities. All toilet construction, sanitaryware and drainage lines drop out of the bill.")), /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(210px,1fr))", gap: 16 } }, /* @__PURE__ */ React.createElement(Field, { label: "Kitchen length (ft)", hint: "back of house \u2014 kitchen, wash, store" }, /* @__PURE__ */ React.createElement("input", { type: "number", style: inputStyle, value: zone.kL, onChange: (e) => setZone({ ...zone, kL: e.target.value }) })), /* @__PURE__ */ React.createElement(Field, { label: "Kitchen width (ft)" }, /* @__PURE__ */ React.createElement("input", { type: "number", style: inputStyle, value: zone.kW, onChange: (e) => setZone({ ...zone, kW: e.target.value }) })), zone.hasToilets && /* @__PURE__ */ React.createElement(Field, { label: "Toilet area (sqft)" }, /* @__PURE__ */ React.createElement("input", { type: "number", style: inputStyle, value: zone.toiletArea, onChange: (e) => setZone({ ...zone, toiletArea: e.target.value }) })), zone.hasToilets && /* @__PURE__ */ React.createElement(Field, { label: "Number of toilets" }, /* @__PURE__ */ React.createElement("input", { type: "number", style: inputStyle, value: zone.toilets, onChange: (e) => setZone({ ...zone, toilets: e.target.value }) })), /* @__PURE__ */ React.createElement(Field, { label: "Entry and counter zone (sqft)", hint: "Billing, display, pickup, washbasin" }, /* @__PURE__ */ React.createElement("input", { type: "number", style: inputStyle, value: zone.fixedFoh, onChange: (e) => setZone({ ...zone, fixedFoh: e.target.value }) }))), /* @__PURE__ */ React.createElement(Bar, { segments: [
+      { label: `Kitchen ${Math.round(g.kL)} x ${Math.round(g.kW)}`, v: g.boh, c: C.navySoft },
+      { label: "Toilets", v: g.toiletArea, c: C.lineDark },
+      { label: "Counters and entry", v: num(zone.fixedFoh), c: C.orange },
+      { label: "Dining", v: g.dining, c: C.green }
+    ], total: g.carpet }), /* @__PURE__ */ React.createElement(Readout, { items: [["Kitchen", `${Math.round(g.boh)} sqft \xB7 ${Math.round(g.perim && g.carpet ? g.boh / g.carpet * 100 : 0)}% of carpet`], ["Kitchen perimeter", `${Math.round(g.bohPerim)} rft`], ["Usable dining area", `${Math.round(g.dining)} sqft`], ["Seats it can hold", `about ${Math.floor(g.dining / 14)}`]] }), g.boh + g.toiletArea >= g.carpet && /* @__PURE__ */ React.createElement("div", { style: { marginTop: 14, padding: 12, background: "#FCEFEA", border: `1px solid ${C.red}`, borderRadius: 3, fontSize: 13, color: C.red } }, "The kitchen and toilets together come to ", Math.round(g.boh + g.toiletArea), " sqft, which is the whole carpet area or more. There is nothing left for dining.")), step === 4 && /* @__PURE__ */ React.createElement(Panel, { title: "Seating mix", sub: "Add tables until the dining area is used up. The meter below stops you from over-filling." }, /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gap: 10 } }, SEATING.map((t) => /* @__PURE__ */ React.createElement("div", { key: t.k, style: { display: "flex", alignItems: "center", gap: 14, padding: "12px 14px", background: "#FFF", border: `1px solid ${C.line}`, borderRadius: 3 } }, /* @__PURE__ */ React.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 14, fontWeight: 600 } }, t.label), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 12, color: C.muted } }, t.note, " \xB7 ", t.area, " sqft each including aisle share")), /* @__PURE__ */ React.createElement(
+      "input",
+      {
+        type: "number",
+        min: "0",
+        style: { ...inputStyle, width: 88, textAlign: "right" },
+        value: seats[t.k],
+        onChange: (e) => setSeats({ ...seats, [t.k]: Math.max(0, num(e.target.value)) })
+      }
+    ), /* @__PURE__ */ React.createElement("div", { style: { width: 84, textAlign: "right", fontSize: 13, color: C.muted, fontVariantNumeric: "tabular-nums" } }, num(seats[t.k]) * t.per, " seats")))), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 18, padding: 16, background: over ? "#FCEFEA" : "#FFF", border: `1px solid ${over ? C.red : C.line}`, borderRadius: 3 } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", fontSize: 13, marginBottom: 8 } }, /* @__PURE__ */ React.createElement("span", { style: { fontWeight: 600 } }, Math.round(g.usedArea), " of ", Math.round(g.dining), " sqft placed"), /* @__PURE__ */ React.createElement("span", { style: { color: over ? C.red : C.muted } }, g.totalSeats, " seats")), /* @__PURE__ */ React.createElement("div", { style: { height: 10, background: C.line, borderRadius: 5, overflow: "hidden" } }, /* @__PURE__ */ React.createElement("div", { style: { width: `${Math.min(100, g.usedArea / Math.max(g.dining, 1) * 100)}%`, height: "100%", background: over ? C.red : C.green } })), g.usedArea > g.dining + 0.5 && /* @__PURE__ */ React.createElement("div", { style: { marginTop: 10, fontSize: 13, color: C.red } }, "That is ", Math.round(g.usedArea - g.dining), " sqft more than the dining area holds. Remove tables, or reduce the back of house or counter zone on the previous screen."), g.totalSeats > g.T.seatsMax && /* @__PURE__ */ React.createElement("div", { style: { marginTop: 10, fontSize: 13, color: C.red } }, g.T.name, " is capped at ", g.T.seatsMax, " seats. At ", g.totalSeats, " the outlet is being built above its tier."), g.totalSeats > g.nbcCap && /* @__PURE__ */ React.createElement("div", { style: { marginTop: 10, fontSize: 13, color: C.red } }, g.totalSeats, " seats exceeds the NBC occupant ceiling of ", g.nbcCap, " for this area. That becomes an exit-width and licensing problem."), g.T.seatsMin > 0 && g.totalSeats < g.T.seatsMin && g.totalSeats > 0 && /* @__PURE__ */ React.createElement("div", { style: { marginTop: 10, fontSize: 13, color: C.orange } }, g.T.name, " expects at least ", g.T.seatsMin, " seats. At ", g.totalSeats, " the space is under-used for the tier."), g.areaCap < g.T.seatsMin && /* @__PURE__ */ React.createElement("div", { style: { marginTop: 10, fontSize: 13, color: C.red } }, "This carpet area holds about ", g.areaCap, " seats, below the ", g.T.seatsMin, " that ", g.T.name, " needs. The site is too small for this tier."))), step === 5 && /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gap: 22 } }, Object.entries(GROUPS).filter(([k]) => (k !== "ac" || shell.ac) && (k !== "sanitary" || zone.hasToilets)).map(([key, grp]) => /* @__PURE__ */ React.createElement(Panel, { key, title: grp.title, sub: grp.question }, /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))", gap: 12 } }, grp.tiers.map((t, i) => {
+      const tier = String(i + 1);
+      const on = choice[key] === tier && !customs[key];
+      const unitRate = key === "furniture" ? R(`CH.${tier}`) : R(t.id);
+      return /* @__PURE__ */ React.createElement(
+        "button",
+        {
+          key: t.id,
+          onClick: () => {
+            setChoice({ ...choice, [key]: tier });
+            setCustoms((c) => ({ ...c, [key]: void 0 }));
+          },
+          style: { padding: 0, textAlign: "left", cursor: "pointer", background: "#FFF", border: `2px solid ${on ? C.orange : C.line}`, borderRadius: 3, overflow: "hidden", fontFamily: FONT }
+        },
+        /* @__PURE__ */ React.createElement(Swatch, { group: key, tier: i + 1 }),
+        /* @__PURE__ */ React.createElement("div", { style: { padding: "10px 12px" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 13, fontWeight: 600, color: C.navy } }, t.name), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11.5, color: C.muted, marginTop: 2, minHeight: 30 } }, t.desc), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 12.5, fontWeight: 600, marginTop: 6, color: on ? C.orange : C.navy, fontVariantNumeric: "tabular-nums" } }, inr(unitRate), " ", key === "furniture" ? "per chair" : `per ${grp.unit}`))
+      );
+    }), /* @__PURE__ */ React.createElement("div", { style: { background: "#FFF", border: `2px solid ${customs[key] ? C.orange : C.line}`, borderRadius: 3, overflow: "hidden" } }, customs[key]?.img ? /* @__PURE__ */ React.createElement("img", { src: customs[key].img, alt: "", style: { width: "100%", height: 88, objectFit: "cover", display: "block" } }) : /* @__PURE__ */ React.createElement("div", { style: { height: 88, background: C.orangeSoft, display: "flex", alignItems: "center", justifyContent: "center", color: C.orange, fontSize: 26 } }, "+"), /* @__PURE__ */ React.createElement("div", { style: { padding: "10px 12px" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 13, fontWeight: 600 } }, "Something else"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11.5, color: C.muted, marginTop: 2 } }, "Upload a picture. It is added to the bill for pricing."), /* @__PURE__ */ React.createElement(
+      "input",
+      {
+        type: "file",
+        accept: "image/*",
+        style: { fontSize: 11, marginTop: 8, width: "100%" },
+        onChange: (e) => e.target.files?.[0] && onUpload(key, e.target.files[0])
+      }
+    ), customs[key] && /* @__PURE__ */ React.createElement(
+      "input",
+      {
+        style: { ...inputStyle, marginTop: 8, fontSize: 12 },
+        placeholder: "What is it?",
+        value: customs[key].note || "",
+        onChange: (e) => setCustoms((c) => ({ ...c, [key]: { ...c[key], note: e.target.value } }))
+      }
+    ))))))), step === 6 && /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement(Panel, { title: "Bill of quantities", sub: "Every quantity and rate can be edited, including the brand-standard lines. The tag tells you what came from Crunchery\\u2019s standard so you know what to check with them before changing it." }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 6 } }, /* @__PURE__ */ React.createElement(Btn, { kind: "accent", onClick: downloadPdf }, "Download PDF"), /* @__PURE__ */ React.createElement(Btn, { kind: "ghost", onClick: saveProject }, "Save"), /* @__PURE__ */ React.createElement(Btn, { kind: "ghost", onClick: openLoad }, "Open"), /* @__PURE__ */ React.createElement(Btn, { kind: "ghost", onClick: () => setExtras([...extras, { mod: "Additional items", desc: "", unit: "nos", qty: 1, rate: 0 }]) }, "Add a line"), saved && /* @__PURE__ */ React.createElement("span", { style: { alignSelf: "center", fontSize: 12.5, color: C.green } }, saved))), projList && /* @__PURE__ */ React.createElement(Panel, { title: "Open a saved project", sub: "Saved on this device." }, /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gap: 8 } }, projList.map((it) => /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        key: it.key,
+        onClick: () => loadProject(it.key),
+        style: {
+          textAlign: "left",
+          padding: "11px 13px",
+          cursor: "pointer",
+          fontFamily: FONT,
+          background: "#FFF",
+          border: `1px solid ${C.line}`,
+          borderRadius: 3
+        }
+      },
+      /* @__PURE__ */ React.createElement("div", { style: { fontSize: 13.5, fontWeight: 600 } }, it.name),
+      /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11.5, color: C.muted, marginTop: 2 } }, TIERS[it.tier]?.name || "", " \xB7 saved ", new Date(it.at).toLocaleString("en-IN"))
+    ))), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 12 } }, /* @__PURE__ */ React.createElement(Btn, { kind: "ghost", onClick: () => setProjList(null) }, "Cancel"))), Object.entries(modules).map(([mod, lines]) => /* @__PURE__ */ React.createElement("div", { key: mod, style: { marginBottom: 18, background: "#FFF", border: `1px solid ${C.line}`, borderRadius: 3 } }, /* @__PURE__ */ React.createElement("div", { style: { padding: "10px 14px", borderBottom: `1px solid ${C.line}`, display: "flex", justifyContent: "space-between", fontSize: 13, fontWeight: 700 } }, /* @__PURE__ */ React.createElement("span", null, mod), /* @__PURE__ */ React.createElement("span", { style: { fontVariantNumeric: "tabular-nums" } }, inr(lines.reduce((s, l) => s + l.amount, 0)))), /* @__PURE__ */ React.createElement("div", { style: { overflowX: "auto" } }, /* @__PURE__ */ React.createElement("table", { style: { width: "100%", borderCollapse: "collapse", fontSize: 12.5 } }, /* @__PURE__ */ React.createElement("tbody", null, lines.map((l) => /* @__PURE__ */ React.createElement("tr", { key: l.id, style: { borderTop: `1px solid ${C.paper}`, opacity: l.removed ? 0.35 : 1, background: l.flag === "LOCK" ? "#FBFAF8" : "#FFF" } }, /* @__PURE__ */ React.createElement("td", { style: { padding: "8px 10px", width: 62, color: C.muted, fontVariantNumeric: "tabular-nums" } }, l.id), /* @__PURE__ */ React.createElement("td", { style: { padding: "8px 10px", minWidth: 240 } }, l.desc, l.flag === "LOCK" && /* @__PURE__ */ React.createElement(Tag, { c: C.muted }, "brand standard"), l.flag === "CHOICE" && /* @__PURE__ */ React.createElement(Tag, { c: C.orange }, "your selection"), l.flag === "CUSTOM" && /* @__PURE__ */ React.createElement(Tag, { c: C.red }, "to be priced")), /* @__PURE__ */ React.createElement("td", { style: { padding: "8px 6px", width: 44, color: C.muted } }, l.unit), /* @__PURE__ */ React.createElement("td", { style: { padding: "8px 6px", width: 92 } }, /* @__PURE__ */ React.createElement(
+      "input",
+      {
+        type: "number",
+        style: { ...inputStyle, padding: "5px 7px", fontSize: 12, textAlign: "right" },
+        value: l.qty,
+        onChange: (e) => setOv({ ...ov, [l.id]: { ...ov[l.id], qty: e.target.value } })
+      }
+    )), /* @__PURE__ */ React.createElement("td", { style: { padding: "8px 6px", width: 104 } }, /* @__PURE__ */ React.createElement(
+      "input",
+      {
+        type: "number",
+        style: { ...inputStyle, padding: "5px 7px", fontSize: 12, textAlign: "right" },
+        value: l.rate,
+        onChange: (e) => setOv({ ...ov, [l.id]: { ...ov[l.id], rate: e.target.value } })
+      }
+    )), /* @__PURE__ */ React.createElement("td", { style: { padding: "8px 10px", width: 112, textAlign: "right", fontWeight: 600, fontVariantNumeric: "tabular-nums" } }, inr(l.amount)), /* @__PURE__ */ React.createElement("td", { style: { padding: "8px 8px", width: 34 } }, /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        onClick: () => setOv({ ...ov, [l.id]: { ...ov[l.id], removed: !l.removed } }),
+        title: l.removed ? "Put back" : "Remove",
+        style: { border: "none", background: "none", cursor: "pointer", color: C.muted, fontSize: 15 }
+      },
+      l.removed ? "\u21BA" : "\xD7"
+    ))))))))), /* @__PURE__ */ React.createElement(Panel, { title: "Summary" }, /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(150px,1fr))", gap: 14, marginBottom: 16 } }, [["ohp", "Overheads and profit %"], ["cont", "Contingency %"], ["gst", "GST %"]].map(([k, label]) => /* @__PURE__ */ React.createElement(Field, { key: k, label }, /* @__PURE__ */ React.createElement("input", { type: "number", style: inputStyle, value: markup[k], onChange: (e) => setMarkup({ ...markup, [k]: e.target.value }) })))), [
+      ["Works priced in this BOQ", totals.works],
+      [`Overheads and profit @ ${markup.ohp}%`, totals.ohp],
+      [`Contingency @ ${markup.cont}%`, totals.cont],
+      [`Architecture and site visits \u2014 ${g.T.name}, ${g.T.visits} visits`, totals.fee],
+      ["Turnkey contract value", totals.sub]
+    ].map(([l, v], i) => /* @__PURE__ */ React.createElement(Row, { key: i, l, v: inr(v) })), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 12 } }, /* @__PURE__ */ React.createElement(Check, { label: `Include GST @ ${markup.gst}% in the total`, checked: withGst, onChange: setWithGst })), withGst && /* @__PURE__ */ React.createElement(Row, { l: `GST @ ${markup.gst}%`, v: inr(totals.gst) }), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", padding: "14px 0 4px", borderTop: `2px solid ${C.navy}`, marginTop: 8, fontSize: 17, fontWeight: 700 } }, /* @__PURE__ */ React.createElement("span", null, "Project total"), /* @__PURE__ */ React.createElement("span", { style: { fontVariantNumeric: "tabular-nums" } }, inr(totals.grand))), !withGst && /* @__PURE__ */ React.createElement("div", { style: { fontSize: 13, color: C.orange, fontWeight: 600, marginTop: 4 } }, "GST extra at actuals"), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 26, paddingTop: 20, borderTop: `1px solid ${C.line}` } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 15, fontWeight: 700, marginBottom: 12 } }, "Total investment"), /* @__PURE__ */ React.createElement(Row, { l: `Paid to Crunchery's \u2014 management ${inr(g.T.mgmt)}, kitchen equipment ${inr(g.T.kitchen)}`, v: inr(totals.toCruncherys) }), /* @__PURE__ */ React.createElement(Row, { l: "Turnkey contract, Ink Craft \u2014 everything else", v: inr(totals.grand) }), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", padding: "12px 0 4px", borderTop: `2px solid ${C.navy}`, marginTop: 6, fontSize: 17, fontWeight: 700 } }, /* @__PURE__ */ React.createElement("span", null, "Total investment"), /* @__PURE__ */ React.createElement("span", { style: { fontVariantNumeric: "tabular-nums" } }, inr(totals.investment))), (() => {
+      const [lo, hi] = g.T.band;
+      const pos = Math.min(100, Math.max(0, (totals.investment - lo) / (hi - lo) * 100));
+      const outLo = totals.investment < lo, outHi = totals.investment > hi;
+      return /* @__PURE__ */ React.createElement("div", { style: { marginTop: 14 } }, /* @__PURE__ */ React.createElement("div", { style: { position: "relative", height: 8, background: C.line, borderRadius: 4 } }, /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", left: 0, right: 0, top: 0, bottom: 0, background: outHi ? C.red : C.green, opacity: 0.25, borderRadius: 4 } }), /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", left: `${pos}%`, top: -4, width: 3, height: 16, background: outHi || outLo ? C.red : C.navy } })), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", fontSize: 11.5, color: C.muted, marginTop: 6 } }, /* @__PURE__ */ React.createElement("span", null, inr(lo)), /* @__PURE__ */ React.createElement("span", null, g.T.name, " band"), /* @__PURE__ */ React.createElement("span", null, inr(hi))), outHi && /* @__PURE__ */ React.createElement("div", { style: { fontSize: 13, color: C.red, marginTop: 8 } }, inr(totals.investment - hi), " above the top of the ", g.T.name, " band. Either trim the selections or the partner should be looking at the tier above."), outLo && /* @__PURE__ */ React.createElement("div", { style: { fontSize: 13, color: C.orange, marginTop: 8 } }, inr(lo - totals.investment), " below the ", g.T.name, " band. Worth checking nothing has been left out of the scope."));
+    })()), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 28, paddingTop: 20, borderTop: `1px solid ${C.line}`, display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 20, flexWrap: "wrap" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 12, color: C.muted, maxWidth: 400, lineHeight: 1.6 } }, "Estimate prepared for ", proj.partner || "the franchise partner", proj.outlet ? `, ${proj.outlet}` : "", ". Rates are indicative and confirmed against vendor quotations before the contract is signed."), /* @__PURE__ */ React.createElement(InkCraftLockup, { height: 120 })), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 12.5, color: C.muted, marginTop: 6 } }, inr(totals.psf), " per sqft on ", Math.round(g.carpet), " sqft carpet \xB7 ", g.totalSeats, " seats \xB7 ", inr(g.totalSeats ? totals.grand / g.totalSeats : 0), " per seat"))), step === 7 && /* @__PURE__ */ React.createElement(Panel, { title: "Rate library", sub: "Indicative Tamil Nadu market rates, September 2026. Edit any of them and the change is kept for the next outlet too." }, /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 10 } }, Object.keys(rates).sort().map((k) => /* @__PURE__ */ React.createElement("div", { key: k, style: { display: "flex", alignItems: "center", gap: 8, background: "#FFF", border: `1px solid ${C.line}`, padding: "7px 10px", borderRadius: 3 } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: 12, color: C.muted, width: 52, fontVariantNumeric: "tabular-nums" } }, k), /* @__PURE__ */ React.createElement(
+      "input",
+      {
+        type: "number",
+        style: { ...inputStyle, padding: "5px 8px", fontSize: 12.5, textAlign: "right" },
+        value: rates[k],
+        onChange: (e) => saveRates({ ...rates, [k]: num(e.target.value) })
+      }
+    )))), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 16 } }, /* @__PURE__ */ React.createElement(Btn, { kind: "ghost", onClick: () => saveRates(SEED) }, "Reset to seeded rates")))), /* @__PURE__ */ React.createElement("div", { style: { position: "fixed", bottom: 0, left: 0, right: 0, background: C.navy, color: "#FFF", padding: "12px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: 26, fontSize: 12.5, flexWrap: "wrap" } }, /* @__PURE__ */ React.createElement(Stat, { l: "Tier", v: g.T.name }), /* @__PURE__ */ React.createElement(Stat, { l: "Carpet", v: `${Math.round(g.carpet)} sqft` }), /* @__PURE__ */ React.createElement(Stat, { l: "Seats", v: `${g.totalSeats}/${g.T.seatsMax}`, warn: over || g.totalSeats > g.nbcCap }), /* @__PURE__ */ React.createElement(Stat, { l: "Dining used", v: `${Math.round(g.usedArea)}/${Math.round(g.dining)}`, warn: over }), /* @__PURE__ */ React.createElement(Stat, { l: "Per sqft", v: inr(totals.psf) })), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 16 } }, /* @__PURE__ */ React.createElement("div", { style: { textAlign: "right" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 10.5, opacity: 0.65, letterSpacing: "0.05em" } }, "Total investment"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 20, fontWeight: 700, fontVariantNumeric: "tabular-nums" } }, inr(totals.investment))), /* @__PURE__ */ React.createElement(Btn, { kind: "accent", onClick: () => setStep(Math.min(7, step + 1)), style: { display: step >= 6 ? "none" : "block" } }, "Next"))));
+  }
+  function Panel({ title, sub, children }) {
+    return /* @__PURE__ */ React.createElement("div", { style: { background: "#FFF", border: `1px solid ${C.line}`, borderRadius: 3, padding: "20px 22px", marginBottom: 20 } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 17, fontWeight: 700, color: C.navy } }, title), sub && /* @__PURE__ */ React.createElement("div", { style: { fontSize: 13, color: C.muted, marginTop: 4, marginBottom: 18, maxWidth: 620, lineHeight: 1.5 } }, sub), children);
+  }
+  var Tag = ({ children, c }) => /* @__PURE__ */ React.createElement("span", { style: { marginLeft: 8, fontSize: 10.5, color: c, border: `1px solid ${c}`, padding: "1px 5px", borderRadius: 2, whiteSpace: "nowrap" } }, children);
+  var Row = ({ l, v }) => /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", padding: "7px 0", borderBottom: `1px solid ${C.paper}`, fontSize: 13.5 } }, /* @__PURE__ */ React.createElement("span", { style: { color: C.muted } }, l), /* @__PURE__ */ React.createElement("span", { style: { fontVariantNumeric: "tabular-nums" } }, v));
+  var Stat = ({ l, v, warn }) => /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { opacity: 0.6, fontSize: 10.5 } }, l), /* @__PURE__ */ React.createElement("div", { style: { fontWeight: 600, color: warn ? C.orange : "#FFF", fontVariantNumeric: "tabular-nums" } }, v));
+  function Readout({ items }) {
+    return /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: 30, flexWrap: "wrap", marginTop: 16, paddingTop: 16, borderTop: `1px solid ${C.line}` } }, items.map(([l, v]) => /* @__PURE__ */ React.createElement("div", { key: l }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11.5, color: C.muted } }, l), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 16, fontWeight: 600, fontVariantNumeric: "tabular-nums" } }, v))));
+  }
+  function Bar({ segments, total }) {
+    return /* @__PURE__ */ React.createElement("div", { style: { marginTop: 20 } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", height: 30, borderRadius: 3, overflow: "hidden", border: `1px solid ${C.line}` } }, segments.map((s) => /* @__PURE__ */ React.createElement("div", { key: s.label, style: { width: `${Math.max(0, s.v / Math.max(total, 1) * 100)}%`, background: s.c }, title: `${s.label} ${Math.round(s.v)} sqft` }))), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: 18, marginTop: 10, flexWrap: "wrap", fontSize: 12 } }, segments.map((s) => /* @__PURE__ */ React.createElement("span", { key: s.label, style: { display: "flex", alignItems: "center", gap: 6, color: C.muted } }, /* @__PURE__ */ React.createElement("span", { style: { width: 10, height: 10, background: s.c, display: "inline-block", borderRadius: 2 } }), s.label, " ", Math.round(s.v), " sqft"))));
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App));
+})();
+
+  } catch (e) {
+    document.getElementById("fallback").style.display = "block";
+    document.getElementById("fallback").innerHTML =
+      "<h2>The estimator hit an error</h2><pre style='white-space:pre-wrap'>" + e.message + "</pre>";
+  }
+})();
+</script>
+</body>
+</html>
